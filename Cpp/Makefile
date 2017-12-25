@@ -4,11 +4,12 @@ OBJ := $(patsubst %.cpp,%.o,$(RECENT))
 EXE := $(patsubst %.cpp,%,$(RECENT))
 CPPLIBS := -lstdc++
 C11FLAG := -std=c++11
-top: $(EXE)
-	./$(EXE)
+TARGET := target
+top: $(TARGET)/$(EXE)
+	./$(TARGET)/$(EXE)
 
-$(EXE): $(OBJ)
-	$(CC) $(C11FLAG) $(OBJ) -o $@ $(CPPLIBS)
+$(TARGET)/$(EXE): $(TARGET)/$(OBJ)
+	$(CC) $(C11FLAG) $(TARGET)/$(OBJ) -o $@ $(CPPLIBS)
 
-%.o: %.cpp
+$(TARGET)/%.o: %.cpp
 	$(CC) $(C11FLAG) -c $< -o $@
