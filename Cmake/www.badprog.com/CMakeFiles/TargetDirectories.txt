@@ -1,0 +1,3 @@
+/home/frank/github/problems/Cmake/www.badprog.com/CMakeFiles/edit_cache.dir
+/home/frank/github/problems/Cmake/www.badprog.com/CMakeFiles/rebuild_cache.dir
+/home/frank/github/problems/Cmake/www.badprog.com/CMakeFiles/BadprogTutorial.dir

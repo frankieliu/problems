@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/frank/github/problems/Cmake/www.badprog.com/Badprog.cpp
+iostream
+-
+Badprog.h
+/home/frank/github/problems/Cmake/www.badprog.com/Badprog.h
+
+/home/frank/github/problems/Cmake/www.badprog.com/Badprog.h
+

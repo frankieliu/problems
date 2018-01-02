@@ -1,0 +1,1 @@
+/usr/bin/c++.exe    -Wl,--enable-auto-import CMakeFiles/BadprogTutorial.dir/Badprog.cpp.o  -o BadprogTutorial.exe -Wl,--out-implib,libBadprogTutorial.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

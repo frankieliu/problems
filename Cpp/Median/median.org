@@ -1,0 +1,202 @@
+#+STARTUP: showall indent hidestars
+
+* Approach 1
+----------------------------------------------------------------------
+
+      x
+1 2 3 4 5 6 7   3 3
+
+      x
+3 4 5 6 7 8 9   3 3
+
+      4<6
+
+Total is 14
+
+Picture:
+3   4 - 6   3
+  4   6   4     
+
+8 numbers accounted for
+(4 on the left and 4 on the right)
+
+6 numbers left:
+
+Top: 5 6 7
+Bot: 3 4 5
+
+----------------------------------------------------------------------
+
+We can do a binary search to find where 4 lies on nums2
+
+it is in the second element, therefore we know:
+
+Left 4 / Right 8 
+
+Then we can do a binary search for 6 in nums1
+
+Left 8 / Right 4
+
+Information thus far:
+
+3--
+5-----
+   4   6
+
+1--
+3------
+   4   6
+
+----------------------------------------------------------------------
+      x    
+1 2 3 4 5 6 7   3 3
+
+  x
+3 4 5 6 7 8 9   3 3
+
+4 / 8
+
+Move to the right:
+
+          x    
+1 2 3 4 5 6 7   3 3
+      x
+3 4 5 6 7 8 9   3 3
+
+8 / 4
+
+Move to the left:
+        x
+1 2 3 4 5 6 7
+    x
+3 4 5 6 7 8 9
+
+6 / 6 Done! => Median is 5
+
+----------------------------------------------------------------------
+
+Pick some random numbers:
+http://numbergenerator.org/randomnumberbetween1and11
+3 2 88
+14 77 99 28 66 37 96 69 90 44
+
+Sort them:
+2 3 88
+14 28 37 44 66 69 77 90 96 99
+
+Pick mid on nums1: 3
+Find on nums2: index -1 : 2/11
+Move to the right: 88
+Find on nums2: 7/3 : 9/3
+Move to the left: pick 44 on nums2
+Find on nums1: 2/1 : 5/7
+Move to the right: pick 69 on nums2
+Find on nums1: 2/1 : 7/5
+Move to the left: pick 66 on nums2
+Find on nums1: 2/1 : 6/6
+Done.
+
+Here we had to repeat quite a few times:
+
+----------------------------------------------------------------------
+
+* Approach 2
+
+** Idea
+Basically we need to keep moving the median in two sorted lists, until
+they meet each other, and we have half in one side and half in another
+side, this is the basic requirement for median.
+
+** Test idea out
+
+*** This is the case of max(X) < min(Y)
+4 numbers xxxx (list X)
+6 numbers yyyyyy (list Y) 
+
+I know the median of these two.
+
+if the median(X) < median(Y), then
+2 numbers on the left (guaranteed)
+3 numbers on the right (guaranteed)
+
+(there are more numbers on the right)
+
+if median(XR) < median(YL), then
+3 numbers on the left (guaranteed)
+4 numbers on the right (guaranteed)
+
+if median(XRR) < median(YLL), then
+4 numbers on the left (guaranteed)
+5 numbers on the right (guaranteed)
+
+At this point we know that median must
+reside in Y
+
+*** For max(X) < min(Y)
+There is an overlap in X and Y
+
+xxxx
+ yyyyyy
+
+How do we find the median?
+
+8 43 57 75
+4 18 19 28 43 57 75 82
+
+
+find the med(X) : 43+57 / 2 = 50
+(* (+ 43 57) 0.5)
+
+locate position in Y : 5/3 (YL/YR)
+find med(YL) = med(4 8 18 19 28 43) = 19
+
+locate position in X : 1/3
+3 / 7
+
+find the med(XL) = med(43 57) = 50
+find med(YLR) = med(28 43) = 35.5
+(* (+ 28 43) 0.5)
+
+locate position in X
+
+* from geeksforgeeks
+https://www.geeksforgeeks.org/median-of-two-sorted-arrays-of-different-sizes/
+    x
+aaaaaaaa
+   bbbbbbbbbbbbbbbbb
+           x
+      x
+     aaa
+   bbbbbbbbbbbbb
+         x
+
+       x
+       a
+   bbbbbbbbbbb
+        x
+
+
+   bbbbbbbbbb
+       xx
+
+ 9 10 | 30 40  : 10
+
+ 4 5 15 | 25 30 40 : 15
+
+10 is less than 15, safe to remove 9?
+
+  10 30 | 40     : 30
+  4 5 | 15 25 30  : 5
+
+10 is greater than 5
+ 9 10 | 30 40  : 10
+
+ 4 5 8 | 25 30 40 : 8
+
+10 is greater than 8, 
+ 
+
+ 10 30 | 40 :
+
+ 4 5 15 25 30 :
+
