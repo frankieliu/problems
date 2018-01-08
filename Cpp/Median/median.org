@@ -200,3 +200,59 @@ aaaaaaaa
 
  4 5 15 25 30 :
 
+* The main idea:
+- remove items from both left and right sides
+  depending on comparison between the medians of
+  the two lists
+
+- make sure that a is smaller than b in terms of
+  number of elements
+
+- if the median of a is smaller than the median of b
+  i.e.
+
+- ma < mb then we elements of ma to the left of ma
+  are going to be smaller than the mb
+
+- safe to remove at least up to i[ma] - 2 where i[ma]
+  represents the index of the median a element
+
+- why don't we remove up to i[ma] - 1? because we may
+  need the i[ma] - 1 element to figure the median
+
+- similarly, if ma > mb then remove items i[ma]+2
+  to the end
+
+- we may be left with the following scenario:
+  < :
+ x x  | x x    median is decided by a and b
+ xx x |  xxx   it seems it is safe to remove up to i[ma]-1
+
+----------------------------------------------------------------------
+
+Note that our implementation of median takes left side for even
+
+    a  | b     median b+c / 2
+     c |  d
+
+    a  |  b    median c+d / 2
+     c | d
+
+      a | b    median a+b / 2
+     c  |  d
+
+      a |  b   median a+d / 2
+     c  | d
+
+----------------------------------------------------------------------
+ 
+     a  |  b   even on top
+      d c e    odd on bottom (c)
+
+     a c b     odd on top
+     ed  ef    even on bottom (c)
+
+----------------------------------------------------------------------
+
+Maybe we 
+ened t

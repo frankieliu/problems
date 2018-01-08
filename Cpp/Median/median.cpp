@@ -14,132 +14,128 @@ double Solution::findMedianSortedArrays
  ) {
 
   if (a1 > a2) { // Zero length a
-    double ans = ((b2-b1) % 2 == 0) ?
-      (b[(b1+b2)/2] + b[(b1+b2)/2+1] * 0.5) :
-      b[(b1+b2)/2];
+    if (b2 > b1) { // Zero length b
+      return 0;
+    } else {
+      double ans = ((b2-b1) % 2 == 0) ?
+	(b[(b1+b2)/2] + b[(b1+b2)/2+1] * 0.5) :
+	b[(b1+b2)/2];
     
-    std::cout << std::setfill('-') << std::setw(69) << "-"<< std::endl;
-    for (int i=b1; i<=b2; i++) {
-      std::cout << b[i] << " ";
+      std::cout << std::setfill('-') << std::setw(69) << "-"<< std::endl;
+      for (int i=b1; i<=b2; i++) {
+	std::cout << b[i] << " ";
+      }
+      std::cout << ": " << ans;
+      std::cout << std::endl;
+      return ans;
     }
-    std::cout << ": " << ans;
-    std::cout << std::endl;
-    return ans;
   }
 
-  // Index at the middle (left of mid if even)
+  if (a1 == a2) { // length 1
+    int am = a1;
+    int bm = (b1 + b2) / 2;
+    int bl = (b2 - b1 + 1);
+    bool b_odd =  bl % 2;
+   
+    if (a[am] <= b[bm]) {
+      if (b_odd) {
+	if ((bl == 1) || (a[am] > b[bm-1])) {
+	  return (double) (a[am] + b[bm]) * 0.5;
+	} else {
+	  return (double) (b[bm-1] + b[bm]) * 0.5;
+	}
+      } else { // even
+	return b[bm];
+      }
+    } else { // a[am] > b[bm]
+      if (b_odd) {
+	if (a[am] < b[bm + 1]) {
+	  return (double) (a[am] + b[bm]) * 0.5;
+	} else {
+	  return (double) (b[bm] + b[bm + 1]) *0.5;
+	}
+      } else { // even
+	if (a[am] < b[bm + 1]) {
+	  return a[bm];
+	} else {
+	  return b[bm + 1];
+	}
+      }
+    }
+  } // len(a) = 1
+
+  if (a2 == (a1+1)) { // two items left
+    int am = a1;
+    int bm = (b1 + b2) / 2;
+    int bl = (b2 - b1 + 1);
+    std::cout
+      << "a[" << a1 << "-" << a2 << "] "
+      << "b[" << b1 << "-" << b2 << "] "
+      << std::endl;
+    bool b_odd =  bl % 2;
+    if (a[a1] <= b[bm]) { // <=
+      
+      if (b_odd) {        // Odd
+	//  a a
+	// b b b
+	if (a[a1+1] < b[bm]) {
+	  return a[a1+1];
+	} else {
+	  return b[bm];
+	}
+
+      } else {            // Even
+	//  a a
+	// b b b b
+	if (a[a1+1] < b[bm]) {
+	  return (double) (b[bm] + a[a1+1]) * 0.5;
+	} else {
+	  if (a[a1+1] > b[bm+1]) {
+	    return (double) (b[bm] + b[bm+1]) * 0.5;
+	  } else {
+	    return (double) (b[bm] + a[a1+1]) * 0.5;
+	  }
+	}
+      }
+    } else {              // >
+      if (b_odd) {        // Odd
+	return 0;
+      } else {            // Even
+	return 0;
+      }
+    }
+  }
+
   int am = (a1 + a2) / 2;
   int bm = (b1 + b2) / 2;
-  
-  std::cout << std::setfill('-') << std::setw(69) << "-"<< std::endl;
-  for (int i=a1; i<=a2; i++) {
-    std::cout << a[i] << " ";
-  }
-  std::cout << ": " << a[am];
-  std::cout << std::endl;
-  for (int i=b1; i<=b2; i++) {
-    std::cout << b[i] << " ";
-  }
-  std::cout << ": " << b[bm];
-  std::cout << std::endl;
-  
-  // std::cout << std::setfill('-') << std::setw(69) << "-"<< std::endl;
 
-  if (a[am] == b[bm]) {
-    //    52 56
-    // 46 52 61 70
-    std::cout << "Mids match/";
-    if ((a2-a1+1) % 2 == 0) {
-      std::cout << "A even/";
+  if (a[am] <= b[bm]) {
+    std::cout
+      << "(" << a1 << "," << a2 << "): "
+      << "a[" << am << "]=" << a[am] << " <= "
+      << "b[" << bm << "]=" << b[bm] << std::endl;
+    if (a[am] > b[bm - 1]) {
+      // Throw away a1 to (am-1)
+      return findMedianSortedArrays(a, am, a2, b, b1, b2 - (am - a1));
     } else {
-      std::cout << "A odd/";
+      // Throw away a1 to am
+      return findMedianSortedArrays(a, am + 1, a2, b, b1, b2 - (am - a1 + 1));
     }
   } else {
-
-    if(a[am] < b[bm]) {
-      
-      std::cout << "</";
-      if (a1 == a2) {
-	std::cout << "Same/" ;
-	// 10
-	// 0 20 30 40
-	if ((b2-b1+1) % 2 == 0) {
-	  std::cout << "Even/";
-	  return b[bm];
-	} else {
-	  std::cout << "Odd/";
-	  if (a[am] > b[bm-1]) {
-	    return (b[bm] + a[am])*0.5;
-	  } else {
-	    return (b[bm-1] + b[bm])*0.5;
-	  }
-	}
-      } else if (a1 == (a2-1)) {
-	std::cout << "2 Left/";
-	if ((b2-b1+1) % 2 == 0) {
-	  //    10 xx
-	  // 38 46 66 69
-	  std::cout << "Even/";
-	  return findMedianSortedArrays(a, am + 1, a2, b, b1, b2 - (am - a1 + 1));
-	} else {
-	  //    10 xx
-	  //  4  16  8
-	  std::cout << "Odd/";
-	  if (a[a2] > b[bm]) {
-	    return b[bm];
-	  } else {
-	    return a[a2];
-	  }
-	}
-      } else {
-	std::cout << "Not Same/";
-	return findMedianSortedArrays(a, am, a2, b, b1, b2 - (am-a1));
-      }
-      
+    std::cout
+      << "a[" << am << "]=" << a[am] << " > "
+      << "b[" << bm << "]=" << b[bm] << std::endl;
+    if (a[am] < b[bm + 1]) {
+      // Throw away am+1 to a2
+      return findMedianSortedArrays(a, a1, am, b, b1 + (a2 - am), b2);
     } else {
-      std::cout << ">/";
-      if (a1 == a2) {
-	// 25
-	// 0 20 30 40
-	std::cout << "Same/";
-	if ((b2-b1+1) % 2 == 0) {
-	  std::cout << "Even/";
-	  return a[am];
-	} else {
-	  // 60
-	  // 32 42 43 51 58 : 43
-	  std::cout << "Odd/";
-	  if (a[am] > b[bm+1]) {
-	    return (b[bm] + b[bm+1])*0.5;
-	  } else {
-	    return (b[bm] + a[am])*0.5;
-	  }
-	}
-      }  else if (a1 == a2-1) {
-	std::cout << "2/";
-	if ((b2-b1+1) % 2 == 0) {
-	  std::cout << "Even/";
-	  // 56 77 : 56
-          // 47 47 80 99 : 47
-	  if (a[a2] < b[bm+1]) {
-	    return (a[a1] + a[a2])*0.5;
-	  } else {
-	    return findMedianSortedArrays(a, a1, am, b, b1 + (a2-am), b2);
-	  }
-	} else {
-	  std::cout << "Odd/";
-	  // 56 77 : 56
-          // 47 47 47 99 100: 47
-	  return findMedianSortedArrays(a, a1, am, b, b1 + (a2-am), b2);
-	}
-      } else {
-	std::cout << "Not Same/";
-	return findMedianSortedArrays(a, a1, am, b, b1 + (a2-am), b2);
-      }
+      // Throw away am to a2
+      return findMedianSortedArrays(a, a1, am - 1, b, b1 + (a2 - am + 1), b2);
     }
   }
+  return -1;
 }
-					
+
 double Solution::findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {
   int n1s = nums1.size();
   int n2s = nums2.size();
