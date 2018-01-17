@@ -1,0 +1,28 @@
+* Check modules
+  module avail
+  module load 
+  module unload
+
+  if [ ${HOSTNAME:0:5} == "bunch" ]; then
+    module load shared
+    module load slurm
+  fi
+
+* Specific queues
+  export SLURM_PARTITION=<name of your queue>
+  srun -p <name of your queue>
+
+** queues
+   bunch-x32q : sandy bridge
+   bunch-x42q : ivy bridge
+   bunch-ib1q : on IB switch
+   clutter-[x]q : example x52-htm
+
+* Running MPI jobs in slurm
+  /home_bunch (cluster-wide shared homedir)
+  /home_local
+
+  module load openmpi
+  salloc -N4 --ntasks-per-node=1 mpirun --bind-to none ./my_app
+
+

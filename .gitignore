@@ -9,5 +9,6 @@ scala/hello2
 *~
 *.stackdump
 *.exe
+a.out
 
 
