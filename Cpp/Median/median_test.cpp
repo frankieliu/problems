@@ -8,12 +8,27 @@
 
 void vector_print(std::vector<int>& a);
 
+
 bool main2();
+bool main3();  // test null
 int main(int argc, char** argv) {
-  bool ans = true;
-  while (ans) {
-    ans = main2();
+  if (false) {
+    bool ans = true;
+    while (ans) {
+      ans = main2();
+    }
   }
+  if (true) {
+    main3();
+  }
+}
+
+bool main3() {
+  std::vector<int> nums1(1,2);
+  std::vector<int> nums2(0);
+  Solution s;
+  double median = s.findMedianSortedArrays(nums1, nums2);
+  std::cout << "median: " << median << std::endl;
 }
 
 bool main2() {

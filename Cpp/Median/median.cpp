@@ -31,12 +31,15 @@ double Solution::findMedianSortedArrays
   // }
   // std::cout << ")" << std::endl;
 
+  
   if (a1 > a2) { // Zero length a
-    if (b2 > b1) { // Zero length b
+    if (b1 > b2) { // Zero length b
       return 0;
     } else {
-      double ans = ((b2-b1) % 2 == 0) ?
-	(b[(b1+b2)/2] + b[(b1+b2)/2+1] * 0.5) :
+      if (b2 == b1) return b[b1];
+	
+      double ans = ((b2-b1+1) % 2 == 0) ?
+	(double) (b[(b1+b2)/2] + b[(b1+b2)/2+1]) * 0.5 :
 	b[(b1+b2)/2];
     
       // std::cout << std::setfill('-') << std::setw(69) << "-"<< std::endl;
