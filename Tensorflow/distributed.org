@@ -1,0 +1,37 @@
+This is one good (MPI and Tensorflow)
+Uber effort
+https://github.com/uber/horovod
+https://www.slideshare.net/AlexanderSergeev4/horovod-distributed-tensorflow-made-easy
+https://eng.uber.com/horovod/
+
+
+Baidu tensorflow-allreduce
+https://github.com/baidu-research/tensorflow-allreduce
+http://research.baidu.com/bringing-hpc-techniques-deep-learning/
+
+Baidu deep bench
+https://github.com/baidu-research/DeepBench
+http://research.baidu.com/bringing-hpc-techniques-deep-learning/
+
+Netflix D
+https://www.slideshare.net/FaisalZakariaSiddiqi/netflix-vectorflow-at-ml-platform-meetup-oct-2017?next_slideshow=3
+
+Facebook slides
+https://www.slideshare.net/FaisalZakariaSiddiqi/largescale-training-with-gpus-at-facebook?next_slideshow=2
+
+Netflix ml platform meetup Ed Chi
+https://www.slideshare.net/EdChi/2017-1010-netflix-ml-platform-meetup-learning-item-and-user-representations-with-sparse-data-in-recommender-systems-focused-learning-factorized-deep-retrieval?next_slideshow=4
+
+https://medium.com/@nealmcb/tensorflow-and-deep-learning-pipelines-for-spark-simpler-more-high-level-a4da96631709
+http://go.databricks.com/hubfs/notebooks/TensorFlow/Distributed_processing_of_images_using_TensorFlow.html
+
+Hadoop and Spark
+http://www.hops.io/
+
+Everything started here: O'Reilly Blog Post
+https://www.oreilly.com/ideas/distributed-tensorflow
+https://github.com/hopshadoop/distributed-tf
+
+TensorFlowOnSpark
+https://github.com/yahoo/TensorFlowOnSpark
+http://yahoohadoop.tumblr.com/post/157196317141/open-sourcing-tensorflowonspark-distributed-deep
