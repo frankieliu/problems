@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CanvasMol</title>
+    <meta name="description" content="Interactive 3D molecule viewer in HTML5. Works with PDB/MOL/SDF formats."/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+    <link href="css/canvasmol.css" rel="stylesheet" type="text/css" />
+    <!--[if IE]><link href="css/ie.css" type="text/css" rel="stylesheet"><![endif]-->
+
+    <script src="js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+    <script src="js/jquery.mousewheel.js" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="js/flash.js" type="text/javascript"></script>
+    <script src="js/flashmol.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--
+    <script src="js/mjs.js" type="text/javascript"></script>
+    <script src="js/glmol.js" type="text/javascript"></script>
+    -->
+    <script src="js/canvasmol.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div id="header">
+    <h1><a href="/canvasmol">CanvasMol</a></h1>
+</div>
+
+<div id="mlist" class="widget shadow drag">
+<ul id="mitems"></ul>
+</div>
+
+<div id="molecules"></div>
+
+<div id="colors" class="widget shadow drag"><span class="close">X</span></div>
+
+<br class="clr"/>
+
+<div id="info" class="widget shadow drag">
+    <span class="close">X</span>
+    <p>Check example molecules.
+    <p>Import PDB/SDF/MOL files.
+    <p>Export to PNG image.
+    <br/><br/>
+    <p>Drag widgets around.
+    <p>Drag molecule to rotate. 
+    <p>Mouse wheel to zoom.
+    <p>Toggle automatic rotation around X,Y,Z axis.
+    <p>Try different rendering options.
+    <br/><br/>
+    <p>Works with Firefox, Opera, Chrome, Safari.
+    <p>Best performance in Chrome and Opera.
+    <br/><br/>
+    <p><span class="new shadow">new</span> Experimental Explorer support (via Flash)
+    <br/>
+    <!--
+    <p><span class="new shadow">new</span> Experimental WebGL support
+    <br/>
+    -->
+    <p><span class="new shadow">new</span> New rendering options
+    <br/><br/>
+    <p class="warning">Warning: complex molecules are very slow, your browser may freeze occasionally if you enable autorotation.
+    <br/><br/>
+    <p>Like this? Check my <a href="http://alteredqualia.com/argon/">other</a> <a href="http://alteredqualia.com/attractor/">HTML5 canvas</a> <a href="http://alteredqualia.com/cubeout/">demos</a> .
+    <br/><br/>
+    <p><a href="http://twitter.com/alteredq">Follow me on Twitter</a>
+    <br/><br/>
+    <p><a href="mailto:postfilter@gmail.com">Feedback</a> 
+</div>
+
+<div id="import" class="widget shadow drag">
+    <span class="close">X</span>
+    <form action="#"><textarea id="pdbtext">Paste here PDB / SDF / MOL molecule definition and click Import molecule button</textarea>
+    </form>
+    <div class="xbutton" id="b_import">Import molecule</div>
+</div>
+
+<div id="touchcontrols" class="widget shadow drag">
+    <span class="close">X</span>
+    <p>Show molecule rotation buttons for touchscreen devices like iPhone / iPad.
+    <div class="xbutton" id="b_controls">Toggle controls</div>
+</div>
+
+<div class="shadow widget drag" id="log"></div>
+
+</body>
+
+</html>
+
