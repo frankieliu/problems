@@ -1,14 +1,71 @@
+// Load modules
+var _ = require('lodash');
 
-var _ = require('../../node_modules/underscore');
+//----------------------------------------------------------------------
+// Main data structure
+var G ={
+    en: [],  // numbered 
+    e: []    // edges
+};
 
-var G ={};
-G.en = [];
-G.e = [];
-
+//----------------------------------------------------------------------
+// Add functionality to push edges into G.e
 G.add_edge = function(x,y) {
     this.e.push([x,y]);
 };
 
+// Converts [[colA, colB], ...] to {colA: colB, ...}
+G.arrayToObject = function(val) {
+    return val.reduce(
+	function (result, item, index) {
+	    result[item[0]] = item[1];
+	    return result;
+	}, {});
+};
+
+// Change edge directivity so small -> large
+G.sortVerticesInEdge = function (edges) {
+    return _.map(
+	edges,
+	function(v) {
+	    return (v[0] < v[1]) ? v : [v[1],v[0]];
+	});
+};
+
+// Sort all edges by V1 column the by V2 column where edges : V1 -> V2  
+G.sortEdgesByVertices = function (edges) {
+    return _.sortBy( edges, [function(o) { return o[0]; }, function(o) { return o[1]; }] );
+};
+
+// Remove identical rows
+G.removeIdenticalNextRows = function (edges) {
+    return edges.reduce(
+	function(result, item, index){
+	    if (result instanceof Array) {
+		if (result.length > 0) {
+		    if (_.isEqual(result[result.length-1], item)) {
+			// console.log("non-unique", item);
+			return result;
+		    } else {
+			result.push(item);
+			return result;
+		    }
+		} else {
+		    result.push(item);
+		    return result;
+		}
+	    }
+	    return result;
+	}, []);
+};
+
+G.uniquifyEdges = function (edges) {
+    return G.removeIdenticalNextRows(
+	G.sortEdgesByVertices(
+	    G.sortVerticesInEdge(edges)));
+};
+
+// Adding edges
 G.add_edge("Portugal", "Spain");
 G.add_edge("Spain","France");
 G.add_edge("France","Belgium");
@@ -36,52 +93,148 @@ G.add_edge("Poland","Germany");
 G.add_edge("Czech Republic","Slovakia");
 G.add_edge("Czech Republic","Germany");
 G.add_edge("Slovakia","Hungary");
+// console.log(G);
 
-console.log(G);
+//----------------------------------------------------------------------
+// Add locations of vertices
+G.loc = 
+{
+  "Portugal": [
+    325.3,
+    666
+  ],
+  "Spain": [
+    325.3,
+    594
+  ],
+  "France": [
+    325.3,
+    522
+  ],
+  "Belgium": [
+    236.3,
+    450
+  ],
+  "Germany": [
+    241.3,
+    378
+  ],
+  "Italy": [
+    399.3,
+    378
+  ],
+  "Netherlands": [
+    53.295,
+    306
+  ],
+  "England": [
+    450.3,
+    666
+  ],
+  "Wales": [
+    415.3,
+    594
+  ],
+  "Scotland": [
+    443.3,
+    522
+  ],
+  "Switzerland": [
+    397.3,
+    306
+  ],
+  "Austria": [
+    343.3,
+    234
+  ],
+  "Czech Republic": [
+    229.3,
+    162
+  ],
+  "Slovakia": [
+    292.3,
+    90
+  ],
+  "Hungary": [
+    339.3,
+    18
+  ],
+  "Denmark": [
+    244.3,
+    306
+  ],
+  "Poland": [
+    222.3,
+    18
+  ]
+};
+   
+// console.log(JSON.stringify(G.loc, undefined, 2));
 
-var loc = {'Portugal': [325.3, 666.0], 'Spain': [325.3, 594.0], 'France': [325.3, 522.0], 'Belgium': [236.3, 450.0], 'Germany': [241.3, 378.0], 'Italy': [399.3, 378.0], 'Netherlands': [53.295, 306.0], 'England': [450.3, 666.0], 'Wales': [415.3, 594.0], 'Scotland': [443.3, 522.0], 'Switzerland': [397.3, 306.0], 'Austria': [343.3, 234.0], 'Czech Republic': [229.3, 162.0], 'Slovakia': [292.3, 90.0], 'Hungary': [339.3, 18.0], 'Denmark': [244.3, 306.0], 'Poland': [222.3, 18.0]};
+//----------------------------------------------------------------------
+// Give a unique id for each location
+G.id = Object.keys(G.loc).reduce(
+    function (result, item, index) {
+	result[item] = {'position' : G.loc[item],
+			'id' : Math.floor(G.loc[item][1] + G.loc[item][0]*0.01)*100};
+	return result;
+    },{});
 
-var val = _.mapObject(loc, (v,k) => Math.floor((v[1] + v[0]*0.01)*100));
-var tmp = 'Portugal';
-var p = loc[tmp];
-var [x,y] = p;
+// Create a reverse id map
+G.rid = Object.keys(G.id).reduce(
+    function (result, item, index) {
+	result[G.id[item].id] = {'name' : item,
+				 'position' : G.id[item].position};
+	return result;
+    },{});
+    
+console.log(G.id);
+console.log(G.rid);
 
-console.log(x);
-console.log(y);
-console.log(val);
-G.en = _.map(G.e, p => [val[p[0]], val[p[1]]]);
+//----------------------------------------------------------------------
+
+G.en = _.map(G.e, p => [G.id[p[0]].id, G.id[p[1]].id]);
+// console.log(G.en);
 
 // Add and extra row:
 G.en.push([ 2139, 9292 ]);
-console.log("----------------------------------------------------------------------");
-console.log(G.en);
 
 var sortEdge = function (v) {
-    if (v[0] < v[1]) {
-	return v;
-    } else {
-	return [v[1], v[0]];
-    }
-};
+    return (v[0] < v[1]) ? v : [v[1],v[0]]; };
 
+console.log("Sorted the edges, first vertex is always smaller than second vertex.");
+G.enSorted0 = _.map(G.en, sortEdge);
+// console.log(G.enSorted0);
+   
+console.log("Finding unique elements: ");
+console.log("1. Sort by first column , then by the second column");
+G.enSorted = _.sortBy(G.enSorted0, [function(o) { return o[0]; }, function(o) { return o[1]; }]);
+// console.log(G.enSorted);
+
+console.log("2. Remove items which match previous inserted item.");
+// The problem is that I was returning result.push which is not an Array!
+G.euniq = (G.enSorted).reduce(
+    function(result, item, index){
+	if (result instanceof Array) {
+	    if (result.length > 0) {
+		if (_.isEqual(result[result.length-1], item)) {
+		    console.log("non-unique", item);
+		    return result;
+		} else {
+		    result.push(item);
+		    return result;
+		}
+	    } else {
+		result.push(item);
+		return result;
+	    }
+	}
+	return result;
+    }, []);
+
+
+console.log(G.euniq);
 console.log("----------------------------------------------------------------------");
+G.euniq2 = G.uniquifyEdges(G.en);
+console.log(G.euniq2);
 
-console.log(_.map(G.en, sortEdge));
-
-console.log("----------------------------------------------------------------------");
-
-G.enSorted = _.uniq(_.map(G.en, sortEdge));
-
-console.log(G.enSorted);
-
-console.log("----------------------------------------------------------------------");
-
-var uniquify = function (A) {
-    return A;
-};
-
-console.log(_.uniq([1,2,3,4,5,5]));
-var a=[[1,2],[1,2],3,4,5,5];
-console.log(_.uniq(a));
-console.log(_.map((v,i) => a.indexOf(v)));
-console.log(a.indexOf(3));
