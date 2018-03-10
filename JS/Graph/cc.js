@@ -16,11 +16,8 @@ G.add_edge = function(x,y) {
 
 // Converts [[colA, colB], ...] to {colA: colB, ...}
 G.arrayToObject = function(val) {
-    return val.reduce(
-	function (result, item, index) {
-	    result[item[0]] = item[1];
-	    return result;
-	}, {});
+    return val.reduce( function (result, item, index) {
+	result[item[0]] = item[1]; return result; }, {});
 };
 
 // Change edge directivity so small -> large
@@ -32,9 +29,21 @@ G.sortVerticesInEdge = function (edges) {
 	});
 };
 
+// Change edge directivity so large -> small
+G.reverseSortVerticesInEdge = function (edges) {
+    return _.map(
+	edges,
+	function(v) {
+	    return (v[0] > v[1]) ? v : [v[1],v[0]];
+	});
+};
+
 // Sort all edges by V1 column the by V2 column where edges : V1 -> V2  
 G.sortEdgesByVertices = function (edges) {
-    return _.sortBy( edges, [function(o) { return o[0]; }, function(o) { return o[1]; }] );
+    return _.sortBy(
+	edges,
+	[function(o) { return o[0]; },
+	 function(o) { return o[1]; }] );
 };
 
 // Remove identical rows
@@ -192,49 +201,106 @@ console.log(G.id);
 console.log(G.rid);
 
 //----------------------------------------------------------------------
-
+// Create the edge graph with the id's
 G.en = _.map(G.e, p => [G.id[p[0]].id, G.id[p[1]].id]);
 // console.log(G.en);
 
-// Add and extra row:
-G.en.push([ 2139, 9292 ]);
 
-var sortEdge = function (v) {
-    return (v[0] < v[1]) ? v : [v[1],v[0]]; };
+//----------------------------------------------------------------------
+// Unit test : adding extra edge and see it being removed
 
-console.log("Sorted the edges, first vertex is always smaller than second vertex.");
-G.enSorted0 = _.map(G.en, sortEdge);
-// console.log(G.enSorted0);
+function test_graph() {
+    // Add and extra row:
+    G.en.push([ 2139, 9292 ]);
+
+    var sortEdge = function (v) {
+	return (v[0] < v[1]) ? v : [v[1],v[0]]; };
+
+    console.log("Sorted the edges, first vertex is always smaller than second vertex.");
+    G.enSorted0 = _.map(G.en, sortEdge);
+    // console.log(G.enSorted0);
    
-console.log("Finding unique elements: ");
-console.log("1. Sort by first column , then by the second column");
-G.enSorted = _.sortBy(G.enSorted0, [function(o) { return o[0]; }, function(o) { return o[1]; }]);
-// console.log(G.enSorted);
+    console.log("Finding unique elements: ");
+    console.log("1. Sort by first // commentlumn , then by the second column");
+    G.enSorted = _.sortBy(G.enSorted0,
+			  [function(o) { return o[0]; }, function(o) { return o[1]; }]);
+    // console.log(G.enSorted);
 
-console.log("2. Remove items which match previous inserted item.");
-// The problem is that I was returning result.push which is not an Array!
-G.euniq = (G.enSorted).reduce(
-    function(result, item, index){
-	if (result instanceof Array) {
-	    if (result.length > 0) {
-		if (_.isEqual(result[result.length-1], item)) {
-		    console.log("non-unique", item);
-		    return result;
+    console.log("2. Remove items which match previous inserted item.");
+    // The problem is that I was returning result.push which is not an Array!
+    G.euniq = (G.enSorted).reduce(
+	function(result, item, index){
+	    if (result instanceof Array) {
+		if (result.length > 0) {
+		    if (_.isEqual(result[result.length-1], item)) {
+			console.log("non-unique", item);
+			return result;
+		    } else {
+			result.push(item);
+			return result;
+		    }
 		} else {
 		    result.push(item);
 		    return result;
 		}
-	    } else {
-		result.push(item);
-		return result;
 	    }
+	    return result;
+	}, []);
+    console.log(G.euniq);
+    console.log("----------------------------------------------------------------------");
+}
+
+function test_graph_uniquifyEdges() {
+    // Add and extra row:
+    G.en.push([ 2000, 9200 ]);
+    G.enUniq = G.uniquifyEdges(G.en);
+    console.log(G.en);
+    console.log(G.enUniq);
+}
+
+test_graph_uniquifyEdges();
+
+// Small star
+// Change edge directivity so large -> small
+G.enRev = G.reverseSortVerticesInEdge(G.en);
+console.log(G.enRev);
+
+function arrayMin(arr) {
+  return arr.reduce(function (p, v) {
+    return ( p < v ? p : v );
+  });
+}
+
+function arrayMax(arr) {
+  return arr.reduce(function (p, v) {
+    return ( p > v ? p : v );
+  });
+}
+
+// Suffle
+var g = [[1,8],[5,8],[7,8],[8,9]];
+
+var g1 = _.map(g,
+	       function(v) {
+		   return (v[0] > v[1]) ? v : [v[1],v[0]];
+	       });
+
+var g2 = g1.reduce(
+    function (result, current, index) {
+	var left = current[0];
+	if (!(result)) {
+	    result = {};
+	} 
+	if (!(left in result)) {
+	    result[left]=[];
 	}
+	result[left].push(current[1]);
 	return result;
-    }, []);
-
-
-console.log(G.euniq);
-console.log("----------------------------------------------------------------------");
-G.euniq2 = G.uniquifyEdges(G.en);
-console.log(G.euniq2);
-
+    },
+    {});
+var g3 = _.mapValues(g2, v => arrayMin(v));
+// var g4 = _.mapValues(g2)
+console.log(g);
+console.log(g1);
+console.log(g2);
+console.log(g3);
