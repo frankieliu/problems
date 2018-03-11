@@ -3,6 +3,8 @@ var _ = require('lodash');
 
 //----------------------------------------------------------------------
 // Main data structure
+// en : [[1, 2], ... ]
+// e  : [['P','Q'], ... ]
 var G ={
     en: [],  // numbered 
     e: []    // edges
@@ -10,10 +12,12 @@ var G ={
 
 //----------------------------------------------------------------------
 // Add functionality to push edges into G.e
+// add_edge(2,3) pushes [2,3] to an array
 G.add_edge = function(x,y) {
     this.e.push([x,y]);
 };
 
+// Convert array to an object
 // Converts [[colA, colB], ...] to {colA: colB, ...}
 G.arrayToObject = function(val) {
     return val.reduce( function (result, item, index) {
@@ -21,6 +25,7 @@ G.arrayToObject = function(val) {
 };
 
 // Change edge directivity so small -> large
+// 3 -> 2 : 2 -> 3
 G.sortVerticesInEdge = function (edges) {
     return _.map(
 	edges,
@@ -30,6 +35,7 @@ G.sortVerticesInEdge = function (edges) {
 };
 
 // Change edge directivity so large -> small
+// 2 -> 3 : 3 -> 2
 G.reverseSortVerticesInEdge = function (edges) {
     return _.map(
 	edges,
@@ -38,7 +44,12 @@ G.reverseSortVerticesInEdge = function (edges) {
 	});
 };
 
-// Sort all edges by V1 column the by V2 column where edges : V1 -> V2  
+// Sort all edges by V1 column the by V2 column where edges : V1 -> V2
+// Sorted edges example;
+// [0, 2] < 
+// [1, 2] < 
+// [1, 3] <
+// [2, 3]
 G.sortEdgesByVertices = function (edges) {
     return _.sortBy(
 	edges,
@@ -47,6 +58,7 @@ G.sortEdgesByVertices = function (edges) {
 };
 
 // Remove identical rows
+// 
 G.removeIdenticalNextRows = function (edges) {
     return edges.reduce(
 	function(result, item, index){
