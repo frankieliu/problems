@@ -280,25 +280,44 @@ function arrayMax(arr) {
 // Suffle
 var g = [[1,8],[5,8],[7,8],[8,9]];
 
-var g1 = _.map(g,
-	       function(v) {
-		   return (v[0] > v[1]) ? v : [v[1],v[0]];
-	       });
+var g1 = _.map(g, v => (v[0] > v[1]) ? v : [v[1],v[0]]);
 
+// Reduce step < u, N(u) > , find min
 var g2 = g1.reduce(
     function (result, current, index) {
 	var left = current[0];
-	if (!(result)) {
-	    result = {};
-	} 
+	var right = current[1];
 	if (!(left in result)) {
-	    result[left]=[];
+	    result[left]={
+		"neighbors" : [left],
+		"min" : left};
 	}
-	result[left].push(current[1]);
+	result[left].neighbors.push(right);
+	var curmin = result[left].min;
+	result[left].min = (right < curmin) ? right : curmin;
 	return result;
     },
     {});
-var g3 = _.mapValues(g2, v => arrayMin(v));
+
+function concatIfNonEmpty(arr1, arr2) {
+    arr2.forEach(
+	x => {
+	    if (x != null) {
+		arr1.push(x);
+	    }
+	});
+    return arr1;
+}
+
+// Emit new edges, it is a flatmap
+var g3 = Object.keys(g2).reduce(
+    function (result, current, index) {
+	var row = g2[current];
+	return concatIfNonEmpty(result,
+	    _.map(row.neighbors,
+		  x => (x == row.min)? null : [x, row.min]));
+    }, []);
+
 // var g4 = _.mapValues(g2)
 console.log(g);
 console.log(g1);
