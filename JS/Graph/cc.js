@@ -58,7 +58,12 @@ G.sortEdgesByVertices = function (edges) {
 };
 
 // Remove identical rows
-// 
+// ...              ...
+// a     becomes    a
+// a                b
+// b                c
+// b
+// c
 G.removeIdenticalNextRows = function (edges) {
     return edges.reduce(
 	function(result, item, index){
@@ -80,6 +85,11 @@ G.removeIdenticalNextRows = function (edges) {
 	}, []);
 };
 
+// remove duplicate rows
+// first  : sort all vertices (make them all point the same way)
+// second : sort all edges (based on the first vertex then on the second)
+// third  : remove identical adjacent rows
+// note   : original order is lost
 G.uniquifyEdges = function (edges) {
     return G.removeIdenticalNextRows(
 	G.sortEdgesByVertices(
