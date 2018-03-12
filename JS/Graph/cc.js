@@ -269,7 +269,6 @@ function test_graph_uniquifyEdges() {
     console.log(G.en);
     console.log(G.enUniq);
 }
-
 test_graph_uniquifyEdges();
 
 // Small star
@@ -289,49 +288,283 @@ function arrayMax(arr) {
   });
 }
 
-// Suffle
-var g = [[1,8],[5,8],[7,8],[8,9]];
+function test_small_star() {
+    // Suffle
+    var g = [[1,8],[5,8],[7,8],[8,9]];
+    
+    var g1 = _.map(g, v => (v[0] > v[1]) ? v : [v[1],v[0]]);
 
-var g1 = _.map(g, v => (v[0] > v[1]) ? v : [v[1],v[0]]);
-
-// Reduce step < u, N(u) > , find min
-var g2 = g1.reduce(
-    function (result, current, index) {
-	var left = current[0];
-	var right = current[1];
-	if (!(left in result)) {
-	    result[left]={
-		"neighbors" : [left],
-		"min" : left};
-	}
-	result[left].neighbors.push(right);
-	var curmin = result[left].min;
-	result[left].min = (right < curmin) ? right : curmin;
-	return result;
-    },
-    {});
-
-function concatIfNonEmpty(arr1, arr2) {
-    arr2.forEach(
-	x => {
-	    if (x != null) {
-		arr1.push(x);
+    // Reduce step < u, N(u) > , find min
+    var g2 = g1.reduce(
+	function (result, current, index) {
+	    var left = current[0];
+	    var right = current[1];
+	    if (!(left in result)) {
+		result[left]={
+		    "neighbors" : [left],
+		    "min" : left};
 	    }
-	});
-    return arr1;
+	    result[left].neighbors.push(right);
+	    var curmin = result[left].min;
+	    result[left].min = (right < curmin) ? right : curmin;
+	    return result;
+	},
+	{});
+
+    function concatIfNonEmpty(arr1, arr2) {
+	arr2.forEach(
+	    x => {
+		if (x != null) {
+		    arr1.push(x);
+		}
+	    });
+	return arr1;
+    }
+
+    // Emit new edges, it is a flatmap
+    var g3 = Object.keys(g2).reduce(
+	function (result, current, index) {
+	    var row = g2[current];
+	    return concatIfNonEmpty(result,
+				    _.map(row.neighbors,
+					  x => (x == row.min)? null : [x, row.min]));
+	}, []);
+    
+    // var g4 = _.mapValues(g2)
+    console.log(g);
+    console.log(g1);
+    console.log(g2);
+    console.log(g3);
+}
+// test_small_start();
+
+function smallStar(g, debug=false) {
+
+    // Emit greater -> smaller
+    var g1 = _.map(g, v => (v[0] >= v[1]) ? v : [v[1],v[0]]);
+
+    // Reduce step < u, N(u) > , find min
+    var g2 = g1.reduce(
+	function (result, current, index) {
+	    var left = current[0];
+	    var right = current[1];
+	    if (!(left in result)) {
+		result[left]={
+		    "neighbors" : [left],
+		    "min" : left};
+	    }
+	    result[left].neighbors.push(right);
+	    var curmin = result[left].min;
+	    result[left].min = (right < curmin) ? right : curmin;
+	    return result;
+	},
+	{});
+
+    function concatIfNonEmpty(arr1, arr2) {
+	arr2.forEach(
+	    x => {
+		if (x != null) {
+		    arr1.push(x);
+		}
+	    });
+	return arr1;
+    }
+
+    // Emit new edges, it is a flatmap
+    var g3 = Object.keys(g2).reduce(
+	function (result, current, index) {
+	    var row = g2[current];
+	    return concatIfNonEmpty(result,
+				    _.map(row.neighbors,
+					  x => (x == row.min)? null : [x, row.min]));
+	}, []);
+
+    if (debug) {
+	console.log("smallStar:");
+	console.log(g);
+	console.log(g1);
+	console.log(g2);
+	console.log(g3);
+    }
+    return g3;
 }
 
-// Emit new edges, it is a flatmap
-var g3 = Object.keys(g2).reduce(
-    function (result, current, index) {
-	var row = g2[current];
-	return concatIfNonEmpty(result,
-	    _.map(row.neighbors,
-		  x => (x == row.min)? null : [x, row.min]));
-    }, []);
+function largeStar(g, debug=false) {
+    // Large-star
+    // Map <u,v>
+    //  Emit <u,v>, <v,u>
+    // Reduce <u,Gamma(u)>:
+    //  Let m = argmin v in Gamma+(u) l_v
+    //  Emit <v,m> for all v where l_v > l_u
+    
+    // This doesn't make much sense,
+    // does v belong to Gamma+(u)?
+    // Note: that you get neighbors of u
+    // Previously:
+    // {8,{1,5,7}},
+    // Now you need to have all edges for 8
+    // {8,{1,5,7,9}},
+    // create an edge for a l_v > l_u
+    // Might as well create both
+    // {8,{1,5,7},{9}}
 
-// var g4 = _.mapValues(g2)
-console.log(g);
-console.log(g1);
-console.log(g2);
-console.log(g3);
+    // create both <u,v> and <v,u>
+    var g1 = g.reduce(
+	function (result, current, index) {
+	    return result.concat([
+		[current[0],current[1]],
+		[current[1],current[0]]]);
+	},[]);
+
+    // Reduce step < u, N(u) >, find min, find larger N
+    var g2 = g1.reduce(
+	function (result, current, index) {
+	    var left = current[0];
+	    var right = current[1];
+	    if (!(left in result)) {
+		result[left]={
+		    "neighbors" : [left],
+		    "min" : left,
+		    "ngreater" : []
+		};
+	    }
+	    result[left].neighbors.push(right);
+	    var curmin = result[left].min;
+	    result[left].min = (right < curmin) ? right : curmin;
+	    if (right > left) {
+		result[left].ngreater.push(right);
+	    }
+	    return result;
+	},
+	{});
+
+    function concatIfNonEmpty(arr1, arr2) {
+	arr2.forEach(
+	    x => {
+		if (x != null) {
+		    arr1.push(x);
+		}
+	    });
+	return arr1;
+    }
+
+    // Emit new edges, it is a flatmap
+    var g3 = Object.keys(g2).reduce(
+	function (result, current, index) {
+	    var row = g2[current];
+	    return concatIfNonEmpty(
+		result,
+		_.map(row.ngreater,
+		      x => [x, row.min]));
+	}, []);
+    
+    if(debug) {
+	console.log("largeStar:");
+	console.log(g);
+	console.log(g1);
+	console.log(g2);
+	console.log(g3);
+    }
+    return g3;
+}
+
+function test_large_star() {
+    // Large-star
+    // Map <u,v>
+    //  Emit <u,v>, <v,u>
+    // Reduce <u,Gamma(u)>:
+    //  Let m = argmin v in Gamma+(u) l_v
+    //  Emit <v,m> for all v where l_v > l_u
+    
+    // This doesn't make much sense,
+    // does v belong to Gamma+(u)?
+    // Note: that you get neighbors of u
+    // Previously:
+    // {8,{1,5,7}},
+    // Now you need to have all edges for 8
+    // {8,{1,5,7,9}},
+    // create an edge for a l_v > l_u
+    // Might as well create both
+    // {8,{1,5,7},{9}}
+
+    // Shuffle
+    var g = [[1,8],[5,8],[7,8],[8,9]];
+
+    // create both <u,v> and <v,u>
+    var g1 = g.reduce(
+	function (result, current, index) {
+	    return result.concat([
+		[current[0],current[1]],
+		[current[1],current[0]]]);
+	},[]);
+
+    // Reduce step < u, N(u) >, find min, find larger N
+    var g2 = g1.reduce(
+	function (result, current, index) {
+	    var left = current[0];
+	    var right = current[1];
+	    if (!(left in result)) {
+		result[left]={
+		    "neighbors" : [left],
+		    "min" : left,
+		    "ngreater" : []
+		};
+	    }
+	    result[left].neighbors.push(right);
+	    var curmin = result[left].min;
+	    result[left].min = (right < curmin) ? right : curmin;
+	    if (right > left) {
+		result[left].ngreater.push(right);
+	    }
+	    return result;
+	},
+	{});
+
+    function concatIfNonEmpty(arr1, arr2) {
+	arr2.forEach(
+	    x => {
+		if (x != null) {
+		    arr1.push(x);
+		}
+	    });
+	return arr1;
+    }
+
+    // Emit new edges, it is a flatmap
+    var g3 = Object.keys(g2).reduce(
+	function (result, current, index) {
+	    var row = g2[current];
+	    return concatIfNonEmpty(
+		result,
+		_.map(row.ngreater,
+		      x => [x, row.min]));
+	}, []);
+    
+    // var g4 = _.mapValues(g2)
+
+    console.log(g);
+    console.log(g1);
+    console.log(g2);
+    console.log(g3);
+}
+//test_large_star();
+
+// Shuffle
+var g = [[1,8],[5,8],[7,8],[8,9]];
+var glarge = largeStar(g, debug=true);
+var gsmall = smallStar(g, debug=true);
+var g1 = G.uniquifyEdges(glarge);
+var g2 = G.uniquifyEdges(gsmall);
+
+function isSame(g1,g2) {
+    return g1.reduce(
+	function (result, current, index) {
+	    return result &&
+		(current[0] == g2[index][0]) &&
+		(current[1] == g2[index][1]);
+	},
+	true);
+}
+
+console.log(g1,g2);
+console.log(isSame(g1,g2));
