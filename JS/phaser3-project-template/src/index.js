@@ -1,1 +1,1 @@
-import './geom/line/copy from.js'
+import './geom/line/copy from.js';
