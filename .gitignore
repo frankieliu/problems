@@ -12,4 +12,8 @@ scala/hello2
 a.out
 fontconfig/
 *#
-
+bazel-bin
+bazel-c++
+bazel-genfiles
+bazel-out
+bazel-testlogs
