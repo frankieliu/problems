@@ -1,0 +1,11 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* compiling and running locally
+** installation
+googletest, glog, bazel
+1. all were installed via aptitude
+2. googletest had to go through a few more steps to create
+   libraries that were manually installed into /usr/lib
+** running
+* 
