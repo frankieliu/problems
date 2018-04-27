@@ -1,0 +1,3 @@
+/home/fyliu/github/problems/Gtest/CMakeFiles/edit_cache.dir
+/home/fyliu/github/problems/Gtest/CMakeFiles/rebuild_cache.dir
+/home/fyliu/github/problems/Gtest/CMakeFiles/runTests.dir

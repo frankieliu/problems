@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/fyliu/github/problems/Gtest/sqrt.cpp
+math.h
+-
+
+/home/fyliu/github/problems/Gtest/tests.cpp
+sqrt.cpp
+/home/fyliu/github/problems/Gtest/sqrt.cpp
+gtest/gtest.h
+-
+

@@ -1,0 +1,8 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* Install
+1. sudo aptitude install pkg-config zip g++ zlib1g-dev unzip python
+2. download bazel # get the one with jdk
+3. run installer ./bazel...sh --user
+4. should install to ~/bin, ~/bin should be in path

@@ -11,4 +11,5 @@ scala/hello2
 *.exe
 a.out
 fontconfig/
+*#
 
