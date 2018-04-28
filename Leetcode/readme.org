@@ -8,4 +8,47 @@ googletest, glog, bazel
 2. googletest had to go through a few more steps to create
    libraries that were manually installed into /usr/lib
 ** running
-* 
+1. c++/ is the workspace directory
+2. WORKSPACE defines the "external" dependencies
+   1. since I have local installs for googletest,
+      need to point them in WORKSPACE, this is in 
+      lieu of downloading them
+   2. googletest also requires use of pthread library
+      this was also added in WORKSPACE
+3. In each "leetcode" problem directory such as 67
+   for add-binary problem, there is a BUILD file the
+   build dependencies
+4. Put solution in leetcode_<#>.h
+5. Put assertion in leetcode_<#>_test.cpp
+6. Run bazel test leetcode_<#>_test
+7. In order to see the outputs need to add to tools/bazel.rc
+   test --test-output=all, this can also be added to WORKSPACE
+   directory as .bazelrc
+8. Notes: most of the time was spent in 2. trying to figure
+   out how to properly reference local libraries
+
+* finished code
+| No. | problem    | links |
+|-----+------------+-------|
+| [[./67/leetcode_67.h][67]]  | [[https://leetcode.com/problems/add-binary/description/][Add binary]] | [[http://fisherlei.blogspot.com/2013/01/leetcode-add-binary.html][1]]     |
+|     |            |       |
+
+* string functions
+string.c_str() : returns const char*
+string.length()
+string.resize("size",'char')
+string.substr("first position","length")
+
+* googletest
+[[http://fisherlei.blogspot.com/2013/01/leetcode-add-binary.html][Primer]]
+EXPECT_STREQ(str.c_str(), (const char*) "some string");
+** libgtest vs libgtest_main
+libgtest_main.a has a main in it already
+
+* bazel local libraries
+[[https://github.com/thinlizzy/die-tk][example]]
+[[https://groups.google.com/forum/#!msg/bazel-discuss/Ndd820uaq2U/gsssAZyBAAAJ][example x11]]
+** workspace
+[[https://docs.bazel.build/versions/master/be/workspace.html][workspace]]
+** cpp
+[[https://docs.bazel.build/versions/master/be/c-cpp.html][srcs]]
