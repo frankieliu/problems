@@ -49,21 +49,34 @@ string.length()
 string.resize("size",'char')
 string.substr("first position","length")
 
+* vector
+** initializing
+vector<int> vec{10,20,30};
+vector<int> vec(n,0);
+vector<int> vec(vec2.begin(), vec2.end());
+vector<int> vec(intarray, intarray + intarray_length);
+
 * set functions
 set.insert(element)
 set.count(element)   # 0 if not in set
 set.find(element)    # set:end
+set.erase(element)
+** convert from vector
+set<int> s(vec.begin(), vec.end());
 
 * for loops
 ** over a vector/set
 vector<int> A; set<int> s;
 for (int i: A) s.insert(i);
 for (int i: s) A.insert(i);
+
 * <algorithm>
-sort(vec.begin(),
-     vec.end(),
+** sort
+sort(vec.begin(),vec.end(),
      { bool func(int i, int j) {return (i<j);} }
      );
+** reverse
+reverse(vec.begin(),vec.end());
 
 * googletest
 [[http://fisherlei.blogspot.com/2013/01/leetcode-add-binary.html][Primer]]
