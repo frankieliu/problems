@@ -55,6 +55,13 @@ vector<int> vec{10,20,30};
 vector<int> vec(n,0);
 vector<int> vec(vec2.begin(), vec2.end());
 vector<int> vec(intarray, intarray + intarray_length);
+** finding element and position
+auto it = find(vec.begin(),vec.end(),element);
+if (it == vec.end() {
+  // not found
+} else {
+  auto index = distance(vec.begin(),it);
+}
 
 * set functions
 set.insert(element)
