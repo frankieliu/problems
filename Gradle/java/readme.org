@@ -1,0 +1,26 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* grade init --type java-application
+
+This creates the following files:
+
+├── build.gradle
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+└── src
+    ├── main
+    │   └── java
+    │       └── App.java
+    └── test
+        └── java
+            └── AppTest.java
+
+* ./gradlew build
+* ./gradlew tasks
+* ./gradlew run
