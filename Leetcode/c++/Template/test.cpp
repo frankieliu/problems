@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include "../base/cpp_standards.h"
-#include ".hpp"
+#include "%title%.hpp"
 
 /*
 */
 
-TEST(Leetcode, _) {
+TEST(Leetcode, %title_%) {
     Solution s;
     vector<int> a={,};
     EXPECT_EQ(, s.(a));
