@@ -1,0 +1,28 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* source
+The example comes from rathboma/hadoop-framework-examples.
+https://github.com/rathboma/hadoop-framework-examples/tree/master/spark-scala
+* differences
+** build
+1. he used pom.xml
+2. built using gradle
+   gradle init --type java.application
+*** build.gradle
+mainClassName = 'main.java.sparktest.ExampleJob'
+dependencies {
+  comile 'org.apache.spark:spark-core_2.11:2.1.0'
+}
+repositories {
+  mavenCentral()
+}
+run {
+  args = ["transactions.txt", "users.txt", "out"]
+}
+
+compile org.apache.spark:spark-core_2.10:2.10
+** changes
+in a couple of places had to get rid of Object and change to Long
+
+gra
