@@ -49,8 +49,6 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 TEST(Leetcode, roman_to_integer_13) {
     Solution s;
-    vector<int> a={,};
-    EXPECT_EQ(, s.(a));
-    vector<int> b={,};
-    EXPECT_EQ(, s.(b));
+    EXPECT_EQ(3, s.romanToInt("III"));
+    EXPECT_EQ(58, s.romanToInt("LVIII"));
 }
