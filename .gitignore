@@ -18,3 +18,5 @@ bazel-genfiles
 bazel-out
 bazel-testlogs
 __pycache__
+metastore_db
+derby.log
