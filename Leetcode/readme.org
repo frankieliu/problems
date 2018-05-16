@@ -21,7 +21,7 @@ googletest, glog, bazel
 1. c++/ is the workspace directory for bazel
 2. WORKSPACE defines the "external" dependencies
    1. since I have local installs for googletest,
-      need to point them in WORKSPACE, this is in 
+      need to point them in WORKSPACE, this is in
       lieu of downloading them
    2. googletest also requires use of pthread library
       this was also added in WORKSPACE
@@ -98,3 +98,9 @@ libgtest_main.a has a main in it already
 [[https://docs.bazel.build/versions/master/be/workspace.html][workspace]]
 ** cpp
 [[https://docs.bazel.build/versions/master/be/c-cpp.html][srcs]]
+
+* Recommended
+my code school intro to datastructures
+code interview exposed
+hackerearth
+hackerrank
