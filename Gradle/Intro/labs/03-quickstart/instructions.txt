@@ -1,0 +1,7 @@
+1. Go to `GRADLE_HOME/samples/java/quickstart`.
+2. Check the output of `gradle help`, `gradle -?` and `gradle tasks`.
+3. Build the archives for this Java project and try to find them.
+4. (optional) Run `gradle eclipse` and open the project in Eclipse.
+5. (optional) Run `gradle idea` and open the project in IntelliJ IDEA.
+
+    Hint: Observe how the Eclipse plugin is declared in the build script. You can do the same for the IDEA plugin.

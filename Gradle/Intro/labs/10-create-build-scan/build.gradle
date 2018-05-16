@@ -1,0 +1,71 @@
+// Adds build scan functionality
+plugins {
+    id 'com.gradle.build-scan' version '1.13.1'
+}
+
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
+}
+// End build scan functionality
+
+/**
+ * 1) Run 'gradle build --scan' and follow the link at the end of the build. You will need to activate the build scan.
+ * 2) Run 'gradle --no-daemon build --scan' and follow the link at the end of the build. What are some of the suggestions made in the 'Performance' card?
+ * 3) Change a unit test to make it fail and rerun 'gradle build --scan'.  How did the build scan change?
+ * 4) Remove the "Adds build scan functionality" section from above, go to https://docs.gradle.com/build-scan-plugin/#for_all_your_builds.  Take a look at the instructions there (you don't need to execute them).
+ * 5) Run the "setupInitScript" task to setup the init script discussed at the link above.
+ * 6) Run "gradle build --scan" again and verify that a scan is published.
+ *
+ * NOTE: Please keep in mind that a build scan contains metadata about your build (project names, file paths, host names) that will be uploaded to a Gradle, Inc owned server, but not the source code itself.
+ *
+ *      Tips: 1) If you click "Remember me", you won't need to activate each build scan every time you create one.
+ *            2) You can configure the build scan plugin to always generate a build scan:
+ *
+ *               buildScan {
+ *                  publishAlways()
+ *               }
+ *
+ *
+ */
+
+
+apply plugin: "java"
+
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "commons-collections:commons-collections:3.2"
+    testCompile "junit:junit:4.11"
+}
+
+task setupInitScript {
+    doLast {
+        def initScript = new File(gradle.gradleUserHomeDir, "init.d/buildScan.gradle")
+        initScript.parentFile.mkdirs()
+        initScript.text = """
+            initscript {
+                repositories {
+                    maven { url 'https://plugins.gradle.org/m2' }
+                }
+
+                dependencies {
+                    classpath 'com.gradle:build-scan-plugin:1.13.1'
+                }
+            }
+
+            rootProject {
+                apply plugin: com.gradle.scan.plugin.BuildScanPlugin
+
+                buildScan {
+                    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+                    licenseAgree = 'yes'
+                }
+            }
+        """
+    }
+}

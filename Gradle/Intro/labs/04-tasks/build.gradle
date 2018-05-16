@@ -1,0 +1,28 @@
+/*
+    1. Add a `helloWorld` task that prints 'hello world'.
+    2. Execute this task.
+    3. Add a `printDate` task that prints out the current date.
+    4. Execute the `printDate` task, abbreviating its name.
+    5. Execute `gradle tasks --all`.
+    6. Add meaningful descriptions to the tasks.
+       Hint: http://www.gradle.org/docs/current/dsl/org.gradle.api.Task.html#org.gradle.api.Task:description
+    7. Execute `gradle tasks` again.
+*/
+
+task helloWorld {
+     doLast {
+            println "Hello World!"
+     }
+}
+
+import java.time.LocalTime
+
+task printDate {
+     doLast {
+            Date now = new Date()
+            System.out.println("The date is $now")
+            LocalTime time = LocalTime.now()
+            println time
+            // println new Date().format("yyyy-MM-dd")
+     }
+}

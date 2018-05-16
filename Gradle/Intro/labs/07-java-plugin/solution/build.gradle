@@ -1,0 +1,34 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+group = "my.company"
+description = "My Java Library"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "commons-collections:commons-collections:3.2"
+    testCompile "junit:junit:4.11"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["java"]
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes "Implementation-Version": project.version
+    }
+}
+
+test {
+    maxParallelForks = (Runtime.runtime.availableProcessors() / 2) + 1
+}

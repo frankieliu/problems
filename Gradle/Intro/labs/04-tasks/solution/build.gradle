@@ -1,0 +1,13 @@
+task helloWorld {
+    description = "everyone's first task"
+    doLast {
+        println "hello world"
+    }
+}
+
+task printDate {
+    description = "prints date"
+    doLast {
+        println new Date().format("yyyy-MM-dd")
+    }
+}

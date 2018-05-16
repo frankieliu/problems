@@ -1,0 +1,9 @@
+/*
+    1. Define a C++ executable named 'hello'
+        (sources for this executable are in the conventional location).
+        Hint: Would the project need any plug-ins applied?
+    2. Build and install the executable. Notice the tasks that are executed. Execute a second time and see what happens.
+        Hint: 'gradle tasks' may help decide the correct task to run.
+    3. Inspect the various generated files under 'build'. Note the location of the generated object files, binary and install image.
+    4. Run the hello executable via the install image script in build/install.
+*/

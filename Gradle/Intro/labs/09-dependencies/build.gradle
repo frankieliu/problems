@@ -1,0 +1,19 @@
+/*
+    1. Execute `gradle dependencies --configuration compile`
+    2. Note the large dependency graph
+    3. Using the `dependencyInsight` task, determine which version of `hibernate-validator` is used at compile time
+    4. Force version `4.0.0.GA` of `hibernate-validator` and verify the result
+    5. Generate a HTML dependency report
+*/
+
+apply plugin: "java"
+apply plugin: "project-report"
+
+repositories {
+    mavenCentral()
+    maven { url "http://repository.jboss.org/nexus/content/groups/public-jboss/" }
+}
+
+dependencies {
+    compile "org.jboss.as:jboss-as-jpa:7.1.2.Final"
+}

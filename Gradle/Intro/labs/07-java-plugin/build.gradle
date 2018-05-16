@@ -1,0 +1,27 @@
+/*
+1. Execute `gradle tasks` to see which tasks are available.
+2. Build the Jar archive and try to find it.
+3. Configure the `jar` task to add an entry named `Implementation-Version` to the Jar manifest. Set the entry's value to the project version.
+4. Edit the source code of a test to make it fail, execute the project's tests, and check the HTML test report.
+5. Configure the `test` task to run tests in parallel (hint: use the `maxParallelForks` setting).
+6. Move the sources from `src/main/java` to `java`, and reconfigure the `main` source set accordingly.
+*/
+
+apply plugin: "java"
+
+group = "my.company"
+description = "My Java Library"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "commons-collections:commons-collections:3.2"
+    testCompile "junit:junit:4.11"
+}
+
+jar {
+    // add logic here
+}

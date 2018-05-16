@@ -1,0 +1,5 @@
+/*
+    1. Add a copy task that copies all `*.txt` files under `content` and all files under images into `build/texts` (observe the preserved hierarchy).
+    2. Add a section to the copy task from 1. that also copies all `*.dat` files under `content` and renames them to `*.data`.
+       Hint: The rename regex is `"(.*)\\.dat"`.
+*/

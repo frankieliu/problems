@@ -1,0 +1,247 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* Google docs
+http://bit.ly/2GpxUt1
+https://docs.google.com/document/d/1y1itnMqPhB354AxYmBKEAeQNDs7VKbcIsuKGhqAWT4g/edit
+
+* Task
+unit of work
+
+* docs
+docs.gradle.org
+
+* discuss
+discuss.gradle.org
+
+* guide
+guides.gradle.org
+
+* Downloading
+sdkinstall(linux), scoop (windows)
+
+* gradle daemon
+keep the jvm warm - keeps jvm alive
+daemon lives for 4 hours
+
+* wrapper
+** always run from a wrapper
+** use same version of gradle
+guarantee that version of project works with version of gradle
+** look in gradle/wrapper/gradle-wrapper.properties
+** if you have wrapper don't need to download gradle
+** generating the wrapper
+
+grade help --task wrapper
+
+* atom.io text editor
+file manager
+preferences:install:language groovy/language gradle/install both:
+
+* ad hoc task
+tells gradle what to do
+println
+
+* gradle tasks --all
+lab 01
+gradle gradleVersion
+
+* GRADLE_USER_HOME
+~/.gradle
+.gradle/wrapper/dists : shows all the downloaded versions of wrapper
+
+Allows you to the task with gradle tasks
+
+task asdfs {
+ group "Help"
+ description "adds a description"
+}
+
+properties of tasks:
+group: putting into a group
+description: lets you add a description to see in gradle tasks
+
+* adding daemon
+--daemon  vs --no-daemon
+org.gradle.daemon=true in ~/.gradle/gradle-properties
+jps to figure out running processes
+gradle --status
+
+* $ gradle properties 
+shows all the properties
+name gets the name of the folder
+
+* "delegate"
+configuring an instance of a project class
+closure
+delegate = object it looks for to resolve
+
+* incubating
+removing the word
+
+* plugins block
+newer syntax
+downloads the syntax
+don't need to apply the plugin
+build
+gradle repository needs plugins {}
+** how to specify version on a plugin
+apply-plugin:  : whatever included in the distribution
+ alternatives
+build-script  : use version
+plugins {} : use version
+
+* create a java project from scratch
+** from scratch
+1. create inside labs directory
+2. gradle init
+   gradle help --task init
+
+** you will see --type
+archetypes : in maven
+responsibility of plugins
+
+3. mkdir java_lib_demo
+4. plugins { }
+   apply-plugin: 'java-library'
+   dependencies {}   guava, commons-math, junit
+   repositories {}   jcenter() front end for Maven
+   need to look at the dsl
+   configurations
+   group:artifact:nameversion
+   group:name:version
+
+   api part of the library you are building - can accessed by user
+   implementation - note exposed to user
+   testImplementation - only added in src/test/java
+
+   used to be
+   "compile" for both: both are added to classpath
+   additional options to init
+
+   kotlin better idea support
+   groovy, interpolate a value use "", '' are regular java strings
+   example println "name: ${name}"
+           println "name: $name"
+
+* plugins.gradle.org
+get source code for the plugin
+for scala plugin, look in github for gradle
+** look inside shadow plugin
+to see how to use 
+
+build-script{} and apply plugin
+
+vs
+plugins {}
+
+which does both fetch and apply
+ 
+* java pms
+modules how interact with gradle?
+
+* --dry-run
+./gradlew build --dry-run
+./gradlew build -m          : short-hand for --dry-run
+
+* plugin added a lot of new tasks (java-library plugin)
+
+* gradlew jar
+** to see all the steps use console option
+./gradlew jar --console=plain
+
+** where did the jar file go?
+build/libs/folder
+
+** add version = 1.0
+
+** ./gradlew clean build
+
+* docs.gradle.org/current/dsl
+look in the jar file
+
+* eclipse support
+add:
+apply plugin: 'eclipse'
+
+list tasks:
+./gradlew tasks
+
+./gradlew cleanEclipse eclipse
+
+eclipse
+file/import ... existing projects into workspace
+select root directory: java_lib_demo
+- should recognize there is project inside
+- finish
+- dependencies point to ~/.gradle/ jar files
+
+adapt existing project to gradle
+
+eclipse plugin for gradle "Buildship"
+ eclipse marketplace : Buildship Gradle Integration
+ right click on project and configure add gradle support
+ then show view/ other/ gradle
+
+ you can import build.gradle in eclipse
+
+gradle plugin for eclipse "eclipse" "eclipse-wtp"
+
+new project: maven, gradle
+
+* idea
+import the build.gradle file
+import from gradle wizard : use all the defaults
+
+new project : can select gradle, will ask kotlin, groovy
+
+* tasks
+defining ad hoc tasks
+
+tasks nameOfTask {
+ doLast {}
+}
+
+task can have a list of actions
+doFirst {}
+doLast {}
+
+a task is backed by a java class
+single method is run
+
+use camel case to match to the task
+
+Tasks org.gradle.api.Tasks
+
+Action is a closure
+onlyIf( )
+   
+gradlew -Pok=false
+
+gradle.properties in project directory can be used in the current
+directory
+
+ok=true
+onlyIf { ok }
+
+ok=false
+onlyIf { ok.toBoolean() }
+
+* hit the 'n' key to see the solutions...
+
+* configuration vs execution
+build Lifecycle
+docs.gradle.org/current/userguide/tutorial_using_tasks.html
+
+* phases
+initialization : reads the environment
+
+configuration : build scripts are evaluated, creates a build model
+ initializes all the tasks, this does invoke methods
+ ex. task myCopy(type: Copy) {
+       from "sourceDir"
+       to "targetDir"
+     }
+ all tasks are configured
+
+execution : 

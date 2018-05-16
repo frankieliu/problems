@@ -1,0 +1,21 @@
+/*
+    1. Make the `date` task depend on the `hello` task.
+    2. Execute the `date` task.
+    3. Execute `gradle tasks --all`.
+    4. The `--dry-run` (or `-m`) command line option executes the build but disables all actions. Execute `date` with the `--dry-run` option.
+    5. Add some top level `println` statements to the script.
+    6. Add a `println` statement to the configuration block of the `date` task.
+    7. Execute the `hello` task and analyze the output.
+*/
+
+task hello {
+    doLast {
+        println "Hello World"
+    }
+}
+
+task date {
+    doLast {
+        println new Date()
+    }
+}

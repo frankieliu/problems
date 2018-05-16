@@ -1,0 +1,13 @@
+/*
+    1. Install the Gradle Wrapper for this build using the "wrapper" task.
+    2. Run the "gradleVersion" task using the wrapper.
+
+    3. (optional) Change the wrapper version to the latest nightly Gradle distribution and rerun the build.
+        Hint: Check the Gradle homepage for information on nightly Gradle distributions.
+*/
+
+task gradleVersion {
+    doLast {
+        println "Gradle version $gradle.gradleVersion"
+    }
+}

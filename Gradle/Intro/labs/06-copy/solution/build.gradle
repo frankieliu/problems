@@ -1,0 +1,9 @@
+task copy(type: Copy) {
+    into "$buildDir/texts"
+    from("content") {
+        include "**/*.txt"
+        include "**/*.dat"
+        rename "(.*)\\.dat", '$1.data'
+    }
+    from("images")
+}

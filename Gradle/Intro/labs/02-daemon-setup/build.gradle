@@ -1,0 +1,11 @@
+/*
+    1. Execute `gradle hello --no-daemon`. (note the execution time and look at the build scan's performance suggestions)
+    2. Execute `gradle hello` a few times. (this uses the daemon by default - notice the faster response)
+
+    Docs: http://www.gradle.org/docs/current/userguide/gradle_daemon.html
+*/
+task hello {
+	doLast {
+		println "Welcome to the Gradle course!"
+	}
+}
