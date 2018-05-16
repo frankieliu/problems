@@ -1,0 +1,35 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* license
+1 License
+JetBrains Product Pack for Students
+Download
+License ID:
+FOFXHAOY4P
+Licensed to:	Frankie Liu
+License restriction:	For educational use only
+Valid through:	March 28, 2019
+Download activation code for offline usage
+Following products included:
+AppCode	CLion	DataGrip	dotCover	dotMemory
+dotTrace	GoLand	IntelliJ IDEA Ultimate	PhpStorm	PyCharm
+ReSharper	ReSharper C++	Rider	RubyMine	WebStorm
+After downloading and installing the software, simply run it and follow the on-screen prompts to sign in with your JetBrains Account.
+
+Can't find your license here? Link your past purchases to your JetBrains Account by providing a license key or domain .
+
+C-n     : new
+C-spc   : code completion
+Alt+F7  : find where something is being used
+* keys
+C-n   : navigate to a class
+C-spc : complete
+A-F7  : usage
+C-q   : quick doc
+C-b   : navigate to declaration
+C-F12 : navigate the currently edited file (file structure)
+S-F6  : refactor/rename
+C-o   : override methods of base calss
+C-i   : implement methods
+C-S-spc : smart type (completion current context)
