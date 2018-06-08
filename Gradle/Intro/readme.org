@@ -245,3 +245,247 @@ configuration : build scripts are evaluated, creates a build model
  all tasks are configured
 
 execution : 
+
+* Training material
+
+Ken Kousen
+ken@gradle.com
+ken.kousen@kousenit.com
+
+go.gradle.com/Materials/IntroToGradle_TrainingMaterials
+http://bit.ly/2GpxUt1
+
+* Wed
+05-lab
+
+The square brackets are optional it means it is a dictionary map
+passed in
+
+task date(dependsOn: ['hello', 'some other task']) {
+  dependsOn hello
+  doLast {
+    println new Date()
+  }
+}
+
+closure is a block of code surrounded by curly braces {...}
+They act like anonymous methods.
+An arrow is used to seprate the args from the body
+If the closure has only a single argument, and you don't give
+it a name, it has a name called 'it'
+list.each { print it }
+list.each { num -> println num }
+list.eachWithIndex { val, idx -> println "The value at index $idx is
+$val" }
+
+* can you change the order?
+
+task date {
+ dependsOn hello
+}
+
+task hello {
+}
+
+No, because it is not defined yet
+
+Using quote for the task name:
+
+ dependsOn 'hello'
+
+is a workaround.
+
+* configuration time and execution time
+println 'a'
+task hello {
+  doLast{
+  }
+}
+println 'b'
+task date {
+ dependsOn hello
+ println 'b1'
+ doLast {}
+ println 'b2'
+}
+println 'c'
+
+gradle hello
+
+will print
+'a'
+'b'
+'b1'  <- all these gets print out during
+'b2'     configuration time
+'c'
+
+* external variable
+the project class defines
+ext
+any variable in that map is available
+
+github project
+spock framework 
+multi-project gradle build
+LOOK HERE >>>  settings.gradle
+has a bunch of includes
+you can even have a include inside if statements
+you can also have a little groovy method that renamed the build files
+LOOK HERE >>> spock-spring
+the build file is call spring.gradle
+ext.displayName = " " : global variable
+description = " " : property of project
+def springVersion =
+LOOK HERE >>> dependencies
+$springVersion is used into the strings
+Got to top level build.gradle
+
+ext {
+ libs = {
+  log4j: "log4j:log4j:1.2.17"
+ }
+}
+
+assigned it to the global 'ext' inside
+the spring project
+libs.log4j
+
+ext.libs.log4j also ok to use it
+
+* default task without (type:) custom tasks
+make your own custom task
+class Greeting extends DefaultTask {
+ String user = 'World'
+
+ @TaskAction
+ void sayHello() {
+  println "Hello, $user!"
+ }
+
+}
+
+task hi(type: Greeting)
+
+task whatUp(type: Greeting) {
+ user = 'Dolly'
+}
+
+task hi(type: Greeting) {
+ doFirst { println 'a' }
+ // @TaskAction happens here
+ doLast { println 'b' }
+}
+
+doFirst and doLast is preprocessing and postprocessing
+default tasks don't have a TaskAction
+type: non-default must have a TaskAction
+
+* << used to be leftShift
+happens at execution time
+
+
+
+* file system
+rootDir : root directory of multi-project build
+buildDir : build output directory under proj dir
+projectDir : 
+
+run:
+gradle properties
+
+project.file("path relative to projectdir")
+
+* copy task
+task copyLibs(type: Copy) {
+ exclude "**/.svn" // all grandchildren of .svn
+
+ from "libsDir", "docs/index.html", "/some.txt"
+ into "tardgetDir"
+ 
+}
+
+* filter ant
+groovy ant builder default ant task
+
+// using ant object
+ant.echo "Echo from Ant"
+
+filter(HeadFilter, lines: 25, skip: 2)
+HeadFilter from ant
+filter { line -> line.substring(5) }
+                 line[0..4]
+
+template engine
+set the values of the variables:
+"$foo" -> "bar", "$red" -> "blue"
+expand(foo: "bar", red: "blue")
+
+rename with RE
+rename "(.*)_OEM_BLUE_(.*)", '$1$2'
+
+eachFile { FileCopyDetails copyDetails ->
+ if (copyDetails.name.length() > 10) {
+  copyDetails.path = "longFileNames/$copyDetails.name"
+ }
+}
+
+task copyFiles (type: Copy) {
+  from "$buildDir.libs"
+  into 'outputs' 
+}
+
+* exec java for system
+* sourceSets
+
+sourceSets {
+ main {
+  java {
+   srcDir 'src'
+  }
+ }
+ test {
+  java {
+   srcDir 'test'
+  }
+ }
+}
+
+* gradle build -t
+gradle build --continuous
+Monitoring the source code and the text
+
+Continuous build mechanism
+Monitors the src and test hierarchies
+
+* build.dependsOn 'hello'
+
+* test parallel
+test {
+ maxParallelForks 4
+}
+
+* gradle dependencyInsight --dependency hibernate-validator --cofiguration compile
+apply plugin: "project-report"
+
+configuration.all {
+ resolutionStragegy.force {
+ 
+ }
+}
+
+* multi-project
+sub
+dependency {
+ compile project(":shared")
+}
+
+gradle :api:classes
+tasks within a subproject
+
+* gradle build --continue
+keep going even if you have a failure
+
+* gradle build --parallel
+run independent tasks from different 
+
+* gradle build --continuous

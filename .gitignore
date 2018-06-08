@@ -20,3 +20,6 @@ bazel-testlogs
 __pycache__
 metastore_db
 derby.log
+.gradle/
+build/
+libs/
