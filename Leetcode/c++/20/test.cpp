@@ -34,9 +34,18 @@ Output: true
 */
 
 TEST(Leetcode, valid_parentheses_20) {
-    Solution s;
-    vector<int> a={,};
-    EXPECT_EQ(, s.(a));
-    vector<int> b={,};
-    EXPECT_EQ(, s.(b));
+    Solution sol;
+    string s = "()";
+    EXPECT_EQ(true, sol.isValid(s));
+    s = "()[]{}";
+    EXPECT_EQ(true, sol.isValid(s));
+    s = "(]";
+    EXPECT_EQ(false, sol.isValid(s));
+    s = "([)]";
+    EXPECT_EQ(false, sol.isValid(s));
+    s = "{[]}";
+    EXPECT_EQ(true, sol.isValid(s));
+    s = "([]";
+    EXPECT_EQ(false, sol.isValid(s));
+
 }

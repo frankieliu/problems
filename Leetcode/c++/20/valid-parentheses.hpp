@@ -3,18 +3,34 @@ public:
     map<char,char> m={{'(',')'},
                       {'[',']'},
                       {'{','}'}};
-                    
+    
     bool isValid(string s) {
-        int head = 0;
-        int tail = s.size()-1;
-        // search head
-        if (s[head] == '(')||(s[head] == '[')||(s[head] == '{') {
-            while (tail > head) {
-                if (s[tail] == s[head])
-                    break;
-                tail--;
+        // keep a stack
+        stack<char> st;
+        int n = s.size();
+        if (n == 0) return true;
+        else {
+            int i=0;
+            st.push(s[i]);
+            // cout << "head: " << st.top() << " i: " << i << endl;
+            i++;
+            while(i < n) {
+                char next = s[i];
+                // cout << "next: " << next << endl;
+                if (st.empty() || (next != m[st.top()])) {
+                    st.push(next);
+                } else {
+                    if (next == m[st.top()]) {
+                        // cout << "next == head" << endl;
+                        st.pop();
+                    }
+                }
+                i++;
             }
-            if (tail == head) return false;
+            if (st.empty())
+                return true;
+            else
+                return false;
         }
     }
 };

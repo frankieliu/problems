@@ -1,0 +1,62 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+
+* pyplot.
+
+cla()    # clear axis
+clf()    # clear figure
+close()  # close figure
+
+* figures
+plt.get_fignums()        # get figure numbers
+
+fig = plt.plot_figure()  # get figure object
+fig = figure()           # get current figure
+
+plt.close(fig)           # close it  fig.close() doesn't work
+fig.clear()              # clears the figure
+fig.clf()                # clears the figure
+
+
+  
+* ipython block=False
+type %pylab to start in pylab mode
+from pylab import *
+plot([1,2,3])
+xlabel('a label')
+plt.show(block=False)
+
+* line color
+line, = plt.plot()
+line.set_color("b")
+plt.gca().get_lines()[0].set_color("b")
+for ax in plt.gcf().axes:
+  ax.get_lines()[0].set_color("b")
+
+
+* colors
+matplotlib.org/users/colors.html
+matplotlib.org/users/colormaps.html
+matplotlib.org/tutorials/colors/colormaps.html
+
+RBG tuple (0.1,0.2,0.5)
+hex RGB #0F0F0F
+string representation of a float '0.5'
+'b'  'g'  'r'  'c'  'm'  'y'  'k'  'w'
+'C0' 'C1' 'C2' 'C3' 'C4' 'C5' 'C6' 'C7' 'C8' 'C9' matplotlib.rcParms['axes.prop_cycle']
+'tab:blue', orange green red purple brown pink gray olive cyan
+'xkcd:colorname'
+
+* cm
+plt.get_cmap().colors = matrix
+matplotlib.set_cmap('copper')
+
+* linestyle
+plot(x,y,linestyle='--',dashes=(length,spacing))
+
+* inkscape
+While Inputting text from keyboard Press ‘Control + U’ to switch to
+Unicode Mode then type ’00a9′ for copyright symbol or ‘2122’ for
+Trademark Symbol without quotes then Press ‘Enter’
+

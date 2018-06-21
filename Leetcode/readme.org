@@ -37,6 +37,11 @@ googletest, glog, bazel
 8. Notes: most of the time was spent in 2. trying to figure
    out how to properly reference local libraries
 
+* My setup for leetcode
+1. create a directory containing the number and title for the leet
+   code, e.g. touchp 13/roman-to-integer.hpp
+2. make
+
 * finished code
 | No. | problem    | links |
 |-----+------------+-------|
