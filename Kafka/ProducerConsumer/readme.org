@@ -1,0 +1,3 @@
+// package net.bigdatums.kafka.producer;
+src/main/java/org/test/
+./gradlew init --type java-application
