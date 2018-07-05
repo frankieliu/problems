@@ -1,0 +1,14 @@
+allprojects {
+    repositories {
+        jcenter()
+    }  
+}
+
+subprojects {
+    version = '1.0'
+}
+
+// apply plugin: "application"
+// mainClassName = System.getProperty("mainClass")
+
+// grade run -DmainClass=....
