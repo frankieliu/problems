@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile files('../../../jeroMQ/build/libs/jeromq-0.4.4-SNAPSHOT.jar')
+}
+
+
+task server(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = project.hasProperty("mainClass")?project.getProperty("mainClass"): "org.test.hwserver"
+}
+// gradle build
+// gradle -PmainClass=foo server
