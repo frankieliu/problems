@@ -1,0 +1,30 @@
+back.py : backward propagation
+
+  def backward(model, X, y, probs, a1, reg_lambda, epsilon):
+
+chain.py : starts the chain computation
+
+  python chain.py
+
+     launch("c{}".format(port),
+           0, port + 1,
+           "add1",
+           "",
+           "c{}_out".format(port),
+           no_server=True,
+           begin_data=10)
+
+    port += 1
+
+  In this case, we pass the 
+  - name of the process,
+  - the receiving and forwarding port, 
+  - the name of the function to run,
+  - the input file name and the output file name
+  - no_server (default=False) implies whether or not to
+    wait for a message, and 
+  - begin_data is a simple convenience parameter for initiating calculations,
+    but in general one might want to set up a input
+    file prior to starting the computation.
+
+ 
