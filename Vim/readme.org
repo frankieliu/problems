@@ -1,0 +1,90 @@
+* :Ex explorer really useful
+
+* :tabe edit in a new tab
+
+* :tabn and :tabp to move between tabs
+  C-A-PgDn C-A-PgUp also moves between tabs
+
+* Jump between file
+  C-6
+
+* Movement
+  hjlk : cursor movement
+  wbe WBE : word backword endword
+  0$_
+  gg G
+  ngg nth line
+  HML (Hi Mid Lo of screen)
+  z(ztb) center on line, top on line, bottom on line
+  C-Forward Backward Up Down
+  C-Y,E move the pane up and down by one line
+
+* Search
+fX find next 'X'
+FX find previous 'X'
+tX till next 'X'
+TX till previous 'X'
+; repeat in same direction
+, repeat in opposite direction
+
+* / find a regex, but leaves marking
+
+* v gq
+
+use v to enter visual
+mark your region
+gq to wrap
+gqap to wrap the current paragraph
+gwap format the current paragraph and leave where you were
+
+* window
+C-W up and down move between windows
+c-w c-w cycle
+c-w_ maximize current window
+c-w= make them same size
+10 c-w+ increase by 10 lines
+:vsplit file  vertical split
+:hide close current window
+:only only keep this window open
+:ls show current buffers
+:b2 open b2 in this window
+
+* Insert mode, moving around
+
+https://stackoverflow.com/questions/1737163/traversing-text-in-insert-mode
+
+You seem to misuse vim, but that's likely due to not being very familiar with it.
+
+The right way is to press Esc, go where you want to do a small correction, fix
+it, go back and keep editing. It is effective because Vim has much more
+movements than usual character forward/backward/up/down. After you learn more
+of them, this will happen to be more productive.
+
+Here's a couple of use-cases:
+
+- you accidentally typed "accifentally". No problem, the sequence EscFfrdA will
+  correct the mistake and bring you back where you've been editing it. Ff
+  movement will bring you back to the first encountered "f" character. Compare
+  with Ctrl+<-->->->->deldEnd, that does virtually the same in a casual editor,
+  but takes more keystrokes, makes you move your hand out of alphanumeric space
+  of the keyboard.
+- you accidentally typed "you accidentally typed", but want to correct it to
+  "you intentionally typed". Then Esc2bcw will erase the word you want to fix
+  and bring you to insert mode, so you can immediately retype it. To get back
+  to editing, just press A instead of End, to reach which you should move your
+  hand
+- you accidentally typed "mouse" instead of "mice". No problem - the good old
+  Ctrl+W will delete the previous word without going out from insert mode. And
+  it happens to be much faster to erase small word than to fix errors in it.
+  I'm so used to it that I had closed the browser page when I was typing this
+  message...
+- repetition count is largely underused. Before making a movement, you can type
+  a number; and the movement will be repeated this number of times. For
+  example, 15h will bring you 15 characters back and 4j will scroll you 4 lines
+  down. Start using them and you'll get used soon and find out that pressing 10
+  times <- key is less fast than iterative approach to moving cursor, when you
+  type 12h, notice that you made a mistake and immediately correct yourself
+  with ll.
+- But, if you still want to do small text traversals without leaving insert
+  mode, follow rson's advice and use Ctrl+O. As an example, Ctrl+OF+f will move
+  you to previous f character and leave you in insert mode.
