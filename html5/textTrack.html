@@ -1,0 +1,57 @@
+<html> 
+<body> 
+
+<div style="text-align:center"> 
+  <button onclick="playPause()">Play/Pause</button> 
+  <button onclick="makeBig()">Big</button>
+  <button onclick="makeSmall()">Small</button>
+  <button onclick="makeNormal()">Normal</button>
+  <br><br>
+  <video id="video1" width="420">
+    <source src="http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv" type="video/ogv">
+    Your browser does not support HTML5 video.
+  </video>
+</div> 
+
+<script>
+var video = document.getElementById("video1"); 
+   var startTime, endTime, message; 
+   var newTextTrack = video.addTextTrack("captions", "sample"); 
+   // newTextTrack.mode = newTextTrack.SHOWING; // set track to display 
+   // create some cues and add them to the new track  
+   for (var i = 0; i < 30; i++) { 
+     startTime = i * 5; 
+     endTime = ((i * 5) + 5); 
+     message = "This is number " + i; 
+     newTextTrack.addCue(new VTTCue(startTime, endTime, message)); 
+   } 
+   //video.play(); 
+
+var myVideo = document.getElementById("video1"); 
+
+function playPause() { 
+    if (myVideo.paused) 
+        myVideo.play(); 
+    else 
+        myVideo.pause(); 
+} 
+
+function makeBig() { 
+    myVideo.width = 560; 
+} 
+
+function makeSmall() { 
+    myVideo.width = 320; 
+} 
+
+function makeNormal() { 
+    myVideo.width = 420; 
+} 
+</script> 
+
+<p>Video courtesy of <a href="https://www.bigbuckbunny.org/" target="_blank">Big Buck Bunny</a>.</p>
+</body> 
+</html>
+  </script> 
+</body> 
+</html> 

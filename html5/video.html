@@ -1,0 +1,27 @@
+
+  <script  src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+  <div id="theater">
+    <video id="video" src="http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv" controls="false"></video>
+    <canvas id="canvas"></canvas>
+    <label>
+      <br />Try to play me :)</label>
+    <br />
+  </div>
+  <script>
+    $(function() {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var video = document.getElementById('video');
+
+        video.addEventListener('play', function() {
+            var $this = this; //cache
+            (function loop() {
+                if (!$this.paused && !$this.ended) {
+                // ctx.drawImage($this, 0, 0);
+                setTimeout(loop, 1000 / 30); // drawing at 30fps
+                }
+            })();
+        }, 0);
+    });
+  </script>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title> Canvas Layers Test </title>
+</head>
+<body>
+    <section>
+        <div id="canvasesdiv" style="position:relative; width: 400px; height: 30px">
+            <canvas id="layer1"
+                style="z-index: 1;
+                position: absolute;
+                left: 0px;
+                top: 0px;"
+                height="300px"
+                width="400px">
+            </canvas>
+            <canvas id="layer2"
+                style="z-index: 2;
+                position: absolute;
+                left: 0px;
+                top: 0px;"
+                height="300px"
+                width="400px">
+            </canvas>
+            <canvas id="layer3"
+                style="z-index: 4;
+                position: absolute;
+                left: 0px;
+                top: 0px;"
+                height="300px"
+                width="400px">
+            </canvas>
+            <canvas id="layer4"
+                style="z-index: 3;
+                position: absolute;
+                left: 0px;
+                top: 0px;"
+                height="300px"
+                width="400px">
+            </canvas>
+        </div>
+        <video id="video" 
+            src="http://upload.wikimedia.org/wikipedia/commons/7/79/Big_Buck_Bunny_small.ogv"
+            controls="false"
+            style="position: absolute;
+            left: 500px;
+            top: 0px;">
+        </video>
+        <div style="position: absolute; left: 0px; top: 400px">
+            Current Time : <span  id="currentTime">0</span>
+        </div>
+        <div style="position: absolute; left: 0px; top: 420px">
+            Total time : <span id="totalTime">0</span>
+        </div>
+        <script type="text/javascript">
+        
+        var layer1;
+        var layer2;
+        var layer3;
+        var layer4;
+
+        var ctx1;
+        var ctx2;
+        var ctx3;
+        var ctx4;
+
+        var x = 400;
+        var y = 300;
+        var dx = 2;
+        var dy = 4;
+        var WIDTH = 400;
+        var HEIGHT = 300;
+        var city = new Image();
+        var video;
+
+        function init() {
+            city.src = "city.png";
+            layer1 = document.getElementById("layer1");
+            ctx1 = layer1.getContext("2d");
+            layer2 = document.getElementById("layer2");
+            ctx2 = layer2.getContext("2d");
+            layer3 = document.getElementById("layer3");
+            ctx3 = layer3.getContext("2d");
+            layer4 = document.getElementById("layer4");
+            ctx4 = layer4.getContext("2d");
+            ctx4.globalAlpha = 0.5;
+            setInterval(drawAll, 20);
+            video = document.getElementById('video');
+
+            // set canvas size = video size when known
+            video.addEventListener('loadedmetadata', function() {
+                //ctx.width = video.videoWidth;
+                //crx.height = video.videoHeight;
+            });
+
+            video.addEventListener('play', function() {
+                var $this = this; //cache
+                (function loop() {
+                    if (!$this.paused && !$this.ended) {
+                        /*
+                        var propValue;
+                        for(var propName in $this) {
+                            propValue = $this[propName]
+                            console.log(propName,propValue);
+                        }
+                        */
+                        ctx4.globalAlpha = 0.2;
+                        ctx4.drawImage($this, 0, 0, 400, 300);
+                        console.log($this.videoHeight,$this.videoWidth);
+                        setTimeout(loop, 1000 / 30); // drawing at 30fps
+                    }
+                })();
+            }, 0);
+
+            // Assign an ontimeupdate event to the <video> element, and execute a function if the current playback position has changed
+            video.ontimeupdate = function() {
+                document.getElementById("currentTime").innerHTML = video.currentTime;
+                document.getElementById("totalTime").innerHTML = video.duration;
+            };
+        }
+
+
+        function drawAll() {
+            draw1();
+            draw2();
+            draw3();
+        }
+
+        function draw1() {
+            ctx1.clearRect(0, 0, WIDTH, HEIGHT);
+            ctx1.fillStyle = "#FAF7F8";
+            ctx1.beginPath();
+            ctx1.rect(0,0,WIDTH,HEIGHT);
+            ctx1.closePath();
+            ctx1.fill();
+            ctx1.fillStyle = "#444444";
+            ctx1.beginPath();
+            ctx1.arc(x, y, 10, 0, Math.PI*2, true);
+            ctx1.closePath();
+            ctx1.fill();
+
+            if (x + dx > WIDTH || x + dx < 0)
+                dx = -dx;
+            if (y + dy > HEIGHT || y + dy < 0)
+                dy = -dy;
+
+            x += dx;
+            y += dy;
+        }
+        
+        function draw2() {
+            ctx2.clearRect(0, 0, WIDTH, HEIGHT);
+            ctx2.drawImage(city, 0, 0);
+        }
+
+        function draw3() {
+            ctx3.clearRect(0, 0, WIDTH, HEIGHT);
+            ctx3.fillStyle = "#444444";
+            ctx3.save();
+            ctx3.translate(200,200);
+            ctx3.rotate(x/20);
+            ctx3.fillRect(-15, -15, 30, 30);
+            ctx3.restore();
+        }
+
+        init();
+
+        </script>
+    </section>
+</body>
+</html>
