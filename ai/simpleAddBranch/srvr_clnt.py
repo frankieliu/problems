@@ -9,15 +9,14 @@ class srvr_clnt:
 
     def __init__(
             self, name,
-            srvrPorts, clntPorts,
-            portConf,
-            logic,
+            srvr_port, clnt_port,
             call,
             input_file, output_file,
             no_server=False,
             begin_data=None,
             no_client=False
     ):
+
         self.name = name
 
         self.srvr_port = srvr_port

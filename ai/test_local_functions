@@ -1,3 +1,0 @@
-import local_functions
-
-f = globals()['local_functions.add1']

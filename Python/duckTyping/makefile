@@ -1,0 +1,2 @@
+top:
+	python duck.py
