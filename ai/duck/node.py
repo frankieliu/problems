@@ -35,7 +35,13 @@ if __name__ == '__main__':
     # logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
     parser.add_argument('-pub')
+    parser.add_argument('-clambda')
     args = parser.parse_args()
 
     # Sequencing unit
     n = Node(args.pub)
+    if args.lmb is not None:
+        # Get the class
+        clambda = getattr(__import__(args.clambda), args.clambda)
+        cl = clambda(n)
+        print(cl.desc())

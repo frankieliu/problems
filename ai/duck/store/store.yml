@@ -1,0 +1,30 @@
+add0:
+  in: store/store0.dat
+  out: store/store1.dat
+add1:
+  in: store/store0.dat
+  out: store/store1.dat
+add2:
+  in: store/store0.dat
+  out: store/store1.dat
+add3:
+  in: store/store0.dat
+  out: store/store1.dat
+add4:
+  in: store/store0.dat
+  out: store/store1.dat
+add5:
+  in: store/store0.dat
+  out: store/store1.dat
+add6:
+  in: store/store0.dat
+  out: store/store1.dat
+add6:
+  in: store/store0.dat
+  out: store/store1.dat
+add6:
+  in: store/store0.dat
+  out: store/store1.dat
+add6:
+  in: store/store0.dat
+  out: store/store1.dat
