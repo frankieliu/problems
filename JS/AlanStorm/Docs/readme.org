@@ -1,0 +1,14 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+
+* webpack -> bundle.js
+echo '{}' > package.json
+npm install webpack --save
+ls -ld node_modules/webpack
+
+mkdir src-client
+mkdir pub
+cd pub
+emacsc example.html
+./node_modules/webpack/bin/webpack.js src-client/entry-point.js -o  pub/bundle.js
