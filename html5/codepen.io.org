@@ -1,0 +1,117 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* Sample code
+** best codepen
+https://codepen.io/2017/popular/pens/8/
+
+** putting jsfiddle in a webpage
+https://www.reddit.com/r/learnjavascript/comments/5zq8eg/moving_from_jsfiddle_to_webpage/
+<html>
+<body>
+...
+</body>
+</html>
+
+* HTML elements
+** Textbox
+*** change size of text box
+https://www.w3schools.com/tags/tag_textarea.asp
+
+*** pixie
+https://codepen.io/rikschennink/pen/VaqNgx
+
+*** input with css magic only
+https://codepen.io/MichaelArestad/pen/ohLIa
+
+*** classy inputs
+https://freefrontend.com/css-input-text/
+FREEFRONTEND is really a nice site full of ideas
+
+** Editable div
+<div contenteditable="true"></d>
+https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content
+https://jsfiddle.net/api/mdn/
+maybe that is all that we add for now
+
+** Adding elements to DOM
+https://stackoverflow.com/questions/9152224/add-canvas-to-a-page-with-javascript
+#+begin_src js
+  var canv = document.createElement('canvas');
+  canv.id = 'someId';
+
+  // adds the canvas to the body element
+  // adds the canvas to #someBox
+  document.body.appendChild(canv);
+  document.getElementById('someBox').appendChild(canv);
+
+  / the += means we add this to the inner HTML of body
+  // replaces the inner HTML of #someBox to a canvas
+  document.body.innerHTML += '<canvas id="someId"></canvas>';
+  document.getElementById('someBox').innerHTML = '<canvas id="someId"></canvas>';
+#+end_src
+
+* Colors
+** colorable
+http://jxnblk.com/colorable/
+
+* Canvas elements
+** html over canvas
+file:///home/frankliu/github/problems/html5/htmlOverCanvas.html
+http://jsfiddle.net/stevendwood/5sSWj/
+https://stackoverflow.com/questions/26793247/how-to-overlay-a-div-over-a-canvas-css/26793302#
+
+** canvasinput
+https://github.com/goldfire/CanvasInput
+Don't really need this with html over canvas should be able to do it.
+
+** stroke rect
+http://tutorials.jenkov.com/html5-canvas/stroke-fill.html
+
+** change opacity of rect
+https://stackoverflow.com/questions/10487882/html5-change-opacity-of-a-draw-rectangle
+ctx.fillStyle = 'rgba(225,225,225,0.5)';
+ctx.fillRect(25,72,32,32);
+
+** resize rectangle
+file:///home/frankliu/github/problems/html5/resize.html
+https://stackoverflow.com/questions/14470956/resize-rectangle-html5-canvas
+https://stackoverflow.com/questions/14470956/resize-rectangle-html5-canvas
+Read this one again on initiating a rectangle
+
+** fixed vs relative positioning
+https://stackoverflow.com/questions/18746569/force-div-element-to-stay-in-same-place-when-page-is-scrolled
+https://www.w3schools.com/Css/css_positioning.asp
+static, relative, fixed, absolute or sticky
+
+* Editor
+** web-mode.el the best one!
+http://web-mode.org/
+
+* Events
+** Add event listeners and objects
+https://www.thecssninja.com/javascript/handleevent
+https://www.thecssninja.com/javascript/handleevent
+This is really required reading
+** Order of events
+https://www.quirksmode.org/js/events_order.html
+
+* Language
+** Curry
+https://hackernoon.com/currying-in-js-d9ddc64f162e
+** Print object
+https://stackoverflow.com/questions/1625208/print-content-of-javascript-object
+
+** Add event listeners and objects
+https://www.thecssninja.com/javascript/handleevent
+https://www.thecssninja.com/javascript/handleevent
+This is really required reading
+** Order of events
+https://www.quirksmode.org/js/events_order.html
+
+* Language
+** Curry
+https://hackernoon.com/currying-in-js-d9ddc64f162e
+** Print object
+https://stackoverflow.com/questions/1625208/print-content-of-javascript-object
+alert(JSON.stringify(YOUR_OBJECT_HERE, null, 4));

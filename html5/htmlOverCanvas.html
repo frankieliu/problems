@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <style>
+         
+         body {background-color: powderblue;}
+         h1   {color: blue;}
+         p    {color: red;}
+         
+         #picture {
+             position: relative;
+         }
+
+         .blob, .blob1, .blob2 {
+             position: absolute;
+             width: 30px;
+             height: 30px;
+             border-radius: 20px;
+             background-color: green;
+             border: 2px solid #ccc;
+         }
+
+         .blob1 {
+             top: 130px;
+             left: 90px;
+         }
+
+         .blob2 {
+             top: 30px;
+             left: 340px;
+         }
+         
+        </style>
+    </head>
+
+    <body>
+        <div id="picture">
+            <canvas id="canvas" width="500" height="500">
+            </canvas>
+
+            <div class="blob1"></div>
+            <div class="blob2"></div>
+        </div>
+        <script>
+            var canvas = document.querySelector('canvas');
+            var context = canvas.getContext('2d');
+
+            context.beginPath();
+            context.moveTo(100, 150);
+            context.lineTo(350, 50);
+            context.stroke();
+        </script>
+    </body>
+</html>
