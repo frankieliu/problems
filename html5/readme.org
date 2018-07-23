@@ -1,0 +1,12 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* https://learn.shayhowe.com/
+Learn to Code HTML & CSS - Beginner & Advanced
+* Looping background video reactx
+https://codedaily.io/screencasts/32/Create-a-Looping-Background-Video-with-React-Native-Video
+* Adding text over video
+https://stackoverflow.com/questions/10422105/add-text-above-html5-video
+* Adding transparent layer
+https://stackoverflow.com/questions/31428660/overlaying-a-transparent-background-on-an-embedded-video
+https://jsfiddle.net/kiirosora/36Lj4kxt/
