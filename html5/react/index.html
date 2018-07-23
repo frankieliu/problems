@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <div id="root"></div>
+    <script>
+     import {RdxVideo, Overlay, Controls} from 'react-html5-video-editor'
+     
+     RdxVideo.Props = {
+	 autoPlay: false,
+	 loop: false,
+	 controls: true,
+	 volume:	1.0,
+	 preload: "auto",
+	 cropEnabled: true;
+     }
+
+     ReactDOM.render(
+	 <RdxVideo autoPlay loop muted poster="src/img/poster.png" store={store}>
+	 <Overlay />
+	 <Controls />
+	 <source src="src/video/small.mp4" type="video/mp4" />
+	 </RdxVideo>
+	 ,
+	 document.getElementById('root')
+     );
+    </script>
+  </body>
+</html>
