@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="container" style="width: 300px; height: 300px; border:1px solid black; ">
+            <svg id="svg-id" xmlns="http://www.w3.org/2000/svg" style="display: inline; width: inherit; min-width: inherit; max-width: inherit; height: inherit; min-height: inherit; max-height: inherit;" version="1.1">
+                <defs>
+                    <linearGradient id="linear-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgb(56,121,217);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgb(138,192,7);stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g fill="none">
+                    <g stroke="#000" fill="#FFF">
+                        <rect x="10" y="10" width="120" height="120" fill="url(#linear-gradient)"/>
+                        <path d="M 10 10  L 130 130 Z"/>
+                    </g>
+                </g>
+            </svg>
+            <button id="move">Move</button>
+        </div>
+        <script src="https://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
+        <script>
+         $(function() {
+             panZoomInstance = svgPanZoom('#svg-id', {
+                 zoomEnabled: true,
+                 controlIconsEnabled: true,
+                 fit: true,
+                 center: true,
+                 minZoom: 0.1
+             });
+             
+             // zoom out
+             panZoomInstance.zoom(0.2)
+
+             $("#move").on("click", function() {
+                 // Pan by any values from -80 to 80
+                 panZoomInstance.panBy({x: Math.round(Math.random() * 160 - 80), y: Math.round(Math.random() * 160 - 80)})
+             });
+         })
+         
+        </script>
+    </body>
+</html>

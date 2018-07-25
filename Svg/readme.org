@@ -1,0 +1,96 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* IE and svg scaling
+https://codepen.io/tomByrer/pen/qEBbzw?editors=110
+
+* IE hack
+width: 500px\9;
+means that a width of 500 pixels is only applied while using IE 7,8,9.
+http://webdesignandsuch.com/ie9-specific-css-hack/
+https://stackoverflow.com/questions/8004765/css-9-in-width-property
+
+* img[src*=".svg"]
+
+[attribute] selectors
+
+You can use the attribute to select elements in CSS
+
+Example:
+a[href="https://..."] {
+}
+
+** 7 different ways of using attributes
+https://css-tricks.com/almanac/selectors/a/attribute/
+
+[data-value] {
+  /* Attribute exists */
+}
+
+[data-value="foo"] {
+  /* Attribute has this exact value */
+}
+
+[data-value*="foo"] {
+  /* Attribute value contains this value somewhere in it */
+}
+
+[data-value~="foo"] {
+  /* Attribute has this value in a space-separated list somewhere */
+}
+
+[data-value^="foo"] {
+  /* Attribute value starts with this */
+}
+
+[data-value|="foo"] {
+  /* Attribute value starts with this in a dash-separated list */
+}
+
+[data-value$="foo"] {
+  /* Attribute value ends with this */
+}
+
+
+* @media screen and (min-width:0\0)
+
+Media queries the device and conditions and applies certain
+css
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries
+
+Should also look at @supports (display: flex)
+
+\0 is for IE10
+http://www.impressivewebs.com/ie10-css-hacks/
+
+@min-width: ~"screen and (min-width: 0\0)";
+@screen: ~"screen\0";
+
+@media @min-width, @screen {
+    .box {
+        width: 100%;
+    }
+}
+
+Outputs to:
+
+@media screen and (min-width: 0\0), screen\0 {
+  .box {
+    width: 100%;
+  }
+}
+
+https://github.com/less/less.js/issues/1538
+http://lesscss.org/usage/
+
+This seems like a useful tool
+
+* Pictures from hackathon
+https://drive.google.com/open?id=15nHaikTiLuiSupK2mcXHSycTn66zKp1e
+https://photos.app.goo.gl/t2ZwVMEv6ArDKNrC9
+https://vfid.io/
+https://github.com/memeinstigator/verifid.git
+https://github.com/Nebulas-Learning/Nebulas-Learning/blob/master/Hackathon-Presentation.pdf
+https://github.com/memeinstigator/verifid/invitations
+https://www.secnix.com/engineering-titbits/single-page-app-angular-5-bootstrap-4-node-js/

@@ -1,0 +1,243 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* internal discussion
+* capabilities
+
+- Vincent: list of "operators" that engine can do
+  - report the list of operators to some entity that creates the plan
+
+- Vincent: entity: thing that creates the plan
+
+- guanghua: entity: doesn't need to know the details
+
+- jieun: "operators" interpretation
+  - if there is a standard set, agreement ex UIR
+
+- ben: capabilities allow the driver to "comm" with different engines
+
+- driver?
+- engine?
+- entity : user compiler
+
+- entity - driver - engine : 3 layers?
+
+  lp - compiler - pp - driver - engine
+                 (pp?)
+
+- driver:
+  - execution sequence (jj)
+    - go signal token passing (vl)
+  - takes care of data transfer (IR operator) (jj)
+  - make sure that the input is ready before starting engine (vl)
+    - driver connects input and output to engine (vl)
+  - interprets the physical plan from the entity (vl)
+  - makes call to engine to execute the physical plan (vl)
+  - driver provides capabilities to entity (gh)
+  - entity will build pp (gh)
+
+- merging:
+  - merged into one execution (run two operator in one engine)
+  - eg: filter/group merged into one engine
+  - IR operator for each
+  - driver will divide into two operations and execute
+  - uir_filter.execute
+  - uir_groupby.execute
+  - uir_filter.uir_groupby
+  - driver needs to add up this plan
+  - optimization <- ??
+  - gw driver: each of these will be separate UIR operator calls
+  - optimization : should allow optmization at the higher level
+  - fgj, ggj, jgf, ....
+
+- entity:
+  - user : picks the plan? or engine?
+  - compiler :
+
+- logical plan
+  - what we want to compute
+  - jieun : LP <-> GUI
+  - user writes a high-level program - user preferences
+
+- physical plan:
+  - how it gets computed
+
+- compiler:
+  - how you map logical to physical
+
+* base (guido)
+
+The base driver implements the messaging:
+1) It publishes the operators to a dedicated topic
+2) It consumes plans from a dedicated topic
+3) It sets up consumer/producer pairs for operators in the plan, invoking `execute` on its dependencies.
+
+A concrete implementation instantiates the operators of an engine and
+adds them via `addOperator()` from the base driver implementation.
+
+#+begin_src java
+  public interface UirOperator {
+      abstract public void execute(Dependency... d);
+  }
+
+  public class PgxPprOperator {
+      public PgxPprOperator(PgxEngine e) {}
+      public void execute(InputDependency<PgxGraph> graph, InputDependency<PgxVertexSet> sources, OutputDependency<PgxVertexProperty> result) {
+          PgxGraph pgxGraph = graph.getData();
+          ...
+          analyst.ppr(pgxGraph, pgxSources, pprProp);
+          result.setData(pprProp);
+      }
+  }
+
+  public abstract class Driver {
+      abstract public void addOperator(UirOperator o);
+      // communicates operators this system can execute to the message system
+      private final void publishOperators() {}
+      // receives a plan from the message system
+      private final Plan receivePlan() {}
+      // sets up the consumer and producers according to the plan, who will execute UirOperators on incoming messages
+      private final void instantiatePlan(Plan p) {}
+  }
+
+  // adds operators for PGX engine
+  public class PgxDriver extends BaseDriver {
+      public PgxDriver() {
+          PgxEngine e = ...;
+          PgxPprOperator ppr = new PgxPprOperator(e);
+          addOperator(ppr);
+      }
+  }
+
+#+end_src
+
+* Wachsmuth [1:47 PM]
+
+There are several aspects to the implementation:
+
+1) UIR operators which execute on Spark. We can also add two UIR
+   operators to transform Spark-specific data from/into Arrow format
+   and two operators to read/store data.
+
+2) API for dependencies. We can simply have a dependency as a box of
+   the actual data.
+
+3) API for messaging. The operators only provide the `execute` method,
+   so they are not involved in messaging themselves. We can have a
+   generic, abstract messaging API and use adapters to connect the API
+   of concrete systems such as ZMQ or Kafka.
+
+4) Implementation of `BaseDriver` in Java. The driver should use the
+   message API to publish its available operators to a generic topic,
+   e.g. "engine capabilities", and to consume plans from a  topic
+   specific to the engine, e.g. "Spark execution plan". From the plan,
+   it should instantiate consumer/producer pairs for each operator in
+   the plan. Based on "go" signals at input dependencies, the consumer
+   should call the `execute` method of the corresponding operator and
+   the producer should publish "go" to the output dependencies.
+
+* ir
+** step 1: computation to be done
+- written in some ir format
+- graphical representation to ir format is tangent
+** step 2: lowering
+- compiler will lower the ir (dsl) to particular engine
+- create micro
+** step 3: runtime
+-
+
+** example
+
+Input:
+    X0          Initial guess at the desired root
+    Epsilon     Error Tolerance
+    F           Pointer to function whose root is desired
+    FP          Pointer to derivative of F
+    Max         Maximum number of iterations
+    Answer      Best estimate obtained for desired root
+    Verbose     Boolean indicator of whether or not to print results of each iteration
+
+Initialize:
+
+    Answer = X0
+    Y = F( Answer )
+
+Begin Iterations:
+
+    For i = 1 to Max
+            DY = FP( Answer )
+            Change = Y / DY
+            Answer = Answer - Change
+            Y = Func( Answer )
+
+            If ( Verbose )
+                Output: I, Answer, Y, Change with appropriate labels
+            END
+
+            If ( | Y | < Epsilon OR | Change | < Epsilon )
+                    Return
+            END
+
+    END
+Return.
+* jj
+- arrow plasma java api
+- arrow string (not fixed length) (vl: arrow layout md)
+- arrow transfer between distributed engine
+  - data is distributed
+  - 3 node spark, 3 node pgx
+  - sending data through arrow
+  - jinsoo?? code
+  - pyspark (multiple node) to pandas (single node)
+  - pandas (single node) to pyspark -> multiple record batch
+    - round robin?
+    - divide by rows
+    - partitioning functions
+* vl
+- sebastian - no reply - 4 dr
+- setup ray, share objects between machine
+- srg-lab1 share plasma objects between them
+- each has plasma-store, ray provide object manager
+- redis server for distribution
+- redis support is blocked
+- bunch older (horde)
+
+* gs
+- kfk (xxx)
+  - streaming example
+  - connect kafka to spark
+- ray paper - omega paper (scheduling)
+- serveless - MIT PhD
+- serveless/graphQL/NodeJS
+
+* ba
+- data transfer project (not relevant)
+  - meant for different use case
+  - not for large database
+  - just started will not get implemented
+  - example: data format for image/mail/text data
+    - meant for these use case
+    - not for database queries or analytics or ml
+- protobuf
+  - use case - driver/sequencer may use for messaging
+  - not for transfering data between engines
+  - is protobuf used in arrow ?
+  - used by store/client process talking with each other
+    (ie messaging), eg seal/release
+  - check tensor (calling flatbuf directly (jj))
+    - 4 schema / record batch / dict batch / tensor - all type message
+      flatbuf used in metadata
+
+* wkly report
+- group meeting / update group meeting
+- universal_ir_grp@oracle.com
+
+* datascience broadcast
+- penumbra group - gone
+- ssg - sync system group
+- distributed ml group - combine them
+  - just started
+- jason peck is a product manager
+- tech update from distributed ML
+  - datascience (customer) tech transfer
+  - oracle internal customer (product group)

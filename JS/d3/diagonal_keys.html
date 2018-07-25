@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <!--  <script src="jquery-3.3.1.min.js"></script> -->
+    <style>
+     #action {
+         width: 500px;
+         height: 250px;
+         background: rgb(185,185,255);
+         border: 1px solid black;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         bottom: 0;
+         margin-top: -125px;
+         margin-left: -250px;
+     }
+
+     #action:hover {
+         cursor: crosshair;
+     }
+
+     #player {
+         width: 20px;
+         height: 20px;
+         position: absolute;
+     }
+    </style>
+    <body>
+        <div id="action"></div>
+        <script>
+         $(function() {
+
+             // Global Varibles
+             var health = 10;
+             var speed = Math.ceil(health / 2);
+             var keys = {};
+
+             $(this).stop(true, false).keydown(function(e) {
+                 keys[e.which] = true;
+                 keypressed(keys);
+             });
+
+             $(this).keyup(function(e) {
+                 delete keys[e.which];
+             });
+
+             // Setup Level
+             $("#action").append('<img src="http://i53.tinypic.com/nnjv9x.png" id="player" alt="" />');
+
+
+             // Move Character
+             //$(this).stop(true, false).keypress(function(event) {
+             //    keypressed()
+             //});
+
+             function keypressed() {
+
+                 for (var key in keys) {
+                     //var key = (event.keyCode);
+                     var key_W = 87;
+                     var key_w = 119;
+                     var key_D = 68;
+                     var key_d = 100;
+                     var key_S = 83;
+                     var key_s = 115;
+                     var key_A = 65;
+                     var key_a = 97;
+
+                     // Directions - Up, Right, Left, Down
+                     if (key == key_W || key == key_w) { // Player Up
+                         $('#player').stop(true, false).animate({
+                             top: '-=' + speed + ''
+                         }, 0, function() {
+                             $('#player').empty();
+                         });
+                     }
+
+                     if (key == key_D || key == key_d) { // Player Right
+                         $('#player').stop(true, false).animate({
+                             left: '+=' + speed + ''
+                         }, 0, function() {
+                             $('#player').empty();
+                         });
+                     }
+
+                     if (key == key_S || key == key_s) { // Player Down
+                         $('#player').stop(true, false).animate({
+                             top: '+=' + speed + ''
+                         }, 0, function() {
+                             $('#player').empty();
+                         });
+                     }
+
+                     if (key == key_A || key == key_a) { // 'A' and 'a' Key - Player Left
+                         $('#player').stop(true, false).animate({
+                             left: '-=' + speed + ''
+                         }, 0, function() {
+                             $('#player').empty();
+                         });
+                     }          
+                 }
+             }
+
+             var img = $("#player");
+
+             if (img.length > 0) {
+
+                 function mouse(evt) {
+
+                     var offset = img.offset();
+
+                     var center_x = (offset.left) + (img.width() / 2);
+                     var center_y = (offset.top) + (img.height() / 2);
+                     var mouse_x = evt.pageX;
+                     var mouse_y = evt.pageY;
+                     var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+                     var degree = (radians * (180 / Math.PI) * -1) + 90;
+
+                     img.css('-moz-transform', 'rotate(' + degree + 'deg)');
+                     img.css('-webkit-transform', 'rotate(' + degree + 'deg)');
+                     img.css('-o-transform', 'rotate(' + degree + 'deg)');
+                     img.css('-ms-transform', 'rotate(' + degree + 'deg)');
+
+                 }
+
+                 $(document).mousemove(mouse);
+
+             }
+         });         
+        </script>
+    </body>
+</html>
+    
