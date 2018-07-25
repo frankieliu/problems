@@ -17,7 +17,7 @@
 
 <script> 
  var myVideo = document.getElementById("video1");
-               
+ 
  var startTime, endTime, message; 
  var newTextTrack = myVideo.addTextTrack("captions", "sample");
  newTextTrack.mode = "showing";
@@ -36,15 +36,18 @@
  } 
 
  function makeBig() { 
-     myVideo.width = 560; 
+     myVideo.width = 560;
+     console.log(myVideo.width + "," + myVideo.videoHeight/myVideo.videoWidth * myVideo.width);
  } 
 
  function makeSmall() { 
-     myVideo.width = 320; 
+     myVideo.width = 320;
+     console.log(myVideo.width + "," + myVideo.videoHeight/myVideo.videoWidth * myVideo.width);
  } 
 
  function makeNormal() { 
-     myVideo.width = 420; 
+     myVideo.width = 420;
+     console.log(myVideo.width + "," + myVideo.videoHeight/myVideo.videoWidth * myVideo.width);
  } 
 </script> 
 </body> 
