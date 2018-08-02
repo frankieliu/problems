@@ -1,0 +1,8 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* intellisense for p5
+https://github.com/processing/p5.js/issues/1339
+basically you add some comments above to the global ts file then vs
+code picks it up
+

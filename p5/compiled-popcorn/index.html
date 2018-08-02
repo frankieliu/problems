@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="js/popcorn-complete.min.js"></script>
+    </head>
+    <body>
+        <div id="main"></div>
+        <video height="180" width="300" id="ourvideo" controls>
+            <source src="./video.webm" type="video/webm">
+            <!--
+                 <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv">
+                 <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.webm">
+            -->
+            No good.
+        </video>
+        <div id="footnote"></div>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+        <script>
+         //document.addEventListener( "DOMContentLoaded", function() {
+         
+         var popcorn = Popcorn.smart("#main", "./video.webm");
+         
+         popcorn.footnote({
+             start: 2,
+             end: 15,
+             target: "footnote",
+             text: "Pop!"
+         });
+         
+         popcorn.play();
+         popcorn.video.setAttribute("controls", "controls");
+         //}, false );
+
+         var main = {
+             getRelativePosition: function(position) {
+
+                 videoBaseX = $("#main").width()/2;
+                 videoBaseY = $("#main").height();
+                 
+                 position.left = videoBaseX + position.left;
+                 position.top = videoBaseY - position.top;
+                 
+                 return position;
+                 
+             }
+         };
+
+             var pop = popcorn;
+             pop.code({
+                 start: 1 ,
+                 onStart: function( options ) {
+                     
+                     var position = main.getRelativePosition({left:-177.5, top:463} );
+                     main.sketch = new p5(introSketch, "sketchCanvas");
+                     main.sketch.showLabel("Lauren McCarthy", position.left, position.top);
+                 }
+             });
+
+        </script>
+  </body>
+</html>
