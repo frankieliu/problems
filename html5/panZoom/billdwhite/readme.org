@@ -1,0 +1,14 @@
+d3.demo = {};
+
+// canvas is a function
+d3.demo.canvas = function() {
+}
+
+define canvas(selection) {
+}
+
+
+d3.scale.linear()
+
+
+
