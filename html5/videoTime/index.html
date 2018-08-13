@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <script src="http://gh-canon.github.io/stack-snippet-console/console.min.js"></script>
+        <video id="ssvid" controls width="300">
+            <source src="http://glpjt.s3.amazonaws.com/so/av/vs34s3.mp4" type="video/mp4" />
+        </video>
+        <script>
+         var ssvid = document.getElementById('ssvid');
+         var tick = ssvid.currentTime;
+
+         ssvid.addEventListener('timeupdate', function(e) {
+             console.log('currentTime: ' + tick + " " + ssvid.currentTime);
+             tick++
+             vidHandler(tick);
+         }, false);
+
+
+         function vidHandler(time) {
+             switch (time) {
+                 case 2:
+                     console.log('2 second mark');
+                     break;
+                 case 13:
+                     console.log('13 second mark');
+                     break;
+                 case 15:
+                     console.log('15 second mark');
+                     break;
+
+                 default:
+                     return false;
+             }
+         }
+        </script>
+    </body>
+</html>

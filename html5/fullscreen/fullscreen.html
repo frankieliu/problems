@@ -1,0 +1,117 @@
+<!-- jsfiddle.net/tv1981/tm069z9c/1 -->
+<html>
+    <style>
+
+     body {
+         margin: 0;
+         padding: 0;
+         font-family: 'Rubik', sans-serif;
+         background-color: black; //
+     }
+
+     #container {
+         width: 100%;
+         height: 100%;
+     }
+
+     .btn-fs {
+         position: absolute;
+         top: 10px;
+         left: 10px;
+         padding: 5px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 5px;
+         z-index: 10;
+         cursor: pointer;
+     }
+
+     .logo {
+         position: absolute;
+         top:10px;
+         right: 10px;
+         padding: 5px;
+         line-height: 18px;
+         background-color: rgba(0, 0, 0, 0.6);
+         color: white;
+     }
+
+     .footer {
+         position: absolute;
+         left: 0;
+         bottom: 0;
+         width: 100%;
+         height: 20px;
+         line-height: 18px;
+         text-align: left; 
+         padding: 5px;
+         background-color: rgba(0, 0, 0, 0.6);
+         color: white;
+     }
+
+     /* deeper elements */
+
+     :-webkit-full-screen video {
+         width: 100%;
+         height: 100%;
+     }
+
+    </style>
+    <body>
+        <div id="container">
+            <div class="btn-fs" id="btnFS">
+                Fullscreen
+            </div>
+            <div class='logo'>
+                Logo Overlay
+            </div>
+            <video width="100%" height="100%" autoplay>
+                <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4"> Your browser does not support the video tag.
+            </video>
+            <div class='footer'>
+                This is Test Overlay for Video
+            </div>
+        </div>
+        <script>
+         var fs = document.getElementById('btnFS');
+
+         fs.addEventListener('click', goFullScreen);
+
+         function goFullScreen() {
+	         var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement ||
+                                     document.webkitFullscreenElement || document.msFullscreenElement;
+	         if(fullscreenElement){
+  	             exitFullscreen();
+             }else {
+  	             launchIntoFullscreen(document.getElementById('container'));
+             }
+             
+         }
+
+         // From https://davidwalsh.name/fullscreen
+         // Find the right method, call on correct element
+         function launchIntoFullscreen(element) {
+             if (element.requestFullscreen) {
+                 element.requestFullscreen();
+             } else if (element.mozRequestFullScreen) {
+                 element.mozRequestFullScreen();
+             } else if (element.webkitRequestFullscreen) {
+                 element.webkitRequestFullscreen();
+             } else if (element.msRequestFullscreen) {
+                 element.msRequestFullscreen();
+             }
+         }
+
+         // Whack fullscreen
+         function exitFullscreen() {
+             if (document.exitFullscreen) {
+                 document.exitFullscreen();
+             } else if (document.mozCancelFullScreen) {
+                 document.mozCancelFullScreen();
+             } else if (document.webkitExitFullscreen) {
+                 document.webkitExitFullscreen();
+             }
+         }
+        </script>
+    </body>
+</html>

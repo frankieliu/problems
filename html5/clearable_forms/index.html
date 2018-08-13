@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <input class="clearable" type="text" placeholder="search">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+         $(function() {
+             // init plugin (with callback)
+             $('.clearable').clearSearch({ callback: function() { console.log("cleared"); } } );
+
+             // update value
+             $('.clearable').val('sample value').change();
+             
+             // change width
+             $('.clearable').width('200px').change();
+         });
+        </script>
+    </body>
+</html>

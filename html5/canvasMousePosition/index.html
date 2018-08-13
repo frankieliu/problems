@@ -1,0 +1,51 @@
+<html>
+    <style>
+     canvas {background:#ddd;width:500px;height:500px}
+    </style>
+    <body>
+        <canvas id="imgCanvas" width="1000" height="1000"></canvas>
+        <!-- https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas -->
+        <!-- https://gitlab.com/epistemex/canvas-mouse/blob/master/src/canvas-mouse.js -->
+        <!-- https://gitlab.com/epistemex/transformation-matrix-js/blob/master/matrix.min.js -->
+        <!-- https://stackoverflow.com/questions/7395813/html5-canvas-get-transform-matrix -->
+        <!-- https://www.webagesolutions.com/blog/archives/135 -->
+        <!-- http://www.ckollars.org/canvas-two-coordinate-scales.html -->
+        <script src="matrix.min.js"></script>
+        <script>
+         var canvas = document.getElementById("imgCanvas");
+         var ctx = canvas.getContext("2d");
+         var matrix = ctx.getTransform();
+         var imatrix = matrix.invertSelf();
+
+         // Not sure if this works in explorer...
+         if (false) {
+             var matrix = new Matrix(context);
+             // apply transform
+             matrix.setTransform(1.1, 0.2, 0.3, 0.9, 20, -10);
+             matrix.rotate(1.2);
+             var imatrix = matrix.inverse();           // get inverted matrix
+             pos = imatrix.applyToPoint(pos.x, pos.y); // apply to adjusted coordinate
+         }
+
+         function draw(e) {
+             var pos = getMousePos(canvas, e);
+             var x = pos.x * imatrix.a + pos.y * imatrix.c + imatrix.e;
+             var y = pos.x * imatrix.b + pos.y * imatrix.d + imatrix.f;
+             ctx.fillStyle = "#000000";
+             ctx.fillRect(x-2, y-2, 4, 4);
+         }
+         window.addEventListener('mousemove', draw, false);
+
+         function  getMousePos(canvas, evt) {
+             var rect = canvas.getBoundingClientRect(),  // abs. size of element
+                 scaleX = canvas.width / rect.width,     // relationship bitmap vs. element for X
+                 scaleY = canvas.height / rect.height;   // relationship bitmap vs. element for Y
+
+             return {
+                 x: (evt.clientX - rect.left) * scaleX,    // scale mouse coordinates after they have
+                 y: (evt.clientY - rect.top) * scaleY      // been adjusted to be relative to element
+             }
+         }
+        </script>
+    </body>
+</html>

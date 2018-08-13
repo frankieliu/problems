@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Test WebVTT Cue Settings and Styling | Preliminary Inventory of Digital Collections by Jason Ronallo</title>
+
+        <link href="/stylesheets/normalize-ef7858ef.css" rel="stylesheet" /><link href="/stylesheets/all-cab5aeae.css" rel="stylesheet" />
+        <script src="/javascripts/all-8fd80bf3.js"></script>
+        <link href="/images/favicon-89a6054e.png" rel="icon" type="image/png" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,300' rel='stylesheet' type='text/css'>
+        <script type="text/javascript">
+
+         var _gaq = _gaq || [];
+         _gaq.push(['_setAccount', 'UA-28548205-1']);
+         _gaq.push(['_trackPageview']);
+
+         (function() {
+             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+         })();
+
+        </script>
+
+
+
+    </head>
+
+    <body class="demos demos_webvtt-cue-settings demos_webvtt-cue-settings_index">
+        <div id="page-wrap">
+            <header id="masthead" class="site-header" role="banner">
+                <a class="home-link" href="/" rel="home">
+                    <h1 class="site-title">Preliminary Inventory of Digital Collections</h1>
+                    <h2 class="site-description hidden-xs">Incomplete thoughts on digital libraries.</h2>
+                </a>
+            </header>
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="/">Preliminary Inventory of Digital Collections</a> -->
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/">Latest</a></li>
+                                <li><a href="/blog/tags">Tags</a></li>
+                                <li><a href="/blog/by_year">Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CV <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/projects">Projects</a></li>
+                                <li><a href="/presentations">Presentations</a></li>
+                                <li><a href="/writing">Writing</a></li>
+                                <li><a href="/experience">Experience</a></li>
+                                <li><a href="/cv" target="_blank">Print Full CV</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="/bots/">Art</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/search">Search</a></li>
+                        <li><a href="/feed.xml"><i class="fa fa-rss-square"></i> </a></li>
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </nav>
+
+            <div class="container">
+                <h1>Test WebVTT Cue Settings and Styling</h1>
+                <p>Dynamically position and style the caption. <a href="/blog/html5-video-caption-cue-settings-tester/">Read more about how this is done</a>.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <video poster="soybean-talk-clip.png" loop controls>
+                            <source src="soybean-talk-clip.mp4" type="video/mp4">
+                            <source src="soybean-talk-clip.webm" type="video/webm">
+                            <track label="Live Captioning Example Captions" kind="captions" srclang="en" src="soybean-talk-clip.vtt" id="caption-change-track" default>
+                        </video>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="caption-change-form" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="input-change-caption" class="col-sm-3 control-label">Caption Text</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" class="form-control" placeholder="This is a placeholder caption." id="input-change-caption"></textarea>
+                                    <span class="help-block">Add whatever cue text you would like. Try some of the different <a href="http://dev.w3.org/html5/webvtt/#webvtt-cue-text">valid span</a> tags. See what happens with line breaks you enter.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-change-line" class="col-sm-3 control-label">Line position cue setting</label>
+                                <div class="col-sm-9">
+                                    <input type="range" min="-16" value=13 max=16 step=1 id="input-change-line">
+                                    <output for="input-change-line" id="line-setting">13</output>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-change-position" class="col-sm-3 control-label">Position cue setting</label>
+                                <div class="col-sm-9">
+                                    <input type="range" min=0 value=50 max=100 id="input-change-position">
+                                    <output for="input-change-position" id="position-setting">50</output>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-change-align" class="col-sm-3 control-label">Alignment cue setting</label>
+                                <div class="col-sm-9">
+
+                                    <div class="radio align-radio">
+                                        <label>
+                                            <input type="radio" name="change-align-radio" id="change-align-radio1" value="start">
+                                            start
+                                        </label>
+                                    </div>
+                                    <div class="radio align-radio">
+                                        <label>
+                                            <input type="radio" name="change-align-radio" id="change-align-radio2" value="middle" checked>
+                                            middle
+                                        </label>
+                                    </div>
+                                    <div class="radio align-radio">
+                                        <label>
+                                            <input type="radio" name="change-align-radio" id="change-align-radio3" value="end" >
+                                            end
+                                        </label>
+                                    </div>
+                                    <div class="radio align-radio">
+                                        <label>
+                                            <input type="radio" name="change-align-radio" id="change-align-radio4" value="left" >
+                                            left
+                                        </label>
+                                    </div>
+                                    <div class="radio align-radio">
+                                        <label>
+                                            <input type="radio" name="change-align-radio" id="change-align-radio5" value="right" >
+                                            right
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-change-size" class="col-sm-3 control-label">Size cue setting</label>
+                                <div class="col-sm-9">
+                                    <input type="range" min=0 value=100 max=100 id="input-change-size">
+                                    <output for="input-change-size" id="size-setting">100</output>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-change-vertical" class="col-sm-3 control-label">Vertical cue setting</label>
+                                <div class="col-sm-9">
+                                    <div class="radio vertical-radio">
+                                        <label>
+                                            <input type="radio" name="change-vertical-radio" id="change-vertical-radio3" value=""  checked>
+                                            Not vertical
+                                        </label>
+                                    </div>
+                                    <div class="radio vertical-radio">
+                                        <label>
+                                            <input type="radio" name="change-vertical-radio" id="change-vertical-radio1" value="lr">
+                                            lr
+                                        </label>
+                                    </div>
+                                    <div class="radio vertical-radio">
+                                        <label>
+                                            <input type="radio" name="change-vertical-radio" id="change-vertical-radio2" value="rl">
+                                            rl
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>Sample WebVTT Cue Based on Current Settings</h2>
+                        <p>A simple, straightforward representation of these settings. <a href="http://dev.w3.org/html5/webvtt/#webvtt-cue-settings-1">Read the spec for optional ways to apply some cue settings in WebVTT</a>.</p>
+                        <pre id="sample_cue">
+
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Cue Class Span</h2>
+                        <p>Classes are available for using a cue class span. You can use the classes red, blue, green, and yellow.</p>
+                        <p>To change the background-color of the cue you can use the classes background-red, background-blue, background-green, and background-yellow.</p>
+                        <p><pre class="highlight html"><span class="nt">&lt;c.red&gt;</span>This text is red<span class="nt">&lt;/c&gt;</span></pre></p>
+                        <p>Classes can be chained.</p>
+                        <p><pre class="highlight html"><span class="nt">&lt;c.red.background-yellow&gt;</span>This text is red with a yellow background<span class="nt">&lt;/c&gt;</span></pre></p>
+                        <p>Of course in your own applications you can use whatever class names and styling as you want.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Styles</h2>
+                        <p>Here's an area where you can add styles that will apply to every cue. You can find out which styles can be applied to cues. Styling only works in Chrome, Opera, and Safari.</p>
+                        <p><code>::cue {</code></p>
+                        <form id="style-change-form">
+                            <textarea rows="5" cols="35"></textarea>
+                        </form>
+                        <p><code>}</code></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>Changes</h2>
+                        <p>2014-10-21 Use the track load event before trying to set things up.</p>
+                    </div>
+                </div>
+
+                <script type="text/javascript" src="webvtt-cue-settings.js"></script>
+                <link rel="stylesheet" type="text/css" href="webvtt-cue-settings.css">
+                <style type="text/css" id="extra-textarea-styles"></style>
+            </div>
+            <div id="footer-push"></div>
+        </div><!-- end page-wrap -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">by Jason Ronallo</div>
+                    <div class="col-md-6 social">
+                        <a href="mailto:jronallo@gmail.com"><i class="fa fa-envelope-square"></i></a>
+                        <!-- <a href="https://plus.google.com/116830234234977722391?rel=author"><i class="fa fa-google-plus-square"></i></a> -->
+                        <a href="http://twitter.com/ronallo"><i class="fa fa-twitter-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+</html>

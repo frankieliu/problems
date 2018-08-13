@@ -1,0 +1,47 @@
+<html>
+    <body>
+        <script>
+         // https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
+         function FileSave(sourceText, fileIdentity) {
+             var workElement = document.createElement("a");
+             if ('download' in workElement) {
+                 workElement.href = "data:" + 'text/plain' + "charset=utf-8," + escape(sourceText);
+                 workElement.setAttribute("download", fileIdentity);
+                 document.body.appendChild(workElement);
+                 var eventMouse = document.createEvent("MouseEvents");
+                 eventMouse.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                 workElement.dispatchEvent(eventMouse);
+                 document.body.removeChild(workElement);
+             } else throw 'File saving not supported for this browser';
+         }
+
+         // Function to download data to a file
+         function download(data, filename, type) {
+             var file = new Blob([data], {type: type});
+             if (window.navigator.msSaveOrOpenBlob) // IE10+
+                 window.navigator.msSaveOrOpenBlob(file, filename);
+             else { // Others
+                 console.log("others");
+                 var a = document.createElement("a"),
+                     url = URL.createObjectURL(file);
+                 a.href = url;
+                 a.download = filename;
+                 document.body.appendChild(a);
+                 a.click();
+                 setTimeout(function() {
+                     document.body.removeChild(a);
+                     window.URL.revokeObjectURL(url);
+                 }, 0);
+             }
+         }
+
+         // FileSave("hello","hello.txt");
+         var a = {a:1, b:2};
+
+         // download(JSON.stringify(a, null, 2), "ab.txt", "application/json");
+         var b = fetch("./ab.txt")
+             .then(response => response.json())
+             .then(json => console.log(json));
+        </script>
+    </body>
+</html>

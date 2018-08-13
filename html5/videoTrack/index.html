@@ -1,0 +1,91 @@
+<html>
+    <body>
+        <script src="http://gh-canon.github.io/stack-snippet-console/console.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- https://www.html5rocks.com/en/tutorials/track/basics/ -->
+
+        <video id="ssvid" controls width="600">
+            <source src="movie.mp4" type="video/mp4" />
+            <track id="english_track" kind="subtitles" label="English subtitles" src="subtitles_en.vtt" srclang="en" default></track>
+            <track kind="subtitles" label="Deutsche Untertitel" src="subtitles_de.vtt" srclang="de"></track>
+        </video>
+        <script>
+            var ssvid = document.getElementById('ssvid');
+            var tick = ssvid.currentTime;
+            var textTracks = ssvid.textTracks;    // one for each track element
+            var textTrack = textTracks[0];        // corresponds to the first track element
+            var kind = textTrack.kind;            // e.g. "subtitles"
+            var mode = textTrack.mode;            // e.g. "disabled", hidden" or "showing"
+
+            var trackElement = document.getElementById("english_track");
+
+            ssvid.textTracks[0].mode = 'disabled';
+
+            // for each track element
+            trackElement.addEventListener("load", function() {
+            var textTrack = this.track; // gotcha: "this" is an HTMLTrackElement, not a TextTrack object
+            var isSubtitles = textTrack.kind === "subtitles"; // for example...
+            // for each cue
+            var anew = new VTTCue(2.5, 3.5, "My <u>underlined</u> Cue");
+            anew.id = 'cue_id 3';
+            anew.position = 30;
+            anew.line = 50;
+            anew.size = 10;
+            textTrack.addCue(anew);
+            // acue.id = 'cue_id 3';
+            // textTrack.mode = 'hidden';
+            console.log("--");
+            console.log(textTrack.mode);
+            console.log("--");
+            console.log(textTrack.cues.length);
+             for (var j = 0; j < textTrack.cues.length; ++j) {
+                 console.log("j " + j);
+                 var cue = textTrack.cues[j];
+                 console.log(cue);
+                 console.log("hh");
+                 cue.addEventListener("enter", function() {
+                     console.log("Enter " + this.id);
+                 });
+                 cue.addEventListener("exit", function() {
+                     console.log("Exiting " + this.id);
+                 });
+             }
+         });
+         function test() {
+             console.log("loaded");
+             // var videoElement = document.querySelector("video");
+
+             console.log(textTrack.cues);
+             for (var j = 0; j < cues.length; j++) {
+                 console.log(j);
+                 var cue = cues[j];
+                 var cueId = cue.id;
+                 var cueText = cue.text;
+                 console.log(cue, cueId, cueText);
+                 cue.onenter(function() {
+                     console.log("Enter " + this.id);
+                 });
+                 cue.onexit(function() {
+                     console.log("Exiting " + this.id);
+                 });
+             }};
+
+         if (false) {
+             // Alternate way of getting cues
+             var trackElements = document.querySelectorAll("track");
+             // for each track element
+             for (var i = 0; i < trackElements.length; i++) {
+                 trackElements[i].addEventListener("load", function() {
+                     var textTrack = this.track; // gotcha: "this" is an HTMLTrackElement, not a TextTrack object
+                     var isSubtitles = textTrack.kind === "subtitles"; // for example...
+                     // for each cue
+                     for (var j = 0; j < textTrack.cues.length; ++j) {
+                         var cue = textTrack.cues[j];
+                         // do something
+                     }
+                 });
+             }
+         }
+        </script>
+    </body>
+</html>

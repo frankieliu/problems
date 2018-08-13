@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Keyboard Events and Codes</title>
+<style type="text/css">
+body {font-family:Arial, sans-serif}
+h1 {text-align:right}
+td {text-align:center}
+</style>
+<script language="JavaScript" type="text/javascript">
+// array of table cell ids
+var tCells = ["downKey", "pressKey", "upKey", "downChar", "pressChar", 
+"upChar", "keyTarget", "character", "downShift", "pressShift",
+"upShift", "downAlt", "pressAlt", "upAlt", "downMeta", "pressMeta",
+"upMeta", "downCtrl", "pressCtrl", "upCtrl"];
+  
+// clear table cells for each key down event
+function clearCells() {
+    for (var i = 0; i < tCells.length; i++) {
+        document.getElementById(tCells[i]).innerHTML = "&mdash;";
+    }
+}
+  
+// display target node's node name
+function showTarget(evt) {
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? 
+               evt.srcElement : null);
+    if (node) {
+        document.getElementById("keyTarget").innerHTML = node.nodeName;
+    }
+}
+
+var nbrEvent = 0;
+
+// decipher key down codes
+function showDown(evt) {
+    clearCells();
+    evt = (evt) ? evt : ((event) ? event : null);
+    if (evt) {
+        var text = "";
+        document.getElementById("downKey").innerHTML = evt.keyCode;
+        if (evt.charCode) {
+            document.getElementById("downChar").innerHTML = evt.charCode;
+        }
+        document.getElementById("downShift").innerHTML = 
+            evt.shiftKey? "true" : "false";
+        document.getElementById("downCtrl").innerHTML = 
+            evt.ctrlKey? "true" : "false";
+        document.getElementById("downAlt").innerHTML = 
+            evt.altKey? "true" : "false";
+        document.getElementById("downMeta").innerHTML = 
+            evt.metaKey? "true" : "false";
+    }   
+}
+  
+// decipher key press codes
+function showPress(evt) {
+    evt = (evt) ? evt : ((event) ? event : null);
+    if (evt) {
+        var text = "";
+        document.getElementById("pressKey").innerHTML = evt.keyCode;
+        if (evt.charCode) {
+            document.getElementById("pressChar").innerHTML = evt.charCode;
+        }
+        showTarget(evt);
+        var charCode = (evt.charCode) ? evt.charCode : evt.keyCode;
+        document.getElementById("character").innerHTML = 
+            String.fromCharCode(charCode);
+        document.getElementById("pressShift").innerHTML = 
+            evt.shiftKey? "true" : "false";
+        document.getElementById("pressCtrl").innerHTML = 
+            evt.ctrlKey? "true" : "false";
+        document.getElementById("pressAlt").innerHTML = 
+            evt.altKey? "true" : "false";
+        document.getElementById("pressMeta").innerHTML = 
+            evt.metaKey? "true" : "false";
+    }
+}
+  
+// decipher key up codes
+function showUp(evt) {
+    evt = (evt) ? evt : ((event) ? event : null);
+    if (evt) {
+        var text = "";
+        document.getElementById("upKey").innerHTML = evt.keyCode;
+        if (evt.charCode) {
+            document.getElementById("upChar").innerHTML = evt.charCode;
+        }
+        document.getElementById("upShift").innerHTML = 
+            evt.shiftKey? "true" : "false";
+        document.getElementById("upCtrl").innerHTML = 
+            evt.ctrlKey? "true" : "false";
+        document.getElementById("upAlt").innerHTML = 
+            evt.altKey? "true" : "false";
+        document.getElementById("upMeta").innerHTML = 
+            evt.metaKey? "true" : "false";
+        return false;
+    }
+}
+  
+// set page-wide event listeners
+document.onkeydown = showDown;
+document.onkeypress = showPress;
+document.onkeyup = showUp;
+
+
+function displayObject(obj) {
+  var s = typeof(obj) + "\n";
+  for (var i in obj) {
+    s = s + "obj[" + i + "] + " + obj[i] + "\n";
+  }
+  alert(s);
+}
+</script>
+</head>
+<body>
+<h1>Key and Character Codes vs. Event Types</h1> 
+<hr>
+<p>
+  This form cancels all keyUp events.
+</p>
+<p>Enter some text with uppercase and lowercase letters:<br>
+<form>
+<input type="text" id="entry" size="60" 
+       onkeydown="showDown(event)" 
+       onkeypress="showPress(event)" 
+       onkeyup="showUp(event)">
+</textarea></p>
+</form>
+<table border="2" cellpadding="5" cellspacing="5">
+<caption>Keyboard Event Properties</caption>
+<tr><th>Data</th><th>keydown</th><th>keypress</th><th>keyup</th></tr>
+<tr><td>keyCode</td>
+    <td id="downKey">&mdash;</td>
+    <td id="pressKey">&mdash;</td>
+    <td id="upKey">&mdash;</td>
+</tr>
+<tr><td>charCode</td>
+    <td id="downChar">&mdash;</td>
+    <td id="pressChar">&mdash;</td>
+    <td id="upChar">&mdash;</td>
+</tr>
+<tr><td>Target</td>
+    <td id="keyTarget" colspan="3">&mdash;</td>
+</tr>
+<tr><td>Character</td>
+    <td id="character" colspan="3">&mdash;</td>
+</tr>
+<tr><td>Shift</td>
+    <td id="downShift">&mdash;</td>
+    <td id="pressShift">&mdash;</td>
+    <td id="upShift">&mdash;</td>
+</tr>
+<tr><td>Ctrl</td>
+    <td id="downCtrl">&mdash;</td>
+    <td id="pressCtrl">&mdash;</td>
+    <td id="upCtrl">&mdash;</td>
+</tr>
+<tr><td>Alt</td>
+    <td id="downAlt">&mdash;</td>
+    <td id="pressAlt">&mdash;</td>
+    <td id="upAlt">&mdash;</td>
+</tr>
+<tr><td>Meta</td>
+    <td id="downMeta">&mdash;</td>
+    <td id="pressMeta">&mdash;</td>
+    <td id="upMeta">&mdash;</td>
+</tr>
+
+</table>
+</body>
+</html>
