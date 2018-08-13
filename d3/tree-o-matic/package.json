@@ -1,0 +1,9 @@
+{
+  "name": "tree-o-matic",
+  "main": "tree-o-matic.js",
+  "version": "313.0.0",
+  "author": {
+    "name": "frankieliu",
+    "url": "https://beta.observablehq.com/@frankieliu"
+  }
+}

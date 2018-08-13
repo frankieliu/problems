@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+ .node {
+     stroke: #fff;
+     stroke-width: 2px;
+ }
+
+ .link {
+     fill: none;
+     stroke: url(#gradient);
+     stroke-width: 1.5px;
+ }
+</style>
+
+<body>
+
+    <!-- <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>  -->
+    <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script>
+
+     var margin = {top: 10, right: 10, bottom: 10, left: 10};
+     var width = 960,
+         height = 500;
+
+     // reference: https://github.com/mbostock/d3/wiki/Tree-Layout
+     // var tree = d3.layout.tree()
+     var tree = d3.tree()
+                  .size([width - margin.left - margin.right, 
+                         height - margin.top - margin.bottom]);
+
+     // Colors as an array
+     // https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20
+     // var colors = d3.scale.category20().range();
+     var colorScale = d3.scaleLinear()
+                        .domain([0,1])
+                        .range(['red', 'green']);
+     
+     var root = {
+         name: 0,
+         children: [
+             {
+                 name: 1,
+                 children: null
+             }]
+     };
+     var root0 = d3.hierarchy(root);
+     console.log(root0);
+     
+     var treemap = tree(root0);
+     var nodes = treemap.descendants();
+
+     console.log(nodes);
+     // Add a new node to a random parent.
+     // var n = {id: 0, parent: null, px = =},
+     //     p = nodes[0];
+     // nodes.push(n);
+     nodes[0].px = nodes[0].x;
+     nodes[0].py = nodes[0].y;
+     nodes[0].id = 0;
+     
+     // root.parent = root;
+     // root.px = root.x;
+     // root.py = root.y;
+
+     // Node's color will relate to level, by 0-indexing in the colors array
+     nodes[0].level = 0;
+
+     // https://github.com/mbostock/d3/wiki/SVG-Shapes#diagonal
+     // var diagonal = d3.svg.diagonal();
+     function diagonal(s, d) {
+         var path = `M ${s.y} ${s.x}
+            C ${(s.y + d.y) / 2} ${s.x},
+              ${(s.y + d.y) / 2} ${d.x},
+              ${d.y} ${d.x}`;
+         return path;
+     }
+
+
+     var svg = d3.select("body").append("svg")
+                 .attr("width", width)
+                 .attr("height", height)
+                 .append("g")
+                 .attr("transform", "translate(10, 10)");
+
+     // These values will update as tree depth updates
+     var gradientData = [
+         {offset: 0.0, color: "pink"},
+         {offset: 0.3, color: "red"},
+         {offset: 0.45, color: "blue"},
+         {offset: 0.55, color: "steelblue"}, 
+         {offset: 0.6, color: "black"},
+         {offset: 1.0, color: "lawngreen"}
+     ];
+
+     // Linear Gradient SVG overlay; https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+     var gradient = svg.append("linearGradient")
+                       .attr("id", "gradient")
+                       .attr("gradientUnits", "userSpaceOnUse")
+	                   .attr("x1", 0)
+                       .attr("y1", 0)
+                       .attr("x2", 0)
+	                   .attr("y2", (height - margin.top - margin.bottom))
+                       .selectAll("stop")
+                       .data(gradientData)
+                       .enter()
+                       .append("stop")
+                       .attr("offset", function(d) { return d.offset; })
+                       .attr("stop-color", function(d) { return d.color; });
+
+     var node = svg.selectAll(".node"),
+         link = svg.selectAll(".link");
+
+     var duration = 750;
+     // var timer = setInterval(update, duration);
+
+     // Store maximum depth here for legibility's sake
+     var deepest = 0;
+
+     //// update ()
+     function update() {
+         // No more than 500 nodes at one time
+         if (nodes.length >= 500) 
+             return clearInterval(timer);
+
+         // Add a new node to a random parent.
+         var n = {id: nodes.length},
+             p = nodes[Math.random() * nodes.length | 0];
+
+         if (p.children) p.children.push(n); else p.children = [n];
+         nodes.push(n);
+
+         // Recompute the layout and data join.
+         node = node.data(nodes, function(d) {
+             return d.id; 
+         });
+
+         console.log(nodes);
+         return clearInterval(timer);
+
+         console.log(treemap.links());
+         link = link.data(treemap.links(), function(d) { 
+	         return d.source.id + "-" + d.target.id; 
+         });
+         return clearInterval(timer);
+
+         // Add entering nodes in the parent’s old position.
+         node.enter().append("circle")
+             .attr("class", "node")
+             .attr("r", 8) // increased node sizes
+             .attr("cx", function(d) { return d.parent.px; })
+             .attr("cy", function(d) { return d.parent.py; })
+         // Color each node.
+             .attr("fill", function(d) { 
+                 /* Update the depth attribute & the record depth variable,
+	                and run the gradientUpdate on changes */
+	             d.level = d.parent.level + 1;
+                 if (d.level > deepest) {
+                     deepest = d.level;
+	                 gradientUpdate(deepest);
+	             }
+	             // Modulus length wraps the color array, rather than going out of bounds.
+	             // return colors[d.level % colors.length];
+                 return colorScale(d.level % colors.length); 
+	         });
+
+         // Add entering links in the parent’s old position.
+         link.enter().insert("path", ".node")
+             .attr("class", "link")
+             .attr("d", function(d) {
+                 var o = {x: d.source.px, y: d.source.py};
+                 return diagonal({source: o, target: o});
+             });
+
+         // Transition nodes and links to their new positions.
+         var t = svg.transition()
+                    .duration(duration);
+
+         t.selectAll(".link")
+          .attr("d", diagonal);
+
+         t.selectAll(".node")
+          .attr("cx", function(d) { return d.px = d.x; })
+          .attr("cy", function(d) { return d.py = d.y; });
+     }
+
+     //// gradientUpdate (integer:depth)
+     // Alters the gradient data array as depth changes/
+     // TODO: Refactor this so it's more efficient with the first/last actions, & cleaner
+     function gradientUpdate (depth) {
+
+         gradient.remove("stop");
+
+	     gradientData = [];
+
+         // This loop will fill gradientData with objects to assemble the gradient.
+	     for (var i = 0; i <= depth; i++) {
+             gradientData[i] = 
+		         {offset: (i / depth), // Distribute the colors evenly with this value
+                  // color: colors[i % colors.length]}; // Store the depth's color
+                  color: colorScale(i % colors.length)
+                 }; // Store the depth's color
+	     }
+
+         gradient = svg.select("linearGradient")
+                       .selectAll("stop")
+                       .data(gradientData)
+                       .enter()
+	                   .append("stop")
+                       .attr("offset", function(d) { return d.offset; })
+                       .attr("stop-color", function(d) { return d.color; });
+     }
+
+    </script>
+
+</body>
