@@ -1,3 +1,5 @@
+import {popCode} from 'popCode';
+
 var script = {
 
     popcorn: null,
@@ -45,6 +47,10 @@ var script = {
 
             script.popcorn = pop;
 
-        }
+        } // true
+        
+        let lpopCode = popCode();
+
     } // init
+
 }

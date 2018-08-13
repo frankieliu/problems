@@ -1,4 +1,4 @@
-var popCode = function() {
+export function popCode() {
     var pop = script.popcorn;
 
     /**

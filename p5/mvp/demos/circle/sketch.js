@@ -87,17 +87,17 @@ var circleSketch = function( sketch ) {
         var c = {
           x: 0,
           y: -r
-        }
+        };
         var b = {
           x: c.x * Math.cos(Math.PI * 2/3) - ( c.y * Math.sin(Math.PI * 2/3) ),
           y: c.x * Math.sin( Math.PI * 2/3  ) + ( c.y * Math.cos( Math.PI * 2/3  ) )
-        }
+        };
         var a = {
           x: c.x * Math.cos(Math.PI * 4/3) - ( c.y * Math.sin(Math.PI * 4/3) ),
           y: c.x * Math.sin( Math.PI * 4/3  ) + ( c.y * Math.cos( Math.PI * 4/3  ) )
-        }        
+        } ;       
 
-        sketch.translate(sketch.width/2, sketch.width/2)
+        sketch.translate(sketch.width/2, sketch.width/2);
         sketch.triangle(a.x, a.y, b.x, b.y, c.x, c.y);
         break;
       case "flower":
@@ -112,7 +112,7 @@ var circleSketch = function( sketch ) {
         break;    
     }
 
-  }
+  };
 
   sketch.addSlider = function() {
     //console.log("Adding slider");  
@@ -126,11 +126,11 @@ var circleSketch = function( sketch ) {
     sketch.hueSlider.position(x,y+180);  
 
     return sketch.hueSlider;
-  }    
+  };   
 
   sketch.hideSlider = function() {
     sketch.hueSlider.hide();
-  }
+  };
 
   sketch.animateSlider = function(start, end, time) {
     sketch.lerpStartTime = sketch.millis();
@@ -139,7 +139,7 @@ var circleSketch = function( sketch ) {
     sketch.lerpEndValue = end;
 
     sketch.sliding = true;
-  }
+  };
 
   sketch.showCode = function (text,x,y) {
     sketch.codePanel.html(text);
@@ -147,11 +147,11 @@ var circleSketch = function( sketch ) {
     sketch.codePanel.show();
 
     return sketch.codePanel;
-  }
+  };
 
   sketch.hideCode = function() {
     sketch.codePanel.hide();
-  }
+  };
 
   sketch.shrink = function() {
     sketch.shrinking = true;
