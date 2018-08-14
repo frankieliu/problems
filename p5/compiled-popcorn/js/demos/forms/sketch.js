@@ -57,14 +57,23 @@ var formsSketch = function( sketch ) {
           console.log(e.code);
         });
         */
+        $video.removeAttribute('controls');
         
         sketch.keymap = {};
-        sketch.container.addEventListener("keydown", function(e) {
+        sketch.container.addEventListener("keypress", function(e) {
             console.log(e.code);
             if (e.code == "KeyC" && e.ctrlKey) {
                 console.log("C-c");
             } else {
                 console.log(e.code);
+                switch(e.code) {
+                case "KeyI":
+                    sketch.insertMode = true;
+                    console.log("Insert mode");
+                    break;
+                default:
+                    break;
+                }
             }
             //            map[e.code] = true;
             //            if (map["Control"]) {
@@ -184,6 +193,7 @@ var formsSketch = function( sketch ) {
     sketch.mouseReleased = function() {
         if (sketch.mouseEnabled) sketch.stopDrawing();
     };
+    
     sketch.touchStartd = function() {
         if (sketch.mouseEnabled) sketch.startDrawing();
     };
@@ -262,9 +272,15 @@ var formsSketch = function( sketch ) {
 
         $cp.focusin(
             function() {
-                console.log("focusin: " + document.activeElement.id);
+                sketch.inFormFocus = true;
+                console.log("+ focus: " + document.activeElement.id);
             });
 
+        $cp.focusout(
+            function() {
+                sketch.inFormFocus = false;
+                console.log("- focus: " + this[0].id);
+            });
         $cp[0].addEventListener("keydown", function(e) {
             if (e.ctrlKey) {
                 switch (e.code) {
@@ -432,6 +448,18 @@ var formsSketch = function( sketch ) {
             }
         });
 
+        $cp.focusin(
+            function() {
+                sketch.inFormFocus = true;
+                console.log("+focus: " + document.activeElement.id);
+            });
+
+        $cp.focusout(
+            function() {
+                sketch.inFormFocus = false;
+                console.log("-focus: " + this.id + "->" + document.activeElement);
+            });
+
         // On title
         var $cpt = $("#codePanelt" + curidx);
         $cpt.hover(
@@ -445,11 +473,6 @@ var formsSketch = function( sketch ) {
 
             }, function() {
             });
-        $cpt.focusin(
-            function() {
-                console.log("focusin: " + document.activeElement.id);
-            });
-
         $cpt[0].addEventListener("keydown", function(e) {
             if (e.ctrlKey) {
                 switch (e.code) {
