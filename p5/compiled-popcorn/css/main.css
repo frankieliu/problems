@@ -19,6 +19,8 @@ body {
   overflow: none;
   color: white;
   background: #333;
+  position: fixed;
+  overflow: hidden;
 }
 
 canvas {
@@ -52,7 +54,7 @@ h1, h2 {
   // margin-top: -400px;
   width: 1280px;
   height: 800px;
-  background: white;
+  background: blue;
 }
 
 #progressBar {

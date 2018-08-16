@@ -125,6 +125,7 @@
 
          // function during paused video
          var normalPauseKeypress = function(e) {
+             
              if (e.which == 32) {
                  e.preventDefault();
                  if ($video.paused == true) {
@@ -146,7 +147,11 @@
              console.log("pause");
              bodyBindKeypress(normalPauseKeypress);
              $("#sketchCanvas").addClass("foreground");
-             main.sketch = new p5(formsSketch, "sketchCanvas");
+             var env = {
+                 video: $video,
+                 main: main
+             };
+             main.sketch = new p5(formsSketch(env), "sketchCanvas");
              main.sketch.scaleFactor = main.scaleFactor;
          });
 
@@ -154,6 +159,7 @@
              "playing",
              function() {
                  console.log("playing");
+                 $video.setAttribute("controls", "controls");
                  bodyBindKeypress(normalPlayKeypress);
              });
          /*
