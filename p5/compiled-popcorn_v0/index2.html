@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="main" tabindex="-1">
+            <video width="700" position="absolute" controls
+                   id="myvideo">
+                <source src="./video.webm" type="video/webm">
+                Not good.
+            </video>
+        </div>
+        <div id="sketchCanvas"></div>
+        <!--
+        -->
+        
+        <div id="footnote"></div>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="js/vendor/jquery-ui.min.js"></script>
+        <!-- <script src="js/vendor/jquery.hotkeys.js"></script> -->
+        <script src="js/popcorn-complete.min.js"></script>
+        <script src="js/vendor/p5.min.js"></script>
+        <script src="js/vendor/addons/p5.dom.js"></script>
+        <script src="js/vendor/addons/p5.sound.min.js"></script>
+        <script src="js/demos/intro/sketch.js"></script>
+        <script src="js/demos/painting/sketch.js"></script>
+        <script src="js/demos/forms/sketch.js"></script>
+        <script>
+         var main = {};
+         var $video = $("#myvideo")[0];
+         var videoSeeking = false;
+
+         $video.addEventListener(
+             "seeking",
+             function() {
+                 videoSeeking = true;
+             });
+
+         $video.addEventListener(
+             "seeked",
+             function() {
+                 videoSeeking = false;
+             });
+         
+         $video.addEventListener(
+             "playing",
+             function() {
+                 $video.setAttribute("controls","controls");
+             });
+
+         $("#main")[0].addEventListener(
+             "keypress", 
+             function(e) {
+                 console.log("keypress paused");
+                 var env = {
+                     main: main,
+                     video: $video
+                 };
+                 main.sketch = new p5(formsSketch(env), "sketchCanvas");
+                 $video.pause();
+             }
+         );
+         
+        </script>
+    </body>
+</html>
