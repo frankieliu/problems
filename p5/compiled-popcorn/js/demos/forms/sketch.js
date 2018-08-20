@@ -1,7 +1,17 @@
+// press i to insert
+// press Esc to return
+// press Ctrl-< to move back in time
+// press Ctrl-> to move fwd in time
+// cue event:
+//  bring new form element
+//  form element can be edited
+// can add new elements
+
 var formsSketch = function(env) {
 
     console.log("Entered formsSketch...");
 
+    // env is now available for this function
     return function( sketch ) {
 
         console.log("Entered formsSketch returned...");
@@ -14,19 +24,10 @@ var formsSketch = function(env) {
         sketch.buffer = null;
         sketch.alphaBuffer = null;
 
-        sketch.osc = null;
-        sketch.lfo = null;
-
         sketch.painting = false;
         sketch.mouseEnabled = true;
         sketch.next = 0;
         sketch.lastPosition = null;
-
-        // Range of midi notes to select on path creation.
-
-        sketch.notes = [60,62,64,65,67,69,71,72,74,76];
-
-        //sketch.notes = [60,64,67,71,72,76,79,83];
 
         sketch.hoverKeypress = function(e) {
         };
@@ -50,15 +51,14 @@ var formsSketch = function(env) {
         };
 
         sketch.setup = function() {
-
             // Full-window canvas
+            // sketch.masterVolume(.5);
             sketch._pixelDensity = 1;
-            sketch.masterVolume(.5);
-
             var mainStyle = {
                 width: $("#main").css('width').replace("px",""),
                 height: $("#main").css('height').replace("px","")
             };
+            console.log(mainStyle.width, mainStyle.height);
             sketch.createCanvas(mainStyle.width, mainStyle.height);
             sketch.container = sketch.canvas.parentElement;
 
@@ -67,34 +67,32 @@ var formsSketch = function(env) {
               console.log(e.code);
               });
             */
-            env.video.removeAttribute('controls');
+            // env.video.removeAttribute('controls');
             
             sketch.keymap = {};
-            sketch.container.addEventListener("keypress", function(e) {
+            sketch.container.addEventListener("keydown", function(e) {
                 console.log(e.code);
                 if (e.code == "KeyC" && e.ctrlKey) {
                     console.log("C-c");
+                } else if(e.key == "Escape") {
+                    console.log("-Insert mode");
+                    sketch.insertMode = false;
                 } else {
                     console.log(e.code);
                     switch(e.code) {
                     case "KeyI":
                         sketch.insertMode = true;
-                        console.log("Insert mode");
+                        console.log("+Insert mode");
                         break;
                     default:
                         break;
                     }
                 }
-                //            map[e.code] = true;
-                //            if (map["Control"]) {
-                //                console.log("Control");
-                //            }
             });
 
             sketch.container.addEventListener("keyup", function(e) {
                 sketch.keymap = {};
             });
-
 
             //sketch.strokeWeight(2);
             sketch.colorMode(sketch.HSB, 100);
@@ -113,40 +111,21 @@ var formsSketch = function(env) {
             sketch.mousePosition = new p5.Vector(0,0);
             sketch.lastPosition = new p5.Vector(0,0);
 
-            // Main oscillator
-            //
-            sketch.osc = new p5.SinOsc(440);
-            sketch.osc.amp(0);
-
-            // LFO to modify main oscillator
-            //
-            sketch.lfo = new p5.SinOsc(2);
-            sketch.lfo.disconnect();
-            sketch.lfo.amp(0);
-            sketch.osc.amp(sketch.lfo);
-
-            sketch.osc.start();
-            sketch.lfo.start();
-
-            sketch.playButton = sketch.createDiv("<i class='fas fa-play'></i>");
-            sketch.playButton.addClass("playButton");
-            sketch.playButton.position(10, 10);
-            // console.log(sketch.canvas);
-            // console.log(sketch.canvas.getBoundingClientRect());
-            sketch.playButton.show();
-
-            // Adding event listeners
-            sketch.playButton.elt.addEventListener(
-                "click",
-                function(e){
-                    console.log("getting ready to play");
-                    e.preventDefault();
-                    // sketch.playButtonPressed = true;
-                    env.video.play();
-                    sketch.remove();
+            sketch.container.addEventListener(
+                "click", function(e) {
+                    console.log("Clicked on " + e.target);
+                    console.log("Mouse Enabled: " + sketch.mouseEnabled, 
+                                sketch.formHover, sketch.playButtonPressed, sketch.insertMode);
+                    if ((sketch.mouseEnabled) &&
+                        !(sketch.formHover) &&
+                        !(sketch.playButtonPressed) &&
+                        (sketch.insertMode)) {
+                        console.log("touch");
+                        sketch.startForms_1();
+                    }
                 });
-            // Mouse/Touch events
 
+            if (false) {
             sketch.canvas.addEventListener(
                 "click", function(e) {
                     console.log("clicked on canvas");
@@ -157,7 +136,11 @@ var formsSketch = function(env) {
                         sketch.startForms_1();
                     }
                 });
+            }
+            sketch.playButtonPressed = false;
+            sketch.makePlayButton();
         };
+        
         sketch.draw = function() {
             sketch.clear();
             // Draw image buffer
@@ -205,14 +188,7 @@ var formsSketch = function(env) {
 
             // Modify the oscillators while painting
             if (sketch.painting) {
-
-                // Tone frequency is based on mouseX
-                // LFO frequency is based on mouseY
-                var note = sketch.midiToFreq(sketch.notes[sketch.floor(sketch.map(sketch.mousePosition.x, 0, sketch.width, 0, sketch.notes.length ))]);;
                 var mod = sketch.map(sketch.mousePosition.y, 0, sketch.height, 4, 16);
-
-                sketch.osc.freq(note);
-                sketch.lfo.freq(mod);
             }
 
             // Draw all paths
@@ -252,11 +228,6 @@ var formsSketch = function(env) {
         sketch.startDrawing = function() {
             sketch.next = 0;
             sketch.painting = true;
-
-
-            sketch.osc.fade(.5,.2);
-            sketch.lfo.fade(.5,.2);
-
             sketch.lastPosition.x = ((sketch.mouseX > sketch.touchX) ? sketch.mouseX : sketch.touchX) - 10;
             sketch.lastPosition.y = ((sketch.mouseY > sketch.touchY) ? sketch.mouseY : sketch.touchY) - 10;
 
@@ -272,132 +243,14 @@ var formsSketch = function(env) {
             sketch.codePanel.show();
             return sketch.codePanel;
         };
-
-        sketch.startForms = function() {
-
-            sketch.lastPosition.x = ((sketch.mouseX > sketch.touchX) ? sketch.mouseX : sketch.touchX);
-            sketch.lastPosition.y = ((sketch.mouseY > sketch.touchY) ? sketch.mouseY : sketch.touchY);
-
-            sketch.lastPosition.x /= sketch.scaleFactor;
-            sketch.lastPosition.y /= sketch.scaleFactor;
-
-            console.log(sketch.lastPosition.x, sketch.lastPosition.y);
-
-            sketch.codePanel = sketch.createDiv("");
-            sketch.codePanel.addClass("codePanel");
-            sketch.codePanel.elt.setAttribute("contenteditable","true");
-
-            var curidx = sketch.forms.length;
-            sketch.codePanel.elt.setAttribute("tabindex", curidx+1);
-            sketch.codePanel.elt.id = "codePanel" + curidx;
-            sketch.forms.push(sketch.codePanel);
-            console.log(sketch.forms.length);
-
-            // Current code panel $cp
-            var $cp = $("#codePanel" + curidx);
-            // var cp = $cp[0];
-
-            $cp.draggable();
-
-            $cp.focusin(
-                function() {
-                    sketch.inFormFocus = true;
-                    console.log("+ focus: " + document.activeElement.id);
-                });
-
-            $cp.focusout(
-                function() {
-                    sketch.inFormFocus = false;
-                    console.log("- focus: " + this[0].id);
-                });
-            $cp[0].addEventListener("keydown", function(e) {
-                if (e.ctrlKey) {
-                    switch (e.code) {
-                    case "Delete":
-                        console.log("C-Delete");
-                        break;
-                    case "Enter":
-                        console.log("C-Enter");
-                        break;
-                    case "Insert":
-                        console.log("C-Insert");
-                        break;
-                    case "End":
-                        console.log("C-End");
-                        break;
-                    case "Home":
-                        console.log("C-Home");
-                        break;
-                    case "Esc":
-                        console.log("C-Esc");
-                        break;
-                    }
-                    e.preventDefault();
-                }
-            });
-
-            $cp.hover(
-                function() {
-                    if ($cp.is(":focus")) {
-                        $.noop();
-                    } else {
-                        $cp.focus();
-                        document.execCommand('selectAll', false, null);
-                    }
-                    console.log("hover:" + this.id);
-                    sketch.formHover = true;
-                    sketch.bodyBindKeypress(sketch.hoverKeypress);
-                },
-                function() {
-                    console.log("-hover:" + this.id);
-                    sketch.formHover = false;
-                    /*
-                      if ($("#codePanel" + curidx).is(":focus")) {
-                      $("#codePanel" + curidx).focus(
-                      function() {
-                      console.log($(this).id + " is focused.");
-                      },
-                      function() {
-
-                      console.log(document.activeElement.id + " has focus now.");
-                      if (document.activeElement.id.indexOf("codePanel") != -1) {
-                      // still in codePanel focus
-                      sketch.bodyBindKeypress(sketch.hoverKeypress);
-                      } else {
-                      sketch.bodyBindKeypress(sketch.normalPauseKeypress);
-                      }
-
-                      $(":focus").each(function() {
-                      alert(this.id + " has focus!");
-                      });
-                      });
-                      } else {
-                      sketch.bodyBindKeypress(sketch.normalPauseKeypress);
-                      }
-                    */
-                });
-
-            /*
-              sketch.codePanel.elt.hover(function() {
-              console.log("hover");
-              });
-            */
-            /*
-              sketch.codePanel.elt.setAttribute("id","true");
-              if ($('#element:hover').length != 0) {
-              // do something ;)
-              }
-            */
-            // sketch.codePanel.hide();
-            sketch.showCode("if (mousePressed()) {<br/>  &emsp;fill(r,g,b); <br/> }",
-                            sketch.lastPosition.x,sketch.lastPosition.y);
-        };
-
+        
         sketch.startForms_1 = function() {
-
             sketch.lastPosition = sketch.getMousePosition();
             console.log(sketch.lastPosition.x, sketch.lastPosition.y);
-
+            sketch.startForms(sketch.lastPosition);
+        };
+        
+        sketch.startForms = function(pos, title="title", subject="subject") {
             // Creating four div's:
             // Container one, icon one, title one, subject one
             sketch.codePanel = {
@@ -407,7 +260,7 @@ var formsSketch = function(env) {
                 subject: sketch.createDiv("")};
 
             // Position the container and show it
-            sketch.codePanel.container.position(sketch.lastPosition.x, sketch.lastPosition.y);
+            sketch.codePanel.container.position(pos.x, pos.y);
 
             // set the group
             var group = sketch.codePanel;
@@ -417,8 +270,8 @@ var formsSketch = function(env) {
                 "<i class='mymove fas fa-arrows-alt fa-fw'></i>" +
                     "<i class='mydelete far fa-trash-alt fa-fw'></i>" +
                     "<i class='myclock far fa-clock'></i>");
-            group.title.html("title");
-            group.subject.html("subject");
+            group.title.html(title);
+            group.subject.html(subject);
             
             // set the parents
             group.icons.parent(group.container);
@@ -452,6 +305,15 @@ var formsSketch = function(env) {
             // var $cp = $("#codePanel" + curidx);
             var $cp = $(group.container.elt);
             $cp.draggable({handle:".mymove"});
+            var $delete = $(group.icons.elt).find('.mydelete');
+            $delete.click(function(e) {
+                console.log("Delete clicked");
+                // console.log(group);
+                group.container.remove();
+                sketch.formHover = false;
+                e.stopPropagation();
+            });
+                
             $cp.hover(function() {
                 console.log("hover:" + this.id);
                 sketch.bodyBindKeypress(sketch.hoverKeypress);
@@ -502,6 +364,7 @@ var formsSketch = function(env) {
 
                 }, function() {
                 });
+            
             $cpt[0].addEventListener("keydown", function(e) {
                 if (e.ctrlKey) {
                     switch (e.code) {
@@ -540,13 +403,12 @@ var formsSketch = function(env) {
             sketch.codePanel.icons.show();
             sketch.codePanel.title.show();
             sketch.codePanel.subject.show();
+            
         };
 
         // Ramp down oscillators
         sketch.stopDrawing = function() {
             sketch.painting = false;
-            sketch.osc.fade(0,.4);
-            sketch.lfo.fade(0,.4);
         };
 
         // Class to handle paths of circles
@@ -665,6 +527,55 @@ var formsSketch = function(env) {
             };
         };
 
+        sketch.makePlayButton = function() {
+            sketch.playButton = sketch.createDiv("<i class='fas fa-play'></i>");
+            sketch.playButton.addClass("playButton");
+            sketch.playButton.position(10, 10);
+            // console.log(sketch.canvas);
+            // console.log(sketch.canvas.getBoundingClientRect());
+            sketch.playButton.show();
+            
+            // Adding event listeners
+            sketch.playButton.elt.addEventListener(
+                "click",
+                function(e){
+                    console.log(env.video.currentTime);
+                    sketch.listForms();
+                    console.log("getting ready to play");
+                    // sketch.playButtonPressed = true;
+                    e.stopPropagation();
+                    // sketch.playButtonPressed = true;
+                    // env.video.play();
+                    // sketch.remove();
+                });
+            // Mouse/Touch events
+        };
+        
+        sketch.saveForms = function() {
+        };
+            
+        sketch.listForms = function() {
+            for(var i = 0; i < sketch.forms.length; i++) {
+                var cp = sketch.forms[i];
+                // console.log(cp.container.elt);
+                var content = {
+                    pos: {
+                        x: cp.container.elt.offsetLeft,
+                        y: cp.container.elt.offsetTop
+                    },
+                    title: cp.title.elt.innerHTML,
+                    subject: cp.subject.elt.innerHTML
+                };
+                console.log(content);
+            }
+        };
+        
+        sketch.resize = function() {
+            console.log($video.width);
+            console.log($video.height);
+        };
+        
         return sketch;
     };
+    
 };
