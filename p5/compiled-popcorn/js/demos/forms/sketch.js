@@ -247,10 +247,17 @@ var formsSketch = function(env) {
         sketch.startForms_1 = function() {
             sketch.lastPosition = sketch.getMousePosition();
             console.log(sketch.lastPosition.x, sketch.lastPosition.y);
-            sketch.startForms(sketch.lastPosition);
+            var curidx = sketch.forms.length + 1;
+            sketch.startForms(
+                curidx,
+                sketch.lastPosition,
+            );
         };
         
-        sketch.startForms = function(pos, title="title", subject="subject") {
+        sketch.startForms = function (
+            id, pos,
+            title="title", subject="subject"
+        ) {
             // Creating four div's:
             // Container one, icon one, title one, subject one
             sketch.codePanel = {
@@ -288,13 +295,11 @@ var formsSketch = function(env) {
             group.title.elt.setAttribute("contenteditable","true");
             group.subject.elt.setAttribute("contenteditable","true");
 
-            // set the index of the element
-            var curidx = sketch.forms.length;
-
             // set the ids
-            group.container.elt.id = "codePanel" + curidx;
+            group.container.elt.id = id + "_codePanel";
+            var curidx = sketch.forms.length;
             group.title.elt.setAttribute("tabindex", curidx + 1);
-            group.title.elt.id = "codePanelt" + curidx;
+            group.title.elt.id = id + "_codePanelt";
 
             // add to forms
             sketch.forms.push(sketch.codePanel);
@@ -352,7 +357,7 @@ var formsSketch = function(env) {
                 });
 
             // On title
-            var $cpt = $("#codePanelt" + curidx);
+            var $cpt = $("#" + id + "_codePanelt");
             $cpt.hover(
                 function() {
                     if ($cpt.is(":focus")) {
@@ -403,7 +408,7 @@ var formsSketch = function(env) {
             sketch.codePanel.icons.show();
             sketch.codePanel.title.show();
             sketch.codePanel.subject.show();
-            
+            return sketch.codePanel;
         };
 
         // Ramp down oscillators

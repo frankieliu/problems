@@ -34,15 +34,19 @@
 
          var main = {};
          var $video = $("#myvideo")[0];
+
          var videoRatio = 1;
          console.log($video.videoHeight, $video.videoWidth);
+         
+         window.addEventListener('resize', resize, false);
+
          $video.onloadeddata = function() {
              videoRatio = $video.videoHeight/$video.videoWidth;
              console.log(videoRatio);
+             createSketch(main, $video);
              resize();
+             setTracks(main, $video);
          };
-         
-         window.addEventListener('resize', resize, false);
 
          function resize() {
              console.log("resizing");
@@ -100,26 +104,36 @@
                  }
              );
          }
-         
-         main.sketch = new p5(formsSketch(
-             {
-                 main: main,
-                 video: $video
-             },
-             "sketchCanvas"));
-         
-         // Text tracking
-         var textTrack = $video.textTracks[0];
-         // textTrack.mode = 'disabled';
-         console.log(textTrack.kind, textTrack.mode);
-         var tt = document.getElementById("mytrack");
-         // console.log(tt);
-         // console.log(textTrack);
-         
-         tt.addEventListener("load", function() {
+
+         function createSketch(main, $video) {
+             main.sketch = new p5(formsSketch(
+                 {
+                     main: main,
+                     video: $video
+                 },
+                 "sketchCanvas"));
+         }
+
+         function setTracks(main, $video) {
+             // Text tracking
+             main.textTrack = $video.textTracks[0];
+             main.tt = document.getElementById("mytrack");
+
+             main.cueinfo={};
+             if (main.tt.readyState == 2) {
+                 doCues.call(main.tt);
+             } else {
+                 main.tt.onloadeddata = doCues;
+             }
+
+         };
+
+         function doCues() {
+             console.log("Do cues");
              var textTrack = this.track;
              var cues = textTrack.cues;
-             // console.log(cues);
+
+             console.log(cues);
              textTrack.oncuechange = function () {
                  var cue = this.activeCues[0];
                  if (cue == null) {
@@ -129,8 +143,9 @@
                  }
              }
 
-             var anew = new VTTCue(10, 150, "My <u>underlined</u> Cue");
-             anew.id = 'cue_id 3';
+             console.log("Creating a new cue");
+             var anew = new VTTCue(10, 150, "My <u>underlined</u> Cue 3");
+             anew.id = 'cue_id_3';
              anew.onenter = function () {
                  console.log("Enter " + this.id);
              }
@@ -138,10 +153,11 @@
                  console.log("Exit " + this.id);
              }
              textTrack.addCue(anew);
-
+             
+             // cueinfo.track3 = anew;
              {
-                 var anew = new VTTCue(180, 240, "My <u>underlined</u> Cue");
-                 anew.id = 'cue_id 4';
+                 var anew = new VTTCue(180, 240, "My <u>underlined</u> Cue 4");
+                 anew.id = 'cue_id_4';
                  anew.onenter = function () {
                      console.log("Enter " + this.id);
                  }
@@ -150,21 +166,43 @@
                  }
                  textTrack.addCue(anew);
              }
+             
              for (var j = 0; j < cues.length; j++) {
                  var cue = cues[j];
                  var cueId = cue.id;
                  var cueText = cue.text;
                  // console.log(j, cue, cueId, cueText);
-                 if ((cue.id != 'cue_id 3') && (cue.id != 'cue_id 4')) {
-                     cue.onenter = function() {
-                         // console.log("Enter " + this.id);
-                     };
-                     cue.onexit = function() {
-                         // console.log("Exit " + this.id);
-                     };
+                 if ((cue.id != 'cue_id_3') && (cue.id != 'cue_id_4')) {
+                     if (/^\s*{/.test(cueText)) {
+                         var s = cueText.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
+                         console.log(s);
+                         cue.obj = JSON.parse(s);
+                         cue.onenter = function() {
+                             this.form = main.sketch.startForms(
+                                 this.id,
+                                 this.obj.pos,
+                                 title=this.obj.title,
+                                 subject=this.obj.subject
+                             );
+                             console.log(this.form);
+                         };
+                         cue.onexit = function() {
+                             this.form.container.remove();
+                         };
+                     } else {
+                         cue.onenter = function() {
+                             // console.log("Enter " + this.id);
+                         };
+                         cue.onexit = function() {
+                             // console.log("Exit " + this.id);
+                         };
+                     }
                  }
              }
-         });
+             
+         };
+
+         
         </script>
     </body>
 </html>
