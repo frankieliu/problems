@@ -247,11 +247,25 @@ var formsSketch = function(env) {
         sketch.startForms_1 = function() {
             sketch.lastPosition = sketch.getMousePosition();
             console.log(sketch.lastPosition.x, sketch.lastPosition.y);
-            var curidx = sketch.forms.length + 1;
-            sketch.startForms(
-                curidx,
-                sketch.lastPosition,
-            );
+            if (false) {
+                // startForms simple
+                // curidx is used as an id
+                var curidx = sketch.forms.length + 1;
+                sketch.startForms(
+                    curidx,
+                    sketch.lastPosition,
+                );
+            } else {
+                var t = $video.currentTime;
+                console.log('Creating cue at '+t);
+                env.main.addCue(
+                    {begin: t, end: t+2},
+                    {pos: sketch.lastPosition,
+                     title: 'title',
+                     subject: 'subject',
+                     color: 'blue'},
+                    env.main);
+            }
         };
         
         sketch.startForms = function (
@@ -369,7 +383,8 @@ var formsSketch = function(env) {
 
                 }, function() {
                 });
-            
+
+            if(false) {
             $cpt[0].addEventListener("keydown", function(e) {
                 if (e.ctrlKey) {
                     switch (e.code) {
@@ -402,6 +417,7 @@ var formsSketch = function(env) {
                     }
                 }
             });
+            }
 
             // Show the codePanel
             sketch.codePanel.container.show();
