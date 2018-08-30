@@ -31,155 +31,154 @@
         <script src="js/demos/painting/sketch.js"></script>
         <script src="js/demos/forms/sketch.js"></script>
         <script>
+          // document.addEventListener( "DOMContentLoaded", function() {
 
-         // document.addEventListener( "DOMContentLoaded", function() {
+          var popcorn = Popcorn.smart("#main", "./video.webm");
 
-         var popcorn = Popcorn.smart("#main", "./video.webm");
+          popcorn.footnote({
+          start: 2,
+          end: 15,
+          target: "footnote",
+          text: "Pop!"
+          });
 
-         popcorn.footnote({
-             start: 2,
-             end: 15,
-             target: "footnote",
-             text: "Pop!"
-         });
+          popcorn.video.setAttribute("controls", "controls");
+          // popcorn.play();
 
-         popcorn.video.setAttribute("controls", "controls");
-         // popcorn.play();
+          // }, false );
 
-         // }, false );
+          var main = {
+          scaleFactor: 1.0,
 
-         var main = {
-             scaleFactor: 1.0,
+          getRelativePosition: function(position) {
 
-             getRelativePosition: function(position) {
+          videoBaseX = $("#main").width()/2;
+          videoBaseY = $("#main").height();
 
-                 videoBaseX = $("#main").width()/2;
-                 videoBaseY = $("#main").height();
+          position.left = videoBaseX + position.left;
+          position.top = videoBaseY - position.top;
 
-                 position.left = videoBaseX + position.left;
-                 position.top = videoBaseY - position.top;
+          return position;
 
-                 return position;
+          }
+          };
 
-             }
-         };
+          var pop = popcorn;
+          pop.code({
+          start: 1 ,
+          onStart: function( options ) {
 
-         var pop = popcorn;
-         pop.code({
-             start: 1 ,
-             onStart: function( options ) {
-
-                 var position = main.getRelativePosition({left:-177.5, top:463} );
-                 // main.sketch = new p5(introSketch, "sketchCanvas");
-                 // main.sketch.showLabel("Lauren McCarthy", position.left, position.top);
-             }
-         });
-         pop.code({
-             start: 1.5,
-             onStart: function( options ) {
-                 if (main.sketch) {
-                     main.sketch.remove();
-                 }
-             }
-         });
-         /*
-            pop.code({
-            start: 1.6,
-            onStart: function( options ) {
-            $("#sketchCanvas").addClass("foreground");
-            main.sketch = new p5(paintingSketch, "sketchCanvas");
-            main.sketch.scaleFactor = main.scaleFactor;
-            }
-            });
+          var position = main.getRelativePosition({left:-177.5, top:463} );
+          // main.sketch = new p5(introSketch, "sketchCanvas");
+          // main.sketch.showLabel("Lauren McCarthy", position.left, position.top);
+          }
+          });
+          pop.code({
+          start: 1.5,
+          onStart: function( options ) {
+          if (main.sketch) {
+          main.sketch.remove();
+          }
+          }
+          });
+          /*
+          pop.code({
+          start: 1.6,
+          onStart: function( options ) {
+          $("#sketchCanvas").addClass("foreground");
+          main.sketch = new p5(paintingSketch, "sketchCanvas");
+          main.sketch.scaleFactor = main.scaleFactor;
+          }
+          });
           */
-         var $video = pop.video;
-         $video.addEventListener("seeked",function(){
-             console.log("seeked");
-             main.sketch.remove();
-             $video.pause();
-         });
+          var $video = pop.video;
+          $video.addEventListener("seeked",function(){
+          console.log("seeked");
+          main.sketch.remove();
+          $video.pause();
+          });
 
-         var bodyBindKeypress = function (f) {
-             $('body').unbind('clear keypress').bind('click keypress', f);
-         }
+          var bodyBindKeypress = function (f) {
+          $('body').unbind('clear keypress').bind('click keypress', f);
+          }
 
-         // function during play
-         var normalPlayKeypress = function(e) {
-             console.log(e.key);
-             if (e.which == 32) {
-                 e.preventDefault();
-                 if ($video.paused == true) {
-                     if (main.sketch) {
-                         main.sketch.remove();
-                     }
-                     $video.play();
-                 } else {
-                     $video.pause();
-                 }
-             } else if (e.which == 105) {
-                 e.preventDefault();
-                 console.log("insert");
-             }
-         };
+          // function during play
+          var normalPlayKeypress = function(e) {
+          console.log(e.key);
+          if (e.which == 32) {
+          e.preventDefault();
+          if ($video.paused == true) {
+          if (main.sketch) {
+          main.sketch.remove();
+          }
+          $video.play();
+          } else {
+          $video.pause();
+          }
+          } else if (e.which == 105) {
+          e.preventDefault();
+          console.log("insert");
+          }
+          };
 
 
-         // function during paused video
-         var normalPauseKeypress = function(e) {
-             if (e.which == 32) {
-                 e.preventDefault();
-                 if ($video.paused == true) {
-                     if (main.sketch) {
-                         main.sketch.remove();
-                     }
-                     $video.play();
-                     bodyBindKeypress(normalPlayKeypress);
-                 } else {
-                     $video.pause();
-                 }
-             } else if (e.which == 105) {
-                 e.preventDefault();
-                 console.log("Pause insert");
-             }
-         };
+          // function during paused video
+          var normalPauseKeypress = function(e) {
+          if (e.which == 32) {
+          e.preventDefault();
+          if ($video.paused == true) {
+          if (main.sketch) {
+          main.sketch.remove();
+          }
+          $video.play();
+          bodyBindKeypress(normalPlayKeypress);
+          } else {
+          $video.pause();
+          }
+          } else if (e.which == 105) {
+          e.preventDefault();
+          console.log("Pause insert");
+          }
+          };
 
-         $video.addEventListener("pause", function() {
-             console.log("pause");
-             bodyBindKeypress(normalPauseKeypress);
-             $("#sketchCanvas").addClass("foreground");
-             main.sketch = new p5(formsSketch, "sketchCanvas");
-             main.sketch.scaleFactor = main.scaleFactor;
-         });
+          $video.addEventListener("pause", function() {
+          console.log("pause");
+          bodyBindKeypress(normalPauseKeypress);
+          $("#sketchCanvas").addClass("foreground");
+          main.sketch = new p5(formsSketch, "sketchCanvas");
+          main.sketch.scaleFactor = main.scaleFactor;
+          });
 
-         $video.addEventListener(
-             "playing",
-             function() {
-                 console.log("playing");
-                 bodyBindKeypress(normalPlayKeypress);
-             });
-         /*
-            $("*").on
+          $video.addEventListener(
+          "playing",
+          function() {
+          console.log("playing");
+          bodyBindKeypress(normalPlayKeypress);
+          });
+          /*
+          $("*").on
           */
-         /*
-         document.addEventListener(
-             "keydown",
-             function(e) {
-                 if (e.code == "KeyC" && e.ctrlKey) {
-                     console.log("C-c");
-                 }
+          /*
+          document.addEventListener(
+          "keydown",
+          function(e) {
+          if (e.code == "KeyC" && e.ctrlKey) {
+          console.log("C-c");
+          }
 
-                 console.log(e.key);
-                 console.log(e.code);
-                 // console.log(e.code);
-             });
-         */
-         /*
-            This one doesn't work
-            $("*:focus").each(function() {
-            alert($this.id + " has focus");});
+          console.log(e.key);
+          console.log(e.code);
+          // console.log(e.code);
+          });
+          */
+          /*
+          This one doesn't work
+          $("*:focus").each(function() {
+          alert($this.id + " has focus");});
 
-            setInterval(function() {
-            console.log(document.querySelector(":focus")); },
-            1000);
+          setInterval(function() {
+          console.log(document.querySelector(":focus")); },
+          1000);
           */
         </script>
     </body>
