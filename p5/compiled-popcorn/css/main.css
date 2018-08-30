@@ -19,6 +19,8 @@ body {
   overflow: none;
   color: white;
   background: #333;
+  position: fixed;
+  overflow: hidden;
 }
 
 canvas {
@@ -41,7 +43,7 @@ h1, h2 {
 
 #main {
   overflow:hidden;
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
   margin-left: 0x;
@@ -50,9 +52,19 @@ h1, h2 {
   // left: 50%;
   // margin-left: -640px;
   // margin-top: -400px;
-  width: 1280px;
-  height: 800px;
-  background: white;
+  // min-width: 100%;
+  // min-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  background: blue;
+}
+
+#myvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0x;
+    margin-top: 0x;
 }
 
 #progressBar {
@@ -241,6 +253,7 @@ h1, h2 {
   color: white;
   opacity: 0;
 }
+
 
 .fontLoadA{
     font-family: "AvenirNextLTW01-MediumS", Helvetica, sans-serif;

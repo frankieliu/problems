@@ -1,0 +1,46 @@
+<html>
+    <style>
+     .div {
+         cursor: move;
+         width: 70px;
+         height: 70px;
+         background: black;
+         z-index: 1;
+         margin: 2px;
+         float: left;
+     }
+     .active {
+         background: grey;
+         z-index: 2;
+     }
+    </style>
+    <body>
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>D</div>
+        <div>E</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+         $('div').on('mousedown', function (e) {
+
+             $(this).addClass('active').parents().on('mousemove', function (e) {
+
+                 $('.active').offset({
+
+                     top: e.pageY - $('.active').outerHeight() / 2,
+                     left: e.pageX - $('.active').outerWidth() / 2
+
+                 }).on('mouseup', function () {
+
+                     $(this).removeClass('active');
+
+                 });
+                 
+             });
+             
+             return false;    
+         });
+        </script>
+    </body>
+</html>

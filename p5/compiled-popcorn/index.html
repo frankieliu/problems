@@ -1,185 +1,259 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+        <meta name="viewport"
+              width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     </head>
+
     <body>
-        <div id="main"></div>
+        <div id="main" tabindex="-1">
+            <video controls id="myvideo">
+                <source src="./video.webm" type="video/webm">
+                <track id="mytrack"
+                       kind="subtitles"
+                       label="mytrack"
+                       src="mytrack.vtt"
+                       srclang="en"
+                       default></track>
+                Not good.
+            </video>
+        </div>
         <div id="sketchCanvas"></div>
-
-        <!--
-        <video height="180" width="300" id="ourvideo" controls>
-            <source src="./video.webm" type="video/webm">
-            <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv">
-            <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.webm">
-            Not good.
-        </video>
-        -->
-
         <div id="footnote"></div>
-        <script src="js/vendor/jquery-1.11.0.min.js"></script>
-        <script src="js/vendor/jquery-ui.min.js"></script>
+
+        <script src="js/vendor/jquery-3.3.1.min.js"></script>
+        <script src="js/vendor/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+        
         <!-- <script src="js/vendor/jquery.hotkeys.js"></script> -->
         <script src="js/popcorn-complete.min.js"></script>
         <script src="js/vendor/p5.min.js"></script>
         <script src="js/vendor/addons/p5.dom.js"></script>
+        <!-- 
         <script src="js/vendor/addons/p5.sound.min.js"></script>
+        -->
         <script src="js/demos/intro/sketch.js"></script>
         <script src="js/demos/painting/sketch.js"></script>
         <script src="js/demos/forms/sketch.js"></script>
         <script>
-          // document.addEventListener( "DOMContentLoaded", function() {
 
-          var popcorn = Popcorn.smart("#main", "./video.webm");
+         var main = {};
+         var $video = $("#myvideo")[0];
 
-          popcorn.footnote({
-          start: 2,
-          end: 15,
-          target: "footnote",
-          text: "Pop!"
-          });
+         main.videoRatio = 1;
+         console.log($video.videoHeight, $video.videoWidth);
+         
+         window.addEventListener('resize', main.resize, false);
 
-          popcorn.video.setAttribute("controls", "controls");
-          // popcorn.play();
+         $video.onloadeddata = function() {
+             main.videoRatio = $video.videoHeight/$video.videoWidth;
+             console.log("video ratio: " + main.videoRatio);
+             main.createSketch(main, $video);
+             main.resize();
+             main.setTracks(main, $video);
+         };
 
-          // }, false );
+         main.resize = function () {
+             console.log("resizing");
+             if ($video.readyState == 4) {
+                 main.videoRatio = $video.videoHeight/$video.videoWidth;
+             }
+             var windowRatio = window.innerHeight / window.innerWidth; /* browser size */
+             console.log("window ratio " + windowRatio, "video ratio " + main.videoRatio);
+             if (windowRatio < main.videoRatio) {
+                 if (window.innerHeight > 50) { /* smallest video height */
+                     $video.height = window.innerHeight;
+                 } else {
+                     $video.height = 50;
+                 }
+                 $video.width = $video.height / main.videoRatio;
+             } else {
+                 $video.width = window.innerWidth;
+                 $video.height = $video.width * main.videoRatio;
+             }
+             console.log($video.width, $video.height, $video.height/$video.width, main.videoRatio);
+             main.sketch.resize();
+         };
+         
+         // event listeners for video
+         var videoSeeking = false;
+         $video.addEventListener(
+             "seeking",
+             function() {
+                 videoSeeking = true;
+             });
 
-          var main = {
-          scaleFactor: 1.0,
+         $video.addEventListener(
+             "seeked",
+             function() {
+                 videoSeeking = false;
+             });
+         
+         $video.addEventListener(
+             "playing",
+             function() {
+                 $video.setAttribute("controls","controls");
+             });
 
-          getRelativePosition: function(position) {
+         if (false) {
+             // previously this entered into "sketch" mode
+             // after pressing a key
+             $("#main")[0].addEventListener(
+                 "keypress", 
+                 function(e) {
+                     console.log("keypress paused");
+                     var env = {
+                         main: main,
+                         video: $video
+                     };
+                     main.sketch = new p5(formsSketch(env), "sketchCanvas");
+                     $video.pause();
+                 }
+             );
+         }
 
-          videoBaseX = $("#main").width()/2;
-          videoBaseY = $("#main").height();
+         main.createSketch = function(main, $video) {
+             main.sketch = new p5(formsSketch(
+                 {
+                     main: main,
+                     video: $video
+                 },
+                 "sketchCanvas"));
+         }
 
-          position.left = videoBaseX + position.left;
-          position.top = videoBaseY - position.top;
+         main.setTracks = function(main, $video) {
+             // Text tracking
+             main.textTrack = $video.textTracks[0];
+             main.ttDom = document.getElementById("mytrack");
+             main.ttDom.track.mode = "hidden";
 
-          return position;
+             // Hash to store the cue id's
+             // so that we can increment cue id
+             main.cuehash={};
+             if (main.ttDom.readyState == 2) {
+                 // Allows one to use doCues on a different object: main.ttDom
+                 doCues.call(main.ttDom);
+             } else {
+                 main.ttDom.onloadeddata = doCues;
+             }
+         };
 
-          }
-          };
+         main.addCue = function(time, data, main) {
+             console.log("In addCue");
+             var index = 0;
+             var cue = new VTTCue(
+                 time.begin,
+                 time.end,
+                 JSON.stringify(data));
 
-          var pop = popcorn;
-          pop.code({
-          start: 1 ,
-          onStart: function( options ) {
+             cue.obj = data;
 
-          var position = main.getRelativePosition({left:-177.5, top:463} );
-          // main.sketch = new p5(introSketch, "sketchCanvas");
-          // main.sketch.showLabel("Lauren McCarthy", position.left, position.top);
-          }
-          });
-          pop.code({
-          start: 1.5,
-          onStart: function( options ) {
-          if (main.sketch) {
-          main.sketch.remove();
-          }
-          }
-          });
-          /*
-          pop.code({
-          start: 1.6,
-          onStart: function( options ) {
-          $("#sketchCanvas").addClass("foreground");
-          main.sketch = new p5(paintingSketch, "sketchCanvas");
-          main.sketch.scaleFactor = main.scaleFactor;
-          }
-          });
-          */
-          var $video = pop.video;
-          $video.addEventListener("seeked",function(){
-          console.log("seeked");
-          main.sketch.remove();
-          $video.pause();
-          });
+             // Find open index
+             var testid  = 'cue_' + time.begin + '_' + index;
+             while (testid in main.cuehash) {
+                 index++;
+                 testid = 'cue_'+time.begin+'_' + index;
+             }
+             cue.id = testid;
 
-          var bodyBindKeypress = function (f) {
-          $('body').unbind('clear keypress').bind('click keypress', f);
-          }
+             console.log("added " + cue.id);
+             cue.onenter = function() {
+                 this.form = main.sketch.startForms(
+                     this.id,
+                     this.obj.pos,
+                     title=this.obj.title,
+                     subject=this.obj.subject
+                 );
+                 console.log(this.form);
+             };
 
-          // function during play
-          var normalPlayKeypress = function(e) {
-          console.log(e.key);
-          if (e.which == 32) {
-          e.preventDefault();
-          if ($video.paused == true) {
-          if (main.sketch) {
-          main.sketch.remove();
-          }
-          $video.play();
-          } else {
-          $video.pause();
-          }
-          } else if (e.which == 105) {
-          e.preventDefault();
-          console.log("insert");
-          }
-          };
+             cue.onexit = function() {
+                 console.log('exiting');
+                 if ($(this.form.container.elt).is(':hover')) {
+                     main.sketch.formHover = false;
+                 }
+                 this.form.container.remove();
+             };
+             
+             main.cuehash[cue.id] = true;
+             main.ttDom.track.addCue(cue);
+         }
 
+         main.addSimpleCue = function(id, time, text, textTrack) {
+             console.log("Creating a new cue");
+             var anew = new VTTCue(time.begin, time.end, text);
+             anew.id = id;
+             textTrack.addCue(anew);
+         }
 
-          // function during paused video
-          var normalPauseKeypress = function(e) {
-          if (e.which == 32) {
-          e.preventDefault();
-          if ($video.paused == true) {
-          if (main.sketch) {
-          main.sketch.remove();
-          }
-          $video.play();
-          bodyBindKeypress(normalPlayKeypress);
-          } else {
-          $video.pause();
-          }
-          } else if (e.which == 105) {
-          e.preventDefault();
-          console.log("Pause insert");
-          }
-          };
+         function doCues() {
+             console.log("Do cues");
+             var textTrack = this.track;
+             var cues = textTrack.cues;
 
-          $video.addEventListener("pause", function() {
-          console.log("pause");
-          bodyBindKeypress(normalPauseKeypress);
-          $("#sketchCanvas").addClass("foreground");
-          main.sketch = new p5(formsSketch, "sketchCanvas");
-          main.sketch.scaleFactor = main.scaleFactor;
-          });
+             // Add elements to the main.cuehash
+             for (var j = 0; j < cues.length; j++) {
+                 main.cuehash[cues[j].id] = true;
+             }
 
-          $video.addEventListener(
-          "playing",
-          function() {
-          console.log("playing");
-          bodyBindKeypress(normalPlayKeypress);
-          });
-          /*
-          $("*").on
-          */
-          /*
-          document.addEventListener(
-          "keydown",
-          function(e) {
-          if (e.code == "KeyC" && e.ctrlKey) {
-          console.log("C-c");
-          }
+             textTrack.oncuechange = function () {
+                 var cue = this.activeCues[0];
+                 if (cue == null) {
+                     console.log("No cue");
+                 } else {
+                     console.log("On cue " + cue);
+                 }
+             }
 
-          console.log(e.key);
-          console.log(e.code);
-          // console.log(e.code);
-          });
-          */
-          /*
-          This one doesn't work
-          $("*:focus").each(function() {
-          alert($this.id + " has focus");});
+             main.addSimpleCue(
+                 'cue_id_3',
+                 {begin: 9.5, end: 150},
+                 "My <u>underlined</u> Cue 3",
+                 textTrack);
 
-          setInterval(function() {
-          console.log(document.querySelector(":focus")); },
-          1000);
-          */
+             main.addSimpleCue(
+                 'cue_id_4',
+                 {begin: 180, end: 240},
+                 "My <u>underlined</u> Cue 4",
+                 textTrack);
+             
+             for (var j = 0; j < cues.length; j++) {
+                 var cue = cues[j];
+                 var cueId = cue.id;
+                 var cueText = cue.text;
+                 // console.log(j, cue, cueId, cueText);
+                 if (/^\s*{/.test(cueText)) {
+                     var s = cueText.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
+                     console.log(s);
+                     cue.obj = JSON.parse(s);
+                     cue.onenter = function() {
+                         this.form = main.sketch.startForms(
+                             this.id,
+                             this.obj.pos,
+                             title=this.obj.title,
+                             subject=this.obj.subject
+                         );
+                         console.log(this.form);
+                     };
+                     cue.onexit = function() {
+                         this.form.container.remove();
+                     };
+                 } else {
+                     cue.onenter = function() {
+                         console.log("Enter " + this.id);
+                     };
+                     cue.onexit = function() {
+                         console.log("Exit " + this.id);
+                     };
+                 }
+             }
+             
+         };
+
+         
         </script>
     </body>
 </html>
