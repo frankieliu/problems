@@ -1,0 +1,23 @@
+<html>
+    <body>
+        Write and read from a file
+        <script>
+         function fun1() {
+             console.log("entered fun1");
+             var promise = new Promise((resolve,reject) => {
+                 var randomNumber = Math.floor((Math.random() * 10) + 1);
+                 if (randomNumber <= 5) {
+                     resolve(randomNumber);
+                 } else {
+                     reject(randomNumber);
+                 }
+             });
+             return promise;
+         }
+
+         fun1().then(function(a) {console.log(a)})
+               .catch(function(b) {console.log(b)});
+                  
+        </script>
+    </body>
+</html>
