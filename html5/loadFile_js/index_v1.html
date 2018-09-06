@@ -1,0 +1,19 @@
+<html>
+    <head>
+    </head>
+    <body>
+        Simplest way to loading a file.
+        <script>
+         var main = {};
+         var scriptElement = document.createElement("script");
+         scriptElement.src = "test.js";
+         document.body.appendChild(scriptElement);
+         console.log("Here");
+         scriptElement.onload = function () {
+             console.log("Read " + main.a.x + " " + main.a.y);
+         }
+         console.log("Here");
+         document.body.removeChild(scriptElement);
+        </script>
+    </body>
+</html>

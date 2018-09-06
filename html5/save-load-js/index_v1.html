@@ -1,0 +1,75 @@
+<html>
+    <body>
+        Write and read from a file
+
+        <script>
+
+         // https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
+         function FileSave(sourceText, fileIdentity) {
+             console.log("Saving file");
+             return new Promise((resolve, reject) => {
+                 var workElement = document.createElement("a");
+                 if ('download' in workElement) {
+                     workElement.href = "data:" + 'text/plain' + "charset=utf-8," + escape(sourceText);
+                     workElement.setAttribute("download", fileIdentity);
+                     document.body.appendChild(workElement);
+                     var eventMouse = document.createEvent("MouseEvents");
+                     eventMouse.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                     workElement.dispatchEvent(eventMouse);
+                     document.body.removeChild(workElement);
+                 } else {
+                     throw 'File saving not supported for this browser';
+                 }
+             });
+         }
+         
+         function FileLoad(fileIdentity) {
+             return new Promise((resolve, reject) => {
+                 var scriptElement = document.createElement("script");
+                 scriptElement.src = fileIdentity;
+                 document.body.appendChild(scriptElement);
+                 scriptElement.onload = function () {
+                     console.log("Read " + main.a.x + " " + main.a.y);
+                 }
+                 document.body.removeChild(scriptElement);
+             });
+         }
+         
+         var a = {
+             x: 10,
+             y: 10
+         };
+
+         console.log("hello");
+         if (false) {
+             FileSave("main.a = " + JSON.stringfy(a), "test.js")
+                 .then( function () {
+                     FileLoad("test.js");
+                 }).then( function () {
+                     console.log(main.a);
+                 });
+         }
+
+         if (false) {
+         function fun1() {
+             console.log("entered fun1");
+             return new Promise((resolve,reject) => {
+                 var randomNumber = Math.floor((Math.random() * 10) + 1);
+                 if (randomNumber <= 5) {
+                     resolve(randomNumber);
+                 } else {
+                     reject(randomNumber);
+                 }
+             });
+         }
+
+         resolve(
+             fun1.then(a => console.log('Success: ' + a))
+                 .catch(a => console.log('Error: ' + a));
+         );
+         }
+         console.log("hello");
+         
+        </script>
+    </body>
+</html>

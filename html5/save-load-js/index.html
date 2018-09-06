@@ -1,0 +1,70 @@
+<html>
+    <body>
+        1. Write and read from a file
+        <script>
+         var main = {};
+         var a =
+             {
+                 x: 10,
+                 y: 12
+             };
+         console.log('hello');
+         
+         function FileSave(sourceText, fileIdentity) {
+             console.log("Saving file");
+             return new Promise((resolve, reject) => {
+                 var workElement = document.createElement("a");
+                 if ('download' in workElement) {
+                     workElement.href = "data:" + 'text/plain' + "charset=utf-8," + escape(sourceText);
+                     workElement.setAttribute("download", fileIdentity);
+                     document.body.appendChild(workElement);
+                     var eventMouse = document.createEvent("MouseEvents");
+                     eventMouse.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                     workElement.dispatchEvent(eventMouse);
+                     document.body.removeChild(workElement);
+                     resolve('done');
+                 } else {
+                     reject('File saving not supported for this browser');
+                 }
+             });
+         }
+
+         function FileLoad(fileIdentity) {
+             // Creates a script element
+             return new Promise((resolve, reject) => {
+                 var scriptElement = document.createElement("script");
+                 scriptElement.src = fileIdentity;
+                 scriptElement.type = "application/javascript";
+                 scriptElement.onload = function () {
+                     console.log("Entered load event");
+                     resolve("Read " + main.a.x + " " + main.a.y);
+                 }
+                 document.body.appendChild(scriptElement);
+                 main.script = scriptElement;
+                 // resolve("done");
+             });
+         }
+
+         FileSave("main.a = " + JSON.stringify(a) + ";",'test.js')
+             .then(function() {
+                 console.log('first finished');
+                 return FileLoad('test.js');
+             })
+             .then(function(r) {
+                 console.log('second finished');
+                 console.log(r);
+                 console.log(main);
+                 return "Sync return";
+             })
+             .then(function(r) {
+                 console.log('third finished');
+                 console.log(r);
+                 console.log('Done');
+             })
+             .catch(a =>
+                 {console.log(b)}
+             );
+
+        </script>
+    </body>
+</html>

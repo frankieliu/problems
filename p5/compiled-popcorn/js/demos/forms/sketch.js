@@ -18,7 +18,7 @@ var formsSketch = function(env) {
         sketch.scaleFactor = 1.0;
 
         sketch.forms = [];
-        sketch.formHover = false;
+        sketch.formHover = 0;
 
         sketch.paths = [];
         sketch.buffer = null;
@@ -114,10 +114,12 @@ var formsSketch = function(env) {
             sketch.container.addEventListener(
                 "click", function(e) {
                     console.log("Clicked on " + e.target);
-                    console.log("Mouse Enabled: " + sketch.mouseEnabled, 
-                                sketch.formHover, sketch.playButtonPressed, sketch.insertMode);
+                    console.log("Mouse Enabled: " + sketch.mouseEnabled,
+                                "formHover: " + sketch.formHover,
+                                "playButton: " + sketch.playButtonPressed,
+                                "insert: " + sketch.insertMode);
                     if ((sketch.mouseEnabled) &&
-                        !(sketch.formHover) &&
+                        (sketch.formHover == 0) &&
                         !(sketch.playButtonPressed) &&
                         (sketch.insertMode)) {
                         console.log("touch");
@@ -130,7 +132,7 @@ var formsSketch = function(env) {
                 "click", function(e) {
                     console.log("clicked on canvas");
                     if ((sketch.mouseEnabled) &&
-                        !(sketch.formHover) &&
+                        (sketch.formHover == 0) &&
                         !(sketch.playButtonPressed)) {
                         console.log("touch");
                         sketch.startForms_1();
@@ -269,6 +271,7 @@ var formsSketch = function(env) {
         };
         
         sketch.startForms = function (
+            cue,
             id, pos,
             title="title", subject="subject"
         ) {
@@ -283,6 +286,9 @@ var formsSketch = function(env) {
             // Position the container and show it
             sketch.codePanel.container.position(pos.x, pos.y);
 
+            // saving the cue
+            sketch.codePanel.container.cue = cue;
+            
             // set the group
             var group = sketch.codePanel;
             
@@ -317,7 +323,7 @@ var formsSketch = function(env) {
 
             // add to forms
             sketch.forms.push(sketch.codePanel);
-            console.log(sketch.forms.length);
+            // console.log(sketch.forms.length);
 
             // Current code panel $cp
             // Alternatively
@@ -329,29 +335,35 @@ var formsSketch = function(env) {
                 console.log("Delete clicked");
                 // console.log(group);
                 group.container.remove();
-                sketch.formHover = false;
+                sketch.formHover--;
+                if(sketch.formHover < 0){
+                    sketch.formHover = 0;
+                }
                 e.stopPropagation();
             });
-                
+
             $cp.hover(function() {
-                console.log("hover:" + this.id);
+                console.log("+hover: " + this.id);
                 sketch.bodyBindKeypress(sketch.hoverKeypress);
-                sketch.formHover = true;
+                sketch.formHover++;
                 var c = $cp.children();                
-                console.log(c.length);
+                // console.log(c.length);
                 for (var i = 0; i < c.length; i++) {
-                    console.log(i + " " + c[i]);
+                    // console.log(i + " " + c[i]);
                     if($(c[i]).is(".codePanel_icons") || $(c[i]).is(".codePanel_subject")) {
                         c[i].style.display = "block";
                     }
                 }
             }, function() {
                 console.log("-hover:" + this.id);
-                sketch.formHover = false;
+                sketch.formHover--;
+                if (sketch.formHover < 0){
+                    sketch.formHover = 0;
+                }
                 var c = $cp.children();
                 console.log(c.length);
                 for (var i = 0; i < c.length; i++) {
-                    console.log(i + " " + c[i]);
+                    // console.log(i + " " + c[i]);
                     if($(c[i]).is(".codePanel_icons") || $(c[i]).is(".codePanel_subject")) {
                         c[i].style.display = "none";
                     }
@@ -371,19 +383,34 @@ var formsSketch = function(env) {
                 });
 
             // On title
-            var $cpt = $("#" + id + "_codePanelt");
-            $cpt.hover(
-                function() {
-                    if ($cpt.is(":focus")) {
-                        $.noop();
-                    } else {
-                        $cpt.focus();
-                        document.execCommand('selectAll', false, null);
-                    }
+            // console.log(group.title.elt);
+            
+            group.title.elt.onmouseover = function() {
+                console.log("+hover: " + this.id);
+                if ($(this).is(":focus")) {
+                    $.noop();
+                } else {
+                    this.focus();
+                    document.execCommand('selectAll', false, null);
+                }
+            };
 
-                }, function() {
-                });
+            group.title.elt.oninput = function() {
+                console.log("Title: " + this.innerHTML);
+                cue.obj.title = this.innerHTML;
+            };
+            
+            group.subject.elt.oninput = function() {
+                console.log("Subject: " + this.innerHTML);
+                cue.obj.subject = this.innerHTML;
+            };
 
+            if(false) {
+                var titleDom = document.getElementById(id + "codePanelt");
+                titleDom.oninput = function() {
+                    console.log(this.innerHTML);  
+                };
+            }
             if(false) {
             $cpt[0].addEventListener("keydown", function(e) {
                 if (e.ctrlKey) {
@@ -563,8 +590,9 @@ var formsSketch = function(env) {
                     console.log(env.video.currentTime);
                     sketch.listForms();
                     console.log("getting ready to play");
-                    // sketch.playButtonPressed = true;
                     e.stopPropagation();
+                    env.main.writeCues();
+                    // sketch.playButtonPressed = true;
                     // sketch.playButtonPressed = true;
                     // env.video.play();
                     // sketch.remove();

@@ -126,13 +126,16 @@
 
          main.setTracks = function(main, $video) {
              // Text tracking
-             main.textTrack = $video.textTracks[0];
              main.ttDom = document.getElementById("mytrack");
-             main.ttDom.track.mode = "hidden";
+             // Equivalent --> main.track = $video.textTracks[0];
+             main.track = main.ttDom.track;
+             main.track.mode = "hidden";
 
              // Hash to store the cue id's
              // so that we can increment cue id
              main.cuehash={};
+
+             console.log("Adding cues fro track...");
              if (main.ttDom.readyState == 2) {
                  // Allows one to use doCues on a different object: main.ttDom
                  doCues.call(main.ttDom);
@@ -162,6 +165,7 @@
              console.log("added " + cue.id);
              cue.onenter = function() {
                  this.form = main.sketch.startForms(
+                     this,
                      this.id,
                      this.obj.pos,
                      title=this.obj.title,
@@ -179,27 +183,44 @@
              };
              
              main.cuehash[cue.id] = true;
-             main.ttDom.track.addCue(cue);
+             main.track.addCue(cue);
          }
 
-         main.addSimpleCue = function(id, time, text, textTrack) {
+         main.addSimpleCue = function(id, time, text, track) {
              console.log("Creating a new cue");
              var anew = new VTTCue(time.begin, time.end, text);
              anew.id = id;
-             textTrack.addCue(anew);
+             track.addCue(anew);
          }
 
+         main.writeCues = function () {
+             console.log("Writing cues");
+             var track = main.track;
+             var cues = main.track.cues;
+             for (var j = 0; j < cues.length; j++) {
+                 var cue = cues[j];
+                 var cueId = cue.id;
+                 var cueText = cue.text;
+
+                 if (cue.hasOwnProperty('obj')) {
+                     console.log("Cue " + cueId + "+obj");
+                 } else {
+                     console.log("Cue " + cueId + "-obj");
+                 }
+             }
+         }
+         
          function doCues() {
              console.log("Do cues");
-             var textTrack = this.track;
-             var cues = textTrack.cues;
+             var track = this.track;
+             var cues = track.cues;
 
              // Add elements to the main.cuehash
              for (var j = 0; j < cues.length; j++) {
                  main.cuehash[cues[j].id] = true;
              }
 
-             textTrack.oncuechange = function () {
+             track.oncuechange = function () {
                  var cue = this.activeCues[0];
                  if (cue == null) {
                      console.log("No cue");
@@ -212,13 +233,13 @@
                  'cue_id_3',
                  {begin: 9.5, end: 150},
                  "My <u>underlined</u> Cue 3",
-                 textTrack);
+                 track);
 
              main.addSimpleCue(
                  'cue_id_4',
                  {begin: 180, end: 240},
                  "My <u>underlined</u> Cue 4",
-                 textTrack);
+                 track);
              
              for (var j = 0; j < cues.length; j++) {
                  var cue = cues[j];
@@ -229,8 +250,10 @@
                      var s = cueText.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ');
                      console.log(s);
                      cue.obj = JSON.parse(s);
+                     // Adding a form
                      cue.onenter = function() {
                          this.form = main.sketch.startForms(
+                             this,
                              this.id,
                              this.obj.pos,
                              title=this.obj.title,
@@ -239,6 +262,10 @@
                          console.log(this.form);
                      };
                      cue.onexit = function() {
+                         main.sketch.formHover--;
+                         if (main.sketch.formHover < 0) {
+                             main.sketch.formHover = 0;
+                         }
                          this.form.container.remove();
                      };
                  } else {
@@ -250,10 +277,7 @@
                      };
                  }
              }
-             
          };
-
-         
         </script>
     </body>
 </html>

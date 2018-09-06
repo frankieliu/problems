@@ -1,0 +1,43 @@
+<html>
+    <style>
+    </style>
+    <body>
+        <div>hello</div>
+        <!--
+             <input id="file" type="file">
+        -->
+        <script>
+         var main = {};
+         
+         function loadFile() {
+             // main.inputElement = document.getElementById("file");
+             console.log("In loadFile");
+             if (true) {
+                 main.inputElement = document.createElement('input');
+                 main.inputElement.id = "file";
+                 main.inputElement.type = "file";
+                 main.inputElement.style = "display: none;";
+                 main.inputElement.onchange = function (e) {
+                     console.log(e.target.files);
+                 };
+                 document.body.appendChild(main.inputElement);
+             }
+             if (false) {
+                 var eventMouse = document.createEvent("MouseEvents");
+                 eventMouse.initEvent("click", true, false);
+                 console.log(inputElement);
+                 main.inputElement.dispatchEvent(eventMouse);
+             }
+             main.inputElement.click();
+             document.body.removeChild(main.inputElement);
+         }
+
+         if(false) {
+             document.addEventListener("DOMContentLoaded", function(event) { 
+                 loadFile();            
+             });
+         }
+         
+        </script>
+    </body>
+</html>
