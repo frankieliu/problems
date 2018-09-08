@@ -1,4 +1,6 @@
 # https://stackoverflow.com/questions/21959985/why-cant-python-increment-variable-in-closure
+
+# Needs to be mutable object such as a list
 def make_counter(init_value=0):
     sum = [init_value]
     def inc(x=0):
