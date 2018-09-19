@@ -1,0 +1,1 @@
+/usr/local/go/misc/tour/src/golang.org
