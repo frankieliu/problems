@@ -1,0 +1,84 @@
+start_
+#+begin_src java
+class Solution {
+    int MOD = 1000000007;
+    
+    public int sumSubarrayMins(int[] A) {
+        int sol = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i < A.length; ++i){
+            while(!stack.isEmpty() && A[i] < A[stack.peek()])
+                stack.pop();
+            int cur = 0;
+            if(stack.isEmpty()){
+                cur = (i + 1)*A[i];
+            } else {
+                cur = map.get(stack.peek()) + (i - stack.peek())*A[i];
+            }
+            cur %= MOD;
+            stack.push(i);
+            map.put(i, cur);
+            sol += cur;
+            sol %= MOD;
+        }
+        
+        return sol;
+    }
+}
+#
+Explanation:
+
+Whenever you have problems saying count the number of subarrays, one
+thing you should think of is counting at every index, meaning for [1,
+2, 3], counting subarrays ending at 1 or 2 or 3 and then summing the
+result. This way you cover every subarray.
+
+counting subarrays ending at 1 :
+[1]
+
+counting subarrays ending at 2 :
+[1,2], [2]
+
+counting subarrys ending at 3 :
+[1,2,3] [2,3] [3]
+
+
+Consider this:
+
+A = [1, 2, 4, 3]
+        
+[1,2,4,3]  # don't need to count here
+[2,4,3]    # found a number less than 3 don't count
+[4,3]
+[3]
+
+If I am calculating subarrays minimums sums ending with the last
+element (val = 3, index = 3), then I should think to myself, if I can
+find a number less than myself (3) to the left of me, then for sure
+for SOME of the subarrays, I'm not the minimum.
+
+[1,2]
+[2]
+
+
+If you have calculated the sums of the minimums of all subarrays
+ending at (val = 2, index = 1), then you know that the minimum value
+must be <= 2 for all subarrays ending at index = 1.
+
+minimum value has to be less than or equal to 2, sure.
+
+Extend subarrays to the current index...
+[1,2]
+[2]
+minimum is less than your value, 
+Finally, clearly you can extend those subarrays to the current index,
+so you add this count, because for each subarray ending at index 1,
+you know the minimum is less than your value and you also know that
+you will need to include that subarray so you just add that minimum
+result.
+
+There is still subarray [4, 3] remaining, and since you found the
+first element to the left thats less than your value, the current
+element is definitely the minimum for all subarrays ending at current
+index. So you also add (i - stack.peek())*A[i]
