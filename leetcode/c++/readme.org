@@ -1,0 +1,6 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+
+* Good site full of code examples
+https://en.cppreference.com/w/cpp/container/priority_queue
