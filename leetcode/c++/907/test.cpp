@@ -37,9 +37,13 @@ TEST(Leetcode, sum_of_subarray_minimums_907) {
         EXPECT_EQ(1, s.sumSubarrayMins(b));
         vector<int> c={1,2};
         EXPECT_EQ(1+2+1, s.sumSubarrayMins(c));
+        EXPECT_EQ(vector<int>({1,2,1,1}),
+                  s.leetLeft(vector<int>({3,1,2,4})));
+        EXPECT_EQ(vector<int>({1,3,2,1}),
+                  s.leetRight(vector<int>({3,1,2,4})));
     }
-    EXPECT_EQ(vector<int>({1,2,1,1}),
-              s.leetLeft(vector<int>({3,1,2,4})));
-    EXPECT_EQ(vector<int>({1,3,2,1}),
-              s.leetRight(vector<int>({3,1,2,4})));
+    vector<int> a({3,1,2,4});
+    EXPECT_EQ(17, s.sumSubarrayMins(a));
 }
+
+

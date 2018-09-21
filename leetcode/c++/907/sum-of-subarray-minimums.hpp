@@ -100,18 +100,94 @@ public:
         return right;
     }
 
-    int sumSubarrayMins(vector<int>& A) {
+    int leetSumSubarrayMins(vector<int>& A) {
         if (A.size() == 0) {
             return 0;
         } else if (A.size() == 1) {
             return A[0];
         } else {
-            vector<int> v(A.begin()+1, A.end());
-            int a = sumSubarrayMins(v);
-            return min(A[0], a) + a;
+            vector<int> left = leetLeft(A);
+            vector<int> right = leetRight(A);
+            int cur = 0;
+            for (auto i = 0; i < A.size(); i++) {
+                cur += (left[i] * right[i]) * A[i];
+            }
+            return cur;
         }
     }
 
+    // This is a different decomposition of the problem
+    // 0 1 2 3 4 5  <- indices of the the array
+    // Subarrays are counted as:
+    // ending in 0:
+    // 0
+    // ending in 1:
+    // 0 1
+    // 1
+    // ending in 2:
+    // 0 1 2
+    // 1 2
+    // 2
+    // ending in 3:
+    // 0 1 2 3   => note that 2 is counted here many times
+    // 1 2 3
+    // 2 3
+    // 3
+    //
+    // Previous solution was counting all the subarrays containing A[i]
+    
+    int sumSubarrayMins(vector<int>& A){
+        int MOD = 1000000007;
+        int sol = 0;
+
+        // number of subarrays containing A[i] as the last element
+        // for which A[i] is a minimum
+        vector<int> cur(A.size(), 0);
+        stack<int> s;
+        for (int i = 0; i < A.size(); ++i){
+
+            // gets rid of previoux elements which
+            // are bigger than current element
+            while(!s.empty() && A[i] < A[s.top()])
+                s.pop();
+
+            cur[i] = 0;
+
+            // if there are no elements left in the stack
+            // it means that A[i] is the smallest element
+            // up to the ith element
+            if(s.empty()){
+                // example: 5 4 3 2 1 -> stack will be empty
+                // this will count all the subarrays 
+                cur[i] = (i + 1)*A[i];
+            } else {
+
+                // This is the real cool calculation:
+                //
+                //          0 1 2 3 4
+                // example: 3 3 6 5 4
+                // the number of subarrays then contain
+                // everything from 6 5 4
+                // s.top = 1, i = 4
+                //
+                //                      (3  elements)*A[i] correct
+                //
+                //                       +
+                //
+                //       remaining min subarray sums! with 6 5 4 suffix!
+                //
+                cur[i] = cur[s.top()] + (i - s.top())*A[i];
+            }
+            cur[i] %= MOD;
+            s.push(i);
+
+            sol += cur[i];
+            sol %= MOD;
+        }
+        return sol;
+    }
+};
+ 
     /*
     -inf,3,1,2,4,-inf
     i,n = 0, -inf
@@ -163,7 +239,4 @@ public:
 
       end of enumerate
 
-
-
     */
-};

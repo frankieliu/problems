@@ -4,3 +4,15 @@
 
 * Good site full of code examples
 https://en.cppreference.com/w/cpp/container/priority_queue
+
+* priority_queue
+file:./base/priority_queue.cpp
+
+* stack
+file:./base/stack.cpp
+
+* unique_ptr
+file:./base/unique_ptr.cpp
+
+* for_each
+file:./base/for_each.cpp
