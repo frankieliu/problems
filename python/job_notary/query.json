@@ -1,0 +1,8 @@
+{
+    "rest_api" : "http://localhost:9090/api/v1/query?query=",
+    "query" : "{__name__=~'[g]o.*'}",
+    "duration" : "[1m]",
+    "atime" : "now",
+    "endtime" : "&time={atime}",
+    "outfile" : "{atime}"
+}

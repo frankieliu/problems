@@ -1,0 +1,54 @@
+* Saving data from prometheus to /mnt/network/data
+
+** idea
+
+   "keep it simple": have lightweight worker at transfer that takes a
+   'go' message and does an arbitrary job
+
+** implementation
+
+   Since I don't know what ports are open in transfer, I couldn't use
+   my preferred zmq solution, instead I thought of two possible ways
+   of communication with the slave within these constraints:
+
+   1. via link locking
+
+      Basically the worker would check a list of todo things, and do
+      them, then acquire a lock, to write a done list.  The lock is
+      required because the master would once in a while clear the done
+      list.  This is one way to keep the slave working only on
+      un-finished tasks.
+
+   2. via inotify
+
+      This seems a lot simpler vs the method above.  The master is in
+      charge of setting a task for the slave, then flagging the slave
+      that it is time for it to do the task.  Task completion can be
+      verified by the master, at which time a new task is generated.
+      Then another 'go' signal is sent.
+
+** testing of idea
+
+   1. start a simple prometheus server
+
+      $ prometheus --config.file prometheus.yaml
+
+   2. launch the slave
+
+      $ python todo.py
+
+   3. send go signal to the slave
+
+      $ touch /tmp/td/go
+      $ touch /tmp/td/go
+      $ ...
+
+** note:
+
+   Note the task is completely dynamically assigned, i.e. the master
+   can give the slave an arbitrary task for the slave, in the example
+   above the slave happens to be running a python file simple_query.py
+   which is imported at every go signal, i.e. you can modify it to
+   your heart's content, or change the json file that it uses.  The
+   only constraint is the name to be imported, but even this can also
+   be arbitrarily set if needed.
