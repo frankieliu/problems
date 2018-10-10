@@ -1,0 +1,4 @@
+
+zones not working with boost
+
+https://github.com/highcharts/highcharts/issues/5223
