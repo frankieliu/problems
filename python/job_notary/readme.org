@@ -52,3 +52,6 @@
    your heart's content, or change the json file that it uses.  The
    only constraint is the name to be imported, but even this can also
    be arbitrarily set if needed.
+
+   Since /mnt/network/data is shared, the flag and task can be set
+   there, thus opening a channel for communication.
