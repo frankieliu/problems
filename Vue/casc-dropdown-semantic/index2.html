@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
+    </head>
+    <body>
+        <div id="app" class="ui grid">
+            <div class="row">
+                <div class="column">
+                    <div class="ui label"> {{ label[0] }} </div>
+                    <select class="ui dropdown" v-model="value0" id="id0">
+                        <option v-for="option in options[0]" v-bind:value="option.id">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="ui label"> {{ label[1] }} </div>
+                    <select class="ui dropdown" v-model="value1" id="id1">
+                        <option 
+                            v-for="option in options[1][value0]" 
+                            :value="option.id" 
+                            :key="option.id">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="app1">
+            Hello
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
+
+
