@@ -1,0 +1,9 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+#+SETUPFILE: ~/github/org-html-themes/setup/theme-readtheorg.setup
+* Entropy calculation
+
+* Make any distribution uniform
+Take $X$ as a r.v., left $F(x) = Pr{X <= x}$ be the cdf for $X$
+
