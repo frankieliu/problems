@@ -1,0 +1,5 @@
+select option:disabled {
+    color: #000;
+    font-weight: bold;
+}
+                      

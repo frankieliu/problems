@@ -1,0 +1,4 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* SOLID

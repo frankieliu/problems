@@ -1,0 +1,9 @@
+{
+  "mongoUri": "mongodb://admin:admin@cluster0-shard-00-00-s0szl.gcp.mongodb.net:27017,cluster0-shard-00-01-s0szl.gcp.mongodb.net:27017,cluster0-shard-00-02-s0szl.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true",
+  "mongoHost": "cluster0-shard-00-00-s0szl.gcp.mongodb.net",
+  "mongoPort": "27017",
+  "mongoDatabase": "test",
+  "mongoUser": "admin",
+  "mongoPass": "admin"
+}
+

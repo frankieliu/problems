@@ -1,120 +1,6 @@
-const exp = {
-  id:'Experiment Type',
-  options: [
-    "Whole-Genome DNA Fragments",
-    "Whole-Genome DNA Mate Pairs",
-    "Targeted Genomic DNA",
-    "ChIP Seq Experiment",
-    "ChIA-PET",
-    "ChIP Control",
-    "Methyl Seq",
-    "Whole-Transcript mRNA, Non-Directional",
-    "Whole-Transcript mRNA, Strand-Specific",
-    "3'-End-Biased mRNA",
-    "5'-End-Biased mRNA",
-    "Small RNA",
-    "Micro RNA",
-    "Total RNA",
-    "ATAC-Seq",
-    "Single-Cell",
-    "10X Genomics",
-    "CRISPR library",
-    "Custom Design"]};
-
-const org = {
-  id: 'Organism',
-  options: [
-    "H. sapiens (Human)",
-    "P. troglodytes (Chimp)",
-    "M. mulatta (Rhesus)",
-    "M. musculus (Mouse)",
-    "C. lupus (Dog)",
-    "M. eugenii (Wallaby)",
-    "G. gallus (Chicken)",
-    "X. tropicalis (Frog)",
-    "D. melanogaster (Fly)",
-    "C. elegans (Worm)",
-    "A. thaliana (Wall Cress)",
-    "Z. mays B73 (Maize)",
-    "S. cerevisiae (Yeast)",
-    "S. bayanus (Yeast)",
-    "S. paradoxus (Yeast)",
-    "S. mikatae (Yeast)",
-    "C. albicans (Yeast)",
-    "E. coli",
-    "Pseudomonas aeruginosa",
-    "Streptomyces coelicolor",
-    "Phi X 174",
-    "Other",
-    "None"]};
-
-const libPrep = {
-  id: 'Library Prep',
-  options: [
-    "No", "Yes"
-  ]
-};
-
-const libType = {
-  id: 'Library Type',
-  options: [
-    "Single End- only available as FC (8 lanes)",
-    "Single End with Index- only available as FC (8 lanes)",
-    "Single End with Dual Index- only available as FC (8 lanes)",
-    "Paired End",
-    "Paired End with Index",
-    "Paired End with Dual Index",
-    "Mate Pairs",
-    "Mate Pairs with Index",
-    "Mate Pairs with Dual Index"]
-};
-
-const loN = {
-  id: 'Low Nucleotide Diversity or Significant Imbalance',
-  options: [
-    "No", "Yes"
-  ]
-};
-
-const spike = {
-  id: 'Percent Spike in PhiX',
-  options: [
-    "5% Spike-in PhiX- sligntly unbalance",
-    "10% Spike-in PhiX- more than sligntly unbalance",
-    "15% Spike-in PhiX-10X, Single Cell, Methyl Seq ",
-    "20% Spike-in PhiX-PCR ",
-    "25% Spike-in PhiX-iRepertoire",
-    "30% Spike-in PhiX-PCR single region amplification",
-    "40% Spike-in PhiX-extremetly unbalance "
-  ]
-};    
-
-const conc = {
-  id: 'Concentration Methods',
-  options: [
-    "NanoDrop",
-    "Qubit",
-    "Bioanalyzer",
-    "qPCR",
-    "Digital PCR",
-    "Tapestation",
-    "Fragment Analyzer",
-    "SYBR Gold",
-    "SYBR Green",
-    "Other "
-    ]
-};
-
-const seq = {
-  id: "Sequencing Platform",
-  options: [
-    "Illumina",
-    "PacBio",
-    "Oxford Nanopore"
-  ]
-};
-
 // Define a simple component
+// const data = require('./data.js');
+
 Vue.component(
   'my-dropdown-simple',
   {
@@ -136,6 +22,32 @@ Vue.component(
    v-on:change="$emit('change', $event.target.value)">
     <option v-for="(option,index) in options" v-bind:value="index">
       {{ option }}
+     </option>
+  </select>
+</div>`
+  });
+
+Vue.component(
+  'my-dropdown-categories',
+  {
+    model: {
+      event: 'change',
+      prop: 'value'
+    },
+    props: {
+      label: String,
+      id: String,
+      options: Array,
+    },
+    data: function() {
+      return { value: null };
+    },
+    template: `
+<div class="ui label"> {{ label }}
+  <select class="ui dropdown" v-model="value" :id="id"
+   v-on:change="$emit('change', $event.target.value)">
+    <option v-for="(option,index) in options" v-bind:value="index" v-bind:disabled="option.disabled">
+      {{ option.text }}
      </option>
   </select>
 </div>`
@@ -230,6 +142,15 @@ Vue.component(
   <span class="ui error" v-if="(sampleConcNgUl_comp != sampleConcNgUl) && (sampleConcNgUl != null)">Error</span>
 </div>
 
+<my-dropdown-categories
+ :label="seqmenu.id"
+ :options="seqmenu.options"
+ :id="seqmenu.label"
+ v-model="seqvalues">
+</my-dropdown-categories>
+
+<h2>Analysis Information</h2>
+
 </div>
 `,
     computed: 
@@ -246,6 +167,7 @@ Vue.component(
         libSizeBp: null,
         sampleVolNl: null,
         sampleConcNgUl: null,
+        seqmenu: seq,
         menus: [
           {
             label: exp.id,
@@ -257,7 +179,8 @@ Vue.component(
           },
           {
             label: libPrep.id,
-            options: libPrep.options,
+            options: libPrep.options
+            /*
             yn: true,
             dep: [
               {
@@ -268,10 +191,12 @@ Vue.component(
                 label: libType.id,
                 options: libType.options
               }]
+            */
           },
+          /*
           {
             label: loN.id,
-            options: loN.options,
+            options: loN.options
             yn: true,
             dep: [
               {
@@ -282,6 +207,12 @@ Vue.component(
                 label: spike.id,
                 options: spike.options
               }]
+
+          },
+          */
+          {
+            label: spike.id,
+            options: spike.options
           },
           {
             label: conc.id,
@@ -290,6 +221,7 @@ Vue.component(
         ],
         values: [],
         depvalues: [],
+        seqvalues: null
       };
     }
   });
