@@ -1,0 +1,3 @@
+[submodule "Vue/standard-nodejs-quickstart/nodejs-docs-samples"]
+	path = Vue/standard-nodejs-quickstart/nodejs-docs-samples
+	url = https://github.com/GoogleCloudPlatform/nodejs-docs-samples
