@@ -1,0 +1,6 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* 107
+there is a nice solution without a tuple
+keep track of how many nodes added at a particular level
