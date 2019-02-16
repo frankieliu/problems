@@ -1,0 +1,139 @@
+#
+# @lc app=leetcode id=10 lang=python3
+#
+# [10] Regular Expression Matching
+#
+# https://leetcode.com/problems/regular-expression-matching/description/
+#
+# algorithms
+# Hard (24.83%)
+# Total Accepted:    268.3K
+# Total Submissions: 1.1M
+# Testcase Example:  '"aa"\n"a"'
+#
+# Given an input string (s) and a pattern (p), implement regular expression
+# matching with support for '.' and '*'.
+#
+#
+# '.' Matches any single character.
+# '*' Matches zero or more of the preceding element.
+#
+#
+# The matching should cover the entire input string (not partial).
+#
+# Note:
+#
+#
+# s could be empty and contains only lowercase letters a-z.
+# p could be empty and contains only lowercase letters a-z, and characters like
+# . or *.
+#
+#
+# Example 1:
+#
+#
+# Input:
+# s = "aa"
+# p = "a"
+# Output: false
+# Explanation: "a" does not match the entire string "aa".
+#
+#
+# Example 2:
+#
+#
+# Input:
+# s = "aa"
+# p = "a*"
+# Output: true
+# Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore,
+# by repeating 'a' once, it becomes "aa".
+#
+#
+# Example 3:
+#
+#
+# Input:
+# s = "ab"
+# p = ".*"
+# Output: true
+# Explanation: ".*" means "zero or more (*) of any character (.)".
+#
+#
+# Example 4:
+#
+#
+# Input:
+# s = "aab"
+# p = "c*a*b"
+# Output: true
+# Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore
+# it matches "aab".
+#
+#
+# Example 5:
+#
+#
+# Input:
+# s = "mississippi"
+# p = "mis*is*p*."
+# Output: false
+#
+#
+#
+class Solution:
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        slen, plen = len(s), len(p)
+        s, p = s + "$", p + "$"
+
+        dp = [False] * (slen+1)
+        for i in range(0, slen+1):
+            dp[i] = [False] * (plen+1)
+
+        dp[slen][plen] = True
+        '''
+        a* consumes nothing, one or more a's
+        '''
+
+        # consider the case where pattern is not empty
+        # but string is empty, i.e. pattern ends with 'a*'
+        for si in range(slen, -1, -1):
+            for pi in range(plen-1, -1, -1):
+                out = False
+                if s[si] == p[pi] or p[pi] == '.' and si < slen:
+                    # advance both
+                    out = out or dp[si+1][pi+1]
+                if (p[pi] == '*' and
+                      (p[pi-1] == '.' or p[pi-1] == s[si])):
+                    # advance one, other, or both
+                    out = out or dp[si][pi+1]
+                    if si < slen:
+                        out = out or dp[si+1][pi] or dp[si+1][pi+1]
+                if p[pi] == '*' and (p[pi-1] != s[si]):
+                    # advance pattern by 1
+                    out = out or dp[si][pi+1]
+                if p[pi+1] == '*':
+                    # advance pattern by 2
+                    out = out or dp[si][pi+2]
+                dp[si][pi] = out
+        return dp[0][0]
+
+
+test = True
+if test:
+    s = Solution()
+    if True:
+        print(s.isMatch("a", "a"))                     # True
+        print(s.isMatch("a", "aa"))                    # False
+        print(s.isMatch("aa", "a"))                    # False
+        print(s.isMatch("aa", "a*"))                   # True
+        print(s.isMatch("a", "ab*"))                   # True
+        print(s.isMatch("ab", ".*"))                   # True
+        print(s.isMatch("aab", "c*a*b"))               # True
+        print(s.isMatch("bbbba", ".*a*a"))             # True
+        print(s.isMatch("mississippi", "mis*is*p*."))  # False

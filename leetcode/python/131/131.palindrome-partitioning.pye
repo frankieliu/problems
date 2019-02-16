@@ -1,0 +1,82 @@
+#
+# @lc app=leetcode id=131 lang=python3
+#
+# [131] Palindrome Partitioning
+#
+# https://leetcode.com/problems/palindrome-partitioning/description/
+#
+# algorithms
+# Medium (39.17%)
+# Total Accepted:    148.7K
+# Total Submissions: 379.6K
+# Testcase Example:  '"aab"'
+#
+# Given a string s, partition s such that every substring of the partition is a
+# palindrome.
+#
+# Return all possible palindrome partitioning of s.
+#
+# Example:
+#
+#
+# Input: "aab"
+# Output:
+# [
+# ⁠ ["aa","b"],
+# ⁠ ["a","a","b"]
+# ]
+#
+#
+#
+class Solution:
+    def __init__(self):
+        self.save = {}
+
+    def partition(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        """
+        dp[i][j] = number of palindrome sequences between i an j
+        dp[i][k] * dp[k+1][j]
+        """
+        return self.help(s)
+
+    def help(self, s):
+        if len(s) == 0:
+            return [[]]
+        if len(s) == 1:
+            return [[s]]
+
+        if s in self.save:
+            return self.save[s]
+
+        """ possible breaks
+        "a" x pali("bcd")
+        "ab" x pali("cd")
+        "abc" x pali("d")
+        "abcd" x pali("")
+        pali("") = [[]]
+        """
+        out = []
+        for i in range(1, len(s)+1):
+            if is_palindrome(s[0:i]):
+                for x in self.help(s[i:]):
+                    out.append([s[0:i]] + x)
+
+        self.save[s] = out
+        return out
+
+
+def is_palindrome(s):
+    for i in range(0, len(s)//2):
+        if s[i] != s[~i]:
+            return False
+    return True
+
+
+test = True
+if test:
+    s = Solution()
+    print(s.partition("aa"))

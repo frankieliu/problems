@@ -1,0 +1,90 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* version
+leetcode version -v
+
+* help
+leetcode -h
+
+* login
+leetcode user -l
+
+* session ?
+leetcode session
+
+* list
+leetcode list
+leetcode list -q e array
+leetcode list -q eDL array
+
+** -q to query by conditions.
+e = easy, E = not easy = m + h.
+m = medium, M = not medium = e + h.
+h = hard, H = not hard = e + m.
+d = done = AC-ed, D = not AC-ed.
+l = locked, L = not locked.
+s = starred, S = unstarred.
+
+* show
+leetcode show 1 -gx
+** options
+-g to generate source file.
+-x to add question description in the generated source file.
+-e to open editor with generated source file.
+-o to specify the output folder.
+-l to choose programming language. (Depends on which langs are provided on leetcode)
+*** language
+c
+cpp
+csharp
+golang
+java
+javascript
+mysql
+python
+python3
+ruby
+scala
+swift
+** options
+-c to only show code template.
+
+Instead of id, you can use name to select specific question.
+leetcode show 1
+leetcode show "Two Sum"
+leetcode show two-sum
+
+If no id/name provided, a random question will be selected for you.
+
+leetcode show
+-q to filter questions by query. (same as list command)
+-t to filter questions by tags. (same as list command)
+
+* test
+leetcode test 1.two-sum.cpp
+leetcode test 1.two-sum.cpp -t '[1,2,3,5,6]\n10'
+
+* submission
+leetcode submission 1
+emacs 1.two-sum.135935155.ac.cpp
+leetcode submit 1.two-sum.135935155.ac.cpp
+
+* stat
+leetcode stat
+leetcode stat -g
+leetcode stat -c
+
+* config
+leetcode config
+leetcode config -a
+leetcode config color:theme blue
+leetcode config color:theme molokai
+
+* plugin
+leetcode plugin
+leetcode plugin -i company
+
+* company (company related problems)
+leetcode list -t google array
+leetcode list -t google array -x
