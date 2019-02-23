@@ -110,7 +110,7 @@ class Solution:
             return left
 
 
-test = False
+test = True
 if test:
     s = Solution()
     gas  = [1,2,3,4,5]

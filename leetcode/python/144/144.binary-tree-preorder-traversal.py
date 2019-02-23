@@ -12,22 +12,22 @@
 # Testcase Example:  '[1,null,2,3]'
 #
 # Given a binary tree, return the preorder traversal of its nodes' values.
-# 
+#
 # Example:
-# 
-# 
+#
+#
 # Input: [1,null,2,3]
 # ⁠  1
 # ⁠   \
 # ⁠    2
 # ⁠   /
 # ⁠  3
-# 
+#
 # Output: [1,2,3]
-# 
-# 
+#
+#
 # Follow up: Recursive solution is trivial, could you do it iteratively?
-# 
+#
 #
 # Definition for a binary tree node.
 # class TreeNode:
@@ -42,4 +42,18 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-        
+class TreeIter:
+    def __iter__:
+        pass
+
+    def next:
+        return 0
+        pass
+
+test = True
+if test:
+    from TreeNode.TreeNode import arrayToTreeNode, TreeNode
+    tn = arrayToTreeNode([1, None, 2, 3])
+    tmp = TreeNode(0)
+    s = Solution()
+    print(s.preorderTraversal(tn))

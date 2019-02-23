@@ -72,7 +72,7 @@ class Solution:
         return dp[0]
 
 
-test = False
+test = True
 if test:
     s = Solution()
     st = "catsandog"

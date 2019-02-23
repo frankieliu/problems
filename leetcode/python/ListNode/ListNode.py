@@ -3,6 +3,8 @@ class ListNode:
     def __init__(self, x=None):
         self.val = x
         self.next = None
+        self.label = x
+        self.random = None
 
     def __repr__(self):
         out = []
@@ -15,7 +17,6 @@ class ListNode:
 
     def make(h):
         ll = []
-        first = True
         for el in h:
             ll.append(ListNode(el))
         for i in range(0, len(ll)-1):

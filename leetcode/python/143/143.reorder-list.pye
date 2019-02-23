@@ -59,7 +59,7 @@ class Solution:
         tmp.next = None
 
 
-test = False
+test = True
 if test:
     from ListNode.ListNode import ListNode
     ll = ListNode.make([1, 2, 3, 4, 5])

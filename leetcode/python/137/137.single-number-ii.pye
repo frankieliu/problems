@@ -93,7 +93,7 @@ class Solution:
 
         return(s)
 
-test = False
+test = True
 if test:
     s = Solution()
     print(s.singleNumber([2,4,2,3,4,2,4]))
