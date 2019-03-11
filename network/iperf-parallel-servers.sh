@@ -31,6 +31,6 @@ for i in `seq 1 $num_servers`; do
 	report_file=${report_base}-${server_port}.txt
 
 	# Run iperf
-	iperf3 -s -p $server_port $iperf_options &> $report_file &
+	echo iperf3 -p $server_port $iperf_options &> $report_file &
 
 done
