@@ -1,0 +1,190 @@
+Connecting to host 192.168.16.105, port 5021
+[  4] local 192.168.16.108 port 41335 connected to 192.168.16.105 port 5021
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  54.6 MBytes   458 Mbits/sec  39510  
+[  4]   1.00-2.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   2.00-3.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   3.00-4.00   sec  54.3 MBytes   456 Mbits/sec  39320  
+[  4]   4.00-5.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   5.00-6.00   sec  54.3 MBytes   456 Mbits/sec  39350  
+[  4]   6.00-7.00   sec  54.3 MBytes   455 Mbits/sec  39310  
+[  4]   7.00-8.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   8.00-9.00   sec  54.3 MBytes   455 Mbits/sec  39290  
+[  4]   9.00-10.00  sec  54.5 MBytes   457 Mbits/sec  39450  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   544 MBytes   456 Mbits/sec  0.006 ms  31194/393520 (7.9%)  
+[  4] Sent 393520 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5022
+[  4] local 192.168.16.108 port 45744 connected to 192.168.16.105 port 5022
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  54.4 MBytes   456 Mbits/sec  39380  
+[  4]   1.00-2.00   sec  54.3 MBytes   455 Mbits/sec  39320  
+[  4]   2.00-3.00   sec  54.3 MBytes   456 Mbits/sec  39350  
+[  4]   3.00-4.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   4.00-5.00   sec  54.3 MBytes   455 Mbits/sec  39310  
+[  4]   5.00-6.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   6.00-7.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   7.00-8.00   sec  54.3 MBytes   455 Mbits/sec  39310  
+[  4]   8.00-9.00   sec  54.3 MBytes   455 Mbits/sec  39300  
+[  4]   9.00-10.00  sec  54.8 MBytes   460 Mbits/sec  39700  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   544 MBytes   456 Mbits/sec  0.007 ms  26675/393574 (6.8%)  
+[  4] Sent 393574 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5023
+[  4] local 192.168.16.108 port 58800 connected to 192.168.16.105 port 5023
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   163 MBytes  1.37 Gbits/sec  118100  
+[  4]   1.00-2.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   2.00-3.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   3.00-4.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   4.00-5.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   5.00-6.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   6.00-7.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   7.00-8.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   8.00-9.00   sec   163 MBytes  1.37 Gbits/sec  117910  
+[  4]   9.00-10.00  sec   163 MBytes  1.37 Gbits/sec  118110  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.59 GBytes  1.37 Gbits/sec  0.006 ms  85970/1179526 (7.3%)  
+[  4] Sent 1179526 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5024
+[  4] local 192.168.16.108 port 54014 connected to 192.168.16.105 port 5024
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  83.9 MBytes   704 Mbits/sec  60780  
+[  4]   1.00-2.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   2.00-3.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   3.00-4.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   4.00-5.00   sec  81.4 MBytes   683 Mbits/sec  58970  
+[  4]   5.00-6.00   sec  81.4 MBytes   683 Mbits/sec  58950  
+[  4]   6.00-7.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   7.00-8.00   sec  81.4 MBytes   683 Mbits/sec  58980  
+[  4]   8.00-9.00   sec  81.4 MBytes   683 Mbits/sec  58980  
+[  4]   9.00-10.00  sec  81.4 MBytes   683 Mbits/sec  58950  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   817 MBytes   685 Mbits/sec  0.015 ms  37886/591430 (6.4%)  
+[  4] Sent 591430 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5025
+[  4] local 192.168.16.108 port 35921 connected to 192.168.16.105 port 5025
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  55.8 MBytes   468 Mbits/sec  40430  
+[  4]   1.00-2.00   sec  54.3 MBytes   456 Mbits/sec  39330  
+[  4]   2.00-3.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   3.00-4.00   sec  54.3 MBytes   456 Mbits/sec  39340  
+[  4]   4.00-5.00   sec  54.3 MBytes   455 Mbits/sec  39320  
+[  4]   5.00-6.00   sec  54.3 MBytes   456 Mbits/sec  39350  
+[  4]   6.00-7.00   sec  54.3 MBytes   455 Mbits/sec  39320  
+[  4]   7.00-8.00   sec  54.3 MBytes   456 Mbits/sec  39330  
+[  4]   8.00-9.00   sec  54.5 MBytes   457 Mbits/sec  39440  
+[  4]   9.00-10.00  sec  54.3 MBytes   455 Mbits/sec  39320  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   545 MBytes   457 Mbits/sec  0.009 ms  29114/394478 (7.4%)  
+[  4] Sent 394478 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5026
+[  4] local 192.168.16.108 port 38356 connected to 192.168.16.105 port 5026
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   164 MBytes  1.37 Gbits/sec  118600  
+[  4]   1.00-2.00   sec   163 MBytes  1.37 Gbits/sec  117910  
+[  4]   2.00-3.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   3.00-4.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   4.00-5.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   5.00-6.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   6.00-7.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   7.00-8.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   8.00-9.00   sec   163 MBytes  1.37 Gbits/sec  117940  
+[  4]   9.00-10.00  sec   163 MBytes  1.37 Gbits/sec  117910  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.59 GBytes  1.37 Gbits/sec  0.010 ms  86407/1179898 (7.3%)  
+[  4] Sent 1179898 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5027
+[  4] local 192.168.16.108 port 39024 connected to 192.168.16.105 port 5027
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  81.5 MBytes   683 Mbits/sec  59000  
+[  4]   1.00-2.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   2.00-3.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   3.00-4.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   4.00-5.00   sec  81.4 MBytes   683 Mbits/sec  58970  
+[  4]   5.00-6.00   sec  81.4 MBytes   683 Mbits/sec  58950  
+[  4]   6.00-7.00   sec  81.4 MBytes   683 Mbits/sec  58960  
+[  4]   7.00-8.00   sec  81.4 MBytes   683 Mbits/sec  58980  
+[  4]   8.00-9.00   sec  81.4 MBytes   683 Mbits/sec  58920  
+[  4]   9.00-10.00  sec  83.2 MBytes   698 Mbits/sec  60220  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   816 MBytes   684 Mbits/sec  0.002 ms  49430/590880 (8.4%)  
+[  4] Sent 590880 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5028
+[  4] local 192.168.16.108 port 59327 connected to 192.168.16.105 port 5028
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   164 MBytes  1.37 Gbits/sec  118440  
+[  4]   1.00-2.00   sec   163 MBytes  1.37 Gbits/sec  118000  
+[  4]   2.00-3.00   sec   163 MBytes  1.37 Gbits/sec  118000  
+[  4]   3.00-4.00   sec   163 MBytes  1.37 Gbits/sec  118010  
+[  4]   4.00-5.00   sec   163 MBytes  1.37 Gbits/sec  117990  
+[  4]   5.00-6.00   sec   163 MBytes  1.37 Gbits/sec  118010  
+[  4]   6.00-7.00   sec   163 MBytes  1.37 Gbits/sec  117990  
+[  4]   7.00-8.00   sec   163 MBytes  1.37 Gbits/sec  118000  
+[  4]   8.00-9.00   sec   163 MBytes  1.37 Gbits/sec  118010  
+[  4]   9.00-10.00  sec   163 MBytes  1.37 Gbits/sec  118050  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.59 GBytes  1.37 Gbits/sec  0.009 ms  86272/1180407 (7.3%)  
+[  4] Sent 1180407 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5029
+[  4] local 192.168.16.108 port 36719 connected to 192.168.16.105 port 5029
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   163 MBytes  1.37 Gbits/sec  117990  
+[  4]   1.00-2.00   sec   163 MBytes  1.37 Gbits/sec  117940  
+[  4]   2.00-3.00   sec   163 MBytes  1.37 Gbits/sec  117940  
+[  4]   3.00-4.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   4.00-5.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   5.00-6.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   6.00-7.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   7.00-8.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   8.00-9.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   9.00-10.00  sec   164 MBytes  1.37 Gbits/sec  118450  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.59 GBytes  1.37 Gbits/sec  0.003 ms  87487/1179880 (7.4%)  
+[  4] Sent 1179880 datagrams
+
+iperf Done.
+Connecting to host 192.168.16.105, port 5030
+[  4] local 192.168.16.108 port 39807 connected to 192.168.16.105 port 5030
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec   163 MBytes  1.37 Gbits/sec  118030  
+[  4]   1.00-2.00   sec   163 MBytes  1.37 Gbits/sec  117910  
+[  4]   2.00-3.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   3.00-4.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   4.00-5.00   sec   163 MBytes  1.37 Gbits/sec  117910  
+[  4]   5.00-6.00   sec   163 MBytes  1.37 Gbits/sec  117910  
+[  4]   6.00-7.00   sec   163 MBytes  1.37 Gbits/sec  117940  
+[  4]   7.00-8.00   sec   163 MBytes  1.37 Gbits/sec  117920  
+[  4]   8.00-9.00   sec   163 MBytes  1.37 Gbits/sec  117930  
+[  4]   9.00-10.00  sec   163 MBytes  1.37 Gbits/sec  118250  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec  1.59 GBytes  1.37 Gbits/sec  0.003 ms  86208/1179526 (7.3%)  
+[  4] Sent 1179526 datagrams
+
+iperf Done.
