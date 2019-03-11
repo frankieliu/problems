@@ -1,0 +1,40 @@
+-----------------------------------------------------------
+Server listening on 5028
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 37908
+[  5] local 192.168.16.105 port 5028 connected to 192.168.16.108 port 44978
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec   100 MBytes   843 Mbits/sec  0.010 ms  6841/79586 (8.6%)  
+[  5]   1.00-2.00   sec   101 MBytes   844 Mbits/sec  0.007 ms  9572/82474 (12%)  
+[  5]   2.00-3.00   sec  99.9 MBytes   838 Mbits/sec  0.010 ms  10042/82372 (12%)  
+[  5]   3.00-4.00   sec  90.9 MBytes   762 Mbits/sec  0.007 ms  16593/82396 (20%)  
+[  5]   4.00-5.00   sec  93.7 MBytes   786 Mbits/sec  0.010 ms  14532/82388 (18%)  
+[  5]   5.00-6.00   sec  93.8 MBytes   787 Mbits/sec  0.009 ms  14516/82418 (18%)  
+[  5]   6.00-7.00   sec  94.3 MBytes   791 Mbits/sec  0.008 ms  14066/82384 (17%)  
+[  5]   7.00-8.00   sec  95.4 MBytes   801 Mbits/sec  0.012 ms  13409/82523 (16%)  
+[  5]   8.00-9.00   sec  98.4 MBytes   825 Mbits/sec  0.007 ms  11288/82545 (14%)  
+[  5]   9.00-10.00  sec  96.4 MBytes   808 Mbits/sec  0.012 ms  12761/82555 (15%)  
+[  5]  10.00-10.04  sec  3.88 MBytes   818 Mbits/sec  0.004 ms  536/3343 (16%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.004 ms  124156/824984 (15%)  
+-----------------------------------------------------------
+Server listening on 5028
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 37923
+[  5] local 192.168.16.105 port 5028 connected to 192.168.16.108 port 48478
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec   152 MBytes  1.27 Gbits/sec  0.011 ms  3586/113585 (3.2%)  
+[  5]   1.00-2.00   sec   147 MBytes  1.23 Gbits/sec  0.011 ms  11464/117911 (9.7%)  
+[  5]   2.00-3.00   sec   141 MBytes  1.18 Gbits/sec  0.013 ms  15980/117925 (14%)  
+[  5]   3.00-4.00   sec   145 MBytes  1.22 Gbits/sec  0.013 ms  12840/117940 (11%)  
+[  5]   4.00-5.00   sec   144 MBytes  1.21 Gbits/sec  0.010 ms  13565/117940 (12%)  
+[  5]   5.00-6.00   sec   149 MBytes  1.25 Gbits/sec  0.012 ms  9882/117921 (8.4%)  
+[  5]   6.00-7.00   sec   147 MBytes  1.23 Gbits/sec  0.010 ms  11432/117923 (9.7%)  
+[  5]   7.00-8.00   sec   146 MBytes  1.23 Gbits/sec  0.010 ms  11867/117924 (10%)  
+[  5]   8.00-9.00   sec   149 MBytes  1.25 Gbits/sec  0.010 ms  10076/117924 (8.5%)  
+[  5]   9.00-10.00  sec   150 MBytes  1.26 Gbits/sec  0.010 ms  9567/117928 (8.1%)  
+[  5]  10.00-10.04  sec  9.44 MBytes  2.00 Gbits/sec  0.001 ms  676/7509 (9%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.001 ms  110935/1182430 (9.4%)  
