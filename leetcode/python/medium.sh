@@ -1,2 +1,5 @@
 #!/bin/bash
-leetcode list -q mD
+# m for medium
+# D for not done
+# L for unlocked
+leetcode list -q mDL

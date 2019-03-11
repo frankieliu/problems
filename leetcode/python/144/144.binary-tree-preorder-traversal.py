@@ -42,15 +42,28 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-class TreeIter:
-    def __iter__:
-        pass
+        """
+        root left right
+        push root
+        when you pop, print (output)
+        then push left and right if it exists
+        """
+        if root is None:
+            return []
+        s = []
+        s.append(root)
+        out = []
+        while s:
+            t = s.pop()
+            out.append(t.val)
+            if t.right:
+                s.append(t.right)
+            if t.left:
+                s.append(t.left)
+        return out
 
-    def next:
-        return 0
-        pass
 
-test = True
+test = False
 if test:
     from TreeNode.TreeNode import arrayToTreeNode, TreeNode
     tn = arrayToTreeNode([1, None, 2, 3])

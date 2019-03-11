@@ -12,41 +12,41 @@
 # Testcase Example:  '["2","1","+","3","*"]'
 #
 # Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-# 
+#
 # Valid operators are +, -, *, /. Each operand may be an integer or another
 # expression.
-# 
+#
 # Note:
-# 
-# 
+#
+#
 # Division between two integers should truncate toward zero.
 # The given RPN expression is always valid. That means the expression would
 # always evaluate to a result and there won't be any divide by zero
 # operation.
-# 
-# 
+#
+#
 # Example 1:
-# 
-# 
+#
+#
 # Input: ["2", "1", "+", "3", "*"]
 # Output: 9
 # Explanation: ((2 + 1) * 3) = 9
-# 
-# 
+#
+#
 # Example 2:
-# 
-# 
+#
+#
 # Input: ["4", "13", "5", "/", "+"]
 # Output: 6
 # Explanation: (4 + (13 / 5)) = 6
-# 
-# 
+#
+#
 # Example 3:
-# 
-# 
+#
+#
 # Input: ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
 # Output: 22
-# Explanation: 
+# Explanation:
 # ⁠ ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
 # = ((10 * (6 / (12 * -11))) + 17) + 5
 # = ((10 * (6 / -132)) + 17) + 5
@@ -54,8 +54,8 @@
 # = (0 + 17) + 5
 # = 17 + 5
 # = 22
-# 
-# 
+#
+#
 #
 class Solution:
     def evalRPN(self, tokens):
@@ -63,4 +63,39 @@ class Solution:
         :type tokens: List[str]
         :rtype: int
         """
-        
+        # operators are binary
+        # pointer to operands
+        if len(tokens) == 0:
+            return int(0)
+        if len(tokens) == 1:
+            return int(tokens[0])
+        s = []
+        for i in range(len(tokens)):
+            el = tokens[i]
+            if el in ['*', '-', '+', '/']:
+                p2 = int(s.pop())
+                p1 = int(s.pop())
+                if el == '*':
+                    out = p1 * p2
+                elif el == '-':
+                    out = p1 - p2
+                elif el == '+':
+                    out = p1 + p2
+                else:
+                    out = p1 // p2
+                    if out < 0 and out != int(p1/p2):
+                        out += 1
+                s.append(out)
+            else:
+                s.append(el)
+        return s.pop()
+
+
+test = False
+if test:
+    s = Solution()
+    print(s.evalRPN(["4", "13", "5", "/", "+"]))
+    print(s.evalRPN(["18"]))
+    print(s.evalRPN(["10","6","9","3","+",
+                     "-11","*","/","*","17",
+                     "+","5","+"]))

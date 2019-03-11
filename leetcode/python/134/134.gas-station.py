@@ -80,6 +80,27 @@ class Solution:
         :type cost: List[int]
         :rtype: int
         """
+
+        """
+
+        Idea:
+
+        basically compute the movement "deficit" for each link in the
+        route, i.e. if there is a deficit, then it must be covered by
+        a previous link, so if you begin at some negative link in the
+        route, then move the beginning of travel point back from that
+        link until it becomes positive
+
+        once it is positive, you can move the end travel point forward
+        until it becomes negative again, at which point you move then
+        beginning point backward until it becomes positive again
+
+        keep going back and forth by either moving the beginning or
+        end of travel points until they meet
+
+
+        """
+
         n = len(gas)
         diff = []
         for i in range(0, n):
