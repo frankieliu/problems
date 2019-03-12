@@ -39,10 +39,12 @@ for i in `seq 1 $num_servers`; do
 
 	# Report file includes server port
 	report_file=${report_base}-${server_port}.txt
+    pid_file=${report_base}-${server_port}.pid
 
 	# Run iperf
     title=P${server_port}
     cmd="iperf3 -p $server_port $iperf_options"
     echo "$cmd"
-    tmux send-keys -t $title "$cmd"' &> '$report_file'' C-m
+    tmux send-keys -t $title 'sh -c '"'"'echo $$ > '"$pid_file"'; exec '"$cmd"' &> '"$report_file""'" C-m
+    tmux send-keys -t $title
 done
