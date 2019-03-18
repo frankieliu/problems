@@ -1,0 +1,33 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* Start three different shells
+08.sh  #  this is the receiving end
+09.sh  #  this is one of the sending ends
+0a.sh  #  this is the other sending end
+
+* In each begin a tmux session
+The scripts launch parallel processes in each terminal
+And they distinguish one another by port number
+
+* 08.sh
+# begin tmux
+$ tmux
+# begin the servers (for different ports)
+$ iperf-parallel-servers.sh
+
+* 09.sh and 10.sh
+# begin tmux
+$ tmux
+# launch clients (for 10 ports each)
+$ iperf-parallel-clients.sh    # on 09
+$ iperf-parallel-clients-2.sh  # on 0a
+
+* do a diff on the snmp counters
+$ paste-diff.sh
+
+* redo collect.sh because of the change in snmp.log
+- before I was saving the results into a single file
+- but split up to save into separate before and after files
+- added the paste-diff.sh to past the before and after and get the
+  diff
