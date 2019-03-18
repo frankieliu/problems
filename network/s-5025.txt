@@ -96,3 +96,23 @@ Accepted connection from 192.168.16.107, port 33017
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
 [  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.014 ms  296181/689053 (43%)  
+-----------------------------------------------------------
+Server listening on 5025
+-----------------------------------------------------------
+Accepted connection from 192.168.16.107, port 36342
+[  5] local 192.168.16.105 port 5025 connected to 192.168.16.107 port 33959
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  85.9 MBytes   721 Mbits/sec  0.008 ms  3800/66032 (5.8%)  
+[  5]   1.00-2.00   sec  91.9 MBytes   771 Mbits/sec  0.009 ms  2288/68818 (3.3%)  
+[  5]   2.00-3.00   sec  59.2 MBytes   497 Mbits/sec  0.021 ms  25832/68735 (38%)  
+[  5]   3.00-4.00   sec  48.3 MBytes   405 Mbits/sec  0.013 ms  33851/68815 (49%)  
+[  5]   4.00-5.00   sec  48.3 MBytes   405 Mbits/sec  0.012 ms  33856/68830 (49%)  
+[  5]   5.00-6.00   sec  48.7 MBytes   409 Mbits/sec  0.020 ms  33528/68825 (49%)  
+[  5]   6.00-7.00   sec  48.8 MBytes   409 Mbits/sec  0.018 ms  33488/68818 (49%)  
+[  5]   7.00-8.00   sec  48.4 MBytes   406 Mbits/sec  0.018 ms  33801/68826 (49%)  
+[  5]   8.00-9.00   sec  48.4 MBytes   406 Mbits/sec  0.017 ms  33737/68810 (49%)  
+[  5]   9.00-10.00  sec  48.6 MBytes   408 Mbits/sec  0.011 ms  33645/68841 (49%)  
+[  5]  10.00-10.25  sec  2.52 MBytes  86.0 Mbits/sec  0.007 ms  1784/3610 (49%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.25  sec  0.00 Bytes  0.00 bits/sec  0.007 ms  269610/688960 (39%)  

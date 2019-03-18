@@ -78,3 +78,23 @@ Accepted connection from 192.168.16.108, port 40500
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
 [  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.009 ms  209511/460660 (45%)  
+-----------------------------------------------------------
+Server listening on 5031
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 44367
+[  5] local 192.168.16.105 port 5031 connected to 192.168.16.108 port 53989
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  39.8 MBytes   334 Mbits/sec  0.019 ms  29612/58441 (51%)  
+[  5]   1.00-2.00   sec  34.9 MBytes   292 Mbits/sec  0.022 ms  26358/51599 (51%)  
+[  5]   2.00-3.00   sec  35.0 MBytes   293 Mbits/sec  0.017 ms  26267/51601 (51%)  
+[  5]   3.00-4.00   sec  34.8 MBytes   292 Mbits/sec  0.024 ms  26407/51600 (51%)  
+[  5]   4.00-5.00   sec  34.9 MBytes   293 Mbits/sec  0.024 ms  26343/51600 (51%)  
+[  5]   5.00-6.00   sec  34.9 MBytes   293 Mbits/sec  0.021 ms  26313/51600 (51%)  
+[  5]   6.00-7.00   sec  35.0 MBytes   293 Mbits/sec  0.018 ms  26283/51601 (51%)  
+[  5]   7.00-8.00   sec  40.3 MBytes   338 Mbits/sec  0.016 ms  22422/51579 (43%)  
+[  5]   8.00-9.00   sec  68.4 MBytes   574 Mbits/sec  0.013 ms  2093/51619 (4.1%)  
+[  5]   9.00-10.00  sec  67.8 MBytes   569 Mbits/sec  0.014 ms  2469/51598 (4.8%)  
+[  5]  10.00-10.04  sec  2.84 MBytes   578 Mbits/sec  0.014 ms  65/2119 (3.1%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.014 ms  214632/524957 (41%)  

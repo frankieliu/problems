@@ -96,3 +96,23 @@ Accepted connection from 192.168.16.107, port 51876
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
 [  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.002 ms  297294/689400 (43%)  
+-----------------------------------------------------------
+Server listening on 5029
+-----------------------------------------------------------
+Accepted connection from 192.168.16.107, port 55191
+[  5] local 192.168.16.105 port 5029 connected to 192.168.16.107 port 37793
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  90.0 MBytes   755 Mbits/sec  0.007 ms  2985/68179 (4.4%)  
+[  5]   1.00-2.00   sec  88.4 MBytes   742 Mbits/sec  0.007 ms  4779/68801 (6.9%)  
+[  5]   2.00-3.00   sec  59.0 MBytes   495 Mbits/sec  0.017 ms  26038/68750 (38%)  
+[  5]   3.00-4.00   sec  48.4 MBytes   406 Mbits/sec  0.019 ms  33760/68809 (49%)  
+[  5]   4.00-5.00   sec  48.4 MBytes   406 Mbits/sec  0.018 ms  33769/68839 (49%)  
+[  5]   5.00-6.00   sec  48.8 MBytes   409 Mbits/sec  0.015 ms  33492/68831 (49%)  
+[  5]   6.00-7.00   sec  48.6 MBytes   408 Mbits/sec  0.014 ms  33619/68813 (49%)  
+[  5]   7.00-8.00   sec  48.3 MBytes   406 Mbits/sec  0.017 ms  33800/68806 (49%)  
+[  5]   8.00-9.00   sec  48.4 MBytes   406 Mbits/sec  0.017 ms  33760/68835 (49%)  
+[  5]   9.00-10.00  sec  48.7 MBytes   408 Mbits/sec  0.012 ms  33565/68816 (49%)  
+[  5]  10.00-10.04  sec  2.11 MBytes   426 Mbits/sec  0.016 ms  1342/2873 (47%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.016 ms  270909/690352 (39%)  
