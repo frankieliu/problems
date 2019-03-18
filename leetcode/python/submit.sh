@@ -1,6 +1,6 @@
 #!/bin/bash
 shopt -s extglob
-file=$(ls +([0-9]).*.py)
+file=$(ls -t +([0-9]).*.py | head -1)
 a=$(tempfile)
 
 echo cp $file save
