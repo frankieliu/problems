@@ -1,0 +1,100 @@
+-----------------------------------------------------------
+Server listening on 5034
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 46525
+[  5] local 192.168.16.105 port 5034 connected to 192.168.16.108 port 59776
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec   142 MBytes  1.19 Gbits/sec  0.008 ms  11986/114653 (10%)  
+[  5]   1.00-2.00   sec   140 MBytes  1.17 Gbits/sec  0.014 ms  16882/117998 (14%)  
+[  5]   2.00-3.00   sec   140 MBytes  1.17 Gbits/sec  0.009 ms  16852/118038 (14%)  
+[  5]   3.00-4.00   sec   137 MBytes  1.15 Gbits/sec  0.010 ms  18632/118060 (16%)  
+[  5]   4.00-5.00   sec   139 MBytes  1.16 Gbits/sec  0.009 ms  17725/118028 (15%)  
+[  5]   5.00-6.00   sec   141 MBytes  1.18 Gbits/sec  0.010 ms  16218/118048 (14%)  
+[  5]   6.00-7.00   sec   141 MBytes  1.18 Gbits/sec  0.011 ms  16044/118012 (14%)  
+[  5]   7.00-8.00   sec   141 MBytes  1.18 Gbits/sec  0.011 ms  16064/118010 (14%)  
+[  5]   8.00-9.00   sec   138 MBytes  1.16 Gbits/sec  0.012 ms  18148/118064 (15%)  
+[  5]   9.00-10.00  sec   140 MBytes  1.17 Gbits/sec  0.011 ms  16556/117980 (14%)  
+[  5]  10.00-10.04  sec  5.67 MBytes  1.22 Gbits/sec  0.009 ms  513/4617 (11%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.009 ms  165620/1181508 (14%)  
+-----------------------------------------------------------
+Server listening on 5034
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 46536
+[  5] local 192.168.16.105 port 5034 connected to 192.168.16.108 port 45954
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  82.1 MBytes   689 Mbits/sec  0.010 ms  8109/67581 (12%)  
+[  5]   1.00-2.00   sec  84.0 MBytes   705 Mbits/sec  0.008 ms  7952/68809 (12%)  
+[  5]   2.00-3.00   sec  84.8 MBytes   712 Mbits/sec  0.011 ms  7372/68802 (11%)  
+[  5]   3.00-4.00   sec  84.5 MBytes   709 Mbits/sec  0.007 ms  6779/67971 (10%)  
+[  5]   4.00-5.00   sec   111 MBytes   930 Mbits/sec  0.004 ms  6759/87067 (7.8%)  
+[  5]   5.00-6.00   sec  94.7 MBytes   794 Mbits/sec  0.006 ms  4396/72973 (6%)  
+[  5]   6.00-7.00   sec  92.9 MBytes   779 Mbits/sec  0.006 ms  4502/71774 (6.3%)  
+[  5]   7.00-8.00   sec  90.7 MBytes   761 Mbits/sec  0.005 ms  4723/70404 (6.7%)  
+[  5]   8.00-9.00   sec  86.6 MBytes   727 Mbits/sec  0.007 ms  6311/69039 (9.1%)  
+[  5]   9.00-10.00  sec  81.4 MBytes   682 Mbits/sec  0.007 ms  9890/68800 (14%)  
+[  5]  10.00-10.04  sec  3.39 MBytes   714 Mbits/sec  0.008 ms  348/2800 (12%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.008 ms  67141/716020 (9.4%)  
+-----------------------------------------------------------
+Server listening on 5034
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 46551
+[  5] local 192.168.16.105 port 5034 connected to 192.168.16.108 port 51735
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  85.6 MBytes   718 Mbits/sec  0.014 ms  63655/125655 (51%)  
+[  5]   1.00-2.00   sec  93.4 MBytes   784 Mbits/sec  0.015 ms  67435/135106 (50%)  
+[  5]   2.00-3.00   sec  94.1 MBytes   789 Mbits/sec  0.020 ms  69055/137164 (50%)  
+[  5]   3.00-4.00   sec  90.0 MBytes   755 Mbits/sec  0.017 ms  67804/132951 (51%)  
+[  5]   4.00-5.00   sec  91.9 MBytes   771 Mbits/sec  0.012 ms  67748/134327 (50%)  
+[  5]   5.00-6.00   sec  84.2 MBytes   707 Mbits/sec  0.017 ms  62534/123525 (51%)  
+[  5]   6.00-7.00   sec  87.3 MBytes   732 Mbits/sec  0.013 ms  65088/128299 (51%)  
+[  5]   7.00-8.00   sec  88.1 MBytes   739 Mbits/sec  0.014 ms  66602/130409 (51%)  
+[  5]   8.00-9.00   sec  91.7 MBytes   770 Mbits/sec  0.015 ms  68683/135119 (51%)  
+[  5]   9.00-10.00  sec   113 MBytes   950 Mbits/sec  0.011 ms  48169/130152 (37%)  
+[  5]  10.00-10.25  sec  8.00 MBytes   273 Mbits/sec  0.006 ms  698/6491 (11%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.25  sec  0.00 Bytes  0.00 bits/sec  0.006 ms  647471/1319198 (49%)  
+-----------------------------------------------------------
+Server listening on 5034
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 46595
+[  5] local 192.168.16.105 port 5034 connected to 192.168.16.108 port 60356
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  95.3 MBytes   800 Mbits/sec  0.015 ms  69116/138164 (50%)  
+[  5]   1.00-2.00   sec  92.8 MBytes   778 Mbits/sec  0.015 ms  70404/137593 (51%)  
+[  5]   2.00-3.00   sec  93.6 MBytes   785 Mbits/sec  0.011 ms  69747/137510 (51%)  
+[  5]   3.00-4.00   sec  94.1 MBytes   789 Mbits/sec  0.009 ms  69382/137523 (50%)  
+[  5]   4.00-5.00   sec  93.7 MBytes   786 Mbits/sec  0.015 ms  69706/137527 (51%)  
+[  5]   5.00-6.00   sec  94.9 MBytes   796 Mbits/sec  0.012 ms  68813/137560 (50%)  
+[  5]   6.00-7.00   sec  93.0 MBytes   780 Mbits/sec  0.014 ms  70281/137592 (51%)  
+[  5]   7.00-8.00   sec  93.8 MBytes   787 Mbits/sec  0.013 ms  69675/137592 (51%)  
+[  5]   8.00-9.00   sec   117 MBytes   982 Mbits/sec  0.010 ms  52725/137520 (38%)  
+[  5]   9.00-10.00  sec   166 MBytes  1.39 Gbits/sec  0.008 ms  17499/137588 (13%)  
+[  5]  10.00-10.04  sec  6.74 MBytes  1.38 Gbits/sec  0.007 ms  828/5711 (14%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.007 ms  628176/1381880 (45%)  
+-----------------------------------------------------------
+Server listening on 5034
+-----------------------------------------------------------
+Accepted connection from 192.168.16.108, port 50465
+[  5] local 192.168.16.105 port 5034 connected to 192.168.16.108 port 33172
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-1.00   sec  67.6 MBytes   567 Mbits/sec  0.019 ms  50639/99602 (51%)  
+[  5]   1.00-2.00   sec  69.6 MBytes   583 Mbits/sec  0.022 ms  52837/103203 (51%)  
+[  5]   2.00-3.00   sec  70.2 MBytes   589 Mbits/sec  0.022 ms  52381/103199 (51%)  
+[  5]   3.00-4.00   sec  69.6 MBytes   584 Mbits/sec  0.015 ms  52791/103203 (51%)  
+[  5]   4.00-5.00   sec  69.8 MBytes   586 Mbits/sec  0.023 ms  52637/103203 (51%)  
+[  5]   5.00-6.00   sec  69.8 MBytes   586 Mbits/sec  0.016 ms  52652/103199 (51%)  
+[  5]   6.00-7.00   sec  70.0 MBytes   587 Mbits/sec  0.024 ms  52528/103205 (51%)  
+[  5]   7.00-8.00   sec  80.5 MBytes   675 Mbits/sec  0.018 ms  44870/103154 (43%)  
+[  5]   8.00-9.00   sec   136 MBytes  1.14 Gbits/sec  0.016 ms  4852/103204 (4.7%)  
+[  5]   9.00-10.00  sec   135 MBytes  1.14 Gbits/sec  0.017 ms  5179/103208 (5%)  
+[  5]  10.00-10.04  sec  5.61 MBytes  1.14 Gbits/sec  0.015 ms  195/4256 (4.6%)  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  5]   0.00-10.04  sec  0.00 Bytes  0.00 bits/sec  0.015 ms  421561/1032636 (41%)  

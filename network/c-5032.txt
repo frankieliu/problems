@@ -1,0 +1,19 @@
+Connecting to host 192.168.16.105, port 5032
+[  4] local 192.168.16.108 port 59303 connected to 192.168.16.105 port 5032
+[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+[  4]   0.00-1.00   sec  71.3 MBytes   598 Mbits/sec  51660  
+[  4]   1.00-2.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   2.00-3.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   3.00-4.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   4.00-5.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   5.00-6.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   6.00-7.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   7.00-8.00   sec  71.3 MBytes   598 Mbits/sec  51600  
+[  4]   8.00-9.00   sec  71.2 MBytes   598 Mbits/sec  51590  
+[  4]   9.00-10.00  sec   130 MBytes  1.09 Gbits/sec  94350  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+[  4]   0.00-10.00  sec   772 MBytes   647 Mbits/sec  0.003 ms  207233/558800 (37%)  
+[  4] Sent 558800 datagrams
+
+iperf Done.

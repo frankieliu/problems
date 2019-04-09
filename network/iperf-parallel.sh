@@ -1,11 +1,28 @@
 #!/bin/bash
 # Run multiple parallel instances of iperf servers
 
+# Get options
+while getopts ":hB:" opt; do
+  case ${opt} in
+    h ) # process option h
+    ;;
+    B ) # process option b
+        base_port=$OPTARG
+        ;;
+    : )
+        echo "Invalid option: $OPTARG requires an argument" 1>&2
+        ;;
+    \? ) echo "Usage: cmd [-h] [-t]"
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
 # Assumes the port numbers used by the servers start at 5001 and increase
 # e.g. 5001, 5002, 5003, ...
 # If you want something different, then change the following parameter value
 # to be: firstport - 1
-base_port=5020
+base_port=${base_port:-5020}
 
 # Command line input: number of servers
 # E.g. 5
@@ -21,6 +38,10 @@ shift
 # E.g. -u
 iperf_options="$@"
 
+echo "     baseport : $base_port"
+echo "  num_servers : $num_servers"
+echo "  report_base : $report_base"
+echo "iperf_options : $iperf_options"
 
 # Create all windows
 for i in `seq 1 $num_servers`; do
