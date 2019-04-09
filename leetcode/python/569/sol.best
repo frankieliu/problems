@@ -1,0 +1,49 @@
+
+Easy solutions with and without @rank column
+
+https://leetcode.com/problems/median-employee-salary/discuss/118389
+
+* Lang:    cpp
+* Author:  csy1984
+* Votes:   16
+
+**Solution 1**: 
+
+Inspired by @yauheni
+https://leetcode.com/problems/find-median-given-frequency-of-numbers/discuss/102710/Easy-peasy
+
+```
+SELECT
+  id,
+  Company,
+  Salary
+FROM Employee e
+WHERE 1 >= ABS((SELECT COUNT(*) FROM Employee e1 WHERE e.company = e1.company AND e.Salary >= e1.Salary) -
+           (SELECT COUNT(*) FROM Employee e2 WHERE e.company = e2.company AND e.Salary <= e2.Salary)) 
+GROUP BY Company, Salary           
+```
+
+**SOLUTION 2**: 
+
+Sort + @rank column and then SELECT the median 
+
+
+```
+SELECT
+  sub.Id,
+  sub.Company,
+  sub.Salary
+FROM (
+    SELECT 
+        @rank := IF(@lastCompany = e.Company, @rank + 1, 1) as Rank,
+        e.id,
+        e.company,
+        e.salary,
+        fre.tot,
+        @lastCompany := e.company
+    FROM (SELECT @rank := 0, @lastCompany := \'A\') SQLvars, Employee e
+    LEFT JOIN ( SELECT e1.company, count(*) as tot FROM Employee e1 GROUP BY e1.company ) fre ON fre.company = e.company
+    ORDER BY e.Company, e.Salary
+) sub
+WHERE sub.rank = sub.tot DIV 2 + 1 OR (sub.tot % 2 = 0 AND sub.rank = sub.tot DIV 2)
+```

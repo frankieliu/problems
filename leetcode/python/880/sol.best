@@ -1,0 +1,45 @@
+
+[C++/Python] O(N) Time O(1) Space
+
+https://leetcode.com/problems/decoded-string-at-index/discuss/156747
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   54
+
+We decode the string and `N` keeps the length of decoded string, until `N >= K`.
+Then we go back from the decoding position.
+If it\'s `S[i] = d` is a digit, then `N = N / d` before repeat and `K  = K % N` is what we want.
+If it\'s `S[i] = c` is a character, we return `c` if `K == 0` or `K == N`
+
+**C++:**
+```
+    string decodeAtIndex(string S, int K) {
+        long N = 0, i;
+        for (i = 0; N < K; ++i)
+            N = isdigit(S[i]) ? N * (S[i] - \'0\') : N + 1;
+        while (i--)
+            if (isdigit(S[i]))
+                N /= S[i] - \'0\', K %= N;
+            else if (K % N-- == 0)
+                return string(1, S[i]);
+        return "lee215";
+    }
+```
+
+**Python:**
+```
+    def decodeAtIndex(self, S, K):
+        N = 0
+        for i, c in enumerate(S):
+            N = N * int(c) if c.isdigit() else N + 1
+            if K <= N: break
+        for j in range(i, -1, -1):
+            c = S[j]
+            if c.isdigit():
+                N /= int(c)
+                K %= N
+            else:
+                if K == N or K == 0: return c
+                N -= 1
+```

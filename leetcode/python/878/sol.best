@@ -1,0 +1,85 @@
+
+[C++/Java/Python] Binary Search
+
+https://leetcode.com/problems/nth-magical-number/discuss/154613
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   44
+
+4 points to figure out:
+
+1. Get gcd (greatest common divisor) and lcm (least common multiple) of (A, B).
+`
+(a, b) = (A, B)
+while b > 0:
+    (a, b) = (b, a % b)
+`
+then, gcd = a and lcm = A * B / a
+
+2. How many magic numbers `<= x` ?
+By inclusion exclusion principle, we have:
+`x / A + x / B - x / lcm`
+
+3. Set our binary search range
+Lower bound is `min(A, B)`, I **just** set `left = 2`.
+Upper bound is `N * min(A, B)`, I **just** set `right = 10 ^ 14`.
+
+4. binary search, find the smallest `x` that `x / A + x / B - x / lcm = N`
+```
+while (l < r) {
+    m = (l + r) / 2;
+    if (m / A + m / B - m / (A * B / a) < N) // m too small
+        l = m + 1;
+    else // m may be too big
+        r = m;
+}
+```
+
+**Time Complexity**:
+`O(log(10**14))`
+
+
+**C++:**
+```
+    int nthMagicalNumber(int N, int A, int B) {
+        long lcm = A * B / __gcd(A, B), l = 2, r = 1e14, mod = 1e9 + 7;
+        while (l < r) {
+            long m = (l + r) / 2;
+            if (m / A + m / B - m / lcm < N) l = m + 1;
+            else r = m;
+        }
+        return l % mod;
+    }
+```
+
+**Java:**
+```
+    public int nthMagicalNumber(int N, int A, int B) {
+        long a = A, b = B, tmp, l = 2, r = (long)1e14, mod = (long)1e9 + 7;
+        while (b > 0) {
+            tmp = a;
+            a = b;
+            b = tmp % b;
+        }
+        while (l < r) {
+            long m = (l + r) / 2;
+            if (m / A + m / B - m / (A * B / a) < N) l = m + 1;
+            else r = m;
+        }
+        return (int)(l % mod);
+    }
+```
+**Python:**
+```
+    def nthMagicalNumber(self, N, A, B):
+        a, b = A, B
+        while b: a, b = b, a % b
+        l, r, lcm = 2, 10**14, A * B / a
+        while l < r:
+            m = (l + r) / 2
+            if m / A + m / B - m / lcm < N: l = m + 1
+            else: r = m
+        return l % (10**9 + 7)
+```
+

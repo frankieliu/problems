@@ -1,0 +1,27 @@
+
+Simple Solution
+
+https://leetcode.com/problems/rising-temperature/discuss/55619
+
+* Lang:    cpp
+* Author:  fabrizio3
+* Votes:   91
+
+    SELECT wt1.Id 
+    FROM Weather wt1, Weather wt2
+    WHERE wt1.Temperature > wt2.Temperature AND 
+          TO_DAYS(wt1.DATE)-TO_DAYS(wt2.DATE)=1;
+
+
+EXPLANATION:
+
+**TO_DAYS(wt1.DATE)** return the number of days between from year 0 to date DATE
+**TO_DAYS(wt1.DATE)-TO_DAYS(wt2.DATE)=1** check if wt2.DATE is yesterday respect to wt1.DATE
+
+We select from the joined tables the rows that have 
+
+**wt1.Temperature > wt2.Temperature** 
+
+and difference between dates in days of 1 (yesterday):
+
+**TO_DAYS(wt1.DATE)-TO_DAYS(wt2.DATE)=1;**

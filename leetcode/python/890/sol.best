@@ -1,0 +1,58 @@
+
+[C++/Java/Python] Normalise Word
+
+https://leetcode.com/problems/find-and-replace-pattern/discuss/161288
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   66
+
+Normalise a string to a standard pattern.
+Yes. You can pass the F(pattern) to the sub function and return earlier in case of dismatch.
+
+**C++**
+```
+    vector<string> findAndReplacePattern(vector<string> words, string p) {
+        vector<string> res;
+        for (string w : words) if (F(w) == F(p)) res.push_back(w);
+        return res;
+    }
+
+    string F(string w) {
+        unordered_map<char, int> m;
+        for (char c : w) if (!m.count(c)) m[c] = m.size();
+        for (int i = 0; i < w.length(); ++i) w[i] = \'a\' + m[w[i]];
+        return w;
+    }
+```
+
+**Java:**
+```
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        int[] p = F(pattern);
+        List<String> res = new ArrayList<String>();
+        for (String w : words)
+            if (Arrays.equals(F(w), p)) res.add(w);
+        return res;
+    }
+
+    public int[] F(String w) {
+        HashMap<Character, Integer> m = new HashMap<>();
+        int n = w.length();
+        int[] res = new int[n];
+        for (int i = 0; i < n; i++) {
+            m.putIfAbsent(w.charAt(i), m.size());
+            res[i] = m.get(w.charAt(i));
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def findAndReplacePattern(self, words, p):
+        def F(w):
+            m = {}
+            return [m.setdefault(c, len(m)) for c in w]
+        return [w for w in words if F(w) == F(p)]
+```
+

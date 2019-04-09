@@ -1,0 +1,22 @@
+
+Shouldn't we use Union instead of Union all?
+
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/discuss/103804
+
+* Lang:    cpp
+* Author:  fangyuan0123
+* Votes:   31
+
+I think the answer missed the case when A send B a friend request, and B send A a friend request, and both requests got approved. In this case, A or B really just gained one friend. But the answer seems to count this case twice.
+Isn't union (remove duplicates) should be used instead of union all?
+```
+select id1 as id, count(id2) as num
+from
+(select requester_id as id1, accepter_id as id2 
+from request_accepted
+union
+select accepter_id as id1, requester_id as id2 
+from request_accepted) tmp1
+group by id1 
+order by num desc limit 1
+```

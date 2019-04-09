@@ -1,0 +1,55 @@
+
+[C++/Java/Python] Two Pointers
+
+https://leetcode.com/problems/reverse-only-letters/discuss/178419
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   18
+
+Two pointers,
+from the begin and the of the string.
+find two letter,
+and swap them.
+
+**Time Complexity**:
+O(N)
+
+**C++:**
+```
+    string reverseOnlyLetters(string S) {
+        for (int i = 0, j = S.length() - 1; i < j; ++i, --j) {
+            while (i < j && !isalpha(S[i])) ++i;
+            while (i < j && !isalpha(S[j])) --j;
+            swap(S[i], S[j]);
+        }
+        return S;
+    }
+```
+
+**Java:**
+```
+    public String reverseOnlyLetters(String S) {
+        StringBuilder sb = new StringBuilder(S);
+        for (int i = 0, j = S.length() - 1; i < j; ++i, --j) {
+            while (i < j && !Character.isLetter(sb.charAt(i))) ++i;
+            while (i < j && !Character.isLetter(sb.charAt(j))) --j;
+            sb.setCharAt(i, S.charAt(j));
+            sb.setCharAt(j, S.charAt(i));
+        }
+        return sb.toString();
+    }
+```
+
+**Python:**
+```
+    def reverseOnlyLetters(self, S):
+        i, j = 0, len(S) - 1
+        S = list(S)
+        while i < j:
+            while i < j and not S[i].isalpha(): i += 1
+            while i < j and not S[j].isalpha(): j -= 1
+            S[i], S[j] = S[j], S[i]
+            i, j = i + 1, j - 1
+        return "".join(S)
+```

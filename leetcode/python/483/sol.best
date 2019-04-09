@@ -1,0 +1,75 @@
+
+Python solution with detailed mathematical explanation and derivation
+
+https://leetcode.com/problems/smallest-good-base/discuss/96587
+
+* Lang:    cpp
+* Author:  harshaneel
+* Votes:   36
+
+First things first. Let's see the math behind it.
+
+From given information, we can say one thing- Numbers will be of form-
+
+n = k^m + k^(m-1) + ... + k + 1
+=> n-1 = k^m + k^(m-1) + ... + k
+=> n-1 = k (k^(m-1) + k^(m-2) + ... + k + 1) ...... **[1]**
+
+Also, from n = k^m + k^(m-1) + ... + k + 1, we can say,
+n-k^m = k^(m-1) + k^(m-2) + ... + k + 1 ...... **[2]**
+
+from [1] and [2],
+
+n-1 = k (n - k^m)
+=>k^(m+1) = nk - n + 1
+
+if you shuffle sides you will end up getting following form,
+
+**(k^(m+1) - 1)/(k - 1) = n** .... **[3]**
+
+Also from [1] note that, (n - 1) must be divisible by k. 
+
+We know that, n = k^m + k^(m-1) + ... + k + 1
+
+=> n > k^m
+=> m-th root of n > k .... **[4]**
+
+**[EDIT]** -->
+
+With inputs from @StefanPochmann we can also say, from binomial thorem, **n = k^m + ... + 1 < (k+1)^m** .... **[5]**
+Therefore, **k+1 > m-th root of n > k**.  .... from **[4]** and **[5]**
+Thus **\u230am-th root of n\u230b** is the only candidate that needs to be tested. **[6]**
+
+<--
+
+So our number should satisfy this equation where **k** will be our base and **m** will be (number of 1s - 1)
+
+This brings us to the search problem where we need to find k and m.
+
+Linear search from 1 to n does not work. it gives us TLE. So it leaves us with performing some optimization on search space.
+
+From **[6]** we know that the only candidate that needs to be tested is, **\u230am-th root of n\u230b**
+
+We also know that the smallest base is 2 so we can find our m must be between 2 and log<sub>2</sub>n else m is (n-1) **[7]**
+
+That brings me to the code:
+**[EDIT]** -- >
+```
+import math
+class Solution(object):
+    def smallestGoodBase(self, n):
+        """
+        :type n: str
+        :rtype: str
+        """
+        n = int(n)
+        max_m = int(math.log(n,2)) # Refer [7]
+        for m in range(max_m,1,-1):
+            k = int(n**m**-1)  # Refer [6]
+            if (k**(m+1)-1)//(k-1) == n:
+                # Refer [3]
+                return str(k)
+        
+        return str(n-1)  
+```
+<\u2014-

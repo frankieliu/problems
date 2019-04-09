@@ -1,0 +1,29 @@
+
+Straightforward Python
+
+https://leetcode.com/problems/baseball-game/discuss/107871
+
+* Lang:    cpp
+* Author:  cutesy_gal
+* Votes:   26
+
+It not stated in the question but you can assume there is not invalid operations, such as `C` when the points history is empty, it still passed.
+
+```
+class Solution(object):
+    def calPoints(self, ops):
+        # Time: O(n)
+        # Space: O(n)
+        history = []
+        for op in ops:
+            if op == 'C':
+                history.pop()
+            elif op == 'D':
+                history.append(history[-1] * 2)
+            elif op == '+':
+                history.append(history[-1] + history[-2])
+            else:
+                history.append(int(op))
+        return sum(history)
+
+```

@@ -1,0 +1,18 @@
+
+Standard test program is wrong?
+
+https://leetcode.com/problems/zuma-game/discuss/97007
+
+* Lang:    cpp
+* Author:  herbix
+* Votes:   90
+
+Hi all,
+
+I tried case `"RRWWRRBBRR", "WB"`. The test program gave the expected answer `-1`. However, I thought the answer might be `2`. Because:
+
+`RRWWRRBBRR -> RRWWRRBBR[W]R -> RRWWRRBB[B]RWR -> RRWWRRRWR -> RRWWWR -> RRR -> empty`
+
+The possible reason might be the first `[W]` was inserted but not adjacent to a `W` in the sequence. I read the description twice but didn't find any condition about it.
+
+Could someone give me some ideas about it?

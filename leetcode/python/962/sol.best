@@ -1,0 +1,114 @@
+
+[Java/C++/Python] O(N) Using Stack
+
+https://leetcode.com/problems/maximum-width-ramp/discuss/208348
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   80
+
+## Solution 1
+
+**Intuition**:
+Keep a decraesing stack.
+For each number,
+binary search the first smaller number in the stack.
+
+When the number is smaller the the last,
+push it into the stack.
+
+**Time Complexity**:
+`O(NlogN)`
+
+**Java**
+```
+    public int maxWidthRamp(int[] A) {
+        List<Integer> s = new ArrayList<>();
+        int res = 0, n = A.length;
+        for (int i = 0; i < n; ++i) {
+            if (s.size() == 0 || A[i] < A[s.get(s.size() - 1)]) {
+                s.add(i);
+            } else {
+                int left = 0, right = s.size() - 1, mid = 0;
+                while (left < right) {
+                    mid = (left + right) / 2;
+                    if (A[s.get(mid)] > A[i]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                res = Math.max(res, i - s.get(left));
+            }
+        }
+        return res;
+    }
+```
+**Python**
+```
+    def maxWidthRamp(self, A):
+        stack = []
+        res = 0
+        for i in range(len(A))[::-1]:
+            if not stack or A[i] > stack[-1][0]:
+                stack.append([A[i], i])
+            else:
+                j = stack[bisect.bisect(stack, [A[i], i])][1]
+                res = max(res, j - i)
+        return res
+```
+<br>
+
+## Solution 2
+
+Improve the idea above.
+Still one pass and keep a decraesing stack.
+
+**Time Complexity**:
+`O(N)`
+
+
+**Java**
+```
+    public int maxWidthRamp(int[] A) {
+        Stack<Integer> s = new Stack<>();
+        int res = 0, n = A.length;
+        for (int i = 0; i < n; ++i)
+            if (s.empty() || A[s.peek()] > A[i])
+                s.add(i);
+        for (int i = n - 1; i > res; --i)
+            while (!s.empty() && A[s.peek()] <= A[i])
+                res = Math.max(res, i - s.pop());
+        return res;
+    }
+```
+
+**C++**
+```
+    int maxWidthRamp(vector<int>& A) {
+        stack<int> s;
+        int res = 0, n = A.size();
+        for (int i = 0; i < n; ++i)
+            if (s.empty() || A[s.top()] > A[i])
+                s.push(i);
+        for (int i = n - 1; i > res; --i)
+            while (!s.empty() && A[s.top()] <= A[i])
+                res = max(res, i - s.top()), s.pop();
+        return res;
+    }
+```
+
+**Python:**
+```
+    def maxWidthRamp(self, A):
+        s = []
+        res = 0
+        for i, a in enumerate(A):
+            if not s or A[s[-1]] > a:
+                s.append(i)
+        for j in range(len(A))[::-1]:
+            while s and A[s[-1]] <= A[j]:
+                res = max(res, j - s.pop())
+        return res
+```
+

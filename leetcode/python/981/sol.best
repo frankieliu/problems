@@ -1,0 +1,27 @@
+
+C++ 3 lines, hash map + map
+
+https://leetcode.com/problems/time-based-key-value-store/discuss/226664
+
+* Lang:    cpp
+* Author:  votrubac
+* Votes:   31
+
+We use hash map to lookup ordered ```{timestamp, value}``` pairs by key in O(1). Then, we use binary search to find the value with a timestamp less or equal than the requested one.
+```
+unordered_map<string, map<int, string>> m;
+void set(string key, string value, int timestamp) {
+  m[key].insert({ timestamp, value });
+}
+string get(string key, int timestamp) {
+  auto it = m[key].upper_bound(timestamp);
+  return it == m[key].begin() ? "" : prev(it)->second;
+}
+```
+# Complexity analysis
+Assuming ```n``` is the number of set operations, and ```m``` is the number of get operations:
+- Time Complexity: 
+    - Set: ```O(1)``` single operation, and total ```O(n)```.
+Note: assuing timestamps are only increasing. If not, it\'s ```O(n log n)```.
+    - Get: ```O(log n)``` for a single operation, and total ```O(m log n)```.
+- Space Complexity: ```O(n)``` (assuming every ```{ timestamp, value }``` is unique).

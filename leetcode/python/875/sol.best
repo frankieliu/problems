@@ -1,0 +1,76 @@
+
+Binary Search Java / Python with Explanations
+
+https://leetcode.com/problems/koko-eating-bananas/discuss/152506
+
+* Lang:    cpp
+* Author:  GraceMeng
+* Votes:   40
+
+Each hour, Koko chooses some pile of bananas, and eats `K` bananas from that pile. 
+There is a limited range of `K`\'s to enable her to eat all the bananas within `H` hours. 
+We ought to reduce the searching space and to return the minimum valid `K`. 
+**Binary Search** is born for that.
+Initially, we know that K belongs to [1, the largest element in `piles[]`]. And we follow the pattern of lower-bound Binary Search except that `if (K == target)` is replaced with `if (canEatAll(piles, K, H))`.
+****
+**Java**
+```
+    public int minEatingSpeed(int[] piles, int H) {
+        int lo = 1, hi = getMaxPile(piles);
+        
+        // Binary search to find the smallest valid K.
+        while (lo <= hi) {
+            int K = lo + ((hi - lo) >> 1);
+            if (canEatAll(piles, K, H)) {
+                hi = K - 1;
+            } else {
+                lo = K + 1;
+            }
+        }
+        
+        return lo;
+    }
+    
+    private boolean canEatAll(int[] piles, int K, int H) {
+        int countHour = 0; // Hours take to eat all bananas at speed K.
+        
+        for (int pile : piles) {
+            countHour += pile / K;
+            if (pile % K != 0)
+                countHour++;
+        }
+        return countHour <= H;
+    }
+    
+    private int getMaxPile(int[] piles) {
+        int maxPile = Integer.MIN_VALUE;
+        for (int pile : piles) {
+            maxPile = Math.max(pile, maxPile);
+        }
+        return maxPile;
+    }
+```
+**Python**
+```
+    def minEatingSpeed(self, piles, H):
+        lo, hi = 1, max(piles)
+        
+        while lo <= hi:
+            K = lo + ((hi - lo) >> 1)
+            if self.countTimeEatAllAtSpeed(
+                    K, piles) <= H:  # count time to eat all bananas at speed K
+                hi = K - 1
+            else:
+                lo = K + 1
+        return lo
+    
+    def countTimeEatAllAtSpeed(self, K, piles):
+        countHours = 0  # hours take to eat all bananas
+        
+        for pile in piles:
+            countHours += pile / K
+            if pile % K != 0:
+                countHours += 1
+        return countHours
+```
+**(\u4EBA \u2022\u0348\u1D17\u2022\u0348)** Thanks for voting!

@@ -1,0 +1,43 @@
+
+665772
+
+https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/discuss/113232
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   37
+
+Ruby:
+```
+def count_prime_set_bits(l, r)
+  (l..r).sum { |i| 665772 >> i.digits(2).sum & 1 }
+end
+```
+Python:
+
+    def countPrimeSetBits(self, L, R):
+        return sum(665772 >> bin(i).count('1') & 1 for i in range(L, R+1))
+
+Java stream:
+
+    public int countPrimeSetBits(int L, int R) {
+        return IntStream.range(L, R+1).map(i -> 665772 >> Integer.bitCount(i) & 1).sum();
+    }
+
+Java:
+
+    public int countPrimeSetBits(int L, int R) {
+        int count = 0;
+        while (L <= R)
+            count += 665772 >> Integer.bitCount(L++) & 1;
+        return count;
+    }
+
+C++:
+
+    int countPrimeSetBits(int L, int R) {
+        int count = 0;
+        while (L <= R)
+            count += 665772 >> __builtin_popcount(L++) & 1;
+        return count;
+    }

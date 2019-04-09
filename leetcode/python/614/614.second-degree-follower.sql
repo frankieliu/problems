@@ -1,0 +1,54 @@
+--
+-- @lc app=leetcode id=614 lang=mysql
+--
+-- [614] Second Degree Follower
+--
+-- https://leetcode.com/problems/second-degree-follower/description/
+--
+-- database
+-- Medium (22.92%)
+-- Total Accepted:    5.6K
+-- Total Submissions: 24.4K
+-- Testcase Example:  '{"headers":{"follow":["followee", "follower"]},"rows":{"follow":[["A", "B"], ["B", "C"], ["B", "D"], ["D", "E"]]}}'
+--
+-- In facebook, there is a follow table with two columns: followee, follower.
+-- 
+-- Please write a sql query to get the amount of each follower’s follower if
+-- he/she has one.
+-- 
+-- For example:
+-- 
+-- 
+-- +-------------+------------+
+-- | followee    | follower   |
+-- +-------------+------------+
+-- |     A       |     B      |
+-- |     B       |     C      |
+-- |     B       |     D      |
+-- |     D       |     E      |
+-- +-------------+------------+
+-- 
+-- should output:
+-- 
+-- 
+-- +-------------+------------+
+-- | follower    | num        |
+-- +-------------+------------+
+-- |     B       |  2         |
+-- |     D       |  1         |
+-- +-------------+------------+
+-- 
+-- Explaination:
+-- Both B and D exist in the follower list, when as a followee, B's follower is
+-- C and D, and D's follower is E. A does not exist in follower list.
+-- 
+-- 
+-- 
+-- Note:
+-- Followee would not follow himself/herself in all cases.
+-- Please display the result in follower's alphabet order.
+-- 
+-- 
+--
+# Write your MySQL query statement below
+

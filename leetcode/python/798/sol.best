@@ -1,0 +1,75 @@
+
+ [C++/Java/Python] Solution with Explanation
+
+https://leetcode.com/problems/smallest-rotation-with-highest-score/discuss/118725
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   64
+
+**Key point**
+Don\'t calculate the score for ```K=0```, we don\'t need it at all.
+(I see almost all other solutions did)
+The key point is to find out how score changes when ```K++```
+
+**Time complexity:**
+\u201CA will have length at most 20000.\u201D
+I think it means you should find a O(N) solution.
+
+**How dosen score change when K++ ?**
+* **Get point**
+Each time when we rotate, we make index ```0``` to index ```N-1```, then we get one more point.
+We know that for sure, so I don\'t need to record it.
+
+* **Lose point**
+```(i - A[i] + N) % N``` is the value of K making ```A[i]\'s``` index just equal to ```A[i]```.
+For example, If ```A[6] = 1```, then ```K = (6 - A[6]) % 6 = 5``` making ```A[6]``` to ```index 1``` of new array.
+So when ```K=5```, we get this point for ```A[6]```
+Then if ```K``` is bigger when ```K = (i - A[i] + 1) % N```, we start to lose this point, making our score -= 1
+All I have done is record the value of ```K```  for all ```A[i]``` where we will lose points.
+
+* **```A[i]=0```**
+Rotation makes no change for it, becasue we alwars have ```0 <= index```.
+However, it is covered in "get point" and "lose point".
+
+**Explanation of codes**
+1. Search the index where score decrease and record this changement to a list ```change```.
+2. A simple for loop to calculate the score for every ```K``` value. 
+```score[K] = score[K-1] + change[K]```
+In my codes I accumulated  ```changes``` so I get the changed score for every ```K``` value compared to ```K=0``` 
+3. Find the index of best score.
+
+
+C++:
+```
+    int bestRotation(vector<int>& A) {
+        int N = A.size();
+        int change[N] = {0};
+        for (int i = 0; i < N; ++i) change[(i - A[i] + 1 + N) % N] -= 1;
+        for (int i = 1; i < N; ++i) change[i] += change[i - 1] + 1;
+        return distance(change, max_element(change, change + N));
+    }
+```
+Java
+```
+    public int bestRotation(int[] A) {
+        int N = A.length;
+        int change[] = new int[N];
+        for (int i = 0; i < N; ++i) change[(i - A[i] + 1 + N) % N] -= 1;
+        int max_i = 0;
+        for (int i = 1; i < N; ++i) {
+            change[i] += change[i - 1] + 1;
+            max_i = change[i] > change[max_i] ? i : max_i;
+        }
+        return max_i;
+    }
+```
+Python
+```
+    def bestRotation(self, A):
+        N = len(A)
+        change = [1] * N
+        for i in range(N): change[(i - A[i] + 1) % N] -= 1
+        for i in range(1, N): change[i] += change[i - 1]
+        return change.index(max(change))
+

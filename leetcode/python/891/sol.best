@@ -1,0 +1,58 @@
+
+[C++/Java/1-line Python] Sort and One Pass
+
+https://leetcode.com/problems/sum-of-subsequence-widths/discuss/161267
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   101
+
+The order in initial arrays doesn\'t matter,
+my first intuition is to sort the array.
+
+For `A[i]`:
+There are `i` smaller numbers,
+so there are `2 ^ i` sequences in which `A[i]` is maximum.
+we should do `res += A[i] * (2 ^ i)`
+
+There are `n - i - 1` bigger numbers,
+so there are `2 ^ (n - i - 1)` sequences in which `A[i]` is minimum.
+we should do `res -= A[i] * 2 ^ (n - i - 1)`
+
+Done.
+
+**Time Complexity**:
+O(NlogN)
+
+**C++:**
+```
+    int sumSubseqWidths(vector<int> A) {
+        sort(A.begin(), A.end());
+        long c = 1, res = 0, mod = 1e9 + 7;
+        for (int i = 0; i < A.size(); ++i, c = (c << 1) % mod)
+            res = (res + A[i] * c - A[A.size() - i - 1] * c) % mod;
+        return (res + mod) % mod;
+    }
+```
+
+**Java:**
+```
+    public int sumSubseqWidths(int[] A) {
+        Arrays.sort(A);
+        long c = 1, res = 0, mod = (long)1e9 + 7;
+        for (int i = 0; i < A.length; ++i, c = (c << 1) % mod)
+            res = (res + A[i] * c - A[A.length - i - 1] * c) % mod;
+        return (int)((res + mod) % mod);
+
+    }
+```
+**1-line Python:**
+```
+    def sumSubseqWidths(self, A):
+        return sum(((1 << i) - (1 << len(A) - i - 1)) * a for i, a in enumerate(sorted(A))) % (10**9 + 7)
+```
+
+**FAQ**
+**Q. why do we plus mod before return?**
+A: in Cpp and Java, mod on negative number will still get a negative number.
+

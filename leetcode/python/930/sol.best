@@ -1,0 +1,56 @@
+
+[C++/Java/Python] Straight Forward
+
+https://leetcode.com/problems/binary-subarrays-with-sum/discuss/186683
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   49
+
+Count the occurrence of all prefix sum.
+
+I didn\'t notice that the array contains only 0 and 1.
+As @davidluoyes suggest, we can use an array with length  = N + 1, 
+to improve the run time.
+
+
+**C++:**
+```
+    int numSubarraysWithSum(vector<int>& A, int S) {
+        unordered_map<int, int> c({{0, 1}});
+        int psum = 0, res = 0;
+        for (int i : A) {
+            psum += i;
+            res += c[psum - S];
+            c[psum]++;
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int numSubarraysWithSum(int[] A, int S) {
+        int psum = 0, res = 0, count[] = new int[A.length + 1];
+        count[0] = 1;
+        for (int i : A) {
+            psum += i;
+            if (psum >= S)
+                res += count[psum - S];
+            count[psum]++;
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def numSubarraysWithSum(self, A, S):
+        c = collections.Counter({0: 1})
+        psum = res = 0
+        for i in A:
+            psum += i
+            res += c[psum - S]
+            c[psum] += 1
+        return res
+```
+

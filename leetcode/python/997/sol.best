@@ -1,0 +1,62 @@
+
+[Java/C++/Python] Directed Graph
+
+https://leetcode.com/problems/find-the-town-judge/discuss/242938
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   80
+
+**Intuition**:
+Consider `trust` as a graph, all pairs are directed edge.
+The point with `in-degree - out-degree = N - 1` become the judge.
+
+**Explanation**:
+Count the degree, and check at the end.
+
+**Time Complexity**:
+Time `O(T + N)`, space `O(N)`
+
+<br>
+
+**Java:**
+```
+    public int findJudge(int N, int[][] trust) {
+        int[] count = new int[N+1];
+        for (int[] t: trust) {
+            count[t[0]]--;
+            count[t[1]]++;
+        }
+        for (int i = 1; i <= N; ++i) {
+            if (count[i] == N - 1) return i;
+        }
+        return -1;
+    }
+```
+
+**C++:**
+```
+    int findJudge(int N, vector<vector<int>>& trust) {
+        vector<int> count(N + 1, 0);
+        for (auto& t : trust)
+            count[t[0]]--, count[t[1]]++;
+        for (int i = 1; i <= N; ++i) {
+            if (count[i] == N - 1) return i;
+        }
+        return -1;
+    }
+```
+
+**Python:**
+```
+    def findJudge(self, N, trust):
+        count = [0] * (N + 1)
+        for i, j in trust:
+            count[i] -= 1
+            count[j] += 1
+        for i in range(1, N + 1):
+            if count[i] == N - 1:
+                return i
+        return -1
+```
+

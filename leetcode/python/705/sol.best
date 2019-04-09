@@ -1,0 +1,12 @@
+
+can you guys think before doing?
+
+https://leetcode.com/problems/design-hashset/discuss/170092
+
+* Lang:    cpp
+* Author:  fluency03
+* Votes:   30
+
+the purpose of this leetcode question is not to pass all the test.  it is for understanding how hashset or hashmap works under the hood. 
+
+So please do not post any answers using built-in hashset/hashmap, or just use a single array. Ask yourself, are you going to do the same stupid thing if this is the question you are asked in a real interview?

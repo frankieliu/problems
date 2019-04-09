@@ -1,0 +1,26 @@
+
+Simple Java HashMap Solution
+
+https://leetcode.com/problems/longest-harmonious-subsequence/discuss/103497
+
+* Lang:    cpp
+* Author:  andyreadsall
+* Votes:   47
+
+- The idea is to keep a count of all the numbers, and eventually for each of the numbers, check if there's any adjacent number. If it's present, then add the count of both - since these two numbers form subsequence in the array. 
+
+**Update : from @harkness comment, we don't need to check both +1 and -1;**
+
+    public int findLHS(int[] nums) {
+        Map<Long, Integer> map = new HashMap<>();
+        for (long num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int result = 0;
+        for (long key : map.keySet()) {
+            if (map.containsKey(key + 1)) {
+                result = Math.max(result, map.get(key + 1) + map.get(key));
+            }
+        }
+        return result;
+    }

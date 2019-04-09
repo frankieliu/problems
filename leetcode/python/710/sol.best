@@ -1,0 +1,51 @@
+
+Java O(B) / O(1), HashMap
+
+https://leetcode.com/problems/random-pick-with-blacklist/discuss/144624
+
+* Lang:    cpp
+* Author:  CAFEBABY
+* Votes:   79
+
+Suppose N=10, blacklist=[3, 5, 8, 9], re-map 3 and 5 to 7 and 6.
+![image](https://s3-lc-upload.s3.amazonaws.com/users/cafebaby/image_1530657902.png)
+
+```
+class Solution {
+    
+    // N: [0, N)
+    // B: blacklist
+    // B1: < N
+    // B2: >= N
+    // M: N - B1
+    int M;
+    Random r;
+    Map<Integer, Integer> map;
+
+    public Solution(int N, int[] blacklist) {
+        map = new HashMap();
+        for (int b : blacklist) // O(B)
+            map.put(b, -1);
+        M = N - map.size();
+        
+        for (int b : blacklist) { // O(B)
+            if (b < M) { // re-mapping
+                while (map.containsKey(N - 1))
+                    N--;
+                map.put(b, N - 1);
+                N--;
+            }
+        }
+        
+        r = new Random();
+    }
+    
+    public int pick() {
+        int p = r.nextInt(M);
+        if (map.containsKey(p))
+            return map.get(p);
+        return p;
+    }
+}
+```
+

@@ -1,0 +1,33 @@
+
+[Java] straight forward stack solution.
+
+https://leetcode.com/problems/validate-stack-sequences/discuss/197667
+
+* Lang:    cpp
+* Author:  rock
+* Votes:   23
+
+Simulate stack operations:
+Loop through the `pushed` array,
+1. Keep pushing `pushed` elements into stack if the top element on the stack is different from the current one of `popped`;
+2. Keep poping out of the top element if it is same as the current one of `popped`;
+3. Check if the stack is empty after loop.
+
+**Analysis:** 
+Let `n` be `pushed.length`
+the while loop at most run `n` times since the stack at most pop out `n` times.
+**Time & space: O(n).**
+```
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Stack<Integer> stk = new Stack<>();
+        int i = 0;
+        for (int p : pushed) {
+            stk.push(p);
+            while (!stk.isEmpty() && stk.peek() == popped[i]) {
+                stk.pop();
+                ++i;
+            }
+        }
+        return stk.empty();
+    }
+```	

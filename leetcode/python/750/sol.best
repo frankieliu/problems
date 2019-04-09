@@ -1,0 +1,27 @@
+
+short JAVA AC solution (O(m^2 * n)) with explanation.
+
+https://leetcode.com/problems/number-of-corner-rectangles/discuss/110196
+
+* Lang:    cpp
+* Author:  jun1013
+* Votes:   124
+
+To find an axis-aligned rectangle, my idea is to fix two rows (or two columns) first, then check column by column to find "1" on both rows. Say you find n pairs, then just pick any 2 of those to form an axis-aligned rectangle (calculating how many in total is just high school math, hint: combination). 
+```
+class Solution {
+    public int countCornerRectangles(int[][] grid) {
+        int ans = 0;
+        for (int i = 0; i < grid.length - 1; i++) {
+            for (int j = i + 1; j < grid.length; j++) {
+                int counter = 0;
+                for (int k = 0; k < grid[0].length; k++) {
+                    if (grid[i][k] == 1 && grid[j][k] == 1) counter++;
+                }
+                if (counter > 0) ans += counter * (counter - 1) / 2;
+            }
+        }
+        return ans;
+    }
+}
+```

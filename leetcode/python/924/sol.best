@@ -1,0 +1,80 @@
+
+[Python] Union Found
+
+https://leetcode.com/problems/minimize-malware-spread/discuss/181129
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   19
+
+Union found all nodes.
+Count the union size of each union set.
+Count the malware number of each union set.
+
+Return the biggest union\'s malware if there is one and only one malware.
+If no such union that has and has only one malware,
+return the malware with minimum index.
+
+
+**Time Complexity**:
+O(N^2)
+
+**C++:**
+```
+    vector<int> parents;
+    int minMalwareSpread(vector<vector<int>>& graph, vector<int>& initial) {
+        int n = graph.size();
+        for (int i = 0; i < n; ++i) parents.push_back(i);
+        for (int i = 0; i < n; ++i)
+            for (int j = i + 1; j < n; ++j)
+                if (graph[i][j]) uni(i, j);
+        vector<int> area(n, 0), malware(n, 0);
+        for (int i = 0; i < n; ++i) area[find(i)]++;
+        for (int i : initial) malware[find(i)]++;
+        vector<int> res = {1, 0};
+        for (int i : initial)
+            res = min(res, {(malware[find(i)] == 1 ) * (-area[find(i)]), i});
+        return res[1];
+    }
+
+    int find(int x) {
+        if (x != parents[x])
+            parents[x] = find(parents[x]);
+        return parents[x];
+    }
+    void uni(int x, int y) {
+        parents[find(x)] = find(y);
+    }
+```
+**Python:**
+```
+    def minMalwareSpread(self, graph, initial):
+        def find(x):
+            if x != parents[x]:
+                parents[x] = find(parents[x])
+            return parents[x]
+        def union(x, y):
+            parents[find(x)] = find(y)
+        # init
+        n = len(graph)
+        parents = range(n)
+        # union
+        for i in range(n):
+            for j in range(i + 1, n):
+                if graph[i][j] == 1:
+                    union(i, j)
+        area = collections.Counter(find(i) for i in range(n))
+        malware = collections.Counter(find(i) for i in initial)
+        return min(initial, key=lambda i: [(malware[find(i)] == 1) * -area[find(i)], i])
+```
+The last line equals to :
+```
+        save, res = 0, min(initial)
+        for i in initial:
+            if malware[find(i)] == 1:
+                if area[find(i)] > save:
+                    save, res = area[find(i)], i
+                elif area[find(i)] == save:
+                    res = min(res, i)
+        return res
+```

@@ -1,0 +1,26 @@
+
+No depth variable, no multiplication
+
+https://leetcode.com/problems/nested-list-weight-sum-ii/discuss/83641
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   284
+
+Inspired by [lzb700m's solution](https://leetcode.com/discuss/110042/share-my-2ms-intuitive-one-pass-bfs-solution) and [one of mine](https://leetcode.com/discuss/95184/no-depth-variable). Instead of multiplying by depth, add integers multiple times (by going level by level and adding the unweighted sum to the weighted sum after each level).
+
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        int unweighted = 0, weighted = 0;
+        while (!nestedList.isEmpty()) {
+            List<NestedInteger> nextLevel = new ArrayList<>();
+            for (NestedInteger ni : nestedList) {
+                if (ni.isInteger())
+                    unweighted += ni.getInteger();
+                else
+                    nextLevel.addAll(ni.getList());
+            }
+            weighted += unweighted;
+            nestedList = nextLevel;
+        }
+        return weighted;
+    }

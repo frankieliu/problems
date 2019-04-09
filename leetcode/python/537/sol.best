@@ -1,0 +1,24 @@
+
+c++ using stringstream
+
+https://leetcode.com/problems/complex-number-multiplication/discuss/100440
+
+* Lang:    cpp
+* Author:  beetlecamera
+* Votes:   48
+
+stringstream is very useful to extract num from a string
+
+```
+class Solution {
+public:
+    string complexNumberMultiply(string a, string b) {
+        int ra, ia, rb, ib;
+        char buff;
+        stringstream aa(a), bb(b), ans;
+        aa >> ra >> buff >> ia >> buff;
+        bb >> rb >> buff >> ib >> buff;
+        ans << ra*rb - ia*ib << "+" << ra*ib + rb*ia << "i";
+        return ans.str();
+    }
+};

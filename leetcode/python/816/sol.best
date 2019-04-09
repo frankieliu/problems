@@ -1,0 +1,86 @@
+
+[C++/Java/Python] Solution with Explanation
+
+https://leetcode.com/problems/ambiguous-coordinates/discuss/123851
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   38
+
+We can split S to two parts for two coordinates.
+Then we use sub function ```f``` to find all possible strings for each coordinate.
+
+**In sub functon f(S)**
+if S == "": return []
+if S == "0": return [S]
+if S == "0XXX0": return []
+if S == "0XXX": return ["0.XXX"]
+if S == "XXX0": return [S]
+return [S, "X.XXX", "XX.XX", "XXX.X"...]
+
+Then we add the product of two lists to result.
+
+**Time complexity**
+O(N^3) with N <= 10
+
+Provement:
+![image](https://s3-lc-upload.s3.amazonaws.com/users/lee215/image_1523920967.png)
+
+
+C++:
+```
+    vector<string> ambiguousCoordinates(string S) {
+        int n = S.size();
+        vector<string> res;
+        for (int i = 1; i < n - 2; ++i) {
+            vector<string> A = f(S.substr(1, i)), B = f(S.substr(i + 1, n - 2 - i));
+            for (auto & a : A) for (auto & b : B) res.push_back("(" + a + ", " + b + ")");
+        }
+        return res;
+    }
+    vector<string> f(string S) {
+        int n = S.size();
+        if (n == 0 || (n > 1 && S[0] == \'0\' && S[n - 1] == \'0\')) return {};
+        if (n > 1 && S[0] == \'0\') return {"0." + S.substr(1)};
+        if (n == 1 || S[n - 1] == \'0\') return {S};
+        vector<string> res = {S};
+        for (int i = 1; i < n; ++i) res.push_back(S.substr(0, i) + \'.\' + S.substr(i));
+        return res;
+    }
+```
+**Java:**
+```
+    public List<String> ambiguousCoordinates(String S) {
+        int n = S.length();
+        List<String> res = new ArrayList();
+        for (int i = 1; i < n - 2; ++i) {
+            List<String> A = f(S.substring(1, i + 1)), B = f(S.substring(i + 1, n - 1));
+            for (String a : A) for (String b : B) res.add("(" + a + ", " + b + ")");
+        }
+        return res;
+    }
+    public List<String> f(String S) {
+        int n = S.length();
+        List<String> res = new ArrayList();
+        if (n == 0 || (n > 1 && S.charAt(0) == \'0\' && S.charAt(n - 1) == \'0\')) return res;
+        if (n > 1 && S.charAt(0) == \'0\') {
+            res.add("0." + S.substring(1));
+            return res;
+        }
+        res.add(S);
+        if (n == 1 || S.charAt(n - 1) == \'0\') return res;
+        for (int i = 1; i < n; ++i) res.add(S.substring(0, i) + \'.\' + S.substring(i));
+        return res;
+    }
+```
+**Python:**
+```
+    def ambiguousCoordinates(self, S):
+        S = S[1:-1]
+        def f(S):
+            if not S or len(S) > 1 and S[0] == S[-1] == \'0\': return []
+            if S[-1] == \'0\': return [S]
+            if S[0] == \'0\': return [S[0] + \'.\' + S[1:]]
+            return [S] + [S[:i] + \'.\' + S[i:] for i in range(1, len(S))]
+        return [\'(%s, %s)\' % (a, b) for i in range(len(S)) for a, b in itertools.product(f(S[:i]), f(S[i:]))]
+```

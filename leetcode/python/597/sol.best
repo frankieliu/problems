@@ -1,0 +1,14 @@
+
+Easy no subquery AC solution
+
+https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/discuss/103581
+
+* Lang:    cpp
+* Author:  Joy4fun
+* Votes:   10
+
+
+	select 
+	ifnull((select round(count(distinct requester_id,accepter_id)/count(distinct sender_id, send_to_id),2)
+	from request_accepted, friend_request),0)
+	as accept_rate

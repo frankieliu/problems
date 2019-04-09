@@ -1,0 +1,75 @@
+
+[Java/C++/Python] Binary Search
+
+https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/discuss/256729
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   50
+
+Given the number of bags, 
+return the minimum capacity of each bag, 
+so that we can put items one by one into all bags.
+
+Similar as
+875. Koko Eating Bananas
+774. Minimize Max Distance to Gas Station
+
+**Java**
+```
+    public int shipWithinDays(int[] weights, int D) {
+        int left = 0, right = 0;
+        for (int w: weights) {
+            left = Math.max(left, w);
+            right += w\uFF1B
+        }
+        while (left < right) {
+            int mid = (left + right) / 2, need = 1, cur = 0;
+            for (int w: weights) {
+                if (cur + w > mid) {
+                    need += 1;
+                    cur = 0;
+                }
+                cur += w;
+            }
+            if (need > D) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+```
+
+**C++**
+```
+    int shipWithinDays(vector<int>& weights, int D) {
+        int left = 0, right = 25000000;
+        for (int w: weights)
+            left = max(left, w);
+        while (left < right) {
+            int mid = (left + right) / 2, need = 1, cur = 0;
+            for (int i = 0; i < weights.size() && need <= D; cur += weights[i++])
+                if (cur + weights[i] > mid)
+                    cur = 0, need++;
+            if (need > D) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+```
+
+**Python:**
+```
+    def shipWithinDays(self, weights, D):
+        left, right = max(weights), sum(weights)
+        while left < right:
+            mid, need, cur = (left + right) / 2, 1, 0
+            for w in weights:
+                if cur + w > mid:
+                    need += 1
+                    cur = 0
+                cur += w
+            if need > D: left = mid + 1
+            else: right = mid
+        return left
+```
+

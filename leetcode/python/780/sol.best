@@ -1,0 +1,53 @@
+
+[Java/C++/Python] Modulo from the End
+
+https://leetcode.com/problems/reaching-points/discuss/114856
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   46
+
+**Basic idea:**
+If we start from ```sx,sy```, it will be hard to find ```tx, ty```.
+If we start from ```tx,ty```, we can find only one path to go back to ```sx, sy```.
+I cut down one by one at first and I got TLE. So I came up with remainder.
+
+**First line:**
+if 2 target points are still bigger than 2 starting point, we reduce target points.
+**Second line:**
+check if we reduce target points to (x, y+kx) or (x+ky, y)
+
+**Time complexity**
+I will say ```O(logN)``` where ```N = max(tx,ty)```.
+
+
+**C++:**
+```
+    bool reachingPoints(int sx, int sy, int tx, int ty) {
+        while (sx < tx && sy < ty)
+            if (tx < ty) ty %= tx;
+            else tx %= ty;
+        return sx == tx && sy <= ty && (ty - sy) % sx == 0 ||
+               sy == ty && sx <= tx && (tx - sx) % sy == 0;
+    }
+```
+
+**Java:**
+```
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        while (sx < tx && sy < ty)
+            if (tx < ty) ty %= tx;
+            else tx %= ty;
+        return sx == tx && sy <= ty && (ty - sy) % sx == 0 ||
+               sy == ty && sx <= tx && (tx - sx) % sy == 0;
+    }
+```
+
+**Python:**
+```
+    def reachingPoints(self, sx, sy, tx, ty):
+        while sx < tx and sy < ty:
+            tx, ty = tx % ty, ty % tx
+        return sx == tx and sy < ty and (ty - sy) % sx == 0 or \\
+               sy == ty and sx < tx and (tx - sx) % sy == 0
+```

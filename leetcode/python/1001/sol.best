@@ -1,0 +1,73 @@
+
+C++ with picture, similar to N-Queens
+
+https://leetcode.com/problems/grid-illumination/discuss/242898
+
+* Lang:    cpp
+* Author:  votrubac
+* Votes:   33
+
+> *I did not look at the problem constraints and implemented a simple solution where everything is tracked in a grid. Obviously, I got MLE. Stepping on the same rake again and again; could have saved 20 minutes in the contest if I read the description carefully...*
+
+We can use a similar technique as in [N-Queens](https://leetcode.com/problems/n-queens/). We track illuminated ```x``` and ```y``` coordinates, as well as two diagonals. Ascending (left-to-right) diagonal ```a_d``` is identified by the sum of the coordinates, and descending ```d_d``` - by their difference.
+
+For example, for the light in position ```[3, 2]```, we would record ```++x[3]```, ```++y[2]```, ```++a_d[5]```, and ```++d_d[1]```. Since lamps can be removed later, we use hashmap (not a hashset) to track how many lamps are illuminating coordinates and diagonals. Also, we use another hashmap ```ls``` to track lamp positions.
+
+![image](https://assets.leetcode.com/users/votrubac/image_1550986316.png)
+
+Now, when we process the queries, we just need to check if any coordinate or diagonal is illuminated. If it is, we need to check if there are lamps needing to be turned off. When turning off a lamp, we remove it\'s coordinates from ```ls``` and  decrement the count of the corresponding coordinates and diagonals.
+> Note that if the queried position is not illuminated, we do not need to check for lamps.
+```
+vector<int> gridIllumination(int N, vector<vector<int>>& lamps, vector<vector<int>>& queries) {
+  vector<int> res;
+  unordered_map<int, int> x, y, a_d, d_d;
+  unordered_map<int, unordered_set<int>> ls;
+  for (auto l : lamps) {
+    auto i = l[0], j = l[1];
+    ++x[i], ++y[j], ++a_d[i + j], ++d_d[i - j], ls[i].insert(j);
+  }
+  for (auto q : queries) {
+    auto i = q[0], j = q[1];
+    if (x[i] || y[j] || a_d[i + j] || d_d[i - j]) {
+      res.push_back(1);
+      for (auto li = i - 1; li <= i + 1; ++li)
+        for (auto lj = j - 1; lj <= j + 1; ++lj){
+          if (ls[li].erase(lj)) {
+            --x[li], --y[lj], --a_d[li + lj], --d_d[li - lj];
+          }
+      }
+    }
+    else res.push_back(0);
+  }
+  return res;
+}
+```
+You can also use ```set<pair<int, int>>``` to track lamps. I found the runtime be similar to ```unordered_map<int, unordered_set<int>>```. Alternatively, you can define a hash function for the pair (STL does not provide one) and use ```unordered_set<pair<int, int>>```. This implementation is ~10% faster comparing to hashmap and set.
+```
+struct pairHash {
+  size_t operator()(const pair<int, int> &x) const { return x.first ^ x.second; }
+};
+vector<int> gridIllumination(int N, vector<vector<int>>& lamps, vector<vector<int>>& queries) {
+  vector<int> res;
+  unordered_map<int, int> x, y, a_d, d_d;
+  unordered_set<pair<int, int>, pairHash> ls;
+  for (auto l : lamps) {
+    auto i = l[0], j = l[1];
+    ++x[i], ++y[j], ++a_d[i + j], ++d_d[i - j], ls.insert({ i, j });
+  }
+  for (auto q : queries) {
+    auto i = q[0], j = q[1];
+    if (x[i] || y[j] || a_d[i + j] || d_d[i - j]) {
+      res.push_back(1);
+      for (int li = i - 1; li <= i + 1; ++li)
+        for (int lj = j - 1; lj <= j + 1; ++lj) {
+          if (ls.erase({li, lj})) {
+            --x[li], --y[lj], --a_d[li + lj], --d_d[li - lj];
+          }
+        }
+    }
+    else res.push_back(0);
+  }
+  return res;
+}
+```

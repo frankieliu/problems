@@ -1,0 +1,35 @@
+
+O(log n) Java, 1 line O(log(n) + k) Ruby
+
+https://leetcode.com/problems/find-k-closest-elements/discuss/106419
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   130
+
+I binary-search for where the resulting elements start in the array. It's the first index `i` so that `arr[i]` is better than `arr[i+k]` (with "better" meaning closer to or equally close to `x`). Then I just return the `k` elements starting there.
+```
+def find_closest_elements(arr, k, x)
+  arr[(0..arr.size).bsearch { |i| x - arr[i] <= (arr[i+k] || 1/0.0) - x }, k]
+end
+```
+I think that's simpler than binary-searching for `x` and then expanding to the left and to the right like I've seen in other binary search solutions.
+
+---
+
+Here's a Java version without using the library's binary search:
+
+    public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
+        int lo = 0, hi = arr.size() - k;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (x - arr.get(mid) > arr.get(mid+k) - x)
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        return arr.subList(lo, lo + k);
+    }
+The binary search costs O(log n) (actually also just O(log (n-k)) and the `subList` call probably only takes O(1). As @sagimann [pointed out](https://discuss.leetcode.com/post/211008), `subList` [returns a view](https://docs.oracle.com/javase/8/docs/api/java/util/List.html#subList-int-int-), not a separate copy. So it should only take O(1). Can be seen for example in `ArrayList`'s [subList](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/ArrayList.java#l980) and the [`SubList` constructor](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/util/ArrayList.java#l1001) it calls. I also checked `LinkedList`, it gets its `subList` method inherited from `AbstractList`, where it also takes only O(1). And `AbstractList` is a basis for most lists.
+
+**Edit:** I also [implemented it in Go](https://discuss.leetcode.com/topic/99831/o-log-n) now, to make it O(log n). **Edit 2:** Ha, didn't have to do that, as the Java version apparently already was O(log n) (I didn't originally know Java returns a view, only added that now). **Edit 3:** Lol, I had mistakenly written "Python" in the title instead of "Ruby" but apparently nobody noticed (and it's at 1800 views). Fixed that now.

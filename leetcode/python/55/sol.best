@@ -1,0 +1,17 @@
+
+Linear and simple solution in C++
+
+https://leetcode.com/problems/jump-game/discuss/20917
+
+* Lang:    cpp
+* Author:  alexander7
+* Votes:   318
+
+I just iterate and update the maximal index that I can reach
+
+    bool canJump(int A[], int n) {
+        int i = 0;
+        for (int reach = 0; i < n && i <= reach; ++i)
+            reach = max(i + A[i], reach);
+        return i == n;
+    }

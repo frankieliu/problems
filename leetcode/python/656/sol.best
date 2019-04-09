@@ -1,0 +1,49 @@
+
+C++, DP, O(nB) time O(n) space
+
+https://leetcode.com/problems/coin-path/discuss/106295
+
+* Lang:    cpp
+* Author:  zestypanda
+* Votes:   28
+
+This is a classic DP problem. dp[k] (starting from k = 0) is the minimum coins from A*k+1* to A*n*, and pos[k] is the next place to jump from A*k+1*.
+
+If working backward from dp[n-1] to dp[0], and considering smaller index first, i.e. i+1 to i+B, there is no need to worry about lexicographical order. I argue pos[k] always holds the lexicographically smallest path from k to n-1, i.e. from A*k+1* to A*n*. The prove is as below. 
+
+Clearly, when k = n-1, it is true because there is only 1 possible path, which is [n]. When k = i and i < n-1, we search for an index j, which has smallest cost or smallest j if the same cost. If there are >= 2 paths having the same minimum cost, for example,
+P = [k+1, j+1, ..., n]
+Q = [k+1, m+1, ..., n] (m > j)
+The path P with smaller index j is always the lexicographically smaller path. 
+So the argument is true by induction.    
+```
+class Solution {
+public:
+    vector<int> cheapestJump(vector<int>& A, int B) {
+        vector<int> ans;
+        if (A.empty() || A.back() == -1) return ans;
+        int n = A.size();
+        vector<int> dp(n, INT_MAX), pos(n, -1);
+        dp[n-1] = A[n-1];
+        // working backward
+        for (int i = n-2; i >= 0; i--) {
+            if (A[i] == -1) continue;
+            for (int j = i+1; j <= min(i+B, n-1); j++) {
+                if (dp[j] == INT_MAX) continue;
+                if (A[i]+dp[j] < dp[i]) {
+                    dp[i] = A[i]+dp[j];
+                    pos[i] = j;
+                }
+            }
+        }
+        // cannot jump to An
+        if (dp[0] == INT_MAX) return ans;
+        int k = 0;
+        while (k != -1) {
+            ans.push_back(k+1);
+            k = pos[k];
+        }
+        return ans;
+    }
+};
+```

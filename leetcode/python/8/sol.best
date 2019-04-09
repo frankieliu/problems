@@ -1,0 +1,10 @@
+
+Such a shitty problem
+
+https://leetcode.com/problems/string-to-integer-atoi/discuss/4640
+
+* Lang:    cpp
+* Author:  shuangling
+* Votes:   436
+
+The description is not clear not all unless you click on the hint. What's the point of testing all the "+-1" or "-+1" without any input spec nor any situation where input is obtained.

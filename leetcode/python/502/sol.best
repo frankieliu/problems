@@ -1,0 +1,43 @@
+
+Very Simple (Greedy) Java Solution using two PriorityQueues
+
+https://leetcode.com/problems/ipo/discuss/98210
+
+* Lang:    cpp
+* Author:  shawngao
+* Votes:   78
+
+The idea is each time we find a project with ```max``` profit and within current capital capability.
+Algorithm:
+1. Create (capital, profit) pairs and put them into PriorityQueue ```pqCap```. This PriorityQueue sort by capital increasingly.
+2. Keep polling pairs from ```pqCap``` until the project out of current capital capability. Put them into 
+PriorityQueue ```pqPro``` which sort by profit decreasingly.
+3. Poll one from ```pqPro```, it's guaranteed to be the project with ```max``` profit and within current capital capability. Add the profit to capital ```W```.
+4. Repeat step 2 and 3 till finish ```k``` steps or no suitable project (pqPro.isEmpty()).
+
+Time Complexity: For worst case, each project will be inserted and polled from both PriorityQueues once, so the overall runtime complexity should be ```O(NlgN)```, N is number of projects.
+
+```
+public class Solution {
+    public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
+        PriorityQueue<int[]> pqCap = new PriorityQueue<>((a, b) -> (a[0] - b[0]));
+        PriorityQueue<int[]> pqPro = new PriorityQueue<>((a, b) -> (b[1] - a[1]));
+        
+        for (int i = 0; i < Profits.length; i++) {
+            pqCap.add(new int[] {Capital[i], Profits[i]});
+        }
+        
+        for (int i = 0; i < k; i++) {
+            while (!pqCap.isEmpty() && pqCap.peek()[0] <= W) {
+                pqPro.add(pqCap.poll());
+            }
+            
+            if (pqPro.isEmpty()) break;
+            
+            W += pqPro.poll()[1];
+        }
+        
+        return W;
+    }
+}
+```

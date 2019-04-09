@@ -1,0 +1,15 @@
+
+Python 1-line Check Permutations, O(24)
+
+https://leetcode.com/problems/largest-time-for-given-digits/discuss/200517
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   16
+
+Check All Valid Permutation, O(24)
+```
+    def largestTimeFromDigits(self, A):
+        return max(["%d%d:%d%d" % t for t in itertools.permutations(A) if t[:2] < (2, 4) and t[2] < 6] or [""])
+```
+

@@ -1,0 +1,16 @@
+
+Accepted and easy-to-understand solution
+
+https://leetcode.com/problems/managers-with-at-least-5-direct-reports/discuss/102697
+
+* Lang:    cpp
+* Author:  crystal.huangjin
+* Votes:   10
+
+```
+select name from employee 
+where id in 
+(select managerId from Employee
+group by managerId
+having count(managerId)>=5) 
+```

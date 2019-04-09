@@ -1,0 +1,96 @@
+
+[Java/C++/Python] Two HashMap
+
+https://leetcode.com/problems/vowel-spellchecker/discuss/211189
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   51
+
+For each word in the wordlist,
+get its the lower pattern and devowel pattern,
+
+For each lower pattern, record the first such match to hashmap `cap`.
+For each vowel pattern, record the first such match to hashmap `vowel`.
+
+For each query,
+check if it\'s in the `words` set,
+check if there is a match in `cap`,
+check if there is a match in `vowel`,
+otherwise return `""`.
+
+
+**Java:**
+```
+    public String[] spellchecker(String[] wordlist, String[] queries) {
+        Set<String> words = new HashSet<>(Arrays.asList(wordlist));
+        HashMap<String, String> cap = new HashMap<>();
+        HashMap<String, String> vowel = new HashMap<>();
+        for (String w : wordlist) {
+            String lower = w.toLowerCase(), devowel = lower.replaceAll("[aeiou]", "#");
+            cap.putIfAbsent(lower, w);
+            vowel.putIfAbsent(devowel, w);
+        }
+        for (int i = 0; i < queries.length; ++i) {
+            if (words.contains(queries[i])) continue;
+            String lower = queries[i].toLowerCase(), devowel = lower.replaceAll("[aeiou]", "#");
+            if (cap.containsKey(lower)) {
+                queries[i] = cap.get(lower);
+            } else if (vowel.containsKey(devowel)) {
+                queries[i] = vowel.get(devowel);
+            } else {
+                queries[i] = "";
+            }
+        }
+        return queries;
+    }
+```
+
+**C++:**
+```
+    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+        set<string> words(wordlist.begin(), wordlist.end());
+        unordered_map<string, string> cap, vowel;
+        for (string w : wordlist) {
+            string lower = tolow(w), devowel = todev(w);
+            cap.insert({lower, w});
+            vowel.insert({devowel, w});
+        }
+        for (int i = 0; i < queries.size(); ++i) {
+            if (words.count(queries[i])) continue;
+            string lower = tolow(queries[i]), devowel = todev(queries[i]);
+            if (cap.count(lower)) {
+                queries[i] = cap[lower];
+            } else if (vowel.count(devowel)) {
+                queries[i] = vowel[devowel];
+            } else {
+                queries[i] = "";
+            }
+        }
+        return queries;
+    }
+
+    string tolow(string w) {
+        for (auto & c: w)
+            c = tolower(c);
+        return w;
+    }
+
+    string todev(string w) {
+        w = tolow(w);
+        for (auto & c: w)
+            if (c == \'a\' || c == \'e\' || c == \'i\' || c == \'o\' || c == \'u\')
+                c = \'#\';
+        return w;
+    }
+```
+
+**Python:**
+```
+    def spellchecker(self, wordlist, queries):
+        words = {w: w for w in wordlist}
+        cap = {w.lower(): w for w in wordlist[::-1]}
+        vowel = {re.sub("[aeiou]", \'#\', w.lower()): w for w in wordlist[::-1]}
+        return [words.get(w) or cap.get(w.lower()) or vowel.get(re.sub("[aeiou]", \'#\', w.lower())) or "" for w in queries]
+```
+

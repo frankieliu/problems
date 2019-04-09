@@ -1,0 +1,60 @@
+
+[Java/C++/Python] Straight Forward
+
+https://leetcode.com/problems/univalued-binary-tree/discuss/211190
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   18
+
+If a node has children,
+every child should be unival tree and has same value.
+
+**Java:**
+```
+    public boolean isUnivalTree(TreeNode root) {
+        if (root.left != null) {
+            if (!isUnivalTree(root.left))
+                return false;
+            if (root.left.val != root.val)
+                return false;
+        }
+
+        if (root.right != null) {
+            if (!isUnivalTree(root.right))
+                return false;
+            if (root.right.val != root.val)
+                return false;
+        }
+        return true;
+    }
+```
+
+**Java:**
+```
+    public boolean isUnivalTree(TreeNode root) {
+        return (root.left == null || root.left.val == root.val && isUnivalTree(root.left)) &&
+               (root.right == null || root.right.val == root.val && isUnivalTree(root.right));
+    }
+```
+
+**C++:**
+```
+    bool isUnivalTree(TreeNode* root) {
+        return (!root->left || root->left->val == root->val && isUnivalTree(root->left)) &&
+               (!root->right || root->right->val == root->val && isUnivalTree(root->right));
+    }
+```
+
+In python solution,
+I use a dfs recusion to checked
+if all nodes in the tree has value equal to `root.val`.
+
+**Python:**
+```
+    def isUnivalTree(self, root):
+        def dfs(node):
+            return not node or node.val == root.val and dfs(node.left) and dfs(node.right)
+        return dfs(root)
+```
+

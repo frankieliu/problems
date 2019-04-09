@@ -1,0 +1,72 @@
+
+Java DP O(3 * 2^16 * n) time O(2^16) space
+
+https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/discuss/226721
+
+* Lang:    cpp
+* Author:  wangzi6147
+* Votes:   17
+
+**Update:**
+
+Thanks for the inspiring solutions in the comments using `HashMap` which runs `O(n^2)` time. I didn\'t come up with such solutions in the contest. That\'s really efficient for this problem specifically. However, I think my solution is more scalable in terms of **the number of indices to be picked** is very large. Say it\'s `M` instead of `3`, the runtime is `O(M * 2^16 * n)`.
+
+Here I updated an `O(M * 2^16)` space version to help understanding, where `dp[i][j]` represents the number of combinations if we pick `i` numbers where the `AND` of these numbers is `j`:
+
+```
+class Solution {
+    public int countTriplets(int[] A) {
+        int N = 1 << 16, M = 3;
+        int[][] dp = new int[M + 1][N];
+        dp[0][N - 1] = 1;
+        for (int i = 0; i < M; i++) {
+            for (int k = 0; k < N; k++) {
+                for (int a : A) {
+                    dp[i + 1][k & a] += dp[i][k];
+                }
+            }
+        }
+        return dp[M][0];
+    }
+}
+```
+
+Appreciate for other solutions again!
+
+**Original Post:**
+
+For each `i`, assume that if we pick `i` numbers from `A` array(allow duplicates), the `AND` of these `i` numbers is `k`.
+Then `dp[k]` represents the number of combinations for such `i` and `k`. We update this `dp` array for 3 times.
+
+Example:
+`i=2` means we pick `2` numbers.
+`dp[10] = 5` means when we pick `2` numbers, the count of combinations is `5`, where the `AND` result of such numbers is `10`.
+
+Tricky:
+We initialize the `dp[(1<<16) - 1]` to 1 because the AND result of every number with `(1<<16) - 1` is the number itself.
+
+Time complexity:
+`O(3 * 2^16 * n)`
+
+Space:
+`O(2^16)`
+
+```
+class Solution {
+    public int countTriplets(int[] A) {
+        int N = 1 << 16;
+        int[] dp = new int[N];
+        dp[N - 1] = 1;
+        for (int i = 0; i < 3; i++) {
+            int[] temp = new int[N];
+            for (int k = 0; k < N; k++) {
+                for (int a : A) {
+                    temp[k & a] += dp[k];
+                }
+            }
+            dp = temp;
+        }
+        return dp[0];
+    }
+}
+```

@@ -1,0 +1,27 @@
+
+Java simple O(n) init and O(1) query solution
+
+https://leetcode.com/problems/range-sum-query-immutable/discuss/75192
+
+* Lang:    cpp
+* Author:  arthur13
+* Votes:   159
+
+public class NumArray {
+
+    int[] nums;
+    
+    public NumArray(int[] nums) {
+        for(int i = 1; i < nums.length; i++)
+            nums[i] += nums[i - 1];
+        
+        this.nums = nums;
+    }
+
+    public int sumRange(int i, int j) {
+        if(i == 0)
+            return nums[j];
+        
+        return nums[j] - nums[i - 1];
+    }
+}

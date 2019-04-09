@@ -1,0 +1,14 @@
+
+Python - 1 Liner
+
+https://leetcode.com/problems/transpose-matrix/discuss/146767
+
+* Lang:    cpp
+* Author:  shreyansh94
+* Votes:   40
+
+```
+class Solution(object):
+    def transpose(self, A):
+        return zip(*A)
+```

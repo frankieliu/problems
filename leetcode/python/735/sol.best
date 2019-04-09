@@ -1,0 +1,107 @@
+
+[Java/C++] Clean Code
+
+https://leetcode.com/problems/asteroid-collision/discuss/109694
+
+* Lang:    cpp
+* Author:  alexander
+* Votes:   35
+
+[735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/)
+- at the end, all the negative star has to be on the left, and all the positive star has to be on the right.
+- from the left, a negative star will pass through if no positive star on the left;
+- keep track of all the positive stars moving to the right, the right most one will be the 1st confront the challenge of any future negative star.
+- if it survives, keep going, otherwise, any past positive star will be exposed to the challenge, by being popped out of the stack.
+
+**C++**
+```
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& a) {
+        vector<int> s; // use vector to simulate stack.
+        for (int i = 0; i < a.size(); i++) {
+            if (a[i] > 0 || s.empty() || s.back() < 0) // a[i] is positive star or a[i] is negative star and there is no positive on stack
+                s.push_back(a[i]);
+            else if (s.back() <= -a[i]) { // a[i] is negative star and stack top is positive star
+                if(s.back() < -a[i]) i--; // only positive star on stack top get destroyed, stay on i to check more on stack.
+                s.pop_back(); // destroy positive star on the frontier;
+            } // else : positive on stack bigger, negative star destroyed.
+        }
+        return s;
+    }
+};
+```
+**java**
+```
+class Solution {
+    public int[] asteroidCollision(int[] a) {
+        LinkedList<Integer> s = new LinkedList<>(); // use LinkedList to simulate stack so that we don't need to reverse at end.
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > 0 || s.isEmpty() || s.getLast() < 0)
+                s.add(a[i]);
+            else if (s.getLast() <= -a[i])
+                if (s.pollLast() < -a[i]) i--;
+        }
+        return s.stream().mapToInt(i->i).toArray();
+    }
+}
+```
+
+**More Intuitive Solution**
+The above approach is short but not intuitive, because it handles positive stars on the stack top with less mess than the incoming negative star once a time each loop.
+More intuitively we can pop all positive star with less mass right away using a while loop in side the for loop.
+**Java**
+```
+class Solution {
+    public int[] asteroidCollision(int[] a) {
+        LinkedList<Integer> s = new LinkedList<>();
+        for (int i : a) {
+            if (i > 0)
+                s.add(i);
+            else {
+                while (!s.isEmpty() && s.getLast() > 0 && s.getLast() < -i)
+                    s.pollLast();
+                if (!s.isEmpty() && s.getLast() == -i)
+                    s.pollLast();
+                else if (s.isEmpty() || s.getLast() < 0)
+                    s.add(i);
+            }
+        }
+        return s.stream().mapToInt(i->i).toArray();
+    }
+}
+```
+```
+class Solution {
+    public int[] asteroidCollision(int[] a) {
+        LinkedList<Integer> s = new LinkedList<>(); // use LinkedList to simulate stack so that we don't need to reverse at end.
+        for (int i : a) {
+            while (!s.isEmpty() && s.getLast() > 0 && s.getLast() < -i)
+                s.pollLast();
+            if (s.isEmpty() || i > 0 || s.getLast() < 0)
+                s.add(i);
+            else if (i < 0 && s.getLast() == -i)
+                s.pollLast();
+        }
+        return s.stream().mapToInt(i->i).toArray();
+    }
+}
+```
+**C++**
+```
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& a) {
+        vector<int> s; // use vector to simulate stack.
+        for (int i : a) {
+            while (!s.empty() && s.back() > 0 && s.back() < -i)
+                s.pop_back();
+            if (s.empty() || i > 0 || s.back() < 0)
+                s.push_back(i);
+            else if (i < 0 && s.back() == -i)
+                s.pop_back();
+        }
+        return s;
+    }
+};
+```

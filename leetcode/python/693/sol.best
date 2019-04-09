@@ -1,0 +1,79 @@
+
+Oneliners (C++, Java, Ruby, Python)
+
+https://leetcode.com/problems/binary-number-with-alternating-bits/discuss/108427
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   66
+
+### Solution 1 - Cancel Bits
+
+    bool hasAlternatingBits(int n) {
+        return !((n ^= n/4) & n-1);
+    }
+
+Xor the number with itself shifted right twice and check whether everything after the leading 1-bit became/stayed 0. Xor is 0 iff the bits are equal, so we get 0-bits iff the pair of leading 1-bit and the 0-bit in front of it are repeated until the end.
+
+        000101010
+      ^ 000001010
+      = 000100000
+ 
+### Solution 2 - Complete Bits
+
+    bool hasAlternatingBits(int n) {
+        return !((n ^= n/2) & n+1);
+    }
+
+Xor the number with itself shifted right once and check whether everything after the leading 1-bit became/stayed 1. Xor is 1 iff the bits differ, so we get 1-bits iff starting with the leading 1-bit, the bits alternate between 1 and 0.
+
+        000101010
+      ^ 000010101
+      = 000111111
+
+### Solution 3 - Positive RegEx
+
+    public boolean hasAlternatingBits(int n) {
+        return Integer.toBinaryString(n).matches("(10)*1?");
+    }
+
+It's simple to describe with a regular expression.
+<br>
+
+### Solution 4 - Negative RegEx
+
+    def has_alternating_bits(n)
+      n.to_s(2) !~ /00|11/
+    end
+
+It's even simpler to describe what we **don't** want: two zeros or ones in a row.
+<br>
+
+### Solution 5 - Negative String
+
+    def hasAlternatingBits(self, n):
+        return '00' not in bin(n) and '11' not in bin(n)
+
+Same as before, just not using regex.
+<br>
+
+### Solution 6 - Golfed
+
+    def has_alternating_bits(n)
+      (n^=n/2)&n+1<1
+    end
+
+### Solution 7 - Recursion
+
+    def has_alternating_bits(n)
+      n < 3 || n%2 != n/2%2 && has_alternating_bits(n/2)
+    end
+
+Compare the last two bits and recurse with the last bit shifted out.
+<br>
+
+### Solution 8 - Complete Bits + RegEx
+
+    public boolean hasAlternatingBits(int n) {
+        return Integer.toBinaryString(n ^ n/2).matches("1+");
+    }

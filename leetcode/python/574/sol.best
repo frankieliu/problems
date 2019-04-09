@@ -1,0 +1,26 @@
+
+my accepted solution
+
+https://leetcode.com/problems/winning-candidate/discuss/102855
+
+* Lang:    cpp
+* Author:  zenmzn
+* Votes:   6
+
+```
+Select distinct c.Name As Name
+from Candidate c
+where c.id = (Select CandidateId 
+from Vote
+Group by CandidateId  
+order by count(CandidateId) desc
+limit 1)
+
+
+
+
+
+
+
+
+```

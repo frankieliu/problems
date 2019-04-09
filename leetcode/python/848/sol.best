@@ -1,0 +1,54 @@
+
+[C++/Java/Python] Easy Understood
+
+https://leetcode.com/problems/shifting-letters/discuss/137906
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   15
+
+**Explanation**:
+One pass to count suffix sum of `shifts`.
+One pass to shift letters in string `S`
+You can combine 2 passes as I did in 2-lines C++ version.
+
+**Time Complexity**:
+O(N)
+
+**C++:**
+```
+    string shiftingLetters2(string S, vector<int> shifts) {
+        for (int i = shifts.size() - 2; i >= 0; i--)
+            shifts[i] = (shifts[i] + shifts[i + 1]) % 26;
+        for (int i = 0; i < shifts.size(); i++)
+            S[i] = (S[i] - \'a\' + shifts[i]) % 26 + \'a\';
+        return S;
+    }
+```
+
+**2-lines C++:**
+```
+    string shiftingLetters(string S, vector<int> sh) {
+        for (int i = sh.size() - 1, m = 0; i >= 0; --i, m %= 26)
+            S[i] = ((S[i] - \'a\') + (m += sh[i])) % 26 + \'a\';
+        return S;
+    }
+```
+
+**Java:**
+```
+    public String shiftingLetters(String S, int[] shifts) {
+        StringBuilder res = new StringBuilder(S);
+        for (int i = shifts.length - 2; i >= 0; i--)
+            shifts[i] = (shifts[i] + shifts[i + 1]) % 26;
+        for (int i = 0; i < S.length(); i++)
+            res.setCharAt(i, (char)((S.charAt(i) - \'a\' + shifts[i]) % 26 + \'a\'));
+        return res.toString();
+    }
+```
+**2-lines Python:**
+```
+    def shiftingLetters(self, S, shifts):
+        for i in range(len(shifts) - 1)[::-1]: shifts[i] += shifts[i + 1]
+        return "".join(chr((ord(c) - 97 + s) % 26 + 97) for c, s in zip(S, shifts))
+```

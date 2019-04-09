@@ -1,0 +1,57 @@
+
+[C++/Java/Python] Easy Solution with Explanation
+
+https://leetcode.com/problems/uncommon-words-from-two-sentences/discuss/158967
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   55
+
+**Intuition**:
+No matter how many sentences,
+**uncommon word = words that appears only once**
+
+I recall another similar problem:
+[819. Most Common Word](https://leetcode.com/problems/most-common-word/discuss/123854/)
+So I open my solutions there and copy some codes.
+
+**Explanation**:
+
+Two steps:
+Count words occurrence to a HashMap<string, int> `count`.
+Loop on the hashmap, find words that appears only once.
+
+**C++:**
+```
+    vector<string> uncommonFromSentences(string A, string B) {
+        unordered_map<string, int> count;
+        istringstream iss(A + " " + B);
+        while (iss >> A) count[A]++;
+        vector<string> res;
+        for (auto w: count)
+            if (w.second == 1)
+                res.push_back(w.first);
+        return res;
+    }
+```
+
+**Java:**
+```
+    public String[] uncommonFromSentences(String A, String B) {
+        Map<String, Integer> count = new HashMap<>();
+        for (String w : (A + " " + B).split(" "))
+            count.put(w, count.getOrDefault(w, 0) + 1);
+        ArrayList<String> res = new ArrayList<>();
+        for (String w : count.keySet())
+            if (count.get(w) == 1)
+                res.add(w);
+        return res.toArray(new String[0]);
+    }
+```
+**Python:**
+```
+    def uncommonFromSentences(self, A, B):
+        c = collections.Counter((A + " " + B).split())
+        return [w for w in c if c[w] == 1]
+```
+

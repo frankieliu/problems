@@ -1,0 +1,14 @@
+
+3 line recursive solution
+
+https://leetcode.com/problems/remove-linked-list-elements/discuss/57306
+
+* Lang:    cpp
+* Author:  renzid
+* Votes:   386
+
+    public ListNode removeElements(ListNode head, int val) {
+            if (head == null) return null;
+            head.next = removeElements(head.next, val);
+            return head.val == val ? head.next : head;
+    }

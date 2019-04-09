@@ -1,0 +1,27 @@
+
+Java AC Solution Easy to Understand
+
+https://leetcode.com/problems/valid-word-square/discuss/91125
+
+* Lang:    cpp
+* Author:  star1993
+* Votes:   39
+
+Simply check for each row and columns, return false if not match.
+```
+public class Solution {
+    public boolean validWordSquare(List<String> words) {
+        if(words == null || words.size() == 0){
+            return true;
+        }
+        int n = words.size();
+        for(int i=0; i<n; i++){
+            for(int j=0; j<words.get(i).length(); j++){
+                if(j >= n || words.get(j).length() <= i || words.get(j).charAt(i) != words.get(i).charAt(j))
+                    return false;
+            }
+        }
+        return true;
+    }
+}
+````

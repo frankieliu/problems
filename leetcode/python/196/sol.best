@@ -1,0 +1,61 @@
+
+Simple Solution
+
+https://leetcode.com/problems/delete-duplicate-emails/discuss/55553
+
+* Lang:    cpp
+* Author:  fabrizio3
+* Votes:   203
+
+> DELETE p1  
+FROM Person p1, Person p2  
+WHERE p1.Email = p2.Email AND
+>               p1.Id > p2.Id
+
+EXPLANATION:
+
+ - Take the table in the example
+ 
+**Id | Email**
+
+**1 | john@example.com** 
+
+**2 | bob@example.com** 
+
+**3 | john@example.com**
+
+ - Join the table on itself by the Email and you'll get:
+
+> FROM Person p1, Person p2  WHERE p1.Email = p2.Email
+
+**p1.Id  | p1.Email | p2.Id | p2.Email**
+
+**1	| john@example.com	| 1	| john@example.com**
+
+**3	| john@example.com      | 1	| john@example.com**
+
+**2	| bob@example.com	| 2	| bob@example.com**
+
+**1	| john@example.com	| 3	| john@example.com**
+
+**3	| john@example.com	| 3	| john@example.com**
+
+ - From this results filter the records that have p1.Id>p2.ID, in this case you'll get just one record:
+
+> AND           p1.Id > p2.Id
+
+**p1.Id  | p1.Email | p2.Id | p2.Email**
+
+**3	| john@example.com	| 1	| john@example.com**
+
+ - This is the record we need to delete, and by saying
+
+> DELETE p1
+
+in this multiple-table syntax, only matching rows from the tables listed before the FROM clause are deleted, in this case just
+
+**p1.Id  | p1.Email**
+
+**3	| john@example.com**
+
+will be deleted

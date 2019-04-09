@@ -1,0 +1,78 @@
+
+Java Super Clean Code (Similarity I and II)
+
+https://leetcode.com/problems/sentence-similarity/discuss/109633
+
+* Lang:    cpp
+* Author:  FLAGbigoffer
+* Votes:   26
+
+Sentence Similarity I (Transitive is not allowed.)
+```
+class Solution {
+    public boolean areSentencesSimilar(String[] words1, String[] words2, String[][] pairs) {
+        if (words1.length != words2.length) return false;
+        
+        Map<String, Set<String>> map = new HashMap<>();
+        for (String[] p : pairs) {
+            map.putIfAbsent(p[0], new HashSet<>());
+            map.putIfAbsent(p[1], new HashSet<>());
+            map.get(p[0]).add(p[1]);
+            map.get(p[1]).add(p[0]);
+        }
+        
+        for (int i = 0; i < words1.length; i++) {
+            if (words1[i].equals(words2[i])) continue;
+            if (!map.containsKey(words1[i])) return false;
+            if (!map.get(words1[i]).contains(words2[i])) return false;
+        }
+        
+        return true;
+    }
+}
+```
+
+
+Sentence Similarity II (Transitive is allowed.)
+The idea is simple:
+1. Build the graph according to the similar word pairs. Each word is a graph node.
+2. For each word in words1, we do DFS search to see if the corresponding word is existing in words2.
+
+See the clean code below. Happy coding!
+```
+class Solution {
+    public boolean areSentencesSimilarTwo(String[] words1, String[] words2, String[][] pairs) {
+        if (words1.length != words2.length) {
+            return false;
+        }
+        
+        Map<String, Set<String>> graph = new HashMap<>();
+        for (String[] p : pairs) {
+            graph.putIfAbsent(p[0], new HashSet<>());
+            graph.putIfAbsent(p[1], new HashSet<>());
+            graph.get(p[0]).add(p[1]);
+            graph.get(p[1]).add(p[0]);
+        }
+        
+        for (int i = 0; i < words1.length; i++) {
+            if (words1[i].equals(words2[i])) continue;           
+            if (!graph.containsKey(words1[i])) return false;            
+            if (!dfs(graph, words1[i], words2[i], new HashSet<>())) return false;
+        }
+        
+        return true;
+    }
+    
+    private boolean dfs(Map<String, Set<String>> graph, String source, String target, Set<String> visited) {
+        if (graph.get(source).contains(target)) return true;
+        
+        if (visited.add(source)) {
+            for (String next : graph.get(source)) {
+                if (!visited.contains(next) && dfs(graph, next, target, visited)) 
+                    return true;
+            }
+        }
+        return false;
+    }
+}
+````

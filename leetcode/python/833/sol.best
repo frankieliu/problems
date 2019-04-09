@@ -1,0 +1,74 @@
+
+[C++/Java/Python] Replace S from right to left
+
+https://leetcode.com/problems/find-and-replace-in-string/discuss/130587
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   55
+
+**Intuition**:
+Verify equality of string and change it if necessay.
+The only thing we need take attention is that the string form sources and targets can be different.
+Instead of record the length changement, I sort indexes and do it from right to left.
+(Since `indexes.length <= 100` is really small)
+In this way, the different length won\'t bother us anymore.
+
+
+**Explanation**:
+1. Descending `indexes[]` with tracking its index.
+2. Verify equality of subring in `S` source and source.
+3. Replace `S` if necessay.
+
+
+
+**Time Complexity**:
+O(SN)
+
+Comments from @CanDong:
+Since there won\'t be any overlap in replacement, every character in S will be compared at most once. 
+If using StringBuilder,  it should be O(NlogN + S). 
+
+**C++:**
+```
+    string findReplaceString(string S, vector<int>& indexes, vector<string>& sources, vector<string>& targets) {
+        vector<pair<int, int>> sorted;
+        for (int i = 0 ; i < indexes.size(); i++) sorted.push_back(make_pair(indexes[i], i));
+        sort(sorted.rbegin(), sorted.rend());
+        for (auto ind : sorted) {
+            int i = ind.first;
+            string s = sources[ind.second], t = targets[ind.second];
+            if (S.substr(i, s.length()) == s) S = S.substr(0, i) + t + S.substr(i + s.length());
+        }
+        return S;
+    }
+```
+
+**Java:**
+```
+    public String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+        List<int[]> sorted = new ArrayList<>();
+        for (int i = 0 ; i < indexes.length; i++) sorted.add(new int[]{indexes[i], i});
+        Collections.sort(sorted, Comparator.comparing(i -> -i[0]));
+        for (int[] ind: sorted) {
+            int i = ind[0], j = ind[1];
+            String s = sources[j], t = targets[j];
+            if (S.substring(i, i + s.length()).equals(s)) S = S.substring(0, i) + t + S.substring(i + s.length());
+        }
+        return S;
+    }
+```
+**Python:**
+```
+    def findReplaceString(self, S, indexes, sources, targets):
+        for i, s, t in sorted(zip(indexes, sources, targets), reverse=True):
+            S = S[:i] + t + S[i + len(s):] if S[i:i + len(s)] == s else S
+        return S
+```
+
+**1-line Python:**
+```
+    def findReplaceString(self, S, indexes, sources, targets):
+        return reduce(lambda S, (i, s, t): S[:i] + t + S[i + len(s):] if S[i:i + len(s)] == s else S, sorted(zip(indexes, sources, targets))[::-1], S)
+```
+

@@ -1,0 +1,115 @@
+
+[Java/Python] Find the Loop or Mod 14
+
+https://leetcode.com/problems/prison-cells-after-n-days/discuss/205684
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   37
+
+
+## **Intuition**:
+```
+    public int[] prisonAfterNDays(int[] cells, int N) {
+        while (N > 0) {
+            N--;
+            int[] cells2 = new int[8];
+            for (int i = 1; i < 7; ++i)
+                cells2[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+            cells = cells2;
+        }
+        return cells;
+    }
+```
+
+
+This is right solution, but it will get TLE when `N` is big.
+Note that `cells.length = 8`, and `cells[0]` and `cells[7]` will become `0`.
+In fact, `cells` have only 2 ^ 6 = 64 different states.
+And there will be a loop.
+<br>
+
+
+## Solution 1
+
+We record all seen states.
+Be careful,
+we need transform array to string as the key,
+otherwise it use the reference.
+
+**Java:**
+```
+    public int[] prisonAfterNDays(int[] cells, int N) {
+        Map<String, Integer> seen = new HashMap<>();
+        while (N > 0) {
+            int[] cells2 = new int[8];
+            seen.put(Arrays.toString(cells), N--);
+            for (int i = 1; i < 7; ++i)
+                cells2[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+            cells = cells2;
+            if (seen.containsKey(Arrays.toString(cells))) {
+                N %= seen.get(Arrays.toString(cells)) - N;
+            }
+        }
+        return cells;
+    }
+```
+**Python:**
+```
+    def prisonAfterNDays(self, cells, N):
+        seen = {str(cells): N}
+        while N:
+            seen.setdefault(str(cells), N)
+            N -= 1
+            cells = [0] + [cells[i - 1] ^ cells[i + 1] ^ 1 for i in range(1, 7)] + [0]
+            if str(cells) in seen:
+                N %= seen[str(cells)] - N
+        return cells
+```
+<br>
+
+
+## Solution 2
+I tried to find the pattern of the loop.
+Well, the length of loop can be 1, 7, or 14.
+
+So once we enter the loop, every 14 steps must be the same state.
+
+The length of cells is even,
+so for any state, we can find a previous state.
+So all states are in a loop.
+
+It means that, after a single step from the initial state, we enter the loop.
+
+**Java**
+```
+    public int[] prisonAfterNDays(int[] cells, int N) {
+        for (N = (N - 1) % 14 + 1; N > 0; --N) {
+            int[] cells2 = new int[8];
+            for (int i = 1; i < 7; ++i)
+                cells2[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+            cells = cells2;
+        }
+        return cells;
+    }
+```
+**C++**
+```
+    vector<int> prisonAfterNDays(vector<int>& cells, int N) {
+        for (N = (N - 1) % 14 + 1; N > 0; --N) {
+            vector<int> cells2(8, 0);
+            for (int i = 1; i < 7; ++i)
+                cells2[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+            cells = cells2;
+        }
+        return cells;
+    }
+```
+**Python:**
+```
+    def prisonAfterNDays(self, cells, N):
+        N -= max(N - 1, 0) / 14 * 14
+        for i in xrange(N):
+            cells = [0] + [cells[i - 1] ^ cells[i + 1] ^ 1 for i in range(1, 7)] + [0]
+        return cells
+```

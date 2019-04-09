@@ -1,0 +1,69 @@
+
+JAVA Greedy 6 lines with Explanation
+
+https://leetcode.com/problems/advantage-shuffle/discuss/149822
+
+* Lang:    cpp
+* Author:  caraxin
+* Votes:   50
+
+Contest version below:
+```
+class Solution {
+    public int[] advantageCount(int[] A, int[] B) {
+        Arrays.sort(A);
+        int n=A.length;
+        int[] res= new int[n];
+        PriorityQueue<int[]> pq= new PriorityQueue<>((a,b)->b[0]-a[0]);
+        for (int i=0; i<n; i++) pq.add(new int[]{B[i], i});
+        int lo=0, hi=n-1;
+        while(!pq.isEmpty()){
+            int[] cur= pq.poll();
+            int idx=cur[1], val=cur[0];
+            if (A[hi]>val) res[idx]=A[hi--];
+            else res[idx]=A[lo++];
+        }
+        return res;
+    }  
+}
+```
+![image](https://s3-lc-upload.s3.amazonaws.com/users/caraxin/image_1531625378.png)
+Shorter version just for fun (promise me never use it during an interview):
+```
+class Solution {
+    public int[] advantageCount(int[] A, int[] B) {
+        Arrays.sort(A);
+        PriorityQueue<int[]> pq= new PriorityQueue<>((a,b)->b[0]-a[0]);
+        for (int i=0; i<B.length; i++) pq.add(new int[]{B[i], i});
+        int lo=0, hi=A.length-1, res[] = new int[A.length];
+        while(!pq.isEmpty()) res[pq.peek()[1]]=pq.poll()[0]<A[hi]?A[hi--]:A[lo++];
+        return res;
+    }
+}
+```
+If you are chasing speed, it\'s time to forget lambda, beats 90%:
+```
+class Solution {
+    public int[] advantageCount(int[] A, int[] B) {
+        Arrays.sort(A);
+        int n=A.length;
+        int[] res= new int[n];
+        PriorityQueue<int[]> pq= new PriorityQueue<>(new Comparator<int[]>(){
+            public int compare(int[] a, int[] b){
+                return b[0]-a[0];
+            }
+        });
+        for (int i=0; i<n; i++) pq.add(new int[]{B[i], i});
+        int lo=0, hi=n-1;
+        while(!pq.isEmpty()){
+            int[] cur= pq.poll();
+            int idx=cur[1], val=cur[0];
+            if (A[hi]>val) res[idx]=A[hi--];
+            else res[idx]=A[lo++];
+        }
+        return res;
+    }  
+}
+```
+Happy coding.
+

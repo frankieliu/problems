@@ -1,0 +1,10 @@
+
+Confused
+
+https://leetcode.com/problems/number-of-recent-calls/discuss/204560
+
+* Lang:    cpp
+* Author:  rangitaaaa
+* Votes:   19
+
+I am slightly confused by the problem statement, could anyone describe the sample output? I get how 1 and 2 are counted, but not why 3001 and 3002 are not.

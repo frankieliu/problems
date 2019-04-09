@@ -1,0 +1,36 @@
+
+[C++/Java] In Place Swap
+
+https://leetcode.com/problems/sort-array-by-parity/discuss/170734
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   38
+
+Return a new array is not difficult.
+Here I shared a solution if in-place swap asked.
+
+**Time Complexity**:
+O(N)
+
+**C++:**
+```
+    vector<int> sortArrayByParity(vector<int> &A) {
+        for (int i = 0, j = 0; j < A.size(); j++)
+            if (A[j] % 2 == 0) swap(A[i++], A[j]);
+        return A;
+    }
+```
+
+**Java:**
+```
+    public int[] sortArrayByParity(int[] A) {
+        for (int i = 0, j = 0; j < A.length; j++)
+            if (A[j] % 2 == 0) {
+                int tmp = A[i];
+                A[i++] = A[j];
+                A[j] = tmp;;
+            }
+        return A;
+    }
+```

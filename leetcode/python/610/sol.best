@@ -1,0 +1,19 @@
+
+Using CASE WHEN
+
+https://leetcode.com/problems/triangle-judgement/discuss/104162
+
+* Lang:    cpp
+* Author:  tucaoneo
+* Votes:   8
+
+```
+SELECT x, y, z,
+CASE WHEN x+y<=z OR
+          x+z<=y OR
+          y+z<=x
+     THEN 'No'
+     ELSE 'Yes'
+END AS 'triangle'
+FROM triangle;
+```

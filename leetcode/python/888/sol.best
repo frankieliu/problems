@@ -1,0 +1,46 @@
+
+[C++/Java/Python] Straight Forward
+
+https://leetcode.com/problems/fair-candy-swap/discuss/161269
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   34
+
+Calculate `dif = (sum(A) - sum(B)) / 2`
+We want find a pair `(a, b)` with `a = b + dif`
+
+**Time Complexity**:
+O(N)
+
+**C++:**
+```
+    vector<int> fairCandySwap(vector<int> A, vector<int> B) {
+        int dif = (accumulate(A.begin(), A.end(), 0) - accumulate(B.begin(), B.end(), 0)) / 2;
+        unordered_set<int> S(A.begin(), A.end());
+        for (int b: B)
+            if (S.count(b + dif))
+                return {b + dif, b};
+    }
+```
+
+**Java:**
+```
+    public int[] fairCandySwap(int[] A, int[] B) {
+        int dif = (IntStream.of(A).sum() - IntStream.of(B).sum()) / 2;
+        HashSet<Integer> S = new HashSet<>();
+        for (int a : A) S.add(a);
+        for (int b : B) if (S.contains(b + dif)) return new int[] {b + dif, b};
+        return new int[0];
+    }
+```
+**Python:**
+```
+    def fairCandySwap(self, A, B):
+        dif = (sum(A) - sum(B)) / 2
+        A = set(A)
+        for b in set(B):
+            if dif + b in A:
+                return [dif + b, b]
+```
+

@@ -1,0 +1,33 @@
+
+Short Python O(n) time O(1) space with Explanation
+
+https://leetcode.com/problems/find-pivot-index/discuss/109255
+
+* Lang:    cpp
+* Author:  yangshun
+* Votes:   60
+
+As we iterate through the array of numbers, we need to keep track of the sum of the values on the current number's left and its right. The following debugger trace demonstrates the values of the variables in each loop before the `left == right` line
+
+Input: `[1, 7, 3, 6, 5, 6]`
+
+1. `index`: 0, `num`: 1, `left`: 0, `right`: 27
+1. `index`: 1, `num`: 7, `left`: 1, `right`: 20
+1. `index`: 2, `num`: 3, `left`: 8, `right`: 17
+1. `index`: 3, `num`: 6, `left`: 11, `right`: 11 <-- Found!!!
+
+*- Yangshun*
+
+```
+class Solution(object):
+    def pivotIndex(self, nums):
+        # Time: O(n)
+        # Space: O(1)
+        left, right = 0, sum(nums)
+        for index, num in enumerate(nums):
+            right -= num
+            if left == right:
+                return index
+            left += num
+        return -1
+```

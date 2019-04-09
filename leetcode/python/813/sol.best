@@ -1,0 +1,84 @@
+
+[C++/Java/Python] Easy Understood Solution with Explanation
+
+https://leetcode.com/problems/largest-sum-of-averages/discuss/122739
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   43
+
+```search``` return the result for ```n``` first numbers to ```k``` groups.
+It\'s top-down solution and it keeps all process to memory.
+So it\'s like a DP solution while DP is bottom-up.
+I took suggestion from @MonnaGotIt and added a prunting: ```if (n < k) return 0;```
+
+Time complexity: ```O(KN^2)```
+
+C++:
+```
+    double memo[200][200];
+    double largestSumOfAverages(vector<int>& A, int K) {
+        memset(memo, 0, sizeof(memo));
+        int N = A.size();
+        double cur = 0;
+        for (int i = 0; i < N; ++i) {
+            cur += A[i];
+            memo[i + 1][1] = cur / (i + 1);
+        }
+        return search(N, K, A);
+    }
+
+    double search(int n, int k, vector<int>& A) {
+        if (memo[n][k] > 0) return memo[n][k];
+        if (n < k) return 0; // 14ms to 10ms
+        double cur = 0;
+        for (int i = n - 1; i > 0; --i) {
+            cur += A[i];
+            memo[n][k] = max(memo[n][k], search(i, k - 1, A) + cur / (n - i));
+        }
+        return memo[n][k];
+    }
+```
+Java:
+```
+    public double largestSumOfAverages(int[] A, int K) {
+        int N = A.length;
+        double[][] memo = new double[N+1][N+1];
+        double cur = 0;
+        for (int i = 0; i < N; ++i) {
+            cur += A[i];
+            memo[i + 1][1] = cur / (i + 1);
+        }
+        return search(N, K, A, memo);
+    }
+
+    public double search(int n, int k, int[] A, double[][] memo) {
+        if (memo[n][k] > 0) return memo[n][k];
+        if (n < k) return 0;
+        double cur = 0;
+        for (int i = n - 1; i > 0; --i) {
+            cur += A[i];
+            memo[n][k] = Math.max(memo[n][k], search(i, k - 1, A, memo) + cur / (n - i));
+        }
+        return memo[n][k];
+    }
+```
+
+Python
+```
+    def largestSumOfAverages(self, A, K):
+        memo = {}
+        def search(n, k):
+            if (n, k) in memo: return memo[n, k]
+            if n < k: return 0
+            if k == 1:
+                memo[n, k] = sum(A[:n]) / float(n)
+                return memo[n, k]
+            cur, memo[n, k] = 0, 0
+            for i in range(n - 1, 0, -1):
+                cur += A[i]
+                memo[n, k] = max(memo[n, k], search(i, k - 1) + cur / float(n - i))
+            return memo[n, k]
+        return search(len(A), K)
+
+

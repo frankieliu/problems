@@ -1,0 +1,65 @@
+
+[C++/Java/Python] Sort and Two pointer
+
+https://leetcode.com/problems/most-profit-assigning-work/discuss/127031
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   29
+
+**Explanation**
+1. zip `difficulty` and `profit` as jobs.
+2. sort `jobs` and sort \'worker\'.
+3. 2 pointers idea, for each worker, find his maximum profit he can make under his ability.
+Because we have sorted `jobs` and `worker`, we will go through two lists only once.
+It will be only O(M+N).
+
+**Time Complexity**
+O(NlogN + MlogM), as we sort list.
+
+
+**C++:**
+```
+    int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit, vector<int>& worker) {
+        vector<pair<int,int>> jobs;
+        int N = profit.size(), res = 0, i = 0, maxp = 0;
+        for (int j = 0; j < N; ++j) jobs.push_back(make_pair(difficulty[j], profit[j]));
+        sort(jobs.begin(), jobs.end()); sort(worker.begin(), worker.end());
+        for (int & ability: worker) {
+            while (i < N && ability >= jobs[i].first) maxp = max(jobs[i++].second, maxp);
+            res += maxp;
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+        List<Pair<Integer, Integer>> jobs = new ArrayList<>();
+        int N = profit.length, res = 0, i = 0, maxp = 0;
+        for (int j = 0; j < N; ++j) jobs.add(new Pair<Integer, Integer>(difficulty[j], profit[j]));
+        Collections.sort(jobs, Comparator.comparing(Pair::getKey));
+        Arrays.sort(worker);
+        for (int ability : worker) {
+            while (i < N && ability >= jobs.get(i).getKey())
+                maxp = Math.max(jobs.get(i++).getValue(), maxp);
+            res += maxp;
+        }
+        return res;
+    }
+```
+
+**Python:**
+```
+    def maxProfitAssignment(self, difficulty, profit, worker):
+        jobs = sorted([a, b] for a, b in zip(difficulty, profit))
+        res = i = maxp = 0
+        for ability in sorted(worker):
+            while i < len(jobs) and ability >= jobs[i][0]:
+                maxp = max(jobs[i][1], maxp)
+                i += 1
+            res += maxp
+        return res
+
+```

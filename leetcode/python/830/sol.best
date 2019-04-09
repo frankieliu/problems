@@ -1,0 +1,57 @@
+
+[C++/Java/Python] Straight Forward
+
+https://leetcode.com/problems/positions-of-large-groups/discuss/128957
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   28
+
+
+For every groups, find its start index `i` and end index `j - 1`
+Group length is `j - i`, if it\'s no less than 3, add `(i, j)` to result.
+
+**C++:**
+```
+    vector<vector<int>> largeGroupPositions(string S) {
+        int i = 0, j = 0, N = S.size();
+        vector<vector<int>> res;
+        while (j < N) {
+            while (j < N && S[j] == S[i]) ++j;
+            if (j - i >= 3)
+                res.push_back({i, j - 1});
+            i = j;
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public List<List<Integer>> largeGroupPositions(String S) {
+        int i = 0, j = 0, N = S.length();
+        List<List<Integer>> res = new ArrayList<>();
+        while (j < N) {
+            while (j < N && S.charAt(j) == S.charAt(i)) ++j;
+            if (j - i >= 3)
+                res.add(Arrays.asList(i, j - 1));
+            i = j;
+        }
+        return res;
+    }
+
+```
+
+**Python:**
+```
+    def largeGroupPositions(self, S):
+        i, j, N = 0, 0, len(S)
+        res = []
+        while j < N:
+            while j < N and S[j] == S[i]: j += 1
+            if j - i >= 3:
+                res.append((i, j - 1))
+            i = j
+        return res
+```
+

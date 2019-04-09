@@ -1,0 +1,68 @@
+
+[C++/Java/Python]  Self-Explaining Solution and 2-lines
+
+https://leetcode.com/problems/binary-tree-pruning/discuss/122730
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   46
+
+Of course. We should take care about free memory.
+But in my opinion, we can delete a node only if we know it was allocated with new, right?
+So in my cpp, I didn\'t do this part.
+My rule is that, If you don\'t new it, don\'t delete it.
+
+**Recursive Solution, very self-explaining**
+```
+if root == null: return null
+root.left = pruneTree(root.left)
+root.right = pruneTree(root.right)
+if root.left == null and root.right == null and root.val == 0: return null
+return root
+```
+
+**C++**
+```
+    TreeNode* pruneTree(TreeNode* root) {
+        if (!root) return NULL;
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
+        if (!root->left && !root->right && root->val == 0) return NULL;
+        return root;
+    }
+```
+**Java:**
+```
+    public TreeNode pruneTree(TreeNode root) {
+        if (root == null) return null;
+        root.left = pruneTree(root.left);
+        root.right = pruneTree(root.right);
+        if (root.left == null && root.right == null && root.val == 0) return null;
+        return root
+    }
+```
+**Python**
+```
+    def pruneTree(self, root):
+        if not root: return None
+        root.left = self.pruneTree(root.left)
+        root.right = self.pruneTree(root.right)
+        if not root.left and not root.right and not root.val: return None
+        return root
+```
+**If you like less lines:**
+**2-lines C++**
+```
+    TreeNode* pruneTree(TreeNode* root) {
+        if (root) root->left = pruneTree(root->left), root->right = pruneTree(root->right);
+        return (root && (root->left || root->right || root->val)) ? root : NULL;
+    }
+```
+
+
+**2-lines Python**
+```
+    def pruneTree(self, root):
+        if root: root.left, root.right = self.pruneTree(root.left), self.pruneTree(root.right)
+        if root and (root.left or root.right or root.val): return root
+```

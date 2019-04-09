@@ -1,0 +1,13 @@
+
+Accepted Solution
+
+https://leetcode.com/problems/employee-bonus/discuss/103016
+
+* Lang:    cpp
+* Author:  BKB_Sven
+* Votes:   6
+
+**SELECT** name, bonus
+**FROM** Employee **LEFT** **JOIN** Bonus
+**ON** Employee.empID=Bonus.empID
+**WHERE** bonus<1000 **OR** bonus **IS** **NULL**

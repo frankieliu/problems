@@ -1,0 +1,12 @@
+
+Another poorly worded question
+
+https://leetcode.com/problems/fruit-into-baskets/discuss/170765
+
+* Lang:    cpp
+* Author:  rootswoods
+* Votes:   169
+
+If I start from a tree I can\'t stop and have to put the fruit in a basket, but I want basket to have only one type of fruit. It is not clear if one needs to stop after a 3rd type of fruit is encountered.
+
+Since about 4 contests there is at least one question that is harder to understand than to solve. Is it too hard to have someone proofread it before posting?

@@ -1,0 +1,97 @@
+
+Search Palindrome with Odd Digits
+
+https://leetcode.com/problems/prime-palindrome/discuss/146798
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   64
+
+## **Intuition:**
+
+**All palindrome with even digits is multiple of `11`.**
+
+We can prove as follow:
+
+11 % 11 = 0
+1111 % 11 = 0
+111111 % 11 = 0
+11111111 % 11 = 0
+
+**So:**
+1001 % 11 = (1111 - 11 * 10) % 11 = 0
+100001 % 11 = (111111 - 1111 * 10) % 11 = 0
+10000001 % 11 = (11111111 - 111111 * 10) % 11 = 0
+
+For any palindrome with even digits:
+abcddcba % 11
+= (a * 10000001 + b * 100001 * 10 + c * 1001 * 100 + d * 11 * 1000) % 11
+= 0
+
+All palindrome with even digits is multiple of `11`.
+So among them, 11 is the only one prime
+`if (8 <= N <= 11) return 11`
+
+For other cases, **we consider only palindrome with odd dights.**
+
+
+## **Time Complexity**
+`O(10000)` to check all numbers 1 - 10000.
+`isPrime` function is `O(sqrt(x))` in worst case.
+But only `sqrt(N)` worst cases for `1 <= x <= N`
+In general it\'s `O(logx)`
+
+
+**C++:**
+```
+    int primePalindrome(int N) {
+        if (8 <= N && N <= 11) return 11;
+        for (int x = 1; x < 100000; ++x) {
+            string s = to_string(x), r(s.rbegin(), s.rend());
+            int y = stoi(s + r.substr(1));
+            if (y >= N && isPrime(y)) return y;
+        }
+        return -1;
+    }
+    bool isPrime(int num) {
+        if (num < 2 || num % 2 == 0) return num == 2;
+        for (int i = 3; i * i <= num; i += 2)
+            if (num % i == 0) return false;
+        return true;
+    }
+```
+
+**Java:**
+```
+    public int primePalindrome(int N) {
+        if (8 <= N && N <= 11) return 11;
+        for (int x = 1; x < 100000; x++) {
+            String s = Integer.toString(x), r = new StringBuilder(s).reverse().toString().substring(1);
+            int y = Integer.parseInt(s + r);
+            if (y >= N && isPrime(y)) return y;
+        }
+        return -1;
+    }
+
+    public Boolean isPrime(int x) {
+        if (x < 2 || x % 2 == 0) return x == 2;
+        for (int i = 3; i * i <= x; i += 2)
+            if (x % i == 0) return false;
+        return true;
+    }
+```
+
+
+**Python:**
+```
+    def primePalindrome(self, N):
+        def isPrime(x):
+            if x < 2 or x % 2 == 0: return x == 2
+            for i in xrange(3, int(x**0.5) + 1, 2):
+                if x % i == 0: return False
+            return True
+        if 8 <= N <= 11: return 11
+        for x in xrange(10 ** (len(str(N)) / 2), 10**5):
+            y = int(str(x) + str(x)[-2::-1])
+            if y >= N and isPrime(y): return y
+```

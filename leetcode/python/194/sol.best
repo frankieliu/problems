@@ -1,0 +1,28 @@
+
+AC solution using awk and statement just like C.
+
+https://leetcode.com/problems/transpose-file/discuss/55502
+
+* Lang:    cpp
+* Author:  illuz
+* Votes:   51
+
+Just feel free to use `for` and `if`.  
+You can append string easily, for example, `s = s a` to append `a` with `s`. 
+
+
+    awk '
+    {
+        for (i = 1; i <= NF; i++) {
+            if(NR == 1) {
+                s[i] = $i;
+            } else {
+                s[i] = s[i] " " $i;
+            }
+        }
+    }
+    END {
+        for (i = 1; s[i] != ""; i++) {
+            print s[i];
+        }
+    }' file.txt

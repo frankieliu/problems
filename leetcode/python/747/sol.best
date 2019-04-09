@@ -1,0 +1,36 @@
+
+Python O(n) time and O(1) space without fancy builtins
+
+https://leetcode.com/problems/largest-number-at-least-twice-of-others/discuss/110120
+
+* Lang:    cpp
+* Author:  SunnyvaleCA
+* Votes:   21
+
+Just iterate through the array and note the highest and second highest numbers. Might as well take note of the index at the same time.
+
+One slightly clever idea was to shuffle the highest to the second-highest whenever a new highest was found. That was a way to handle the case where there are two (or more) value tied for highest.
+
+```
+class Solution:
+    def dominantIndex(self, nums):
+        if len(nums) == 0: return -1
+
+        highest = -1
+        secondHighest = -1
+        highestIndex = 0
+        
+        for i,n in enumerate(nums):
+            if n >= highest:
+                secondHighest = highest
+                highest = n
+                highestIndex = i
+            elif n > secondHighest:
+                secondHighest = n
+
+        if highest < secondHighest*2:
+            highestIndex = -1
+        
+        return highestIndex
+
+```

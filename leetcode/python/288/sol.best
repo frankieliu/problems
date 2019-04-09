@@ -1,0 +1,24 @@
+
+Let me explain the question with better examples.
+
+https://leetcode.com/problems/unique-word-abbreviation/discuss/73141
+
+* Lang:    cpp
+* Author:  2016trojan
+* Votes:   206
+
+The description (**A word's abbreviation is unique if no other word from the dictionary has the same abbreviation**) is clear however a bit twisting. It took me a few "Wrong Answer"s to finally understand what it's asking for.  
+We are trying to search for a word in a dictionary. If this word (also this word\u2019s abbreviation) is not in the dictionary OR this word and only it\u2019s abbreviation in the dictionary. We call a word\u2019s abbreviation unique.  
+EX:  
+
+    1) [\u201cdog\u201d]; isUnique(\u201cdig\u201d);   
+
+//False, because \u201cdig\u201d has the same abbreviation with \u201cdog" and \u201cdog\u201d is already in the dictionary. It\u2019s not unique.  
+
+    2) [\u201cdog\u201d, \u201cdog"]; isUnique(\u201cdog\u201d);  
+
+ //True, because \u201cdog\u201d is the only word that has \u201cd1g\u201d abbreviation.  
+
+    3) [\u201cdog\u201d, \u201cdig\u201d]; isUnique(\u201cdog\u201d);   
+
+//False, because if we have more than one word match to the same abbreviation, this abbreviation will never be unique.

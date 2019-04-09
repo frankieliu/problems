@@ -1,0 +1,48 @@
+
+Easy Understood
+
+https://leetcode.com/problems/buddy-strings/discuss/141780
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   74
+
+If `A.length() != B.length()`: no possible swap
+
+If `A == B`, we need swap two same characters. Check is duplicated char in `A`.
+
+In other cases, we find index for `A[i] != B[i]`. There should be only 2 diffs and it\'s our one swap.
+
+**C++:**
+```
+    bool buddyStrings(string A, string B) {
+        if (A.length() != B.length()) return false;
+        if (A == B && set<char>(A.begin(), A.end()).size() < A.size()) return true;
+        vector<int> dif;
+        for (int i = 0; i < A.length(); ++i) if (A[i] != B[i]) dif.push_back(i);
+        return dif.size() == 2 && A[dif[0]] == B[dif[1]] && A[dif[1]] == B[dif[0]];
+    }
+```
+
+**Java:**
+```
+    public boolean buddyStrings(String A, String B) {
+        if (A.length() != B.length()) return false;
+        if (A.equals(B)) {
+            Set<Character> s = new HashSet<Character>();
+            for (char c : A.toCharArray()) s.add(c);
+            return s.size() < A.length();
+        }
+        List<Integer> dif = new ArrayList<>();
+        for (int i = 0; i < A.length(); ++i) if (A.charAt(i) != B.charAt(i)) dif.add(i);
+        return dif.size() == 2 && A.charAt(dif.get(0)) == B.charAt(dif.get(1)) && A.charAt(dif.get(1)) == B.charAt(dif.get(0));
+    }
+```
+**Python:**
+```
+    def buddyStrings(self, A, B):
+        if len(A) != len(B): return False
+        if A == B and len(set(A)) < len(A): return True
+        dif = [(a, b) for a, b in zip(A, B) if a != b]
+        return len(dif) == 2 and dif[0] == dif[1][::-1]
+```

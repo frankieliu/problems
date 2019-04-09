@@ -1,0 +1,81 @@
+
+[Java/C++/Python] Find 111.....1111 >= N
+
+https://leetcode.com/problems/complement-of-base-10-integer/discuss/256740
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   21
+
+## **Intuition**
+Let\'s find the first number `X` that `X = 1111....1 >= N`
+And also, it has to be noticed that,
+`N = 0` is a corner case expecting`1` as result.
+
+<br>
+
+## **Solution 1**:
+`N + bitwiseComplement(N) = 11....11 = X`
+Then `bitwiseComplement(N) = X - N`
+
+**Java:**
+```
+    public int bitwiseComplement(int N) {
+        int X = 1;
+        while (N > X) X = X * 2 + 1;
+        return X - N;
+    }
+```
+
+**C++:**
+```
+    int bitwiseComplement(int N) {
+        int X = 1;
+        while (N > X) X = X * 2 + 1;
+        return X - N;
+    }
+```
+
+**Python:**
+```
+    def bitwiseComplement(self, N):
+        X = 1
+        while N > X: X = X * 2 + 1
+        return X - N
+```
+<br>
+
+## **Solution 2**:
+`N ^ bitwiseComplement(N) = 11....11 = X`
+`bitwiseComplement(N) = N ^ X`
+
+**Java:**
+```
+    public int bitwiseComplement(int N) {
+        int X = 1;
+        while (N > X) X = X * 2 + 1;
+        return N ^ X;
+    }
+```
+
+**C++:**
+```
+    int bitwiseComplement(int N) {
+        int X = 1;
+        while (N > X) X = X * 2 + 1;
+        return N ^ X;
+    }
+```
+
+**Python:**
+```
+    def bitwiseComplement(self, N):
+        X = 1
+        while N > X: X = X * 2 + 1;
+        return N ^ X
+```
+<br>
+
+## **Complexity**
+`O(logN)` Time
+`O(1)` Space

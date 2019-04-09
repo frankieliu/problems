@@ -1,0 +1,147 @@
+
+Java/C++/Python O(N^2) solution using only one grid matrix
+
+https://leetcode.com/problems/largest-plus-sign/discuss/113314
+
+* Lang:    cpp
+* Author:  fun4LeetCode
+* Votes:   94
+
+**Algorithms**: For each position `(i, j)` of the `grid` matrix, we try to extend in each of the four directions (left, right, up, down) as long as possible, then take the minimum length of `1`\'s out of the four directions as the order of the largest axis-aligned plus sign centered at position `(i, j)`.
+
+---
+
+**Optimizations**: Normally we would need a total of five matrices to make the above idea work -- one matrix for the `grid` itself and four more matrices for each of the four directions. However, these five matrices can be combined into one using two simple tricks:
+
+1. For each position `(i, j)`, we are only concerned with the minimum length of `1`\'s out of the four directions. This implies we may combine the four matrices into one by only keeping tracking of the minimum length.
+
+2. For each position `(i, j)`, the order of the largest axis-aligned plus sign centered at it will be `0` if and only if `grid[i][j] == 0`. This implies we may further combine the `grid` matrix with the one obtained above.
+
+---
+
+**Implementations**:
+
+1. Create an `N-by-N` matrix `grid`, with all elements initialized with value `N`.
+2. Reset those elements to `0` whose positions are in the `mines` list.
+3. For each position `(i, j)`, find the maximum length of `1`\'s in each of the four directions and set `grid[i][j]` to the minimum of these four lengths. Note that there is a simple recurrence relation relating the maximum length of `1`\'s at current position with previous position for each of the four directions (labeled as `l`, `r`, `u`, `d`).
+4. Loop through the `grid` matrix and choose the maximum element which will be the largest axis-aligned plus sign of `1`\'s contained in the grid.
+
+---
+
+**Solutions**: Here is a list of solutions for Java/C++/Python based on the above ideas. All solutions run at `O(N^2)` time with `O(N^2)` extra space. Further optimizations are possible such as keeping track of the maximum plus sign currently available and terminating as early as possible if no larger plus sign can be found for current row/column.
+
+**Note**: For those of you who got confused by the logic within the first nested for-loop, refer to [andier\'s comment](https://leetcode.com/problems/largest-plus-sign/discuss/113314/JavaC++Python-O(N2)-solution-using-only-one-grid-matrix/114381) below for a more clear explanation.
+
+**Java solution:**
+
+```
+public int orderOfLargestPlusSign(int N, int[][] mines) {
+    int[][] grid = new int[N][N];
+        
+    for (int i = 0; i < N; i++) {
+        Arrays.fill(grid[i], N);
+    }
+        
+    for (int[] m : mines) {
+        grid[m[0]][m[1]] = 0;
+    }
+        
+    for (int i = 0; i < N; i++) {
+        for (int j = 0, k = N - 1, l = 0, r = 0, u = 0, d = 0; j < N; j++, k--) {
+            grid[i][j] = Math.min(grid[i][j], l = (grid[i][j] == 0 ? 0 : l + 1));  // left direction
+            grid[i][k] = Math.min(grid[i][k], r = (grid[i][k] == 0 ? 0 : r + 1));  // right direction
+            grid[j][i] = Math.min(grid[j][i], u = (grid[j][i] == 0 ? 0 : u + 1));  // up direction
+            grid[k][i] = Math.min(grid[k][i], d = (grid[k][i] == 0 ? 0 : d + 1));  // down direction
+        }
+    }
+        
+    int res = 0;
+        
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            res = Math.max(res, grid[i][j]);
+        }
+    }
+        
+    return res;
+}
+```
+
+<br>
+
+**C++ solution:**
+
+```
+int orderOfLargestPlusSign(int N, vector<vector<int>>& mines) {
+    vector<vector<int>> grid(N, vector<int>(N, N));
+        
+    for (auto& m : mines) {
+        grid[m[0]][m[1]] = 0;
+    }
+        
+    for (int i = 0; i < N; i++) {
+        for (int j = 0, k = N - 1, l = 0, r = 0, u = 0, d = 0; j < N; j++, k--) {
+            grid[i][j] = min(grid[i][j], l = (grid[i][j] == 0 ? 0 : l + 1));
+            grid[i][k] = min(grid[i][k], r = (grid[i][k] == 0 ? 0 : r + 1));
+            grid[j][i] = min(grid[j][i], u = (grid[j][i] == 0 ? 0 : u + 1));
+            grid[k][i] = min(grid[k][i], d = (grid[k][i] == 0 ? 0 : d + 1));
+        }
+    }
+        
+    int res = 0;
+        
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            res = max(res, grid[i][j]);
+        }
+    }
+        
+    return res;
+}
+```
+
+<br>
+
+**Python solution:**
+
+```
+def orderOfLargestPlusSign(self, N, mines):
+    """
+    :type N: int
+    :type mines: List[List[int]]
+    :rtype: int
+    """
+    grid = [[N] * N for i in range(N)]
+        
+    for m in mines:
+        grid[m[0]][m[1]] = 0
+            
+    for i in range(N):
+        l, r, u, d = 0, 0, 0, 0
+            
+        for j, k in zip(range(N), reversed(range(N))):
+            l = l + 1 if grid[i][j] != 0 else 0
+            if l < grid[i][j]:
+                grid[i][j] = l
+            
+            r = r + 1 if grid[i][k] != 0 else 0
+            if r < grid[i][k]:
+                grid[i][k] = r
+
+            u = u + 1 if grid[j][i] != 0 else 0
+            if u < grid[j][i]:
+                grid[j][i] = u
+                
+            d = d + 1 if grid[k][i] != 0 else 0
+            if d < grid[k][i]:
+                grid[k][i] = d
+        
+    res = 0
+        
+    for i in range(N):
+        for j in range(N):
+            if res < grid[i][j]:
+                res = grid[i][j]
+                
+    return res
+```

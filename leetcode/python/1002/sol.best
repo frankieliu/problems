@@ -1,0 +1,23 @@
+
+Python 1 line
+
+https://leetcode.com/problems/find-common-characters/discuss/247560
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   39
+
+```
+    def commonChars(self, A):
+        res = collections.Counter(A[0])
+        for a in A:
+            res &= collections.Counter(a)
+        return list(res.elements())
+```
+
+1-line version
+```
+    def commonChars(self, A):
+        return list(reduce(collections.Counter.__and__, map(collections.Counter, A)).elements())
+```
+

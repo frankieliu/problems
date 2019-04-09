@@ -1,0 +1,33 @@
+
+[C++]Easy recursion in O(n)
+
+https://leetcode.com/problems/split-bst/discuss/113798
+
+* Lang:    cpp
+* Author:  facelessvoid
+* Votes:   38
+
+Let ```res[0]``` be tree less than or equal to V, ```res[1]``` be tree greater than V. 
+
+Detailed explanation: First of all, we can see that the given root is always there in the answer (either in the bigger subtree or in the smaller subtree). After that, if ```root->val > V```, there is a chance that there is some subtree within the subtree ```root->left``` which maybe greater than V and that subtree needs to be attached to ```root->left```. Now, we see that this problem of finding "subtree in ```root->left``` which is greater than V" is the same as the current problem of splitting ```root```. So we can recurse on left and get the required results. One thing to worry about is, what if there is no subtree in ```root->left``` that is greater than V? This case is handled automatically by the base case.
+Similar argument applies for the case ```root->val <= V```.
+```
+vector<TreeNode*> splitBST(TreeNode* root, int V) {
+        vector<TreeNode *> res(2, NULL);
+        if(root == NULL) return res;
+        
+        if(root->val > V){
+            res[1] = root;
+            auto res1 = splitBST(root->left, V);
+            root->left = res1[1];
+            res[0]=res1[0];
+        }else{
+            res[0] = root;
+            auto res1 = splitBST(root->right, V);
+            root->right = res1[0];
+            res[1] = res1[1];
+        }
+        
+        return res;
+    }
+```

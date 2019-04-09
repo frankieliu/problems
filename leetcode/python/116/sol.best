@@ -1,0 +1,24 @@
+
+A simple accepted solution
+
+https://leetcode.com/problems/populating-next-right-pointers-in-each-node/discuss/37472
+
+* Lang:    cpp
+* Author:  ragepyre
+* Votes:   469
+
+    void connect(TreeLinkNode *root) {
+        if (root == NULL) return;
+        TreeLinkNode *pre = root;
+        TreeLinkNode *cur = NULL;
+        while(pre->left) {
+            cur = pre;
+            while(cur) {
+                cur->left->next = cur->right;
+                if(cur->next) cur->right->next = cur->next->left;
+                cur = cur->next;
+            }
+            pre = pre->left;
+        }
+    }
+you need two additional pointer.

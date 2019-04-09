@@ -1,0 +1,31 @@
+
+One Line Java Solution
+
+https://leetcode.com/problems/remove-9/discuss/106561
+
+* Lang:    cpp
+* Author:  DemonSong
+* Votes:   42
+
+This is a radix problem.
+Just change decimal to 9-based.
+```java
+public int newInteger(int n) {
+    return Integer.parseInt(Integer.toString(n, 9));
+}
+```
+
+Of course, you can write it yourself.
+```java
+public int newInteger(int n) {
+	int ans = 0;
+	int base = 1;
+		
+	while (n > 0){
+		ans += n % 9 * base;
+		n /= 9;
+		base *= 10;
+	}
+	return ans;
+}
+```

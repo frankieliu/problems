@@ -1,0 +1,25 @@
+
+C++ O(n), "merge sort"
+
+https://leetcode.com/problems/interval-list-intersections/discuss/231108
+
+* Lang:    cpp
+* Author:  votrubac
+* Votes:   27
+
+Like in the "merge" phase of the merge sort, we use two pointers to combine sorted sequences. Nothing tricky here - just check all conditions carefully.
+```
+vector<Interval> intervalIntersection(vector<Interval>& A, vector<Interval>& B) {
+  vector<Interval> res;
+  for (auto i = 0, j = 0; i < A.size() && j < B.size(); ) {
+    if (A[i].end < B[j].start) ++i;
+    else if (B[j].end < A[i].start) ++j;
+    else {
+      res.push_back({ max(A[i].start, B[j].start), min(A[i].end, B[j].end) });
+      if (A[i].end < B[j].end) ++i;
+      else ++j;
+    }
+  }
+  return res;
+}
+```

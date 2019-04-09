@@ -1,0 +1,18 @@
+
+Three accepted solutions
+
+https://leetcode.com/problems/customers-who-never-order/discuss/53579
+
+* Lang:    cpp
+* Author:  kent-huang
+* Votes:   87
+
+    SELECT A.Name from Customers A
+    WHERE NOT EXISTS (SELECT 1 FROM Orders B WHERE A.Id = B.CustomerId)
+
+    SELECT A.Name from Customers A
+    LEFT JOIN Orders B on  a.Id = B.CustomerId
+    WHERE b.CustomerId is NULL
+
+    SELECT A.Name from Customers A
+    WHERE A.Id NOT IN (SELECT B.CustomerId from Orders B)

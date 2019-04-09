@@ -1,0 +1,58 @@
+
+Straight Forward
+
+https://leetcode.com/problems/keys-and-rooms/discuss/133855
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   25
+
+**C++:**
+```
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        stack<int> dfs; dfs.push(0);
+        unordered_set<int> seen = {0};
+        while (!dfs.empty()) {
+            int i = dfs.top(); dfs.pop();
+            for (int j : rooms[i])
+                if (seen.count(j) == 0) {
+                    dfs.push(j);
+                    seen.insert(j);
+                    if (rooms.size() == seen.size()) return true;
+                }
+        }
+        return rooms.size() == seen.size();
+    }
+```
+
+**Java:**
+```
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        Stack<Integer> dfs = new Stack<>(); dfs.add(0);
+        HashSet<Integer> seen = new HashSet<Integer>(); seen.add(0);
+        while (!dfs.isEmpty()) {
+            int i = dfs.pop();
+            for (int j : rooms.get(i))
+                if (!seen.contains(j)) {
+                    dfs.add(j);
+                    seen.add(j);
+                    if (rooms.size() == seen.size()) return true;
+                }
+        }
+        return rooms.size() == seen.size();
+    }
+```
+**Python:**
+```
+    def canVisitAllRooms(self, rooms):
+        dfs = [0]
+        seen = set(dfs)
+        while dfs:
+            i = dfs.pop()
+            for j in rooms[i]:
+                if j not in seen:
+                    dfs.append(j)
+                    seen.add(j)
+                    if len(seen) == len(rooms): return True
+        return len(seen) == len(rooms)
+```

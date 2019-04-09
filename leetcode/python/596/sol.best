@@ -1,0 +1,10 @@
+
+Distinct is not needed
+
+https://leetcode.com/problems/classes-more-than-5-students/discuss/199199
+
+* Lang:    cpp
+* Author:  jamedeo
+* Votes:   7
+
+Distinct is not needed in this example.  There are no duplicates within the table.  Also in real life scenarios students do not take classes more than once *within the same semester*.  They do not start their day with math and end their day with math.  If you need distinct in this scenario then the database is not properly designed.

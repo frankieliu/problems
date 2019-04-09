@@ -1,0 +1,44 @@
+
+Python, 5 and 43816729
+
+https://leetcode.com/problems/magic-squares-in-grid/discuss/133874
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   59
+
+The intuition is brute force, don\'t need any tricky. 
+One thing to pay attention: A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers from **1 to 9**.
+I just find many sumbmission ignoring this condition. 
+
+Here I just want share two observatons with this **1-9** condition:
+
+Assume a magic square:
+a1,a2,a3
+a4,a5,a6
+a7,a8,a9
+
+`a2 + a5 + a8 = 15`
+`a4 + a5 + a6 = 15`
+`a1 + a5 + a9 = 15`
+`a3 + a5 + a7 = 15`
+
+Accumulate all, then we have:
+`sum(ai) + 3 * a5 = 60`
+`3 * a5 = 15`
+`a5 = 5`
+
+The center of magic square must be 5.
+
+Another observation for other 8 numbers:
+The even must be in the corner, and the odd must be on the edge.
+And it must be in a order like "43816729" \uFF08clockwise or anticlockwise)
+
+```
+    def numMagicSquaresInside(self, g):
+        def isMagic(i, j):
+            s = "".join(str(g[i + x / 3][j + x % 3]) for x in [0, 1, 2, 5, 8, 7, 6, 3])
+            return g[i][j] % 2 == 0 and (s in "43816729" * 2 or s in "43816729"[::-1] * 2)
+        return sum(isMagic(i, j) for i in range(len(g) - 2) for j in range(len(g[0]) - 2) if g[i + 1][j + 1] == 5)
+```
+

@@ -1,0 +1,20 @@
+
+The OJ has a bug! upper and lower case
+
+https://leetcode.com/problems/second-degree-follower/discuss/104225
+
+* Lang:    cpp
+* Author:  zestypanda
+* Votes:   23
+
+The table and OJ code use upper and lower case, such as 'B' and 'b' interchangeably. But it requires specific upper or lower case in the output, to be consistent with follower column only!
+
+Here is my answer to apply this approach.
+```
+select distinct follower, num
+from follow, 
+(select followee, count(distinct follower) as num from follow 
+group by followee) as t
+where follower = t.followee
+order by follower;
+```

@@ -1,0 +1,21 @@
+
+The example for this question is poor
+
+https://leetcode.com/problems/degree-of-an-array/discuss/108682
+
+* Lang:    cpp
+* Author:  bomv
+* Votes:   72
+
+The wording of the example\'s explanation does not make it clear if 2 is being returned because it is highest degree, what number has the highest degree, or "length of shortest contiguous subarray that has the same highest degree of the original array"
+
+Now that I understand the problem it makes sense, but I definitely think a better example could have been chosen.
+
+Also, the title has almost nothing to do the with the question, as evidenced by the fact that the default function name is far from what the title is.
+
+EDIT: Clearer example:
+```
+Input: [1, 7, 7, 5, 7, 1]
+Output: 4
+```
+Explanation: The degree of this array is 3 because 7 appears the most of any number. The shortest subarray that you can make that has a degree of 3 is [7,7,5,7]. The length of that subarray is 4, so we return 4.

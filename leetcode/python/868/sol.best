@@ -1,0 +1,42 @@
+
+[C++/Java/Python] Dividing by 2
+
+https://leetcode.com/problems/binary-gap/discuss/149835
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   35
+
+One pass on `N` in binary from right to left.
+`d` means the distance from the last 1 position.
+`d` is initial to a small enough value `-32`
+
+**C++:**
+```
+    int binaryGap(int N) {
+        int res = 0;
+        for (int d = -32; N; N /= 2, d++)
+            if (N % 2) res = max(res, d), d = 0;
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int binaryGap(int N) {
+        int res = 0;
+        for (int d = -32; N > 0; N /= 2, d++)
+            if (N % 2 == 1) {
+                res = Math.max(res, d);
+                d = 0;
+            }
+        return res;
+    }
+```
+**Python:**
+```
+    def binaryGap(self, N):
+        index = [i for i, v in enumerate(bin(N)) if v == \'1\']
+        return max([b - a for a, b in zip(index, index[1:])] or [0])
+```
+

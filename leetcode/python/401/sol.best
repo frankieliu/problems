@@ -1,0 +1,28 @@
+
+Simple Python+Java
+
+https://leetcode.com/problems/binary-watch/discuss/88458
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   359
+
+Just go through the possible times and collect those with the correct number of one-bits.
+
+Python:
+
+    def readBinaryWatch(self, num):
+        return ['%d:%02d' % (h, m)
+                for h in range(12) for m in range(60)
+                if (bin(h) + bin(m)).count('1') == num]
+
+Java:
+
+    public List<String> readBinaryWatch(int num) {
+        List<String> times = new ArrayList<>();
+        for (int h=0; h<12; h++)
+            for (int m=0; m<60; m++)
+                if (Integer.bitCount(h * 64 + m) == num)
+                    times.add(String.format("%d:%02d", h, m));
+        return times;        
+    }

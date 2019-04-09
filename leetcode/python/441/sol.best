@@ -1,0 +1,45 @@
+
+[JAVA] Clean Code with Explanations and Running Time [2 Solutions]
+
+https://leetcode.com/problems/arranging-coins/discuss/92274
+
+* Lang:    cpp
+* Author:  ratchapongt
+* Votes:   49
+
+<h3>[JAVA] Clean Code with Explanations and Running Time [2 Solutions]</h3>
+<a href=https://ratchapong.com/algorithm-practice/leetcode/arranging-coins>Full Solutions and Explanations</a>
+<h3><b>Solution 1</b></h3>
+```
+public class Solution {
+    public int arrangeCoins(int n) {
+        int start = 0;
+        int end = n;
+        int mid = 0;
+        while (start <= end){
+            mid = (start + end) >>> 1;
+            if ((0.5 * mid * mid + 0.5 * mid ) <= n){
+                start = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        return start - 1;
+    }
+}
+```
+
+<div class="margin-bottom-20"><h4 class="text-uppercase margin-bottom-10">Complexity Analysis</h4><p>Uniform cost model is used as Cost Model and `n` is the input number. `b` in this case would be `2`.</p><p><b>Time Complexity:</b><ul><li>Best Case `O(log_b(n))` : With respect to the input, the algorithm will always depend on the value of input.</li><li>Average Case `O(log_b(n))` : With respect to the input, the algorithm will always depend on the value of input.</li><li>Worst Case `O(log_b(n))` : With respect to the input, the algorithm will always depend on the value of input.</li></ul></p><p><b>Auxiliary Space:</b><ul><li>Worst Case `O(1)` : Additional variables are of constant size.</li></ul></p></div><div class="margin-bottom-20"><h4 class="text-uppercase margin-bottom-10">Algorithm</h4><p><b>Approach:</b> Binary Search</p><p>The problem is basically asking the maximum length of consecutive number that has the running sum lesser or equal to `n`. In other word, find `x` that satisfy the following condition:</p><div class="margin-left-50 margin-bottom-10">`1 + 2 + 3 + 4 + 5 + 6 + 7 + ... + x &lt= n`</div><div class="margin-left-50 margin-bottom-10">`sum_{i=1}^x i &lt= n`</div><p>Running sum can be simplified,</p><div class="margin-left-50 margin-bottom-10">`(x * ( x + 1)) / 2 &lt= n`</div><p>Binary search is used in this case to slowly narrow down the `x` that will satisfy the equation. Note that <code>0.5 * mid * mid + 0.5 * mid</code> does not have overflow issue as the intermediate result is implicitly autoboxed to <code>double</code> data type.</p></div>
+<hr>
+
+<h3><b>Solution 2</b></h3>
+```
+public class Solution {
+    public int arrangeCoins(int n) {
+        return (int) ((Math.sqrt(1 + 8.0 * n) - 1) / 2);
+    }
+}
+```
+
+<div class="margin-bottom-20"><h4 class="text-uppercase margin-bottom-10">Complexity Analysis</h4><p>Uniform cost model is used as Cost Model and `n` is the input number. `b` in this case would be `2`.</p><p><b>Time Complexity:</b><ul><li>Best Case `O(1)` : With respect to the input, the algorithm will always perform basic mathematical operation that run in constant time.</li><li>Average Case `O(1)` : With respect to the input, the algorithm will always perform basic mathematical operation that run in constant time.</li><li>Worst Case `O(1)` : With respect to the input, the algorithm will always perform basic mathematical operation that run in constant time.</li></ul></p><p><b>Auxiliary Space:</b><ul><li>Worst Case `O(1)` : No extra space is used.</li></ul></p></div><div class="margin-bottom-20"><h4 class="text-uppercase margin-bottom-10">Algorithm</h4><p><b>Approach:</b> Mathematics</p><p>The problem is basically asking the maximum length of consecutive number that has the running sum lesser or equal to `n`. In other word, find `x` that satisfy the following condition:</p><div class="margin-left-50 margin-bottom-10">`1 + 2 + 3 + 4 + 5 + 6 + 7 + ... + x &lt= n`</div><div class="margin-left-50 margin-bottom-10">`sum_{i=1}^x i &lt= n`</div><p>Running sum can be simplified,</p><div class="margin-left-50 margin-bottom-10">`(x * ( x + 1)) / 2 &lt= n`</div><p>Using quadratic formula, `x` is evaluated to be,</p><div class="margin-left-50 margin-bottom-10">`x = 1 / 2 * (-sqrt(8 * n + 1)-1)` (Inapplicable) or `x = 1 / 2 * (sqrt(8 * n + 1)-1)`</div><p>Negative root is ignored and positive root is used instead. Note that <code>8.0 * n</code> is very important because it will cause Java to implicitly autoboxed the intermediate result into <code>double</code> data type. The code will not work if it is simply <code>8 * n</code>. Alternatively, an explicit casting can be done <code>8 * (long) n)</code>.</p></div>
+<hr>

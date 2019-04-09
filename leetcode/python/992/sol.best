@@ -1,0 +1,83 @@
+
+[Java/C++/Python] Sliding Window with Video
+
+https://leetcode.com/problems/subarrays-with-k-different-integers/discuss/234482
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   67
+
+[Contest 123 in C++](https://www.youtube.com/watch?v=eBKv6-m4NDQ)
+
+**Intuition**:
+Write a helper using sliding window,
+to get the number of subarrays with at most K distinct elements.
+Then f(exactly K) = f(atMost K) - f(atMost K-1).
+
+Of course, you can merge 2 for loop into ones, if you like.
+
+**Time Complexity**:
+O(N)
+
+
+**Java:**
+```
+    public int subarraysWithKDistinct(int[] A, int K) {
+        return atMostK(A, K) - atMostK(A, K - 1);
+    }
+    int atMostK(int[] A, int K) {
+        int i = 0, res = 0;
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int j = 0; j < A.length; ++j) {
+            if (count.getOrDefault(A[j], 0) == 0) K--;
+            count.put(A[j], count.getOrDefault(A[j], 0) + 1);
+            while (K < 0) {
+                count.put(A[i], count.get(A[i]) - 1);
+                if (count.get(A[i]) == 0) K++;
+                i++;
+            }
+            res += j - i + 1;
+        }
+        return res;
+    }
+```
+
+**C++:**
+```
+    int subarraysWithKDistinct(vector<int>& A, int K) {
+        return atMostK(A, K) - atMostK(A, K - 1);
+    }
+    int atMostK(vector<int>& A, int K) {
+        int i = 0, res = 0;
+        unordered_map<int, int> count;
+        for (int j = 0; j < A.size(); ++j) {
+            if (!count[A[j]]++) K--;
+            while (K < 0) {
+                if (!--count[A[i]]) K++;
+                i++;
+            }
+            res += j - i + 1;
+        }
+        return res;
+    }
+```
+
+**Python:**
+```
+    def subarraysWithKDistinct(self, A, K):
+        return self.atMostK(A, K) - self.atMostK(A, K - 1)
+
+    def atMostK(self, A, K):
+        count = collections.Counter()
+        res = i = 0
+        for j in range(len(A)):
+            if count[A[j]] == 0: K -= 1
+            count[A[j]] += 1
+            while K < 0:
+                count[A[i]] -= 1
+                if count[A[i]] == 0: K += 1
+                i += 1
+            res += j - i + 1
+        return res
+```
+

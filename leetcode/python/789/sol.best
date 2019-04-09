@@ -1,0 +1,13 @@
+
+Why interception in the middle is not a good idea for ghosts.
+
+https://leetcode.com/problems/escape-the-ghosts/discuss/116678
+
+* Lang:    cpp
+* Author:  ctrlcctrlv555
+* Votes:   52
+
+![image](https://s3-lc-upload.s3.amazonaws.com/users/ctrlcctrlv555/image_1519591480.png)
+Let's say you always take the shortest route to reach the target because if you go a longer or a more tortuous route, I believe the ghost has a better chance of getting you.
+Denote your starting point A, ghost's starting point B, the target point C.
+For a ghost to intercept you, there has to be some point D on AC such that AD = DB. Fix D. By triangle inequality, AC = AD + DC = DB + DC >= BC. What that means is if the ghost can intercept you in the middle, it can actually reach the target at least as early as you do. So wherever the ghost starts at (and wherever the interception point is), its best chance of getting you is going directly to the target and waiting there rather than intercepting you in the middle.

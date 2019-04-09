@@ -1,0 +1,39 @@
+
+[C++/Java/Python] One Pass O(N)
+
+https://leetcode.com/problems/monotonic-array/discuss/165889
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   70
+
+We check if `A` is increasing and decreasing.
+
+**C++:**
+```
+    bool isMonotonic(vector<int> A) {
+        bool inc = true, dec = true;
+        for (int i = 1; i < A.size(); ++i)
+            inc &= A[i - 1] <= A[i], dec &= A[i - 1] >= A[i];
+        return inc || dec;
+    }
+```
+
+**Java:**
+```
+    public boolean isMonotonic(int[] A) {
+        boolean inc = true, dec = true;
+        for (int i = 1; i < A.length; ++i) {
+            inc &= A[i - 1] <= A[i];
+            dec &= A[i - 1] >= A[i];
+        }
+        return inc || dec;
+    }
+```
+
+**Python:**
+```
+    def isMonotonic(self, A):
+        return not {cmp(i, j) for i, j in zip(A, A[1:])} >= {1, -1}
+```
+

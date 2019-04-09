@@ -1,0 +1,38 @@
+
+My concise JAVA solution based on memorized DFS
+
+https://leetcode.com/problems/word-break-ii/discuss/44167
+
+* Lang:    cpp
+* Author:  Cheng_Zhang
+* Votes:   218
+
+**Explanation**
+
+Using DFS directly will lead to TLE, so I just used HashMap to save the previous results to prune duplicated branches, as the following:
+ 
+
+    public List<String> wordBreak(String s, Set<String> wordDict) {
+        return DFS(s, wordDict, new HashMap<String, LinkedList<String>>());
+    }       
+    
+    // DFS function returns an array including all substrings derived from s.
+    List<String> DFS(String s, Set<String> wordDict, HashMap<String, LinkedList<String>>map) {
+        if (map.containsKey(s)) 
+            return map.get(s);
+            
+        LinkedList<String>res = new LinkedList<String>();     
+        if (s.length() == 0) {
+            res.add("");
+            return res;
+        }               
+        for (String word : wordDict) {
+            if (s.startsWith(word)) {
+                List<String>sublist = DFS(s.substring(word.length()), wordDict, map);
+                for (String sub : sublist) 
+                    res.add(word + (sub.isEmpty() ? "" : " ") + sub);               
+            }
+        }       
+        map.put(s, res);
+        return res;
+    }

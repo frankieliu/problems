@@ -1,0 +1,60 @@
+
+python solution with my thinking process (with extra Chinese explanation)
+
+https://leetcode.com/problems/minimize-malware-spread-ii/discuss/184129
+
+* Lang:    cpp
+* Author:  2017111303
+* Votes:   17
+
+you can get Chinese explanation in 
+https://buptwc.github.io/2018/10/21/Leetcode-928-Minimize-Malware-Spread-II/
+
+The idea of this question is similar to [leetcode 924 Minimize Malware Spread](https://leetcode.com/problems/minimize-malware-spread/discuss/181186/python-dfs-solution-with-picture-to-explain-my-thought(with-extra-Chinese-explanation)).
+
+The key point of these two questions is to analyze how to change a node from an infected state to a safe one.
+
+![image](https://assets.leetcode.com/users/2017111303/image_1540136419.png)
+as picture shows, the yellow node is the initial infected node.
+for the safe node [1,2,3,5,6], we analyze one by one.
+
+we define `node a` are directly infected by `node b` if `node a` will be infected by `node b` `without through any other infected node`.
+
+For `node 1`, it will be directly infected by `node 0` and `node 4`,(0->1, 4->3->2->1)
+For `node 2`, it is same as `node 1`(0->1->2, 4->3->2)
+For `node 3`, it is same as `node 1`
+For `node 5`, it is same as `node 1`
+For `node 6`, it will be directly infected by `node 4`. (4 - > 6)
+
+for node [1,2,3,5], even if we delete one node from the initial infected node, it will be infected by another node in the end.
+
+So, a node may be safe if and only if it\'s just `directly` infected by one node. I called it `s_node`
+we can use bfs solution to find the all `s_node`, and store the only node that can infect it.
+Finally, we count which node in the stored node appears the most.
+
+```python
+# 492ms
+import collections
+class Solution(object):
+    def minMalwareSpread(self, graph, initial):
+        n = len(graph)
+        d = collections.defaultdict(list)
+        for init in initial:
+            vis = set(initial)
+            Q = collections.deque([init])
+            while Q:
+                infect = Q.popleft()
+                for node in range(len(graph[infect])):
+                    if graph[infect][node] == 0: continue
+                    if node in vis: continue
+                    vis.add(node)
+                    d[node].append(init)
+                    Q.append(node)
+        # count the most frequent node
+        res = [0] * n
+        for key in d:
+            if len(d[key]) == 1:
+                res[d[key][0]] += 1
+        if max(res) == 0: return min(initial)
+        return res.index(max(res))
+```

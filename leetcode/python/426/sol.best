@@ -1,0 +1,36 @@
+
+Concise Java solution  - Beats 100% 
+
+https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/discuss/149151
+
+* Lang:    cpp
+* Author:  Cris_Tang
+* Votes:   107
+
+step1: inorder tranversal by recursion to connect the original BST
+step2: connect the head and tail to make it circular
+
+Tips: Using dummy node to handle corner case
+
+```
+Node prev = null;
+public Node treeToDoublyList(Node root) {
+	if (root == null) return null;
+	Node dummy = new Node(0, null, null);
+	prev = dummy;
+	helper(root);
+	//connect head and tail
+	prev.right = dummy.right;
+	dummy.right.left = prev;
+	return dummy.right;
+}
+
+private void helper (Node cur) {
+	if (cur == null) return;
+	helper(cur.left);
+	prev.right = cur;
+	cur.left = prev;
+	prev = cur;
+	helper(cur.right);
+}
+```

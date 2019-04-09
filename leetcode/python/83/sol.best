@@ -1,0 +1,18 @@
+
+3 Line JAVA recursive solution
+
+https://leetcode.com/problems/remove-duplicates-from-sorted-list/discuss/28625
+
+* Lang:    cpp
+* Author:  wen587sort
+* Votes:   182
+
+This solution is inspired by renzid https://leetcode.com/discuss/33043/3-line-recursive-solution
+
+    public ListNode deleteDuplicates(ListNode head) {
+            if(head == null || head.next == null)return head;
+            head.next = deleteDuplicates(head.next);
+            return head.val == head.next.val ? head.next : head;
+    }
+
+Enjoy!

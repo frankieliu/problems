@@ -1,0 +1,139 @@
+
+DP or Just return true
+
+https://leetcode.com/problems/stone-game/discuss/154610
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   173
+
+## Approach 1: Just return true
+Alex is first to pick pile.
+`piles.length` is even, and this lead to an interesting fact:
+Alex can always pick odd piles or always pick even piles!
+
+For example,
+If Alex wants to pick even indexed piles `piles[0], piles[2], ....., piles[n-2]`,
+he picks first `piles[0]`, then Lee can pick either `piles[1]` or `piles[n - 1]`.
+Every turn, Alex can always pick even indexed piles and Lee can only pick odd indexed piles.
+
+In the description, we know that `sum(piles)` is odd.
+If `sum(piles[even]) > sum(piles[odd])`, Alex just picks all evens and wins.
+If `sum(piles[even]) < sum(piles[odd])`, Alex just picks all odds and wins.
+
+So, Alex always defeats Lee in this game.
+
+**C++/Java**
+```
+    return true;
+```
+
+**Python:**
+```
+    return True
+```
+<br/>
+
+## Approach 2: 2D DP
+
+It\'s tricky when we have even number of piles of stones. You may not have this condition in an interview.
+
+**Follow-up:**
+
+What if piles.length can be odd?
+What if we want to know exactly the diffenerce of score?
+Then we need to solve it with DP.
+
+`dp[i][j]` means the biggest number of stones you can get more than opponent picking piles in `piles[i] ~ piles[j]`.
+You can first pick `piles[i]` or  `piles[j]`.
+1. If you pick `piles[i]`, your result will be `piles[i] - dp[i + 1][j]`
+1. If you pick `piles[j]`, your result will be `piles[j] - dp[i][j - 1]`
+
+So we get:
+`dp[i][j] = max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j - 1])`
+We start from smaller subarray and then we use that to calculate bigger subarray.
+
+Note that take evens or take odds, it\'s just an easy strategy to win when the number of stones is even. 
+**It\'s not the best solution!**
+I didn\'t find a tricky solution when the number of stones is odd (maybe there is).
+
+**C++:**
+```
+    bool stoneGame(vector<int>& p) {
+        int n = p.size();
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+        for (int i = 0; i < n; i++) dp[i][i] = p[i];
+        for (int d = 1; d < n; d++)
+            for (int i = 0; i < n - d; i++)
+                dp[i][i + d] = max(p[i] - dp[i + 1][i + d], p[i + d] - dp[i][i + d - 1]);
+        return dp[0][n - 1] > 0;
+    }
+```
+
+**Java:**
+```
+    public boolean stoneGame(int[] p) {
+        int n = p.length;
+        int[][] dp  = new int[n][n];
+        for (int i = 0; i < n; i++) dp[i][i] = p[i];
+        for (int d = 1; d < n; d++)
+            for (int i = 0; i < n - d; i++)
+                dp[i][i + d] = Math.max(p[i] - dp[i + 1][i + d], p[i + d] - dp[i][i + d - 1]);
+        return dp[0][n - 1] > 0;
+    }
+```
+**Python:**
+```
+    def stoneGame(self, p):
+        n = len(p)
+        dp = [[0] * n for i in range(n)]
+        for i in range(n): dp[i][i] = p[i]
+        for d in range(1, n):
+            for i in range(n - d):
+                dp[i][i + d] = max(p[i] - dp[i + 1][i + d], p[i + d] - dp[i][i + d - 1])
+        return dp[0][-1] > 0
+```
+<br/>
+
+## Approach 3: 1D DP
+Follow up: Use only O(N) space?
+
+Simplify to 1D DP.
+
+**C++:**
+```
+    bool stoneGame(vector<int>& p) {
+        vector<int> dp = p;
+        for (int d = 1; d < p.size(); d++)
+            for (int i = 0; i < p.size() - d; i++)
+                dp[i] = max(p[i] - dp[i + 1], p[i + d] - dp[i]);
+        return dp[0] > 0;
+    }
+```
+
+**Java:**
+```
+    public boolean stoneGame(int[] p) {
+        int[] dp = Arrays.copyOf(p, p.length);;
+        for (int d = 1; d < p.length; d++)
+            for (int i = 0; i < p.length - d; i++)
+                dp[i] = Math.max(p[i] - dp[i + 1], p[i + d] - dp[i]);
+        return dp[0] > 0;
+    }
+```
+**Python:**
+```
+    def stoneGame(self, p):
+        n = len(p)
+        dp = p[:]
+        for d in range(1, n):
+            for i in range(n - d):
+                dp[i] = max(p[i] - dp[i + 1], p[i + d] - dp[i])
+        return dp[0] > 0
+```
+
+
+
+
+
+

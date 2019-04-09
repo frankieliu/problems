@@ -1,0 +1,49 @@
+
+[C++] [Java] Clean Code - O(N)
+
+https://leetcode.com/problems/array-nesting/discuss/102432
+
+* Lang:    cpp
+* Author:  alexander
+* Votes:   56
+
+The idea is to, start from every number, find ``circle``s in those ``index-pointer-chains``, every time you find a set (a circle) ``mark every number as visited (-1)`` so that next time you won't step on it again.
+**C++**
+```
+class Solution {
+public:
+    int arrayNesting(vector<int>& a) {
+        size_t maxsize = 0;
+        for (int i = 0; i < a.size(); i++) {
+            size_t size = 0;
+            for (int k = i; a[k] >= 0; size++) {
+                int ak = a[k];
+                a[k] = -1; // mark a[k] as visited;
+                k = ak;
+            }
+            maxsize = max(maxsize, size);
+        }
+
+        return maxsize;
+    }
+};
+```
+**Java**
+```
+public class Solution {
+    public int arrayNesting(int[] a) {
+        int maxsize = 0;
+        for (int i = 0; i < a.length; i++) {
+            int size = 0;
+            for (int k = i; a[k] >= 0; size++) {
+                int ak = a[k];
+                a[k] = -1; // mark a[k] as visited;
+                k = ak;
+            }
+            maxsize = Integer.max(maxsize, size);
+        }
+
+        return maxsize;
+    }
+}
+```

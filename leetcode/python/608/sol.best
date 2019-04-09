@@ -1,0 +1,14 @@
+
+AC Solution
+
+https://leetcode.com/problems/tree-node/discuss/104111
+
+* Lang:    cpp
+* Author:  richarddia
+* Votes:   18
+
+```
+select T.id, 
+IF(isnull(T.p_id), 'Root', IF(T.id in (select p_id from tree), 'Inner', 'Leaf')) Type 
+from tree T
+```

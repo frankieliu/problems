@@ -1,0 +1,19 @@
+
+Concise MySQL solution with reference
+
+https://leetcode.com/problems/biggest-single-number/discuss/104466
+
+* Lang:    cpp
+* Author:  zhutou7
+* Votes:   9
+
+```
+# Refer to: https://stackoverflow.com/questions/17250243/how-to-return-null-when-result-is-empty
+select(
+  select num
+  from number
+  group by num
+  having count(*) = 1
+  order by num desc limit 1
+) as num;
+```

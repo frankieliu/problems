@@ -1,0 +1,39 @@
+
+[Java] 3 liner with explanation, time & space: O(n).
+
+https://leetcode.com/problems/flip-equivalent-binary-trees/discuss/200514
+
+* Lang:    cpp
+* Author:  rock
+* Votes:   13
+
+1. If at least one of the two root nodes is `null`, are they equal? if yes, `true`; if no, `false`;
+2. otherwise, neither node is `null`; if the values of the two nodes are: 
+	2a) NOT equal, return `false`;
+	2b) equal, compare their children recursively.
+
+```
+    public boolean flipEquiv(TreeNode r1, TreeNode r2) {
+        if (r1 == null || r2 == null) return r1 == r2;
+        if (r1.val != r2.val) return false;
+        return flipEquiv(r1.left, r2.left) && flipEquiv(r1.right, r2.right) || flipEquiv(r1.left, r2.right) && flipEquiv(r1.right, r2.left);         
+    }
+```
+**Update:** 
+For some time, I forgot the following constraint and changed the comlexity from O(n) to O(n ^ 2):
+`Each value in each tree will be a unique integer in the range [0, 99]`
+
+The follows are correct **only without the above condition**.
+=============================
+Complexity analysis corrected from `O(n)` to `O(n ^ 2)`, credit to @coder_coder.
+**Analysis:**
+
+In worst case, the recursion corresponds to a perfect quaternary (means `4`-nary) tree, which has `4 ^ d = N ^ 2` nodes, and we have to traverse all nodes. `d = logN` is the depth of the binary tree.
+
+One worst case for input:
+two perfect binary trees: root1 & root2. 
+1. Root1\'s nodes are all `0`s; 
+2. Root2\'s nodes are all `0`s, with the exception that left and right bottoms are both `1`s.
+
+**Time & Space: O(n ^ 2).**
+

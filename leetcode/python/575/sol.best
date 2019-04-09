@@ -1,0 +1,17 @@
+
+Python, Straightforward with Explanation
+
+https://leetcode.com/problems/distribute-candies/discuss/102868
+
+* Lang:    cpp
+* Author:  awice
+* Votes:   51
+
+There are ```len(set(candies))``` unique candies, and the sister picks only ```len(candies) / 2``` of them, so she can't have more than this amount.
+
+For example, if there are 5 unique candies, then if she is picking 4 candies, she will take 4 unique ones.  If she is picking 7 candies, then she will only take 5 unique ones.
+
+```
+def distributeCandies(self, candies):
+    return min(len(candies) / 2, len(set(candies)))
+```

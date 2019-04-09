@@ -1,0 +1,48 @@
+
+[Java/C++] Clean Code
+
+https://leetcode.com/problems/longest-word-in-dictionary/discuss/109114
+
+* Lang:    cpp
+* Author:  alexander
+* Votes:   81
+
+1. Sort the words alphabetically, therefore shorter words always comes before longer words;
+2. Along the sorted list, populate the words that can be built;
+3. Any prefix of a word must comes before that  word.
+
+**Java**
+```
+class Solution {
+    public String longestWord(String[] words) {
+        Arrays.sort(words);
+        Set<String> built = new HashSet<String>();
+        String res = "";
+        for (String w : words) {
+            if (w.length() == 1 || built.contains(w.substring(0, w.length() - 1))) {
+                res = w.length() > res.length() ? w : res;
+                built.add(w);
+            }
+        }
+        return res;
+    }
+}
+```
+**C++**
+```
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        sort(words.begin(), words.end());
+        unordered_set<string> built;
+        string res;
+        for (string w : words) {
+            if (w.size() == 1 || built.count(w.substr(0, w.size() - 1))) {
+                res = w.size() > res.size() ? w : res;
+                built.insert(w);
+            }
+        }
+        return res;
+    }
+};
+```

@@ -1,0 +1,137 @@
+
+[C++/Java/Python] Add 0 or 2 * K
+
+https://leetcode.com/problems/smallest-range-ii/discuss/173377
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   59
+
+## **Intuition**:
+For each integer `A[i]`,
+we may choose either `x = -K` or `x = K`.
+
+If we add `K` to all `B[i]`, the result won\'t change.
+
+It\'s the same as:
+For each integer `A[i]`, we may choose either `x = 0` or `x = 2 * K`.
+
+
+## **Explanation**:
+We sort the `A` first, and we choose to add `x = 0` to all `A[i]`.
+Now we have `res = A[n - 1] - A[0]`.
+Starting from the smallest of `A`, we add `2 * K` to `A[i]`,
+hoping this process will reduce the difference.
+
+Update the new `mx = max(mx, A[i] + 2 * K)`
+Update the new `mn = min(A[i + 1], A[0] + 2 * K)`
+Update the `res = min(res, mx - mn)`
+
+
+## **Time Complexity**:
+`O(NlogN)`, in both of the worst and the best cases.
+In the Extending Reading part, I improve this to `O(N)` in half of cases.
+
+**C++:**
+```
+    int smallestRangeII(vector<int> A, int K) {
+        sort(A.begin(), A.end());
+        int n = A.size(), mx = A[n - 1], mn = A[0], res = mx - mn;
+        for (int i = 0; i < n - 1; ++i) {
+            mx = max(mx, A[i] + 2 * K);
+            mn = min(A[i + 1], A[0] + 2 * K);
+            res = min(res, mx - mn);
+        }
+        return res;
+    }
+```
+**Java:**
+```
+    public int smallestRangeII(int[] A, int K) {
+        Arrays.sort(A);
+        int n = A.length, mx = A[n - 1], mn = A[0], res = mx - mn;
+        for (int i = 0; i < n - 1; ++i) {
+            mx = Math.max(mx, A[i] + 2 * K);
+            mn = Math.min(A[i + 1], A[0] + 2 * K);
+            res = Math.min(res, mx - mn);
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def smallestRangeII(self, A, K):
+        A.sort()
+        res = A[-1] - A[0]
+        for i in range(len(A) - 1):
+            big = max(A[-1], A[i] + 2 * K)
+            small = min(A[i + 1], A[0] + 2 * K)
+            res = min(res, big - small)
+        return res
+```
+
+## **Extending Reading:**
+
+I notice that no other posts help me explain this part,
+So I decided to complete it myself.
+<br>
+
+**Q:** Do we have to sort the list?
+**A:** In general cases, Yes. and this can be easily proved.
+
+For example A = [0,1,4,5,6,7,8,9], K = 5
+result = 2 * K - max(gap between numbers) = 2 * 5 - (4 - 1) = 7
+
+To get the gap of consecutive numbers (in sorted order),
+I don\'t have a better idea than sortting.
+
+<br>
+
+**Q:** If we add `2*K` to `A[i]`, why do we need to add `2*K` to `A[0]` ~ `A[i - 1]`?
+**A:** Yes we need to keep the array **rotated sorted**.
+
+If we add `2*K` to any `A[i]`, now the maximum will be at least `A[i] + 2*K`
+`A[0]` is the minimum and `A[0] + 2K` won\'t be bigger than `A[i] + 2*K`.
+
+For example A = [0,1,4,5,6,7,8,9], K = 5
+If we add K * 2 = 10 to 5, then we have [0,1,4,15,6,7,8,9],
+we should also add 10 to 0,1 and 4.
+
+In other words, if we add any A[i],
+we should do the same thing to the all smaller numbers,
+and keep the array **rotated sorted**.
+
+<br>
+
+**Q:** Except the general cases, do we any corner case?
+**A:** Yes, we have.
+if `max(A) - min(A) >= 4 * K`, return `max(A) - min(A) -  2 * K`
+if `max(A) - min(A) <= K`, return `max(A) - min(A)`
+Otherwise, we have to sort.
+
+<br>
+
+**Q:** Can we optimise this O(NlogN) solution?
+**A:** No.
+
+To be easier understood, I sort the whole list here.
+But we don\'t have to.
+We can only take and sort he number between `[max(A) - 2 * K, min(A) + 2 * K]`
+
+This will help improve the complexity a lot.
+In 30 of 68 total cases, we solve the problem in O(N).
+In ther rest cases, we solve in O(KlogK) where K <= N.
+
+In python, it will improve from 120ms to 45ms.
+
+```
+    def smallestRangeII(self, A, K):
+        if len(A) == 1: return 0
+        ma, mi = max(A), min(A)
+        if ma - mi >= 4 * K:
+            return ma - mi - 2 * K
+        if ma - mi <= 2 * K:
+            return ma - mi
+        inter = sorted([i for i in A if ma - 2 * K < i < mi + 2 * K] + [ma - 2 * K, mi + 2 * K])
+        return min(a + 2 * K - b for a, b in zip(inter, inter[1:]))
+```

@@ -1,0 +1,43 @@
+
+Short Java Solutions - Sorting Dictionary and Without Sorting
+
+https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/discuss/99588
+
+* Lang:    cpp
+* Author:  compton_scatter
+* Votes:   64
+
+We sort the input dictionary by longest length and lexicography. Then, we iterate through the dictionary exactly once. In the process, the first dictionary word in the sorted dictionary which appears as a subsequence in the input string s must be the desired solution.
+
+```
+public String findLongestWord(String s, List<String> d) {
+    Collections.sort(d, (a,b) -> a.length() != b.length() ? -Integer.compare(a.length(), b.length()) :  a.compareTo(b));
+    for (String dictWord : d) {
+        int i = 0;
+        for (char c : s.toCharArray()) 
+            if (i < dictWord.length() && c == dictWord.charAt(i)) i++;
+        if (i == dictWord.length()) return dictWord;
+    }
+    return "";
+}
+```
+
+An alternate, more efficient solution which avoids sorting the dictionary: 
+
+```
+public String findLongestWord(String s, List<String> d) {
+    String longest = "";
+    for (String dictWord : d) {
+        int i = 0;
+        for (char c : s.toCharArray()) 
+            if (i < dictWord.length() && c == dictWord.charAt(i)) i++;
+
+        if (i == dictWord.length() && dictWord.length() >= longest.length()) 
+            if (dictWord.length() > longest.length() || dictWord.compareTo(longest) < 0)
+                longest = dictWord;
+    }
+    return longest;
+}
+```
+
+Time Complexity: O(nk), where n is the length of string s and k is the number of words in the dictionary.

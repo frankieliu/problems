@@ -1,0 +1,43 @@
+
+[C++/Java/Python] Climb Mountain
+
+https://leetcode.com/problems/valid-mountain-array/discuss/194900
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   72
+
+Two people climb from left and from right separately.
+If they are climbing the same mountain,
+they will meet at the same point.
+
+
+**C++:**
+```
+    bool validMountainArray(vector<int>& A) {
+        int n = A.size(), i = 0, j = n - 1;
+        while (i + 1 < n && A[i] < A[i + 1]) i++;
+        while (j > 0 && A[j - 1] > A[j]) j--;
+        return i > 0 && i == j && j < n - 1;
+    }
+```
+
+**Java:**
+```
+    public boolean validMountainArray(int[] A) {
+        int n = A.length, i = 0, j = n - 1;
+        while (i + 1 < n && A[i] < A[i + 1]) i++;
+        while (j > 0 && A[j - 1] > A[j]) j--;
+        return i > 0 && i == j && j < n - 1;
+    }
+```
+
+**Python:**
+```
+    def validMountainArray(self, A):
+        i, j, n = 0, len(A) - 1, len(A)
+        while i + 1 < n and A[i] < A[i + 1]: i += 1
+        while j > 0 and A[j - 1] > A[j]: j -= 1
+        return 0 < i == j < n - 1
+```
+

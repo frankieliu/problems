@@ -1,0 +1,23 @@
+
+Java O(n) Time O(1) Space
+
+https://leetcode.com/problems/shortest-unsorted-continuous-subarray/discuss/103057
+
+* Lang:    cpp
+* Author:  compton_scatter
+* Votes:   244
+
+I use the variables `beg` and `end` to keep track of minimum subarray `A[beg...end]` which must be sorted for the entire array `A` to be sorted. If  `end < beg < 0` at the end of the `for` loop, then the array is already fully sorted.
+
+```
+public int findUnsortedSubarray(int[] A) {
+    int n = A.length, beg = -1, end = -2, min = A[n-1], max = A[0];
+    for (int i=1;i<n;i++) {
+      max = Math.max(max, A[i]);
+      min = Math.min(min, A[n-1-i]);
+      if (A[i] < max) end = i;
+      if (A[n-1-i] > min) beg = n-1-i; 
+    }
+    return end - beg + 1;
+}
+```

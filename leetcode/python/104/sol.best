@@ -1,0 +1,17 @@
+
+Simple solution using Java
+
+https://leetcode.com/problems/maximum-depth-of-binary-tree/discuss/34216
+
+* Lang:    cpp
+* Author:  ray050899
+* Votes:   237
+
+if the node does not exist, simply return 0. Otherwise, return the 1+the longer distance of its subtree.
+
+    public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
+        }

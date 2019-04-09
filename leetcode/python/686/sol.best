@@ -1,0 +1,44 @@
+
+Intuitive Python 2-liner
+
+https://leetcode.com/problems/repeated-string-match/discuss/108090
+
+* Lang:    cpp
+* Author:  yangshun
+* Votes:   55
+
+Let `n` be the answer, the minimum number of times `A` has to be repeated. 
+
+For `B` to be inside `A`, `A` has to be repeated sufficient times such that it is at least as long as `B` (or one more), hence we can conclude that the theoretical lower bound for the answer would be length of `B` / length of `A`.
+
+Let `x` be the theoretical lower bound, which is `ceil(len(B)`/`len(A))`.
+
+The answer `n` can only be `x` or `x + 1` (in the case where `len(B)` is a multiple of `len(A)` like in `A = "abcd"` and `B = "cdabcdab"`) and not more. Because if `B` is already in `A * n`, `B` is definitely in `A * (n + 1)`. 
+
+Hence we only need to check whether `B in A * x` or `B in A * (x + 1)`, and if both are not possible return -1.
+
+*- Yangshun*
+
+Here's the cheeky two-liner suggested by @liping5:
+
+```
+class Solution(object):
+    def repeatedStringMatch(self, A, B):
+        t = -(-len(B) // len(A)) # Equal to ceil(len(b) / len(a))
+        return t * (B in A * t) or (t + 1) * (B in A * (t + 1)) or -1
+```
+
+But don't do the above in interviews. Doing the following is more readable.
+
+```
+class Solution(object):
+    def repeatedStringMatch(self, A, B):
+        times = -(-len(B) // len(A)) # Equal to ceil(len(b) / len(a))
+        for i in range(2):
+          if B in (A * (times + i)):
+            return times + i
+        return -1
+
+```
+
+Thanks @ManuelP for suggesting that `times = int(math.ceil(float(len(B)) / len(A)))` can be written as `times = -(-len(B) // len(A))`.

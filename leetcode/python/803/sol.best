@@ -1,0 +1,82 @@
+
+Python Solution by reversely adding hits bricks back
+
+https://leetcode.com/problems/bricks-falling-when-hit/discuss/119829
+
+* Lang:    cpp
+* Author:  LuckyPants
+* Votes:   96
+
+We can reverse the problem and count how many new no-dropping bricks are added when we add the bricks reversely. It\'s just the same of counting dropping bricks when erase one brick.
+
+Let m, n = len(grid), len(grid[0]).
+
+Here is the detailed solution:
+
+1. For each hit (i, j), if grid[i][j]==0, set grid[i][j]=-1 otherwise set grid[i][j]=0. Since a hit may happen at an empty position, we need to seperate emptys from bricks.
+2. For i in [0, n], do dfs at grid[i][0] and mark no-dropping bricks. Here we get the grid after all hits.
+3. Then for each hit (i,j) (reversely), first we check grid[i][j]==-1, if yes, it\'s empty, skip this hit. Then we check whether it\'s connected to any no-dropping bricks or it\'s at the top, if not, it can\'t add any no-dropping bricks, skip this hit. Otherwise we do dfs at grid[i][j], mark new added no-dropping bricks and record amount of them.
+4. Return the amounts of new added no-dropping bricks at each hits.
+
+Here is a example, you can walk from the last step to the first step to see how we transfer the question:
+
+![image](https://s3-lc-upload.s3.amazonaws.com/users/luckypants/image_1521450349.png)
+![image](https://s3-lc-upload.s3.amazonaws.com/users/luckypants/image_1521450376.png)
+![image](https://s3-lc-upload.s3.amazonaws.com/users/luckypants/image_1521450387.png)
+![image](https://s3-lc-upload.s3.amazonaws.com/users/luckypants/image_1521450393.png)
+
+Using this method, we only do $O(n)+O(len(hits))$ dfs.
+
+
+
+Here is my Python code:
+
+**EDIT**:  Many thanks to @lee215 for pointing mistake out and improving the code:
+* I used h[0], h[1] in is_connected, although it works, it\'s a mistake
+* Use grid[i][j]-=1 to execute hits and grid[i][j]+=1 to add bricks (So when we have repeating hits, only when we add from 0 to 1, it\'s the true time we hit the brick, following hits are done on empty), it makes the code concise and deals with repeating hits (Although the problem guarantees no repeating hits)
+
+I also simplified some for loops when checking adjacent positions.
+
+```
+class Solution:
+    def hitBricks(self, grid, hits):
+        """
+        :type grid: List[List[int]]
+        :type hits: List[List[int]]
+        :rtype: List[int]
+        """
+
+        m, n = len(grid), len(grid[0])
+        
+        # Connect unconnected bricks and 
+        def dfs(i, j):
+            if not (0<=i<m and 0<=j<n) or grid[i][j]!=1:
+                return 0
+            ret = 1
+            grid[i][j] = 2
+            ret += sum(dfs(x, y) for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)])
+            return ret
+        
+        # Check whether (i, j) is connected to Not Falling Bricks
+        def is_connected(i, j):
+            return i==0 or any([0<=x<m and 0<=y<n and grid[x][y]==2 for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]])
+        
+        # Mark whether there is a brick at the each hit
+        for i, j in hits:
+            grid[i][j] -= 1
+                
+        # Get grid after all hits
+        for i in range(n):
+            dfs(0, i)
+        
+        # Reversely add the block of each hits and get count of newly add bricks
+        ret = [0]*len(hits)
+        for k in reversed(range(len(hits))):
+            i, j = hits[k]
+            grid[i][j] += 1
+            if grid[i][j]==1 and is_connected(i, j):
+                ret[k] = dfs(i, j)-1
+            
+        return ret
+```
+

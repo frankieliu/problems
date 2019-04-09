@@ -1,0 +1,97 @@
+
+[C++/Java/Python] 1,1,2,2,3,3 Steps
+
+https://leetcode.com/problems/spiral-matrix-iii/discuss/158970
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   47
+
+**Intuition**:
+Take steps one by one.
+If the location is inside of grid, add it to `res`.
+But how to simulate the path?
+
+It seems to be annoying, but if we oberserve the path:
+
+move right `1` step, turn right
+move down `1` step, turn right
+move left `2` steps, turn right
+move top `2` steps, turn right,
+move right `3` steps, turn right
+move down `3` steps, turn right
+move left `4` steps, turn right
+move top `4` steps, turn right,
+
+we can find the sequence of steps: 1,1,2,2,3,3,4,4,5,5....
+
+So there are two thing to figure out:
+1. how to generate sequence 1,1,2,2,3,3,4,4,5,5
+2. how to turn right?
+
+**Generate sequence 1,1,2,2,3,3,4,4,5,5**
+Let `n` be index of this sequence.
+Then `A0 = 1`, `A1 = 1`, `A2 = 2` ......
+We can include that `An = n / 2 + 1`
+
+**How to turn right?**
+By cross product:
+Assume current direction is (x, y) in plane, which is (x, y, 0) in space.
+Then the direction after turn right (x, y, 0) \xD7 (0, 0, 1) = (y, -x, 0)
+Translate to code: `tmp = x; x = y; y = -tmp;`
+
+By arrays of arrays:
+The directions order is (0,1),(1,0),(0,-1),(-1,0), then repeat.
+Just define a variable.
+
+
+**Time Complexity**:
+O(max(M,N) ^ 2)
+
+**C++:**
+```
+    vector<vector<int>> spiralMatrixIII(int R, int C, int r, int c) {
+        vector<vector<int>> res = {{r, c}};
+        int x = 0, y = 1, tmp;
+        for (int n = 0; res.size() < R * C; n++) {
+            for (int i = 0; i < n / 2 + 1; i++) {
+                r += x, c += y;
+                if (0 <= r && r < R && 0 <= c && c < C)
+                    res.push_back({r, c});
+            }
+            tmp = x, x = y, y = -tmp;
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int[][] spiralMatrixIII(int R, int C, int r, int c) {
+        int[][] res = new int[R * C][2];
+        res[0] = new int[] {r, c};
+        int x = 0, y = 1, n = 0, i = 0, tmp, j = 1;
+        while (j < R * C) {
+            r += x; c += y; i++;
+            if (0 <= r && r < R && 0 <= c && c < C)
+                res[j++] = new int[] {r, c};
+            if (i == n / 2 + 1) {
+                i = 0; n++; tmp = x; x = y; y = -tmp;
+            }
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def spiralMatrixIII(self, R, C, r, c):
+        res = [[r, c]]
+        x, y, n, i = 0, 1, 0, 0
+        while len(res) < R * C:
+            r, c, i = r + x, c + y, i + 1
+            if 0 <= r < R and 0 <= c < C:
+                res.append([r, c])
+            if i == n / 2 + 1:
+                x, y, n, i = y, -x, n + 1, 0
+        return res
+```

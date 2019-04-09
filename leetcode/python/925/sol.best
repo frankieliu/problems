@@ -1,0 +1,46 @@
+
+[C++/Java/Python] Two Pointers
+
+https://leetcode.com/problems/long-pressed-name/discuss/183994
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   30
+
+**C++:**
+```
+    bool isLongPressedName(string name, string typed) {
+        int i = 0, m = name.length(), n = typed.length();
+        for (int j = 0; j < n; ++j)
+            if (i < m && name[i] == typed[j])
+                ++i;
+            else if (!j || typed[j] != typed[j - 1])
+                return false;
+        return i == m;
+    }
+```
+
+**Java:**
+```
+    public boolean isLongPressedName(String name, String typed) {
+        int i = 0, m = name.length(), n = typed.length();
+        for (int j = 0; j < n; ++j)
+            if (i < m && name.charAt(i) == typed.charAt(j))
+                ++i;
+            else if (j == 0 || typed.charAt(j) != typed.charAt(j - 1))
+                return false;
+        return i == m;
+    }
+```
+**Python:**
+```
+    def isLongPressedName(self, name, typed):
+        i = 0
+        for j in range(len(typed)):
+            if i < len(name) and name[i] == typed[j]:
+                i += 1
+            elif j == 0 or typed[j] != typed[j - 1]:
+                return False
+        return i == len(name)
+```
+

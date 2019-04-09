@@ -1,0 +1,13 @@
+
+Python one liner
+
+https://leetcode.com/problems/robot-return-to-origin/discuss/106315
+
+* Lang:    cpp
+* Author:  aditya74
+* Votes:   91
+
+```
+def judgeCircle(self, moves):
+    return moves.count('L') == moves.count('R') and moves.count('U') == moves.count('D')
+```

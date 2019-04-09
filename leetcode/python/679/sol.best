@@ -1,0 +1,16 @@
+
+\ub5a2\ube3b\uac01\uac4e\ub0c7\uac05\uac38\uae9a\ubd5f\uc223\uc684\ubd74\ubd5e\ub93c\uac08\uac0c\ub914\ub58c\uc60a\uba54\ub284\uc22d\uceb8\uae36\uae9b\uc616\uac0d\ub1d0\uca62\uacf4\ub4c7\uac6f\uad84\uc615\uc679\ub21e\uc1b4\uac43\ub057\uae2c\ub549\uadbf\uac00\uc300\ub090\uac44\uc224\ubeb4\ub298\uac58\uaf78\uc222\uac42\uac0b\uac03\ucad0\uaf14\uc1be\uca61\uc1d4\uc1bf\ub05b\ub91c\uac04\ube3a\uca6c\uc6e8\ub534\uc620\ub91b\uac02\ubd6a\ub360\ub1a4\ube50\uc60b\uadd2\ub282\uac30\uac16\ub1a5\uadbe\uac06\uc60c\ubf18\ubb30\uac70\uac0e\uae37\ub0a4\uacbc
+
+https://leetcode.com/problems/24-game/discuss/107670
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   92
+
+    def judgePoint24(self, nums):
+        bad = '\ub5a2\ube3b\uac01\uac4e\ub0c7\uac05\uac38\uae9a\ubd5f\uc223\uc684\ubd74\ubd5e\ub93c\uac08\uac0c\ub914\ub58c\uc60a\uba54\ub284\uc22d\uceb8\uae36\uae9b\uc616\uac0d\ub1d0\uca62\uacf4\ub4c7\uac6f\uad84\uc615\uc679\ub21e\uc1b4\uac43\ub057\uae2c\ub549\uadbf\uac00\uc300\ub090\uac44\uc224\ubeb4\ub298\uac58\uaf78\uc222\uac42\uac0b\uac03\ucad0\uaf14\uc1be\uca61\uc1d4\uc1bf\ub05b\ub91c\uac04\ube3a\uca6c\uc6e8\ub534\uc620\ub91b\uac02\ubd6a\ub360\ub1a4\ube50\uc60b\uadd2\ub282\uac30\uac16\ub1a5\uadbe\uac06\uc60c\ubf18\ubb30\uac70\uac0e\uae37\ub0a4\uacbc'
+        return chr(int(''.join(map(str, sorted(nums)))) + 42921) not in bad
+
+There are really only 495 possible inputs, of which 404 are solvable and 91 aren't. The above is the shortest encoding of those 91 that I could think of. One character for each case. The +42921 is for getting all characters from the same unicode range (from the "Hangul Syllables" range) so that it looks good. For extra style points I shuffled them, otherwise they'd look somewhat sorted.
+
+Edit: Then again, after a few iterations my ["normal" solution](https://discuss.leetcode.com/topic/104018/short-python) ended up being *shorter* than this. But at least this is still much faster and imho more fun :-)

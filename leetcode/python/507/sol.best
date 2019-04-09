@@ -1,0 +1,45 @@
+
+Simple Java Solution
+
+https://leetcode.com/problems/perfect-number/discuss/98594
+
+* Lang:    cpp
+* Author:  shawngao
+* Votes:   40
+
+```
+public class Solution {
+    public boolean checkPerfectNumber(int num) {
+        if (num == 1) return false;
+        
+        int sum = 0;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                sum += i;
+                if (i != num / i) sum += num / i;
+            }
+        }
+        sum++;
+        
+        return sum == num;
+    }
+}
+```
+```Update``` Enlightened by discussion below by @StefanPochmann and @jdrogin, in the given range we don't need to test ```if (i != num / i)``` before add ```num / i``` to ```sum```. 
+```
+public class Solution {
+    public boolean checkPerfectNumber(int num) {
+        if (num == 1) return false;
+        
+        int sum = 0;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                sum += i + num / i;
+            }
+        }
+        sum++;
+        
+        return sum == num;
+    }
+}
+```

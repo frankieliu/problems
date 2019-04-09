@@ -1,0 +1,84 @@
+
+[Java/C++/Python] Easy and Concise Recursion
+
+https://leetcode.com/problems/special-binary-string/discuss/113211
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   103
+
+## **Explanation**:
+
+Just 4 steps:
+1. Split S into several special strings (as many as possible).
+2. Special string starts with 1 and ends with 0. Recursion on the middle part.
+3. Sort all special strings in lexicographically largest order.
+4. Join and output all strings.
+
+## **Update**
+
+The middle part of a special string may not be another special string. But in my recursion it is.
+For example, 1M0 is a splitted special string. M is its middle part and it must be another special string.
+
+Because:
+1. The number of 0\'s is equal to the number of 1\'s in ```M```
+2. If there is a prefix ```P``` of ```M```which has one less 1\'s than 0\'s, ```1P``` will make up a special string. ```1P``` will be found as special string before ```1M0``` in my solution.
+It means that every prefix of ```M``` has at least as many 1\'s as 0\'s.
+
+Based on 2 points above, M is a special string.
+
+## **Solution**
+
+**Java**
+```
+public String makeLargestSpecial(String S) {
+        int count = 0, i = 0;
+        List<String> res = new ArrayList<String>();
+        for (int j = 0; j < S.length(); ++j) {
+          if (S.charAt(j) == \'1\') count++;
+          else count--;
+          if (count == 0) {
+            res.add(\'1\' + makeLargestSpecial(S.substring(i + 1, j)) + \'0\');
+            i = j + 1;
+          }
+        }
+        Collections.sort(res, Collections.reverseOrder());
+        return String.join("", res);
+    }
+```
+
+**C++**
+```
+string makeLargestSpecial(string S) {
+    int count = 0, i = 0;
+    vector<string> res;
+    for (int j = 0; j < S.size(); ++j) {
+      if (S[j] == \'1\') count++;
+      else count--;
+      if (count == 0) {
+        res.push_back(\'1\' + makeLargestSpecial(S.substr(i + 1, j - i - 1)) + \'0\');
+        i = j + 1;
+      }
+    }
+    sort(res.begin(), res.end(), greater<string>());
+    string res2 = "";
+    for (int i = 0; i < res.size(); ++i) res2 += res[i];
+    return res2;
+  }
+```
+
+**Python**
+```
+def makeLargestSpecial(self, S):
+        count = i = 0
+        res = []
+        for j, v in enumerate(S):
+            count = count + 1 if v==\'1\' else count - 1
+            if count == 0:
+                res.append(\'1\' + self.makeLargestSpecial(S[i + 1:j]) + \'0\')
+                i = j + 1
+        return \'\'.join(sorted(res)[::-1])
+```
+
+Upvote and enjoy.
+

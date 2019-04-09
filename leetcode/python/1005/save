@@ -1,0 +1,89 @@
+#
+# @lc app=leetcode id=1005 lang=python3
+#
+# [1005] Maximize Sum Of Array After K Negations
+#
+# https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/
+#
+# algorithms
+# Easy (48.99%)
+# Total Accepted:    6.9K
+# Total Submissions: 14.2K
+# Testcase Example:  '[4,2,3]\n1'
+#
+# Given an array A of integers, we must modify the array in the following way:
+# we choose an i and replace A[i] with -A[i], and we repeat this process K
+# times in total.  (We may choose the same index i multiple times.)
+#
+# Return the largest possible sum of the array after modifying it in this
+# way.
+#
+#
+#
+# Example 1:
+#
+#
+# Input: A = [4,2,3], K = 1
+# Output: 5
+# Explanation: Choose indices (1,) and A becomes [4,-2,3].
+#
+#
+#
+# Example 2:
+#
+#
+# Input: A = [3,-1,0,2], K = 3
+# Output: 6
+# Explanation: Choose indices (1, 2, 2) and A becomes [3,1,0,2].
+#
+#
+#
+# Example 3:
+#
+#
+# Input: A = [2,-3,-1,5,-4], K = 2
+# Output: 13
+# Explanation: Choose indices (1, 4) and A becomes [2,3,-1,5,4].
+#
+#
+#
+#
+#
+#
+# Note:
+#
+#
+# 1 <= A.length <= 10000
+# 1 <= K <= 10000
+# -100 <= A[i] <= 100
+#
+#
+#
+
+
+class Solution:
+    def largestSumAfterKNegations(self, A, k):
+        A = sorted(A)
+        # if the number is large and negative negate it
+        amin = None
+        sum = 0
+        for i in range(len(A)):
+            if A[i] < 0 and k > 0:
+                A[i] = -A[i]
+                k -= 1
+            if amin is None or A[i] < amin:
+                amin = A[i]
+            sum += A[i]
+        return sum - (k % 2) * amin * 2
+
+
+test = True
+if test:
+    s = Solution()
+    A = [3, -1, 0, 2]
+    K = 3
+    A = [4, 2, 3]
+    K = 1
+    A = [4, -5, 4, -5, 9, 4, 5]
+    K = 1
+    print(s.largestSumAfterKNegations(A, K))

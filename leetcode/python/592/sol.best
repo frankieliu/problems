@@ -1,0 +1,61 @@
+
+Small simple C++/Java/Python
+
+https://leetcode.com/problems/fraction-addition-and-subtraction/discuss/103384
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   43
+
+Keep the overall result in `A / B`, read the next fraction into `a / b`. Their sum is `(Ab + aB) / Bb` (but cancel their greatest common divisor).
+
+**C++:**
+
+    string fractionAddition(string expression) {
+        istringstream in(expression);
+        int A = 0, B = 1, a, b;
+        char _;
+        while (in >> a >> _ >> b) {
+            A = A * b + a * B;
+            B *= b;
+            int g = abs(__gcd(A, B));
+            A /= g;
+            B /= g;
+        }
+        return to_string(A) + '/' + to_string(B);
+    }
+
+**Java:**
+
+    public String fractionAddition(String expression) {
+        Scanner sc = new Scanner(expression).useDelimiter("/|(?=[-+])");
+        int A = 0, B = 1;
+        while (sc.hasNext()) {
+            int a = sc.nextInt(), b = sc.nextInt();
+            A = A * b + a * B;
+            B *= b;
+            int g = gcd(A, B);
+            A /= g;
+            B /= g;
+        }
+        return A + "/" + B;
+    }
+
+    private int gcd(int a, int b) {
+        return a != 0 ? gcd(b % a, a) : Math.abs(b);
+    }
+
+**Python 3:**
+Added this after @lee215 reminded me about Python 3's `math.gcd` with his solution in the comments.
+
+    def fractionAddition(self, expression):
+        ints = map(int, re.findall('[+-]?\\d+', expression))
+        A, B = 0, 1
+        for a in ints:
+            b = next(ints)
+            A = A * b + a * B
+            B *= b
+            g = math.gcd(A, B)
+            A //= g
+            B //= g
+        return '%d/%d' % (A, B)

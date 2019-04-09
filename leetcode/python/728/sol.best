@@ -1,0 +1,30 @@
+
+Python Elegant 2-liner!!!
+
+https://leetcode.com/problems/self-dividing-numbers/discuss/109445
+
+* Lang:    cpp
+* Author:  yangshun
+* Votes:   22
+
+Pretty self-explanatory.
+
+*- Yangshun*
+
+```
+class Solution(object):
+    def selfDividingNumbers(self, left, right):
+        is_self_dividing = lambda num: '0' not in str(num) and all([num % int(digit) == 0 for digit in str(num)])
+        return filter(is_self_dividing, range(left, right + 1))
+```
+
+As pointed out by @ManuelP, `[num % int(digit) == 0 for digit in str(num)]` creates an entire list which is not necessary. By leaving out the `[` and `]`, we can make use of generators which are lazy and allows for short-circuit evaluation, i.e. `all` will terminate as soon as one of the digits fail the check.
+
+The answer below improves the run time from 128 ms to 95 ms:
+
+```
+class Solution(object):
+    def selfDividingNumbers(self, left, right):
+        is_self_dividing = lambda num: '0' not in str(num) and all(num % int(digit) == 0 for digit in str(num))
+        return filter(is_self_dividing, range(left, right + 1))
+```

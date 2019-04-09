@@ -1,0 +1,43 @@
+
+Java 4 lines concise solution with explanation
+
+https://leetcode.com/problems/max-consecutive-ones/discuss/96693
+
+* Lang:    cpp
+* Author:  yuxiangmusic
+* Votes:   72
+
+
+```
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxHere = 0, max = 0;
+        for (int n : nums)
+            max = Math.max(max, maxHere = n == 0 ? 0 : maxHere + 1);
+        return max; 
+    } 
+```
+
+The idea is to reset ```maxHere``` to 0 if we see 0, otherwise increase ```maxHere``` by 1
+The max of all ```maxHere``` is the solution
+
+```
+110111
+^ maxHere = 1
+
+110111
+.^ maxHere = 2
+
+110111
+..^ maxHere = 0
+
+110111
+...^ maxHere = 1
+
+110111
+....^ maxHere = 2
+
+110111
+.....^ maxHere = 3
+```
+
+We can also solve this problem by setting ```k = 0``` of [Max Consecutive Ones II](https://discuss.leetcode.com/topic/75445/java-clean-solution-easily-extensible-to-flipping-k-zero-and-follow-up-handled)

@@ -1,0 +1,10 @@
+
+Its a simple question of Left Join. My solution attached
+
+https://leetcode.com/problems/combine-two-tables/discuss/52928
+
+* Lang:    cpp
+* Author:  lazyprogrammer
+* Votes:   55
+
+    SELECT Person.FirstName, Person.LastName, Address.City, Address.State from Person LEFT JOIN Address on Person.PersonId = Address.PersonId;

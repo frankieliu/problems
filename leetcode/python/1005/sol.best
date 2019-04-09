@@ -1,0 +1,48 @@
+
+[C++/Python] Sort
+
+https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/discuss/252254
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   31
+
+
+**Java**
+```
+    public int largestSumAfterKNegations(int[] A, int K) {
+        Arrays.sort(A);
+        for (int i = 0; K > 0 && i < A.length && A[i] < 0; ++i, --K)
+            A[i] = -A[i];
+        int res = 0, min = Integer.MAX_VALUE;
+        for (int a : A) {
+            res += a;
+            min = Math.min(min, a);
+        }
+        return res - (K % 2) * min * 2;
+    }
+```
+
+**C++**
+```
+    int largestSumAfterKNegations(vector<int>& A, int K) {
+        sort(A.begin(), A.end());
+        for (int i = 0; K > 0 && i < A.size() && A[i] < 0; ++i, --K)
+            A[i] = -A[i];
+        return accumulate(A.begin(), A.end(), 0) - (K%2) * *min_element(A.begin(), A.end()) * 2;
+    }
+```
+
+**Python:**
+```
+    def largestSumAfterKNegations(self, A, K):
+        A.sort()
+        i = 0
+        while i < len(A) and i < K and A[i] < 0:
+            A[i] = -A[i]
+            i += 1
+        return sum(A) - (K - i) % 2 * min(A) * 2
+```
+
+We can improve this to O(N) by quick selecting the Kth in the negative numbers.
+

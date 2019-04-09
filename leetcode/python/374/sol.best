@@ -1,0 +1,14 @@
+
+The key point is to read the problem carefully.
+
+https://leetcode.com/problems/guess-number-higher-or-lower/discuss/84665
+
+* Lang:    cpp
+* Author:  Nakanu
+* Votes:   106
+
+-1 : My number is lower
+ 1 : My number is higher
+ 0 : Congrats! You got it!
+
+Here "My" means the number which is given for you to guess not the number you put into      **guess(int num).**

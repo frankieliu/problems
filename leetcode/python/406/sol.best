@@ -1,0 +1,56 @@
+
+Easy concept with Python/C++/Java Solution
+
+https://leetcode.com/problems/queue-reconstruction-by-height/discuss/89345
+
+* Lang:    cpp
+* Author:  YJL1228
+* Votes:   314
+
+1. **Pick out tallest group of people and sort them** in a subarray (S). Since there's no other groups of people taller than them, therefore **each guy's index will be just as same as his k value**.
+2. For 2nd tallest group (and the rest), insert each one of them into (S) by k value. So on and so forth.
+
+E.g.
+input: [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+subarray after step 1: [**[7,0], [7,1]**]
+subarray after step 2: [[7,0], **[6,1]**, [7,1]]
+...
+
+It's not the most concise code, but I think it well explained the concept.
+
+```
+class Solution(object):
+    def reconstructQueue(self, people):
+        if not people: return []
+
+        # obtain everyone's info
+        # key=height, value=k-value, index in original array
+        peopledct, height, res = {}, [], []
+        
+        for i in xrange(len(people)):
+            p = people[i]
+            if p[0] in peopledct:
+                peopledct[p[0]] += (p[1], i),
+            else:
+                peopledct[p[0]] = [(p[1], i)]
+                height += p[0],
+
+        height.sort()      # here are different heights we have
+
+        # sort from the tallest group
+        for h in height[::-1]:
+            peopledct[h].sort()
+            for p in peopledct[h]:
+                res.insert(p[0], people[p[1]])
+
+        return res
+
+```
+
+**EDIT:**
+Please also check:
+@tlhuang 's concise Python code.
+@wsurvi 's 4 lines Python code.
+@tonygogogo 's 8 lines C++ solution.
+@zeller2 's Java version.
+@hotpro 's Java 8 solution.

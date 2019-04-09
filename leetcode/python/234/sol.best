@@ -1,0 +1,18 @@
+
+Reversing a list is not considered "O(1) space"
+
+https://leetcode.com/problems/palindrome-linked-list/discuss/64493
+
+* Lang:    cpp
+* Author:  wangmenghui
+* Votes:   409
+
+It is a common misunderstanding that the space complexity of a program is just how much the size of additional memory space being used besides input. An important prerequisite is neglected the above definition: [the input has to be read-only][1]. By definition, changing the input and change it back is not allowed (or the input size should be counted when doing so). Another way of determining the space complexity of a program is to simply look at how much space it has written to. Reversing a singly linked list requires writing to O(n) memory space, thus the space complexities for all "reverse-the-list"-based approaches are O(n), not O(1).
+
+Solving this problem in O(1) space is theoretically impossible due to two simple facts: (1) a program using O(1) space is computationally equivalent to a finite automata, or a regular expression checker; (2) [the pumping lemma][2] states that the set of palindrome strings does not form a regular set.
+
+Please change the incorrect problem statement.
+
+
+  [1]: https://en.wikipedia.org/wiki/DSPACE#Machine_models
+  [2]: https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages

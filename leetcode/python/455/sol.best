@@ -1,0 +1,20 @@
+
+Simple Greedy Java Solution
+
+https://leetcode.com/problems/assign-cookies/discuss/93987
+
+* Lang:    cpp
+* Author:  fabrizio3
+* Votes:   71
+
+```
+Arrays.sort(g);
+Arrays.sort(s);
+int i = 0;
+for(int j=0;i<g.length && j<s.length;j++) {
+	if(g[i]<=s[j]) i++;
+}
+return i;
+```
+
+Just assign the cookies starting from the child with less greediness to maximize the number of happy children .

@@ -1,0 +1,10 @@
+
+age[B] > age[A] and age[B] > 100 && age[A] < 100, isn't the latter redundant?
+
+https://leetcode.com/problems/friends-of-appropriate-ages/discuss/126936
+
+* Lang:    cpp
+* Author:  elvinyang
+* Votes:   68
+
+age[B] > age[A] and age[B] > 100 && age[A] < 100, isn\'t the latter redundant?

@@ -1,0 +1,148 @@
+
+[Java/C++/Python] DP, min(O(SN/2), O(3^N/2 * N)
+
+https://leetcode.com/problems/tallest-billboard/discuss/203181
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   51
+
+## **Explanation**:
+`dp[d]` mean the maximum pair of sum we can get with pair difference `d`
+For example, if have a pair of sum `(a, b)` with `a > b`, then `dp[a - b] = b`
+If we have `dp[diff] = a`, it means we have a pair of sum `(a, a + diff)`.
+And this is the biggest pair with difference = a
+
+`dp` is initializes with `dp[0] = 0`;
+
+Assume we have an init state like this
+------- y ------|----- d -----|
+------- y ------|
+
+**case 1**
+If put `x` to tall side
+------- y ------|----- d -----|----- x -----|
+------- y ------|
+
+We update `dp[d + x] = max(dp[d + x],  y )`
+
+**case 2.1**
+Put `x` to low side and `d >= x`:
+-------y------|----- d -----|
+-------y------|--- x ---|
+
+We update `dp[d-x] = max( dp[d - x], y + x)`
+
+**case 2.2**
+Put `x` to low side and `d < x`:
+------- y ------|----- d -----|
+------- y ------|------- x -------|
+We update `dp[x - d] = max(dp[x - d], y + d)`
+
+case 2.1 and case2.2 can merge into `dp[abs(x - d)] = max(dp[abs(x - d)], y + min(d, x))`
+
+<br>
+
+## **Time Complexity**:
+`O(NM)`, where we have
+`N = rod.length <= 20`
+`S = sum(rods) <= 5000`
+`M = all possible sum = min(3^N, S)`
+
+There are 3 ways to arrange a number: in the first group, in the second, not used.
+The number of difference will be less than `3^N`.
+The only case to reach `3^N` is when rod = `[1,3,9,27,81...]`
+
+<br>
+
+**Java, O(SN) using array, just for better reading:**
+```
+    public int tallestBillboard(int[] rods) {
+        int[] dp = new int[5001];
+        for (int d = 1; d < 5001; d++) dp[d] = -10000;
+        for (int x : rods) {
+            int[] cur = dp.clone();
+            for (int d = 0; d + x < 5001; d++) {
+                dp[d + x] = Math.max(dp[d + x], cur[d]);
+                dp[Math.abs(d - x)] = Math.max(dp[Math.abs(d - x)], cur[d] + Math.min(d, x));
+            }
+        }
+        return dp[0];
+    }
+```
+
+**Java, using HashMap:**
+```
+    public int tallestBillboard(int[] rods) {
+        Map<Integer, Integer> dp = new HashMap<>(), cur;
+        dp.put(0, 0);
+        for (int x : rods) {
+            cur = new HashMap<>(dp);
+            for (int d : cur.keySet()) {
+                dp.put(d + x, Math.max(cur.get(d), dp.getOrDefault(x + d, 0)));
+                dp.put(Math.abs(d - x), Math.max(cur.get(d) + Math.min(d, x), dp.getOrDefault(Math.abs(d - x), 0)));
+            }
+        }
+        return dp.get(0);
+    }
+```
+
+
+**C++:**
+```
+    int tallestBillboard(vector<int>& rods) {
+        unordered_map<int, int> dp;
+        dp[0] = 0;
+        for (int x : rods) {
+            unordered_map<int, int> cur(dp);
+            for (auto it: cur) {
+                int d = it.first;
+                dp[d + x] = max(dp[d + x],cur[d]);
+                dp[abs(d - x)] = max(dp[abs(d - x)], cur[d] + min(d, x));
+            }
+        }
+        return dp[0];
+    }
+```
+
+
+**Python:**
+```
+    def tallestBillboard(self, rods):
+        dp = {0: 0}
+        for x in rods:
+            for d, y in dp.items():
+                dp[d + x] = max(dp.get(x + d, 0), y)
+                dp[abs(d - x)] = max(dp.get(abs(d - x), 0), y + min(d, x))
+        return dp[0]
+```
+
+<br>
+
+## One Optimisation
+
+We do the same thing for both half of `rods`.
+Then we try to find the same difference in both results.
+
+**Time Complexity**:
+`O(NM)`, where we have
+`N = rod.length <= 20`
+`S = sum(rods) <= 5000`
+`M = all possible sum = min(3^N/2, S)`
+
+<br>
+
+**Python:**
+```
+    def tallestBillboard(self, rods):
+        def helper(A):
+            dp = {0: 0}
+            for x in A:
+                for d, y in dp.items():
+                    dp[d + x] = max(dp.get(x + d, 0), y)
+                    dp[abs(d - x)] = max(dp.get(abs(d - x), 0), y + min(d, x))
+            return dp
+
+        dp, dp2 = helper(rods[:len(rods) / 2]), helper(rods[len(rods) / 2:])
+        return max(dp[d] + dp2[d] + d for d in dp if d in dp2)
+```

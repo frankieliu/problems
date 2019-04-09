@@ -1,0 +1,12 @@
+
+Accept solution with xor
+
+https://leetcode.com/problems/swap-salary/discuss/104713
+
+* Lang:    cpp
+* Author:  newdev
+* Votes:   83
+
+```
+update salary set sex = CHAR(ASCII('f') ^ ASCII('m') ^ ASCII(sex));
+```

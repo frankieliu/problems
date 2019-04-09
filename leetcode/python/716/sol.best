@@ -1,0 +1,12 @@
+
+O(1) isn't possible
+
+https://leetcode.com/problems/max-stack/discuss/108933
+
+* Lang:    cpp
+* Author:  brendon4565
+* Votes:   55
+
+Because if it were, you could use this data structure to sort an array of numbers in O(n) time.
+
+So, at the very least, either push(x) or popMax() must be O(logn)

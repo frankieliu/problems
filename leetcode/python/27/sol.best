@@ -1,0 +1,14 @@
+
+My solution for your reference.
+
+https://leetcode.com/problems/remove-element/discuss/12289
+
+* Lang:    cpp
+* Author:  daxianji007
+* Votes:   181
+
+    int removeElement(int A[], int n, int elem) {
+        int begin=0;
+        for(int i=0;i<n;i++) if(A[i]!=elem) A[begin++]=A[i];
+        return begin;
+    }

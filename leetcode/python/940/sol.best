@@ -1,0 +1,107 @@
+
+[C++/Java/Python] 4 lines O(N) Time, O(1) Space
+
+https://leetcode.com/problems/distinct-subsequences-ii/discuss/192017
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   87
+
+More detailed chinese solution [here](https://www.jianshu.com/p/02501f516437) explaining how I come up with it.
+
+## Explanation
+Init an array `endswith[26]`
+`endswith[i]` to count how many sub sequence that ends with `i`th character.
+
+Now we have `N = sum(endswith)` different sub sequence,
+add a new character `c` to each of them,
+then we have `N` different sub sequence that ends with `c`.
+
+With this idea, we loop on the whole string `S`,
+and we update `end[c] = sum(end) + 1` for each character.
+
+We need to plus one here, because `"c"` itself is also a sub sequence.
+
+## Example
+Input: `"aba"`
+Current parsed: `"ab"`
+
+endswith `\'a\'`: `["a"]`
+endswith `\'b\'`: `["ab","b"]`
+
+`"a"` -> `"aa"`
+`"ab"` -> `"aba"`
+`"b"` -> `"ba"`
+`""` -> `"a"`
+
+endswith `\'a\'`: `["aa","aba","ba","a"]`
+endswith `\'b\'`: `["ab","b"]`
+result: 6
+
+## Complexity
+Time `O(26N)`, Space `O(1)`.
+
+**C++:**
+```
+    int distinctSubseqII(string S) {
+        long endsWith[26] = {}, mod = 1e9 + 7;
+        for (char c : S)
+            endsWith[c - \'a\'] = accumulate(begin(endsWith), end(endsWith), 1L) % mod;
+        return accumulate(begin(endsWith), end(endsWith), 0L) % mod;
+    }
+```
+
+**Java:**
+```
+    public int distinctSubseqII(String S) {
+        long end[] = new long[26], mod = (long)1e9 + 7;
+        for (char c : S.toCharArray())
+            end[c - \'a\'] = Arrays.stream(end).sum()%mod + 1;
+        return (int)(Arrays.stream(end).sum() % mod);
+    }
+```
+**Python:**
+```
+    def distinctSubseqII(self, S):
+        end = [0] * 26
+        for c in S:
+            end[ord(c) - ord(\'a\')] = sum(end) + 1
+        return sum(end) % (10**9 + 7)
+```
+
+Use a variable to count the `sum(end)` can avoid repeatly count it.
+Improve time complexity from `O(26N)` to `O(N)`, if you want.
+
+**C++:**
+```
+    int distinctSubseqII(string S) {
+        int res = 0, added = 0, mod = 1e9 + 7, endsWith[26] = {};
+        for (char c : S) {
+            added = (res - endsWith[c - \'a\'] + 1) % mod;
+            res = (res + added) % mod;
+            endsWith[c - \'a\'] = (endsWith[c - \'a\'] + added) % mod;
+        }
+        return (res + mod) % mod;
+    }
+```
+
+**Java:**
+```
+    public int distinctSubseqII(String S) {
+        int end[] = new int[26], res = 0, added = 0, mod = (int)1e9 + 7;
+        for (char c : S.toCharArray()) {
+            added = (res + 1 - end[c - \'a\']) % mod;
+            res = (res + added) % mod;
+            end[c - \'a\'] = (end[c - \'a\'] + added) % mod;
+        }
+        return (res + mod) % mod;
+    }
+```
+**Python:**
+```
+    def distinctSubseqII(self, S):
+        res, end = 0, collections.Counter()
+        for c in S:
+            res, end[c] = res * 2 + 1 - end[c], res + 1
+        return res % (10**9 + 7)
+```

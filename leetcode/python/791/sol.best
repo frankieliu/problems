@@ -1,0 +1,25 @@
+
+Java 5 ms 10 line counting solution with comment
+
+https://leetcode.com/problems/custom-sort-string/discuss/116615
+
+* Lang:    cpp
+* Author:  rock
+* Votes:   65
+
+**update:** Time and space: O(T)
+
+```
+    public String customSortString(String S, String T) {
+        int[] count = new int[26];
+        for (char c : T.toCharArray()) { ++count[c - \'a\']; }  // count each char in T.
+        StringBuilder sb = new StringBuilder();
+        for (char c : S.toCharArray()) {                            
+            while (count[c - \'a\']-- > 0) { sb.append(c); }    // sort chars both in T and S by the order of S.
+        }
+        for (char c = \'a\'; c <= \'z\'; ++c) {
+            while (count[c - \'a\']-- > 0) { sb.append(c); }   // group chars in T but not in S.
+        }
+        return sb.toString();
+   }		
+				```

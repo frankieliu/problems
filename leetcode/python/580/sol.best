@@ -1,0 +1,18 @@
+
+Accepted Easy Solution Using Right Join
+
+https://leetcode.com/problems/count-student-number-in-departments/discuss/103045
+
+* Lang:    cpp
+* Author:  protocols1919
+* Votes:   7
+
+
+```
+SELECT d.dept_name, COUNT(s.student_id) AS student_number
+FROM student s RIGHT JOIN department d ON s.dept_id = d.dept_id
+GROUP BY d.dept_name 
+ORDER BY student_number DESC, d.dept_name;
+
+```
+"ORDER BY d.dept_name" is needed as well (according to the problem description), otherwise you will get a wrong answer.

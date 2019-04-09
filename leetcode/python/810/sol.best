@@ -1,0 +1,57 @@
+
+[C++/Java/Python] 3-lines Easy Solution with Complaint and Explanation
+
+https://leetcode.com/problems/chalkboard-xor-game/discuss/121696
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   17
+
+**Should not be Hard problem**
+The solution can be only 3 lines and really simple.
+It should be a medium problem.
+```Hard``` is kind of misleading.
+
+**Why ```[1, 2, 3]``` expect ```true```**
+If ```xor == 0``` at first for Alice, it is considered as Bob lose already!
+I find this stupid idea just after contest and I think it doesn\'t make any sense.
+It should complete this condition in the description.
+
+**Let\'s discuss it if we add this condition.**
+If ```xor == 0```, Alice win directly.
+If ```xor != 0``` and length of numbers is even, Alice will win.
+
+Beacause:
+All numbers won\'t be the same. Otherwise ```xor``` will be equal to ```0```
+If all numbers are not the same, It means there are at least 2 different numbers.
+Alice can always erase a number different from current ```xor```.
+So Alice won\'t never lose this turn at this situation.
+
+**If we don\'t have the condition**
+Just return ```nums are not all 0``` and  ```length of nums is even```
+
+
+C++:
+```
+    bool xorGame(vector<int>& nums) {
+        int xo = 0;
+        for (int i: nums) xo ^= i;
+        return xo == 0 || nums.size() % 2 == 0;
+    }
+```
+Java:
+```
+    public boolean xorGame(int[] nums) {
+        int xor = 0;
+        for (int i: nums) xor ^= i;
+        return xor == 0 || nums.length % 2 == 0;
+    }
+```
+Python
+```
+    def xorGame(self, nums):
+        xor = 0
+        for i in nums: xor ^= i
+        return xor == 0 or len(nums) % 2 == 0
+
+

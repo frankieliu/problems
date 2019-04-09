@@ -1,0 +1,12 @@
+
+Anyone else just find this question really confusing?
+
+https://leetcode.com/problems/online-election/discuss/180972
+
+* Lang:    cpp
+* Author:  benjie
+* Votes:   55
+
+I don\'t understand the example that is given ... why does the input include a bunch of strings? Why are some steps lists of lists of lists and others a list with a single number?
+
+I feel like the description needs to be greatly improved, and is a bit ambiguous at the moment.

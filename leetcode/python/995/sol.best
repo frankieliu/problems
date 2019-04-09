@@ -1,0 +1,129 @@
+
+[Java/C++/Python] One Pass and O(1) Space
+
+https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/discuss/238609
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   35
+
+## **Intuition**:
+There is only one way to filp `A[0]`, 
+and `A[0]` will tell us if we need to filp the range `A[0] ~ A[K -1]`.
+So we start from the leftmost one by one using a greedy idea to solve this problem.
+
+<br>
+
+## Solution 1
+
+**Explanation**
+Create a new array `isFlipped[n]`.
+`isFlipped[i] = 1` iff we flip `K` consecutive bits starting at `A[i]`.
+
+We maintain a variable `flipped` and `flipped = 1` iff the current bit is flipped.
+
+If `flipped = 0` and `A[i] = 0`, we need to flip at `A[i]`.
+If `flipped = 1` and `A[i] = 1`, we need to flip at `A[i]`.
+
+**Complexity**
+`O(N)` time for one pass
+`O(N)` extra space for `isFlipped[n]`.
+
+
+**Java**
+```
+    public int minKBitFlips(int[] A, int K) {
+        int n = A.length, flipped = 0, res = 0;
+        int[] isFlipped = new int[n];
+        for (int i = 0; i < A.length; ++i) {
+            if (i >= K)
+                flipped ^= isFlipped[i - K];
+            if (flipped == A[i]) {
+                if (i + K > A.length)
+                    return -1;
+                isFlipped[i] = 1;
+                flipped ^= 1;
+                res++;
+            }
+        }
+        return res;
+    }
+```
+
+<br>
+
+## Solution 2
+
+**Explanation**
+Instead an array `isFlipped` of size `n`,
+use a deque to maintain the state of a sliding window of size `k`.
+
+**Complexity**
+`O(N)` time for one pass
+`O(K)` extra space for `isFlipped[n]`.
+
+
+<br>
+
+## Solution 3
+
+**Explanation**:
+One pass, count the `cur` filp numbers in a sliding window of size `K`.
+If `cur` is even and A[i] is `0`, we need to flip.
+If `cur` is odd and A[i] is `1`, we need to flip.
+
+
+**Complexity**:
+`O(N)` time for one pass
+`O(1)` extra space.
+
+
+**Java:**
+```
+     public int minKBitFlips(int[] A, int K) {
+        int cur = 0, res = 0;
+        for (int i = 0; i < A.length; ++i) {
+            if (i >= K) cur -= A[i - K] / 2;
+            if ((cur & 1 ^ A[i]) == 0) {
+                if (i + K > A.length) return -1;
+                A[i] += 2;
+                cur++;
+                res++;
+            }
+        }
+        return res;
+    }
+```
+
+**C++:**
+```
+    int minKBitFlips(vector<int>& A, int K) {
+        int cur = 0, res = 0;
+        for (int i = 0; i < A.size(); ++i) {
+            if (i >= K) cur -= A[i - K] / 2;
+            if (cur & 1 ^ A[i] == 0) {
+                if (i + K > A.size()) return -1;
+                A[i] += 2;
+                cur++;
+                res++;
+            }
+        }
+        return res;
+    }
+```
+
+**Python:**
+```
+    def minKBitFlips(self, A, K):
+        cur = res = 0
+        for i in range(len(A)):
+            if i >= K:
+                cur -= A[i - K] / 2
+            if cur & 1 ^ A[i] == 0:
+                if i + K > len(A):
+                    return -1
+                A[i] += 2
+                cur, res = cur + 1, res + 1
+        return res
+```
+

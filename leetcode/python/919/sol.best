@@ -1,0 +1,91 @@
+
+[C++/Java/Python] O(1) Insert
+
+https://leetcode.com/problems/complete-binary-tree-inserter/discuss/178424
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   47
+
+Store tree nodes to a list `self.tree` in bfs order.
+Node `tree[i]` has left child `tree[2 * i + 1]` and `tree[2 * i + 2]`
+
+So when insert the `N`th node (0-indexed), we push it into the list.
+we can find its parent `tree[(N - 1) / 2]` directly.
+
+
+**C++:**
+```
+    vector<TreeNode*> tree;
+    CBTInserter(TreeNode* root) {
+        tree.push_back(root);
+        for(int i = 0; i < tree.size();++i) {
+            if (tree[i]->left) tree.push_back(tree[i]->left);
+            if (tree[i]->right) tree.push_back(tree[i]->right);
+        }
+    }
+
+    int insert(int v) {
+        int N = tree.size();
+        TreeNode* node = new TreeNode(v);
+        tree.push_back(node);
+        if (N % 2)
+            tree[(N - 1) / 2]->left = node;
+        else
+            tree[(N - 1) / 2]->right = node;
+        return tree[(N - 1) / 2]->val;
+    }
+
+    TreeNode* get_root() {
+        return tree[0];
+    }
+```
+
+**Java:**
+```
+    List<TreeNode> tree;
+    public CBTInserter(TreeNode root) {
+        tree = new ArrayList<>();
+        tree.add(root);
+        for (int i = 0; i < tree.size(); ++i) {
+            if (tree.get(i).left != null) tree.add(tree.get(i).left);
+            if (tree.get(i).right != null) tree.add(tree.get(i).right);
+        }
+    }
+
+    public int insert(int v) {
+        int N = tree.size();
+        TreeNode node = new TreeNode(v);
+        tree.add(node);
+        if (N % 2 == 1)
+            tree.get((N - 1) / 2).left = node;
+        else
+            tree.get((N - 1) / 2).right = node;
+        return tree.get((N - 1) / 2).val;
+    }
+
+    public TreeNode get_root() {
+        return tree.get(0);
+    }
+```
+
+**Python:**
+```
+    def __init__(self, root):
+        self.tree = [root]
+        for i in self.tree:
+            if i.left: self.tree.append(i.left)
+            if i.right: self.tree.append(i.right)
+
+    def insert(self, v):
+        N = len(self.tree)
+        self.tree.append(TreeNode(v))
+        if N % 2:
+            self.tree[(N - 1) / 2].left = self.tree[-1]
+        else:
+            self.tree[(N - 1) / 2].right = self.tree[-1]
+        return self.tree[(N - 1) / 2].val
+
+    def get_root(self):
+        return self.tree[0]
+```

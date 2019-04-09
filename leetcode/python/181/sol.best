@@ -1,0 +1,12 @@
+
+A straightforward method
+
+https://leetcode.com/problems/employees-earning-more-than-their-managers/discuss/53475
+
+* Lang:    cpp
+* Author:  hsnu112305
+* Votes:   83
+
+    select E1.Name 
+    from Employee as E1, Employee as E2 
+    where E1.ManagerId = E2.Id and E1.Salary > E2.Salary

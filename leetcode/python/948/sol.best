@@ -1,0 +1,67 @@
+
+[C++/Java/Python] Greedy + Two Pointers
+
+https://leetcode.com/problems/bag-of-tokens/discuss/197696
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   30
+
+Sort tokens.
+Buy at the cheapest and sell at the most expensive.
+
+**C++**
+```
+    int bagOfTokensScore(vector<int>& tokens, int P) {
+        sort(tokens.begin(), tokens.end());
+        int res = 0, points = 0, i = 0, j = tokens.size() - 1;
+        while (i <= j) {
+            if (P >= tokens[i]) {
+                P -= tokens[i++];
+                res = max(res, ++points);
+            } else if (points > 0) {
+                points--;
+                P += tokens[j--];
+            } else {
+                break;
+            }
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int bagOfTokensScore(int[] tokens, int P) {
+        Arrays.sort(tokens);
+        int res = 0, points = 0, i = 0, j = tokens.length - 1;
+        while (i <= j) {
+            if (P >= tokens[i]) {
+                P -= tokens[i++];
+                res = Math.max(res, ++points);
+            } else if (points > 0) {
+                points--;
+                P += tokens[j--];
+            } else {
+                break;
+            }
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def bagOfTokensScore(self, tokens, P):
+        res = cur = 0
+        d = collections.deque(sorted(tokens))
+        while d and (d[0] <= P or cur):
+            if d[0] <= P:
+                P -= d.popleft()
+                cur += 1
+            else:
+                P += d.pop()
+                cur -= 1
+            res = max(res, cur)
+        return res
+```
+

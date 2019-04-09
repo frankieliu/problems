@@ -1,0 +1,10 @@
+
+Please change the description of the problem
+
+https://leetcode.com/problems/projection-area-of-3d-shapes/discuss/160272
+
+* Lang:    cpp
+* Author:  Lingbo787
+* Votes:   78
+
+The problem description is very ambiguous and confusing. I actually spent 90% of my time to understand what does the input imply when I tried to solve this problem. If you want to make problems complicated to solve, you should increase the complexity by making the algorithm itself hard to implement or think of, not making bad wordings and trying to confuse people. If I met this type of problem description in an actual interview, I might not even proceed with it.

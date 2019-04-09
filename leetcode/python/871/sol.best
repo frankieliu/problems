@@ -1,0 +1,119 @@
+
+DP O(N^2) and Priority Queue O(NlogN)
+
+https://leetcode.com/problems/minimum-number-of-refueling-stops/discuss/149839
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   49
+
+## Approach 1: 1D DP, O(N^2)
+
+`dp[t]` means the furthest distance that we can get with `t` times of refueling.
+
+So for every station `s[i]`,
+if the current distance `dp[t] >= s[i][0]`, we can refuel:
+`dp[t + 1] = max(dp[t + 1], dp[t] + s[i][1])`
+
+In the end, we\'ll return the first `t` with `dp[i] >= target`,
+otherwise we\'ll return -1.
+
+
+**C++:**
+```
+    int minRefuelStops(int target, int startFuel, vector<vector<int>> s) {
+        long dp[501] = {startFuel};
+        for (int i = 0; i < s.size(); ++i)
+            for (int t = i; t >= 0 && dp[t] >= s[i][0]; --t)
+                dp[t + 1] = max(dp[t + 1], dp[t] + s[i][1]);
+        for (int t = 0; t <= s.size(); ++t)
+            if (dp[t] >= target) return t;
+        return -1;
+    }
+```
+
+**Java:**
+```
+    public int minRefuelStops(int target, int startFuel, int[][] s) {
+        long[] dp = new long[s.length + 1];
+        dp[0] = startFuel;
+        for (int i = 0; i < s.length; ++i)
+            for (int t = i; t >= 0 && dp[t] >= s[i][0]; --t)
+                dp[t + 1] = Math.max(dp[t + 1], dp[t] + s[i][1]);
+        for (int t = 0; t <= s.length; ++t)
+            if (dp[t] >= target) return t;
+        return -1;
+    }
+```
+**Python:**
+```
+    def minRefuelStops(self, target, startFuel, s):
+        dp = [startFuel] + [0] * len(s)
+        for i in range(len(s)):
+            for t in range(i + 1)[::-1]:
+                if dp[t] >= s[i][0]:
+                    dp[t + 1] = max(dp[t + 1], dp[t] + s[i][1])
+        for t, d in enumerate(dp):
+            if d >= target: return t
+        return -1
+```
+
+
+## Approach 2: Priority Queue, O(NlogN)
+
+`i` is the index of next stops to refuel.
+`res` is the times that we have refeuled.
+`pq` is a priority queue that we store all available gas.
+
+
+We initial `res = 0` and in every loop:
+1. We add all reachable stop to priority queue.
+2. We pop out the largest gas from `pq` and refeul once.
+3. If we can\'t refuel, means that we can not go forward and return `-1`
+
+
+**C++:**
+```
+    int minRefuelStops(int target, int cur, vector<vector<int>> s) {
+        int i = 0, res;
+        priority_queue<int>pq;
+        for (res = 0; cur < target; res++) {
+            while (i < s.size() && s[i][0] <= cur)
+                pq.push(s[i++][1]);
+            if (pq.empty()) return -1;
+            cur += pq.top(), pq.pop();
+        }
+        return res;
+    }
+```
+
+**Java:**
+```
+    public int minRefuelStops(int target, int cur, int[][] s) {
+        Queue<Integer> pq = new PriorityQueue<>();
+        int i = 0, res;
+        for (res = 0; cur < target; res++) {
+            while (i < s.length && s[i][0] <= cur)
+                pq.offer(-s[i++][1]);
+            if (pq.isEmpty()) return -1;
+            cur += -pq.poll();
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def minRefuelStops(self, target, cur, s):
+        pq = []
+        res = i = 0
+        while cur < target:
+            while i < len(s) and s[i][0] <= cur:
+                heapq.heappush(pq, -s[i][1])
+                i += 1
+            if not pq: return -1
+            cur += -heapq.heappop(pq)
+            res += 1
+        return res
+
+```
+Approach 2 inspired by @laiden.

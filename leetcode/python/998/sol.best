@@ -1,0 +1,117 @@
+
+[Java/C++/Python] Recursion and Iteration
+
+https://leetcode.com/problems/maximum-binary-tree-ii/discuss/242936
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   23
+
+## **Solution 1: Recursion**
+If root.val > val, recusion on the right.
+Else, put right subtree on the left of new node `TreeNode(val)`
+
+**Time Complexity**:
+O(N) time,
+O(N) recursion space.
+
+<br>
+
+**Java:**
+```
+    public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        if (root != null && root.val > val) {
+            root.right = insertIntoMaxTree(root.right, val);
+            return root;
+        }
+        TreeNode node = new TreeNode(val);
+        node.left = root;
+        return node;
+    }
+```
+
+**C++:**
+```
+    TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
+        if (root && root->val > val) {
+            root->right = insertIntoMaxTree(root->right, val);
+            return root;
+        }
+        TreeNode* node = new TreeNode(val);
+        node->left = root;
+        return node;        
+    }
+```
+
+**Python:**
+```
+    def insertIntoMaxTree(self, root, val):
+        if root and root.val > val:
+            root.right = self.insertIntoMaxTree(root.right, val)
+            return root
+        node = TreeNode(val)
+        node.left = root
+        return node
+```
+
+<br>
+
+## **Solution 2: Iteration**
+
+Search on the right, find the node that `cur.val > val > cur.right.val`
+Then create new node `TreeNode(val)`,
+put old `cur.right` as `node.left`,
+put `node` as new `cur.right`.
+
+
+**Time Complexity**:
+`O(N)` time,
+`O(1)` space
+
+
+**Java:**
+```
+    public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        TreeNode node = new TreeNode(val), cur = root;
+        if (root.val < val) {
+            node.left = root;
+            return node;
+        }
+        while (cur.right != null && cur.right.val > val) {
+            cur = cur.right;
+        }
+        node.left = cur.right;
+        cur.right = node;
+        return root;
+    }
+```
+
+**C++:**
+```
+    TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
+        TreeNode* node = new TreeNode(val), *cur = root;
+        if (root->val < val) {
+            node->left = root;
+            return node;
+        }
+        while (cur->right && cur->right->val > val) {
+            cur = cur->right;
+        }
+        node->left = cur->right;
+        cur->right = node;
+        return root;
+    }
+```
+
+**Python:**
+```
+    def insertIntoMaxTree(self, root, val):
+        pre,cur = None, root
+        while cur and cur.val > val:
+            pre, cur = cur, cur.right
+        node = TreeNode(val)
+        node.left = cur
+        if pre: pre.right = node
+        return root if root.val > val else node
+```
+

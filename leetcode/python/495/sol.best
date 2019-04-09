@@ -1,0 +1,19 @@
+
+Python Solution for Teemo
+
+https://leetcode.com/problems/teemo-attacking/discuss/97475
+
+* Lang:    cpp
+* Author:  lilixu
+* Votes:   43
+
+![alt text](https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSa-yd3K7uW2ocdpJ-7mA3kMyF-XLUjkVproRQxIzhrRzh_osOW)
+
+    class Solution(object):
+        def findPoisonedDuration(self, timeSeries, duration):
+            ans = duration * len(timeSeries)
+            for i in range(1,len(timeSeries)):
+                ans -= max(0, duration - (timeSeries[i] - timeSeries[i-1]))
+            return ans
+
+![alt text](https://www.baronsteal.net/images/champion/loading/Ashe_4.jpg)

@@ -1,0 +1,58 @@
+
+JAVA BFS 32 ms clean/concise/explanation/whatever
+
+https://leetcode.com/problems/k-similar-strings/discuss/140099
+
+* Lang:    cpp
+* Author:  caraxin
+* Votes:   39
+
+The trick is that you just need to swap the first (a,b)->(b,a) pair every round, instead of other pairs like (c,d)->(d,c) (otherwise it would cause TLE), and BFS would guarantee the shortest path.
+credit to @sijian2001
+```
+class Solution {
+    public int kSimilarity(String A, String B) {
+        if (A.equals(B)) return 0;
+        Set<String> vis= new HashSet<>();
+        Queue<String> q= new LinkedList<>();
+        q.add(A);
+        vis.add(A);
+        int res=0;
+        while(!q.isEmpty()){
+            res++;
+            for (int sz=q.size(); sz>0; sz--){
+                String s= q.poll();
+                int i=0;
+                while (s.charAt(i)==B.charAt(i)) i++;
+                for (int j=i+1; j<s.length(); j++){
+                    if (s.charAt(j)==B.charAt(j) || s.charAt(i)!=B.charAt(j) ) continue;
+                    String temp= swap(s, i, j);
+                    if (temp.equals(B)) return res;
+                    if (vis.add(temp)) q.add(temp);
+                }
+            }
+        }
+        return res;
+    }
+    public String swap(String s, int i, int j){
+        char[] ca=s.toCharArray();
+        char temp=ca[i];
+        ca[i]=ca[j];
+        ca[j]=temp;
+        return new String(ca);
+    }
+}
+```
+![image](https://s3-lc-upload.s3.amazonaws.com/users/caraxin/image_1529267603.png)
+**update** sorry I just realized that my explaination has some flaw (the code is correct though).
+I turned  
+```if (s.charAt(j)==B.charAt(j) || s.charAt(i)!=B.charAt(j) ) continue;```
+into
+``` if (s.charAt(j)==B.charAt(j) || s.charAt(i)!=B.charAt(j) || s.charAt(j)!=B.charAt(i) ) continue;```
+and it can\'t pass all test case, which means we are not actually swapping the direct reversed pair, we are just trying to fix the some wrong character in each loop.
+To make it better understood, I suggest we change this line to:
+```if (s.charAt(j)==B.charAt(j) || s.charAt(j)!=B.charAt(i) ) continue;```
+which means we only swap the i-th and j-th character when j-th character is wrong and it happends to be the target character of i-th position. 
+So that in each round we will repair the **first unordered character** and as a result move forward at least 1 step.
+Sorry again for misleading so many people.
+

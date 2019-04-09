@@ -1,0 +1,44 @@
+
+1-liners Python/Java/Ruby
+
+https://leetcode.com/problems/jewels-and-stones/discuss/113574
+
+* Lang:    cpp
+* Author:  StefanPochmann
+* Votes:   149
+
+### Ruby
+```
+def num_jewels_in_stones(j, s)
+  s.count(j)
+end
+```
+```
+def num_jewels_in_stones(j, s)
+  s.scan(/[#{j}]/).size
+end
+```
+```
+def num_jewels_in_stones(j, s)
+  s.chars.count { |c| j.include?(c) }
+end
+```
+
+### Python
+```
+def numJewelsInStones(self, J, S):
+    return sum(map(J.count, S))
+```
+```
+def numJewelsInStones(self, J, S):
+    return sum(map(S.count, J))               # this one after seeing https://discuss.leetcode.com/post/244105
+```
+```
+def numJewelsInStones(self, J, S):
+    return sum(s in J for s in S)
+```
+### Java
+
+    public int numJewelsInStones(String J, String S) {
+        return S.replaceAll("[^" + J + "]", "").length();
+    }

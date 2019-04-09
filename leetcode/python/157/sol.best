@@ -1,0 +1,10 @@
+
+What is the objective of this question
+
+https://leetcode.com/problems/read-n-characters-given-read4/discuss/49501
+
+* Lang:    cpp
+* Author:  mlblount45
+* Votes:   256
+
+This question is very unclear to me. what are we supposed to accomplish in this problem. Our read function returns an int but the expected result looks like its a String. if we are forced to read 4 chars at a time how do we ever read n chars that are not a factor of 4 if we actually use the read4 method? is 'n' the max we can return or must we return exactly n assuming at least n items exist other wise return the number of items. clearly I'm missing a lot here can someone please explain this problem to me.

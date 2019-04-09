@@ -1,1 +1,28 @@
-[ERROR] failed to load locked problem!
+
+Python solution with comments (bottom-up).
+
+https://leetcode.com/problems/count-univalue-subtrees/discuss/67646
+
+* Lang:    python3
+* Author:  caikehe
+* Votes:   13
+
+        
+    def countUnivalSubtrees(self, root):
+        self.count = 0
+        self.checkUni(root)
+        return self.count
+    
+    # bottom-up, first check the leaf nodes and count them, 
+    # then go up, if both children are "True" and root.val is 
+    # equal to both children's values if exist, then root node
+    # is uniValue suntree node. 
+    def checkUni(self, root):
+        if not root:
+            return True
+        l, r = self.checkUni(root.left), self.checkUni(root.right)
+        if l and r and (not root.left or root.left.val == root.val) and \\
+        (not root.right or root.right.val == root.val):
+            self.count += 1
+            return True
+        return False

@@ -1,0 +1,13 @@
+
+is the description of the problem correct?
+
+https://leetcode.com/problems/unique-morse-code-words/discuss/120941
+
+* Lang:    cpp
+* Author:  smartgear
+* Votes:   74
+
+the description of the problem gives a example.
+"a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", 
+"cab" can be written as "-.-.-....-", (which is the concatenation "-.-." + "-..." + ".-").
+shouldn\'t "cab" be mapped to "-.-..--...", ("-.-."+".-"+"-...")?!!!!

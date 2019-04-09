@@ -1,0 +1,92 @@
+
+[Java/C++/Python] BFS Level Order Traversal
+
+https://leetcode.com/problems/check-completeness-of-a-binary-tree/discuss/205682
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   71
+
+Use BFS to do a level order traversal,
+add childrens to the bfs queue,
+until we met the first empty node.
+
+For a complete binary tree,
+there should not be any node after we met an empty one.
+
+
+**Java:**
+```
+    public boolean isCompleteTree(TreeNode root) {
+        Queue<TreeNode> bfs = new LinkedList<TreeNode>();
+        bfs.offer(root);
+        while (bfs.peek() != null) {
+            TreeNode node = bfs.poll();
+            bfs.offer(node.left);
+            bfs.offer(node.right);
+        }
+        while (!bfs.isEmpty() && bfs.peek() == null)
+            bfs.poll();
+        return bfs.isEmpty();
+    }
+```
+
+**C++:**
+```
+    bool isCompleteTree(TreeNode* root) {
+        vector<TreeNode*> bfs;
+        bfs.push_back(root);
+        int i = 0;
+        while (i < bfs.size() && bfs[i]) {
+            bfs.push_back(bfs[i]->left);
+            bfs.push_back(bfs[i]->right);
+            i++;
+        }
+        while (i < bfs.size() && !bfs[i])
+            i++;
+        return i == bfs.size();
+    }
+```
+
+**Python:**
+```
+    def isCompleteTree(self, root):
+        bfs = [root]
+        i = 0
+        while bfs[i]:
+            bfs.append(bfs[i].left)
+            bfs.append(bfs[i].right)
+            i += 1
+        return not any(bfs[i:])
+```
+
+
+Also you may want to return earlier.
+We can stop the first while loop when met the first null child.
+From then on there should not be any more child.
+This optimisation help reduce half of operations.
+
+
+```
+    public boolean isCompleteTree(TreeNode root) {
+        Queue<TreeNode> bfs = new LinkedList<TreeNode>();
+        bfs.offer(root);
+        while (true) {
+            TreeNode node = bfs.poll();
+            if (node.left == null) {
+                if (node.right != null)
+                    return false;
+                break;
+            }
+            bfs.offer(node.left);
+            if (node.right == null) break;
+            bfs.offer(node.right);
+        }
+        while (!bfs.isEmpty()) {
+            TreeNode node = bfs.poll();
+            if (node.left != null || node.right != null)
+                return false;
+        }
+        return true;
+    }
+```

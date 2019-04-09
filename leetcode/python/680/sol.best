@@ -1,0 +1,23 @@
+
+Java O(n) Time O(1) Space
+
+https://leetcode.com/problems/valid-palindrome-ii/discuss/107716
+
+* Lang:    cpp
+* Author:  compton_scatter
+* Votes:   68
+
+```
+public boolean validPalindrome(String s) {
+    int l = -1, r = s.length();
+    while (++l < --r) 
+        if (s.charAt(l) != s.charAt(r)) return isPalindromic(s, l, r+1) || isPalindromic(s, l-1, r);
+    return true;
+}
+
+public boolean isPalindromic(String s, int l, int r) {
+    while (++l < --r) 
+        if (s.charAt(l) != s.charAt(r)) return false;
+    return true;
+}
+```

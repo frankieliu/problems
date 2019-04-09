@@ -1,0 +1,51 @@
+
+[C++] [Java] Clean Code
+
+https://leetcode.com/problems/output-contest-matches/discuss/101274
+
+* Lang:    cpp
+* Author:  alexander
+* Votes:   50
+
+**C++**
+```
+class Solution {
+public:
+    string findContestMatch(int n) {
+        vector<string> m(n);
+        for (int i = 0; i < n; i++) {
+            m[i] = to_string(i + 1);
+        }
+
+        while (n > 1) {
+            for (int i = 0; i < n / 2; i++) {
+                m[i] = "(" + m[i] + "," + m[n - 1 - i] + ")";
+            }
+            n /= 2;
+        }
+        
+        return m[0];
+    }
+};
+```
+
+**Java**
+```
+public class Solution {
+    public String findContestMatch(int n) {
+        String[] m = new String[n];
+        for (int i = 0; i < n; i++) {
+            m[i] = String.valueOf(i + 1);
+        }
+
+        while (n > 1) {
+            for (int i = 0; i < n / 2; i++) {
+                m[i] = "(" + m[i] + "," + m[n - 1 - i] + ")";
+            }
+            n /= 2;
+        }
+        
+        return m[0];
+    }
+}
+```

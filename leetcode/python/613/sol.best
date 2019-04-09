@@ -1,0 +1,13 @@
+
+Self join
+
+https://leetcode.com/problems/shortest-distance-in-a-line/discuss/104216
+
+* Lang:    cpp
+* Author:  john700
+* Votes:   8
+
+```
+SELECT MIN(ABS(P1.x - P2.x)) AS shortest FROM point AS P1
+JOIN point AS P2 ON P1.x <> P2.x
+```

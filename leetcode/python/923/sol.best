@@ -1,0 +1,81 @@
+
+[C++/Java/Python] O(N + 101 * 101)
+
+https://leetcode.com/problems/3sum-with-multiplicity/discuss/181131
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   61
+
+Count the occurrence of each number.
+using hashmap or array up to you.
+
+Loop `i` on all numbers,
+loop `j` on all numbers,
+check if `k = target - i - j` is valid.
+
+Add the number of this combination to result.
+3 cases covers all possible combination:
+1. `i == j == k` 
+2. ` i == j != k`
+3. `i < k && j < k`
+
+**Time Complexity**:
+`3 <= A.length <= 3000`, so N = 3000
+But `0 <= A[i] <= 100`
+So my solution is `O(N + 101 * 101)`
+
+**C++:**
+```
+    int threeSumMulti(vector<int>& A, int target) {
+        unordered_map<int, long> c;
+        for (int a : A) c[a]++;
+        long res = 0;
+        for (auto it : c)
+            for (auto it2 : c) {
+                int i = it.first, j = it2.first, k = target - i - j;
+                if (!c.count(k)) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6;
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (i < j && j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        return res % int(1e9 + 7);
+    }
+```
+
+**Java:**
+```
+    public int threeSumMulti(int[] A, int target) {
+        long[] c = new long[101];
+        for (int a : A) c[a]++;
+        long res = 0;
+        for (int i = 0; i <= 100; i++)
+            for (int j = i; j <= 100; j++) {
+                int k = target - i - j;
+                if (k > 100 || k < 0) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6;
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        return (int)(res % (1e9 + 7));
+    }
+```
+**Python:**
+```
+    def threeSumMulti(self, A, target):
+        c = collections.Counter(A)
+        res = 0
+        for i, j in itertools.combinations_with_replacement(c, 2):
+            k = target - i - j
+            if i == j == k: res += c[i] * (c[i] - 1) * (c[i] - 2) / 6
+            elif i == j != k: res += c[i] * (c[i] - 1) / 2 * c[k]
+            elif k > i and k > j: res += c[i] * c[j] * c[k]
+        return res % (10**9 + 7)
+```
+

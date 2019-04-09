@@ -1,0 +1,121 @@
+
+[Java/C++/Python] Greedy Solution, O(MN)
+
+https://leetcode.com/problems/delete-columns-to-make-sorted-ii/discuss/203182
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   36
+
+## **Intuition**
+Solve it with a greed algorithme.
+
+Initial `N` empty string.
+For each column,
+add the character to each row,
+and check if all rows are still sorted.
+
+If not, we have to delete this column.
+<br>
+
+## **Explanation**
+Initial a boolean array `sorted`,
+`sorted[i] = true` if and only if `A[i] < A[i + 1]`,
+that is to say `A[i]` and `A[i + 1]` are sorted.
+
+For each col, we check all unsorted rows.
+If `A[i][j] > A[i + 1][j]`, we need to deleted this col, `res++`.
+
+Otherwise, we can keep this col, and update all sorted rows.
+<br>
+
+
+**Java, Using array, O(MN), 14ms**
+```
+    public int minDeletionSize(String[] A) {
+        int res = 0, n = A.length, m = A[0].length(), i, j;
+        boolean[] sorted = new boolean[n - 1];
+        for (j = 0; j < m; ++j) {
+            for (i = 0; i < n - 1; ++i) {
+                if (!sorted[i] && A[i].charAt(j) > A[i + 1].charAt(j)) {
+                    res++;
+                    break;
+                }
+            }
+            if (i < n - 1) continue;
+            for (i = 0; i < n - 1; ++i)
+                if (A[i].charAt(j) < A[i + 1].charAt(j))
+                    sorted[i] = true;
+        }
+        return res;
+    }
+```
+
+**C++, Using vector, O(MN), 8ms**
+```
+    int minDeletionSize(vector<string>& A) {
+        int res = 0, n = A.size(), m = A[0].length(), i, j;
+        vector<bool> sorted(n - 1, false);
+        for (j = 0; j < m; ++j) {
+            for (i = 0; i < n - 1; ++i) {
+                if (!sorted[i] && A[i][j] > A[i + 1][j]) {
+                    res++;
+                    break;
+                }
+            }
+            if (i < n - 1) continue;
+            for (i = 0; i < n - 1; ++i)
+                if (A[i][j] < A[i + 1][j])
+                    sorted[i] = true;
+        }
+        return res;
+    }
+```
+
+**Python, Using list, `O(NM)`, 64ms**
+```
+    def minDeletionSize(self, A):
+        res, n, m = 0, len(A), len(A[0])
+        is_sorted = [0] * (n - 1)
+        for j in range(m):
+            is_sorted2 = is_sorted[:]
+            for i in range(n - 1):
+                if A[i][j] > A[i + 1][j] and is_sorted[i] == 0:
+                    res += 1
+                    break
+                is_sorted2[i] |= A[i][j] < A[i + 1][j]
+            else:
+                is_sorted = is_sorted2
+        return res
+```
+<br>
+
+## More
+My other python solution, more concise.
+
+**Python, Brute force, `O(NlogN M^2)`\uFF0C 230ms**
+```
+    def minDeletionSize(self, A):
+        res = 0
+        cur = [""] * len(A)
+        for col in zip(*A):
+            cur2 = zip(cur, col)
+            if cur2 == sorted(cur2): cur = cur2
+            else: res += 1
+        return res
+```
+
+
+**Python, Using set, `O(NM)`, 24ms**
+```
+    def minDeletionSize(self, A):
+        res, n, m = 0, len(A), len(A[0])
+        unsorted = set(range(n - 1))
+        for j in range(m):
+            if any(A[i][j] > A[i + 1][j] for i in unsorted):
+                res += 1
+            else:
+                unsorted -= {i for i in unsorted if A[i][j] < A[i + 1][j]}
+        return res
+```
+

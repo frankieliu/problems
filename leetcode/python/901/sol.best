@@ -1,0 +1,68 @@
+
+[C++/Java/Python] O(1)
+
+https://leetcode.com/problems/online-stock-span/discuss/168311
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   43
+
+# Explanation
+You can refer to the same problem 739. Daily Temperatures.
+
+Push every pair of `<price, result>` to a stack.
+Pop lower price from the stack and accumulate the count.
+
+One price will be pushed once and popped once. 
+So `2 * N` times stack operations and `N` times calls.
+I\'ll say time complexity is `O(1)`
+</br>
+
+**C++:**
+```
+    stack<pair<int, int>> s;
+    int next(int price) {
+        int res = 1;
+        while (!s.empty() && s.top().first <= price) {
+            res += s.top().second;
+            s.pop();
+        }
+        s.push({price, res});
+        return res;
+    }
+```
+
+**Java:**
+```
+    Stack<int[]> stack = new Stack<>();
+    public int next(int price) {
+        int res = 1;
+        while (!stack.isEmpty() && stack.peek()[0] <= price)
+            res += stack.pop()[1];
+        stack.push(new int[]{price, res});
+        return res;
+    }
+```
+
+**Python:**
+```
+    def __init__(self):
+        self.stack = []
+
+    def next(self, price):
+        res = 1
+        while self.stack and self.stack[-1][0] <= price:
+            res += self.stack.pop()[1]
+        self.stack.append([price, res])
+        return res
+```
+</br>
+
+# Similar Problems
+@Sithis suggest some similar problems to practice monotone stack:
+
+496. Next Greater Element I
+503. Next Greater Element II
+739. Daily Temperatures
+907. Sum of Subarray Minimums
+84. Largest Rectangle in Histogram

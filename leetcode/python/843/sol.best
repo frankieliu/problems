@@ -1,0 +1,193 @@
+
+Random Guess and Minimax Guess with Comparison
+
+https://leetcode.com/problems/guess-the-word/discuss/133862
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   231
+
+Great! Finally we have an interactive problem new to the LeetCode platform.
+
+The description emphasize that the wordlist is generated randomly and it\'s does have a reason.
+
+There is no solution that can guarantee to find a secret word in 10 tries. If I make up a test case with wordlist like ["aaaaaa", "bbbbbb" ...., "zzzzzz"], it need 26 tries to find the secret.
+
+So 10 tries is just a limit to test reasonable solution. And this problem is more than finding right output for given input, it\'s more about a strategy.
+
+**So it doesn\'t make any sense to do any hand-made "extra challendge".**
+
+
+## **Intuition**:
+Take a word from wordlist and guess it.
+Get the matches of this word
+Update our wordlist and keep only the same matches to our guess.
+
+For example we guess "aaaaaa" and get matches `x = 3`, we keep the words with exactly 3 `a`.
+
+Also we need to know the matches between two words, so a sub function as following will be helpful.
+
+**C++:**
+```
+    int match(string a, string b) {
+        int matches = 0;
+        for (int i = 0; i < a.length(); ++i) if (a[i] == b[i]) matches ++;
+        return matches;
+    }
+```
+
+**Java:**
+```
+    public int match(String a, String b) {
+        int matches = 0;
+        for (int i = 0; i < a.length(); ++i) if (a.charAt(i) == b.charAt(i)) matches ++;
+        return matches;
+    }
+```
+
+
+This process is straight forward.
+However, the key point is, which word should we guess from all of the wordlist?
+
+## **Explanation**:
+
+First of all, I guessed the first word from wordlist.
+Unfortunately, I didn\'t get a lucky pass.
+This problem has only 5 test cases but they are good.
+
+But I didn\'t give up this idea. All words are generated randomly.
+So why not we also guess a random word and let it be whatever will be.
+So here it is this idea and it can get accepted.
+
+
+**C++:**
+```
+    void findSecretWord(vector<string>& wordlist, Master& master) {
+        for (int i = 0, x = 0; i < 10 && x < 6; ++i) {
+            string guess = wordlist[rand() % (wordlist.size())];
+            x = master.guess(guess);
+            vector<string> wordlist2;
+            for (string w : wordlist)
+                if (match(guess, w) == x)
+                    wordlist2.push_back(w);
+            wordlist = wordlist2;
+        }
+    }
+```
+
+**Java:**
+```
+    public void findSecretWord(String[] wordlist, Master master) {
+        for (int i = 0, x = 0; i < 10 && x < 6; ++i) {
+            String guess = wordlist[new Random().nextInt(wordlist.length)];
+            x = master.guess(guess);
+            List<String> wordlist2 = new ArrayList<>();
+            for (String w : wordlist)
+                if (match(guess, w) == x)
+                    wordlist2.add(w);
+            wordlist = wordlist2.toArray(new String[wordlist2.size()]);
+        }
+    }
+```
+**Python:**
+```
+    def findSecretWord(self, wordlist, master):
+        n = 0
+        while n < 6:
+            guess = random.choice(wordlist)
+            n = master.guess(guess)
+            wordlist = [w for w in wordlist if sum(i == j for i, j in zip(guess, w)) == n]
+```
+
+I said I could get accepted but not for sure. In fact it has 80% rate to get accepted.
+
+Now we want to find a solution that improve this rate.
+
+Generally, we will get 0 matches from the `master.guess`.
+
+As a result, the size of `wordlist` reduces slowly.
+
+Here we\'re going to assume that, we will always run into the worst case.
+
+**We need to guess a word that can minimum our worst outcome.**
+
+So we compare each two words and count their matches.
+
+For each word, we note how many word of 0 matches it gets.
+
+Then we guess the word with minimum words of 0 matches.
+
+
+In this solution, we apply a minimax idea.
+
+We minimize our worst case,
+
+where the worst case is `max(the number of words with i matches)`
+
+
+**C++:**
+```
+    void findSecretWord(vector<string>& wordlist, Master& master) {
+        for (int i = 0, x = 0; i < 10 && x < 6; ++i) {
+            unordered_map<string, int> count;
+            for (string w1 : wordlist)
+                for (string w2 : wordlist)
+                    if (match(w1, w2) == 0)
+                        count[w1]++;
+            pair<string, int> minimax = make_pair(wordlist[0], 1000);
+            for (string w : wordlist)
+                if (count[w] <= minimax.second)
+                    minimax = make_pair(w, count[w]);
+            x = master.guess(minimax.first);
+            vector<string> wordlist2;
+            for (string w : wordlist)
+                if (match(minimax.first, w) == x)
+                    wordlist2.push_back(w);
+            wordlist = wordlist2;
+        }
+    }
+```
+
+**Java:**
+```
+    public void findSecretWord(String[] wordlist, Master master) {
+        for (int i = 0, x = 0; i < 10 && x < 6; ++i) {
+            HashMap<String, Integer> count = new HashMap<>();
+            for (String w1 : wordlist)
+                for (String w2 : wordlist)
+                    if (match(w1, w2) == 0)
+                        count.put(w1, count.getOrDefault(w1 , 0) + 1);
+            Pair<String, Integer> minimax = new Pair<>("", 1000);
+            for (String w : wordlist)
+                if (count.getOrDefault(w, 0) < minimax.getValue())
+                    minimax = new Pair<>(w, count.getOrDefault(w, 0));
+            x = master.guess(minimax.getKey());
+            List<String> wordlist2 = new ArrayList<String>();
+            for (String w : wordlist)
+                if (match(minimax.getKey(), w) == x)
+                    wordlist2.add(w);
+            wordlist = wordlist2.toArray(new String[0]);
+        }
+    }
+```
+**Python:**
+```
+    def findSecretWord(self, wordlist, master):
+        n = 0
+        while n < 6:
+            count = collections.Counter(w1 for w1, w2 in itertools.permutations(wordlist, 2) if self.match(w1, w2) == 0)
+            guess = min(wordlist, key=lambda w: count[w])
+            n = master.guess(guess)
+            wordlist = [w for w in wordlist if self.match(w, guess) == n]
+```
+
+## **Time Complexity and Result Analyse**
+
+To be more convincing, I test each approach with 1000 test cases.
+For the random approach, time complexity O(N), average 6.5 guess, worst case 14 guess.
+For the minimax  approach, time complexity O(N^2), average 5.5 guess, worst case 10 guess.
+I draw this diagram to visualize the result:
+
+![image](https://s3-lc-upload.s3.amazonaws.com/users/lee215/image_1527391162.png)
+
+

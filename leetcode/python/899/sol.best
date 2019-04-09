@@ -1,0 +1,66 @@
+
+[C++/Java/Python] Sort String or Rotate String
+
+https://leetcode.com/problems/orderly-queue/discuss/165878
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   39
+
+**Intuition**:
+First, this is string rotation.
+`12345` -> `23451` -> `34512` -> `45123` -> `51234`
+I use number instead of letters to make it clear.
+
+If `K == 1`, we can only rotate the whole string.
+There are `S.length` different states and
+we return the lexicographically smallest string.
+
+If `K > 1`, it means we can:
+1. rotate the whole string,
+2. rotate the whole string except the first letter.
+`012345` -> `023451` -> `034512` -> `045123` -> `051234`
+
+We can rotate `i+1`th big letter to the start (method 1),
+then rotate `i`th big letter to the end (method 2).
+`2XXX01` -> `XXX012`
+
+In this way, we can bubble sort the whole string lexicographically.
+So just return sorted string.
+
+**C++:**
+```
+    string orderlyQueue(string S, int K) {
+        if (K > 1) {
+            sort(S.begin(), S.end());
+            return S;
+        }
+        string res = S;
+        for (int i = 1; i < S.length(); i++)
+            res = min(res, S.substr(i) + S.substr(0, i));
+        return res;
+    }
+```
+
+**Java:**
+```
+    public String orderlyQueue(String S, int K) {
+        if (K > 1) {
+            char S2[] = S.toCharArray();
+            Arrays.sort(S2);
+            return new String(S2);
+        }
+        String res = S;
+        for (int i = 1; i < S.length(); i++) {
+            String tmp = S.substring(i) + S.substring(0, i);
+            if (res.compareTo(tmp) > 0) res = tmp;
+        }
+        return res;
+    }
+```
+**Python:**
+```
+    def orderlyQueue(self, S, K):
+        return "".join(sorted(S)) if K > 1 else min(S[i:] + S[:i] for i in range(len(S)))
+```
+

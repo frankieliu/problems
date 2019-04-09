@@ -1,0 +1,95 @@
+
+[Java/Python/C++] Stack Solution O(N)
+
+https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/discuss/247626
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   28
+
+## Solution 1, Brute Force
+
+Brute force using replace will get accepted. Though it\'s not expected.
+
+Time complexity `O(N^2)`, space `O(N^2)` (depending on implementation).
+**Python**
+```
+    def isValid(self, S):
+        S2 = ""
+        while S != S2:
+            S, S2 = S.replace("abc", ""), S
+        return S == ""
+```
+<br>
+
+## Solution 2
+
+Keep a stack, whenever meet `\'c\'`,
+pop `a` and `b` at the end of stack.
+Otherwise return `false`.
+
+**Java**
+```
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c: s.toCharArray()) {
+            if (c == \'c\') {
+                if (stack.isEmpty() || stack.pop() != \'b\') return false;
+                if (stack.isEmpty() || stack.pop() != \'a\') return false;
+            } else {
+                stack.push(c);
+            }
+        }
+        return stack.isEmpty();
+    }
+```
+
+**C++**
+```
+    bool isValid(string S) {
+        vector<char> stack;
+        for (char c : S) {
+            if (c == \'c\') {
+                int n = stack.size();
+                if (n < 2 || stack[n - 1] != \'b\' || stack[n - 2] != \'a\') return false;
+                stack.pop_back(), stack.pop_back();
+            } else {
+                stack.push_back(c);
+            }
+        }
+        return stack.size() == 0;
+    }
+```
+
+**Python**
+```
+    def isValid(self, S):
+        stack = []
+        for i in S:
+            if i == \'c\':
+                if stack[-2:] != [\'a\', \'b\']:
+                    return False
+                stack.pop()
+                stack.pop()
+            else:
+                stack.append(i)
+        return not stack
+```
+
+
+<br>
+
+## Solution 3,  Accepted Wrong Solution...**
+One wrong solution is that check that if `count[a] <= count[b] <= count[c]` always valid.
+It\'s hard to construct a false positive test cases.
+One easy counterexample can be `"aabbcc"`, expecting Leetcode to add it later.
+
+```
+    def isValid(self, S):
+        count = [0, 0, 0]
+        for i in S:
+            count[ord(i) - ord(\'a\')] += 1
+            if not count[0] >= count[1] >= count[2]:
+                return False
+        return count[0] == count[1] == count[2]
+```

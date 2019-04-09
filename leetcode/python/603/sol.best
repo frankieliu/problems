@@ -1,0 +1,17 @@
+
+AC using self join
+
+https://leetcode.com/problems/consecutive-available-seats/discuss/103815
+
+* Lang:    cpp
+* Author:  Douglas1612
+* Votes:   9
+
+```
+select distinct a.seat_id
+from cinema a
+join cinema b
+on abs(a.seat_id - b.seat_id) = 1
+and a.free=true and b.free=true
+order by a.seat_id;
+```

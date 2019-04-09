@@ -1,0 +1,33 @@
+
+Java solution beats 100%
+
+https://leetcode.com/problems/increasing-subsequences/discuss/97147
+
+* Lang:    cpp
+* Author:  chidong
+* Votes:   62
+
+```
+public class Solution {
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        List<List<Integer>> res = new LinkedList<>();
+        helper(new LinkedList<Integer>(), 0, nums, res);
+        return res; 
+    }
+    private void helper(LinkedList<Integer> list, int index, int[] nums, List<List<Integer>> res){
+        if(list.size()>1) res.add(new LinkedList<Integer>(list));
+        Set<Integer> used = new HashSet<>();
+        for(int i = index; i<nums.length; i++){
+            if(used.contains(nums[i])) continue;
+            if(list.size()==0 || nums[i]>=list.peekLast()){
+                used.add(nums[i]);
+                list.add(nums[i]); 
+                helper(list, i+1, nums, res);
+                list.remove(list.size()-1);
+            }
+        }
+    }
+}
+```
+
+Pretty straightforward. Maybe one thing is: while nums is not necessarily sorted but we have to skip duplicates in each recursion, so we use a hash set to record what we have used in this particular recursion.

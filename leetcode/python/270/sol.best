@@ -1,0 +1,19 @@
+
+Clean and concise java solution
+
+https://leetcode.com/problems/closest-binary-search-tree-value/discuss/70331
+
+* Lang:    cpp
+* Author:  larrywang2014
+* Votes:   148
+
+    public int closestValue(TreeNode root, double target) {
+        int ret = root.val;   
+        while(root != null){
+            if(Math.abs(target - root.val) < Math.abs(target - ret)){
+                ret = root.val;
+            }      
+            root = root.val > target? root.left: root.right;
+        }     
+        return ret;
+    }

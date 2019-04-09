@@ -1,0 +1,22 @@
+
+Python 1-liner
+
+https://leetcode.com/problems/reorder-log-files/discuss/192144
+
+* Lang:    cpp
+* Author:  cenkay
+* Votes:   11
+
+```
+class Solution:
+    def reorderLogFiles(self, logs):
+        return sorted(filter(lambda l: l[l.find(" ") + 1].isalpha(), logs), key = lambda x: (x[x.find(" "):], x[:x.find(" ")])) + list(filter(lambda l: l[l.find(" ") + 1].isdigit(), logs))
+```
+* More readable version
+```
+class Solution:
+    def reorderLogFiles(self, logs):
+        l = filter(lambda l: l[l.find(" ") + 1].isalpha(), logs)
+        d = filter(lambda l: l[l.find(" ") + 1].isdigit(), logs)
+        return sorted(l, key = lambda x: (x[x.find(" "):], x[:x.find(" ")])) + list(d)
+```

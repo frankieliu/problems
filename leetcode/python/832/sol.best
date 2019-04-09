@@ -1,0 +1,47 @@
+
+[C++/Java/Python] Reverse and Toggle
+
+https://leetcode.com/problems/flipping-an-image/discuss/130590
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   60
+
+**Explanation**:
+1. reverse every row.
+2. toggle every value.
+
+In java, I did both steps together.
+I compared the `i` th and `n - i - 1` th in a row.
+If they are same, we toggle both. Otherwise we do nothing.
+
+**Time Complexity**:
+O(N^2)
+
+
+**C++:**
+```
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& A) {
+        for (auto & row : A) reverse(row.begin(), row.end());
+        for (auto & row : A) for (int & i: row) i ^= 1;
+        return A;
+    }
+```
+
+**Java:**
+```
+    public int[][] flipAndInvertImage(int[][] A) {
+        int n = A.length;
+        for (int[] row : A)
+            for (int i = 0; i * 2 < n; i++)
+                if (row[i] == row[n - i - 1])
+                    row[i] = row[n - i - 1] ^= 1;
+        return A;
+    }
+```
+**1-line Python:**
+```
+    def flipAndInvertImage(self, A):
+        return [[1 ^ i for i in row[::-1]] for row in A]
+```
+

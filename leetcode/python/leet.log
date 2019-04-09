@@ -1,0 +1,5541 @@
+begin-end = 1-1015
+leetcode show -gx -o 175/ 175
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 175/ 175
+[175] Combine Two Tables  
+
+https://leetcode.com/problems/combine-two-tables/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (48.42%)
+* Source Code:       175/175.combine-two-tables.1.sql
+* Total Accepted:    132.1K
+* Total Submissions: 272.8K
+* Testcase Example:  '{"headers": {"Person": ["PersonId", "LastName", "FirstName"], "Address": ["AddressId", "PersonId", "City", "State"]}, "rows": {"Person": [[1, "Wang", "Allen"]], "Address": [[1, 2, "New York City", "New York"]]}}'
+
+Table: Person
+
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| PersonId    | int     |
+| FirstName   | varchar |
+| LastName    | varchar |
++-------------+---------+
+PersonId is the primary key column for this table.
+
+
+Table: Address
+
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| AddressId   | int     |
+| PersonId    | int     |
+| City        | varchar |
+| State       | varchar |
++-------------+---------+
+AddressId is the primary key column for this table.
+
+
+ 
+
+Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:
+
+
+FirstName, LastName, City, State
+
+
+leetcode show -gx -o 175/original/ 175
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 175/original/ 175
+[175] Combine Two Tables  
+
+https://leetcode.com/problems/combine-two-tables/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (48.42%)
+* Source Code:       175/original/175.combine-two-tables.1.sql
+* Total Accepted:    132.1K
+* Total Submissions: 272.8K
+* Testcase Example:  '{"headers": {"Person": ["PersonId", "LastName", "FirstName"], "Address": ["AddressId", "PersonId", "City", "State"]}, "rows": {"Person": [[1, "Wang", "Allen"]], "Address": [[1, 2, "New York City", "New York"]]}}'
+
+Table: Person
+
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| PersonId    | int     |
+| FirstName   | varchar |
+| LastName    | varchar |
++-------------+---------+
+PersonId is the primary key column for this table.
+
+
+Table: Address
+
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| AddressId   | int     |
+| PersonId    | int     |
+| City        | varchar |
+| State       | varchar |
++-------------+---------+
+AddressId is the primary key column for this table.
+
+
+ 
+
+Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:
+
+
+FirstName, LastName, City, State
+
+
+leetcode show 175 --solution > 175/sol.py
+leetcode show -gx -o 176/ 176
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 176/ 176
+[176] Second Highest Salary  
+
+https://leetcode.com/problems/second-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (25.77%)
+* Source Code:       176/176.second-highest-salary.1.sql
+* Total Accepted:    107.2K
+* Total Submissions: 416.1K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Salary"]}, "rows": {"Employee": [[1, 100], [2, 200], [3, 300]]}}'
+
+Write a SQL query to get the second highest salary from the Employee table.
+
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
+
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+
+
+leetcode show -gx -o 176/original/ 176
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 176/original/ 176
+[176] Second Highest Salary  
+
+https://leetcode.com/problems/second-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (25.77%)
+* Source Code:       176/original/176.second-highest-salary.1.sql
+* Total Accepted:    107.2K
+* Total Submissions: 416.1K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Salary"]}, "rows": {"Employee": [[1, 100], [2, 200], [3, 300]]}}'
+
+Write a SQL query to get the second highest salary from the Employee table.
+
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
+
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+
+
+leetcode show 176 --solution > 176/sol.py
+leetcode show -gx -o 177/ 177
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 177/ 177
+[177] Nth Highest Salary  
+
+https://leetcode.com/problems/nth-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (24.34%)
+* Source Code:       177/177.nth-highest-salary.3.sql
+* Total Accepted:    53.2K
+* Total Submissions: 218.5K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Salary"]}, "argument": 2, "rows": {"Employee": [[1, 100], [2, 200], [3, 300]]}}'
+
+Write a SQL query to get the n^th highest salary from the Employee table.
+
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+
+For example, given the above Employee table, the n^th highest salary where n = 2 is 200. If there is no n^th highest salary, then the query should return null.
+
+
++------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+
+
+leetcode show -gx -o 177/original/ 177
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 177/original/ 177
+[177] Nth Highest Salary  
+
+https://leetcode.com/problems/nth-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (24.34%)
+* Source Code:       177/original/177.nth-highest-salary.2.sql
+* Total Accepted:    53.2K
+* Total Submissions: 218.5K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Salary"]}, "argument": 2, "rows": {"Employee": [[1, 100], [2, 200], [3, 300]]}}'
+
+Write a SQL query to get the n^th highest salary from the Employee table.
+
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+
+For example, given the above Employee table, the n^th highest salary where n = 2 is 200. If there is no n^th highest salary, then the query should return null.
+
+
++------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+
+
+leetcode show -gx -o 178/ 178
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 178/ 178
+[178] Rank Scores  
+
+https://leetcode.com/problems/rank-scores/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (34.07%)
+* Source Code:       178/178.rank-scores.2.sql
+* Total Accepted:    52.5K
+* Total Submissions: 154.1K
+* Testcase Example:  '{"headers": {"Scores": ["Id", "Score"]}, "rows": {"Scores": [[1, 3.50], [2, 3.65], [3, 4.00], [4, 3.85], [5, 4.00], [6, 3.65]]}}'
+
+Write a SQL query to rank scores. If there is a tie between two scores, both should have the same ranking. Note that after a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no "holes" between ranks.
+
+
++----+-------+
+| Id | Score |
++----+-------+
+| 1  | 3.50  |
+| 2  | 3.65  |
+| 3  | 4.00  |
+| 4  | 3.85  |
+| 5  | 4.00  |
+| 6  | 3.65  |
++----+-------+
+
+
+For example, given the above Scores table, your query should generate the following report (order by highest score):
+
+
++-------+------+
+| Score | Rank |
++-------+------+
+| 4.00  | 1    |
+| 4.00  | 1    |
+| 3.85  | 2    |
+| 3.65  | 3    |
+| 3.65  | 3    |
+| 3.50  | 4    |
++-------+------+
+
+
+leetcode show -gx -o 178/original/ 178
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 178/original/ 178
+[178] Rank Scores  
+
+https://leetcode.com/problems/rank-scores/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (34.07%)
+* Source Code:       178/original/178.rank-scores.1.sql
+* Total Accepted:    52.5K
+* Total Submissions: 154.1K
+* Testcase Example:  '{"headers": {"Scores": ["Id", "Score"]}, "rows": {"Scores": [[1, 3.50], [2, 3.65], [3, 4.00], [4, 3.85], [5, 4.00], [6, 3.65]]}}'
+
+Write a SQL query to rank scores. If there is a tie between two scores, both should have the same ranking. Note that after a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no "holes" between ranks.
+
+
++----+-------+
+| Id | Score |
++----+-------+
+| 1  | 3.50  |
+| 2  | 3.65  |
+| 3  | 4.00  |
+| 4  | 3.85  |
+| 5  | 4.00  |
+| 6  | 3.65  |
++----+-------+
+
+
+For example, given the above Scores table, your query should generate the following report (order by highest score):
+
+
++-------+------+
+| Score | Rank |
++-------+------+
+| 4.00  | 1    |
+| 4.00  | 1    |
+| 3.85  | 2    |
+| 3.65  | 3    |
+| 3.65  | 3    |
+| 3.50  | 4    |
++-------+------+
+
+
+leetcode show 178 --solution > 178/sol.py
+leetcode show -gx -o 180/ 180
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 180/ 180
+[180] Consecutive Numbers  
+
+https://leetcode.com/problems/consecutive-numbers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (31.57%)
+* Source Code:       180/180.consecutive-numbers.2.sql
+* Total Accepted:    44.6K
+* Total Submissions: 141.4K
+* Testcase Example:  '{"headers": {"Logs": ["Id", "Num"]}, "rows": {"Logs": [[1, 1], [2, 1], [3, 1], [4, 2], [5, 1], [6, 2], [7, 2]]}}'
+
+Write a SQL query to find all numbers that appear at least three times consecutively.
+
+
++----+-----+
+| Id | Num |
++----+-----+
+| 1  |  1  |
+| 2  |  1  |
+| 3  |  1  |
+| 4  |  2  |
+| 5  |  1  |
+| 6  |  2  |
+| 7  |  2  |
++----+-----+
+
+
+For example, given the above Logs table, 1 is the only number that appears consecutively for at least three times.
+
+
++-----------------+
+| ConsecutiveNums |
++-----------------+
+| 1               |
++-----------------+
+
+
+leetcode show -gx -o 180/original/ 180
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 180/original/ 180
+[180] Consecutive Numbers  
+
+https://leetcode.com/problems/consecutive-numbers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (31.57%)
+* Source Code:       180/original/180.consecutive-numbers.1.sql
+* Total Accepted:    44.6K
+* Total Submissions: 141.4K
+* Testcase Example:  '{"headers": {"Logs": ["Id", "Num"]}, "rows": {"Logs": [[1, 1], [2, 1], [3, 1], [4, 2], [5, 1], [6, 2], [7, 2]]}}'
+
+Write a SQL query to find all numbers that appear at least three times consecutively.
+
+
++----+-----+
+| Id | Num |
++----+-----+
+| 1  |  1  |
+| 2  |  1  |
+| 3  |  1  |
+| 4  |  2  |
+| 5  |  1  |
+| 6  |  2  |
+| 7  |  2  |
++----+-----+
+
+
+For example, given the above Logs table, 1 is the only number that appears consecutively for at least three times.
+
+
++-----------------+
+| ConsecutiveNums |
++-----------------+
+| 1               |
++-----------------+
+
+
+leetcode show -gx -o 181/ 181
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 181/ 181
+[181] Employees Earning More Than Their Managers  
+
+https://leetcode.com/problems/employees-earning-more-than-their-managers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (44.27%)
+* Source Code:       181/181.employees-earning-more-than-their-managers.0.sql
+* Total Accepted:    88.7K
+* Total Submissions: 200.3K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "ManagerId"]}, "rows": {"Employee": [[1, "Joe", 70000, 3], [2, "Henry", 80000, 4], [3, "Sam", 60000, null], [4, "Max", 90000, null]]}}'
+
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
+
++----+-------+--------+-----------+
+| Id | Name  | Salary | ManagerId |
++----+-------+--------+-----------+
+| 1  | Joe   | 70000  | 3         |
+| 2  | Henry | 80000  | 4         |
+| 3  | Sam   | 60000  | NULL      |
+| 4  | Max   | 90000  | NULL      |
++----+-------+--------+-----------+
+
+
+Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.
+
+
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+
+
+leetcode show -gx -o 181/original/ 181
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 181/original/ 181
+[181] Employees Earning More Than Their Managers  
+
+https://leetcode.com/problems/employees-earning-more-than-their-managers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (44.27%)
+* Source Code:       181/original/181.employees-earning-more-than-their-managers.0.sql
+* Total Accepted:    88.7K
+* Total Submissions: 200.3K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "ManagerId"]}, "rows": {"Employee": [[1, "Joe", 70000, 3], [2, "Henry", 80000, 4], [3, "Sam", 60000, null], [4, "Max", 90000, null]]}}'
+
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
+
++----+-------+--------+-----------+
+| Id | Name  | Salary | ManagerId |
++----+-------+--------+-----------+
+| 1  | Joe   | 70000  | 3         |
+| 2  | Henry | 80000  | 4         |
+| 3  | Sam   | 60000  | NULL      |
+| 4  | Max   | 90000  | NULL      |
++----+-------+--------+-----------+
+
+
+Given the Employee table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.
+
+
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+
+
+leetcode show 181 --solution > 181/sol.py
+leetcode show -gx -o 182/ 182
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 182/ 182
+[182] Duplicate Emails  
+
+https://leetcode.com/problems/duplicate-emails/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (51.70%)
+* Source Code:       182/182.duplicate-emails.0.sql
+* Total Accepted:    95.4K
+* Total Submissions: 184.4K
+* Testcase Example:  '{"headers": {"Person": ["Id", "Email"]}, "rows": {"Person": [[1, "a@b.com"], [2, "c@d.com"], [3, "a@b.com"]]}}'
+
+Write a SQL query to find all duplicate emails in a table named Person.
+
+
++----+---------+
+| Id | Email   |
++----+---------+
+| 1  | a@b.com |
+| 2  | c@d.com |
+| 3  | a@b.com |
++----+---------+
+
+
+For example, your query should return the following for the above table:
+
+
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+
+
+Note: All emails are in lowercase.
+
+leetcode show -gx -o 182/original/ 182
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 182/original/ 182
+[182] Duplicate Emails  
+
+https://leetcode.com/problems/duplicate-emails/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (51.70%)
+* Source Code:       182/original/182.duplicate-emails.0.sql
+* Total Accepted:    95.4K
+* Total Submissions: 184.4K
+* Testcase Example:  '{"headers": {"Person": ["Id", "Email"]}, "rows": {"Person": [[1, "a@b.com"], [2, "c@d.com"], [3, "a@b.com"]]}}'
+
+Write a SQL query to find all duplicate emails in a table named Person.
+
+
++----+---------+
+| Id | Email   |
++----+---------+
+| 1  | a@b.com |
+| 2  | c@d.com |
+| 3  | a@b.com |
++----+---------+
+
+
+For example, your query should return the following for the above table:
+
+
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+
+
+Note: All emails are in lowercase.
+
+leetcode show 182 --solution > 182/sol.py
+leetcode show -gx -o 183/ 183
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 183/ 183
+[183] Customers Who Never Order  
+
+https://leetcode.com/problems/customers-who-never-order/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (42.08%)
+* Source Code:       183/183.customers-who-never-order.0.sql
+* Total Accepted:    85.4K
+* Total Submissions: 203K
+* Testcase Example:  '{"headers": {"Customers": ["Id", "Name"], "Orders": ["Id", "CustomerId"]}, "rows": {"Customers": [[1, "Joe"], [2, "Henry"], [3, "Sam"], [4, "Max"]], "Orders": [[1, 3], [2, 1]]}}'
+
+Suppose that a website contains two tables, the Customers table and the Orders table. Write a SQL query to find all customers who never order anything.
+
+Table: Customers.
+
+
++----+-------+
+| Id | Name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+
+
+Table: Orders.
+
+
++----+------------+
+| Id | CustomerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+
+
+Using the above tables as example, return the following:
+
+
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+
+
+leetcode show -gx -o 183/original/ 183
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 183/original/ 183
+[183] Customers Who Never Order  
+
+https://leetcode.com/problems/customers-who-never-order/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (42.08%)
+* Source Code:       183/original/183.customers-who-never-order.0.sql
+* Total Accepted:    85.4K
+* Total Submissions: 203K
+* Testcase Example:  '{"headers": {"Customers": ["Id", "Name"], "Orders": ["Id", "CustomerId"]}, "rows": {"Customers": [[1, "Joe"], [2, "Henry"], [3, "Sam"], [4, "Max"]], "Orders": [[1, 3], [2, 1]]}}'
+
+Suppose that a website contains two tables, the Customers table and the Orders table. Write a SQL query to find all customers who never order anything.
+
+Table: Customers.
+
+
++----+-------+
+| Id | Name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+
+
+Table: Orders.
+
+
++----+------------+
+| Id | CustomerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+
+
+Using the above tables as example, return the following:
+
+
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+
+
+leetcode show 183 --solution > 183/sol.py
+leetcode show -gx -o 184/ 184
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 184/ 184
+[184] Department Highest Salary  
+
+https://leetcode.com/problems/department-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (26.44%)
+* Source Code:       184/184.department-highest-salary.1.sql
+* Total Accepted:    52.3K
+* Total Submissions: 197.7K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "DepartmentId"], "Department": ["Id", "Name"]}, "rows": {"Employee": [[1, "Joe", 70000, 1], [2, "Henry", 80000, 2], [3, "Sam", 60000, 2], [4, "Max", 90000, 1]], "Department": [[1, "IT"], [2, "Sales"]]}}'
+
+The Employee table holds all employees. Every employee has an Id, a salary, and there is also a column for the department Id.
+
+
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
++----+-------+--------+--------------+
+
+
+The Department table holds all departments of the company.
+
+
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+
+
+Write a SQL query to find employees who have the highest salary in each of the departments. For the above tables, Max has the highest salary in the IT department and Henry has the highest salary in the Sales department.
+
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| Sales      | Henry    | 80000  |
++------------+----------+--------+
+
+
+leetcode show -gx -o 184/original/ 184
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 184/original/ 184
+[184] Department Highest Salary  
+
+https://leetcode.com/problems/department-highest-salary/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (26.44%)
+* Source Code:       184/original/184.department-highest-salary.0.sql
+* Total Accepted:    52.3K
+* Total Submissions: 197.7K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "DepartmentId"], "Department": ["Id", "Name"]}, "rows": {"Employee": [[1, "Joe", 70000, 1], [2, "Henry", 80000, 2], [3, "Sam", 60000, 2], [4, "Max", 90000, 1]], "Department": [[1, "IT"], [2, "Sales"]]}}'
+
+The Employee table holds all employees. Every employee has an Id, a salary, and there is also a column for the department Id.
+
+
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
++----+-------+--------+--------------+
+
+
+The Department table holds all departments of the company.
+
+
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+
+
+Write a SQL query to find employees who have the highest salary in each of the departments. For the above tables, Max has the highest salary in the IT department and Henry has the highest salary in the Sales department.
+
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| Sales      | Henry    | 80000  |
++------------+----------+--------+
+
+
+leetcode show 184 --solution > 184/sol.py
+leetcode show -gx -o 185/ 185
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 185/ 185
+[185] Department Top Three Salaries  
+
+https://leetcode.com/problems/department-top-three-salaries/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (23.25%)
+* Source Code:       185/185.department-top-three-salaries.0.sql
+* Total Accepted:    35K
+* Total Submissions: 150.6K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "DepartmentId"], "Department": ["Id", "Name"]}, "rows": {"Employee": [[1, "Joe", 70000, 1], [2, "Henry", 80000, 2], [3, "Sam", 60000, 2], [4, "Max", 90000, 1]], "Department": [[1, "IT"], [2, "Sales"]]}}'
+
+The Employee table holds all employees. Every employee has an Id, and there is also a column for the department Id.
+
+
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
+| 5  | Janet | 69000  | 1            |
+| 6  | Randy | 85000  | 1            |
++----+-------+--------+--------------+
+
+
+The Department table holds all departments of the company.
+
+
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+
+
+Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.
+
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| IT         | Randy    | 85000  |
+| IT         | Joe      | 70000  |
+| Sales      | Henry    | 80000  |
+| Sales      | Sam      | 60000  |
++------------+----------+--------+
+
+
+leetcode show -gx -o 185/original/ 185
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 185/original/ 185
+[185] Department Top Three Salaries  
+
+https://leetcode.com/problems/department-top-three-salaries/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (23.25%)
+* Source Code:       185/original/185.department-top-three-salaries.0.sql
+* Total Accepted:    35K
+* Total Submissions: 150.6K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Salary", "DepartmentId"], "Department": ["Id", "Name"]}, "rows": {"Employee": [[1, "Joe", 70000, 1], [2, "Henry", 80000, 2], [3, "Sam", 60000, 2], [4, "Max", 90000, 1]], "Department": [[1, "IT"], [2, "Sales"]]}}'
+
+The Employee table holds all employees. Every employee has an Id, and there is also a column for the department Id.
+
+
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
+| 5  | Janet | 69000  | 1            |
+| 6  | Randy | 85000  | 1            |
++----+-------+--------+--------------+
+
+
+The Department table holds all departments of the company.
+
+
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+
+
+Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.
+
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| IT         | Randy    | 85000  |
+| IT         | Joe      | 70000  |
+| Sales      | Henry    | 80000  |
+| Sales      | Sam      | 60000  |
++------------+----------+--------+
+
+
+leetcode show 185 --solution > 185/sol.py
+leetcode show -gx -o 192/ 192
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 192/ 192
+[192] Word Frequency  
+
+https://leetcode.com/problems/word-frequency/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Medium (26.50%)
+* Source Code:       192/192.word-frequency.1.sh
+* Total Accepted:    16.2K
+* Total Submissions: 61.3K
+
+Write a bash script to calculate the frequency of each word in a text file words.txt.
+
+For simplicity sake, you may assume:
+
+
+	words.txt contains only lowercase characters and space ' ' characters.
+	Each word must consist of lowercase characters only.
+	Words are separated by one or more whitespace characters.
+
+
+Example:
+
+Assume that words.txt has the following content:
+
+
+the day is sunny the the
+the sunny is is
+
+
+Your script should output the following, sorted by descending frequency:
+
+
+the 4
+is 3
+sunny 2
+day 1
+
+
+Note:
+
+
+	Don't worry about handling ties, it is guaranteed that each word's frequency count is unique.
+	Could you write it in one-line using Unix pipes?
+
+
+leetcode show -gx -o 192/original/ 192
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 192/original/ 192
+[192] Word Frequency  
+
+https://leetcode.com/problems/word-frequency/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Medium (26.50%)
+* Source Code:       192/original/192.word-frequency.0.sh
+* Total Accepted:    16.2K
+* Total Submissions: 61.3K
+
+Write a bash script to calculate the frequency of each word in a text file words.txt.
+
+For simplicity sake, you may assume:
+
+
+	words.txt contains only lowercase characters and space ' ' characters.
+	Each word must consist of lowercase characters only.
+	Words are separated by one or more whitespace characters.
+
+
+Example:
+
+Assume that words.txt has the following content:
+
+
+the day is sunny the the
+the sunny is is
+
+
+Your script should output the following, sorted by descending frequency:
+
+
+the 4
+is 3
+sunny 2
+day 1
+
+
+Note:
+
+
+	Don't worry about handling ties, it is guaranteed that each word's frequency count is unique.
+	Could you write it in one-line using Unix pipes?
+
+
+leetcode show 192 --solution > 192/sol.py
+leetcode show -gx -o 193/ 193
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 193/ 193
+[193] Valid Phone Numbers  
+
+https://leetcode.com/problems/valid-phone-numbers/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Easy (25.04%)
+* Source Code:       193/193.valid-phone-numbers.0.sh
+* Total Accepted:    20.8K
+* Total Submissions: 83.2K
+
+Given a text file file.txt that contains list of phone numbers (one per line), write a one liner bash script to print all valid phone numbers.
+
+You may assume that a valid phone number must appear in one of the following two formats: (xxx) xxx-xxxx or xxx-xxx-xxxx. (x means a digit)
+
+You may also assume each line in the text file must not contain leading or trailing white spaces.
+
+Example:
+
+Assume that file.txt has the following content:
+
+
+987-123-4567
+123 456 7890
+(123) 456-7890
+
+
+Your script should output the following valid phone numbers:
+
+
+987-123-4567
+(123) 456-7890
+
+
+leetcode show -gx -o 193/original/ 193
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 193/original/ 193
+[193] Valid Phone Numbers  
+
+https://leetcode.com/problems/valid-phone-numbers/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Easy (25.04%)
+* Source Code:       193/original/193.valid-phone-numbers.0.sh
+* Total Accepted:    20.8K
+* Total Submissions: 83.2K
+
+Given a text file file.txt that contains list of phone numbers (one per line), write a one liner bash script to print all valid phone numbers.
+
+You may assume that a valid phone number must appear in one of the following two formats: (xxx) xxx-xxxx or xxx-xxx-xxxx. (x means a digit)
+
+You may also assume each line in the text file must not contain leading or trailing white spaces.
+
+Example:
+
+Assume that file.txt has the following content:
+
+
+987-123-4567
+123 456 7890
+(123) 456-7890
+
+
+Your script should output the following valid phone numbers:
+
+
+987-123-4567
+(123) 456-7890
+
+
+leetcode show 193 --solution > 193/sol.py
+leetcode show -gx -o 194/ 194
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 194/ 194
+[194] Transpose File  
+
+https://leetcode.com/problems/transpose-file/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Medium (22.13%)
+* Source Code:       194/194.transpose-file.1.sh
+* Total Accepted:    8.6K
+* Total Submissions: 39K
+
+Given a text file file.txt, transpose its content.
+
+You may assume that each row has the same number of columns and each field is separated by the ' ' character.
+
+Example:
+
+If file.txt has the following content:
+
+
+name age
+alice 21
+ryan 30
+
+
+Output the following:
+
+
+name alice ryan
+age 21 30
+
+
+ 
+
+leetcode show -gx -o 194/original/ 194
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 194/original/ 194
+[194] Transpose File  
+
+https://leetcode.com/problems/transpose-file/description/
+
+Tags:   shell 
+
+Langs:  bash 
+
+* shell
+* Medium (22.13%)
+* Source Code:       194/original/194.transpose-file.0.sh
+* Total Accepted:    8.6K
+* Total Submissions: 39K
+
+Given a text file file.txt, transpose its content.
+
+You may assume that each row has the same number of columns and each field is separated by the ' ' character.
+
+Example:
+
+If file.txt has the following content:
+
+
+name age
+alice 21
+ryan 30
+
+
+Output the following:
+
+
+name alice ryan
+age 21 30
+
+
+ 
+
+leetcode show -gx -o 195/ 195
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 195/ 195
+[195] Tenth Line  
+
+https://leetcode.com/problems/tenth-line/description/
+
+Tags:   shell   adobe 
+
+Langs:  bash 
+
+* shell
+* Easy (33.99%)
+* Source Code:       195/195.tenth-line.0.sh
+* Total Accepted:    33.9K
+* Total Submissions: 99.7K
+
+Given a text file file.txt, print just the 10th line of the file.
+
+Example:
+
+Assume that file.txt has the following content:
+
+
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+
+
+Your script should output the tenth line, which is:
+
+
+Line 10
+
+
+Note:
+1. If the file contains less than 10 lines, what should you output?
+2. There's at least three different solutions. Try to explore all possibilities.
+
+leetcode show -gx -o 195/original/ 195
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  bash 
+leetcode show -gx -l bash -o 195/original/ 195
+[195] Tenth Line  
+
+https://leetcode.com/problems/tenth-line/description/
+
+Tags:   shell   adobe 
+
+Langs:  bash 
+
+* shell
+* Easy (33.99%)
+* Source Code:       195/original/195.tenth-line.0.sh
+* Total Accepted:    33.9K
+* Total Submissions: 99.7K
+
+Given a text file file.txt, print just the 10th line of the file.
+
+Example:
+
+Assume that file.txt has the following content:
+
+
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+
+
+Your script should output the tenth line, which is:
+
+
+Line 10
+
+
+Note:
+1. If the file contains less than 10 lines, what should you output?
+2. There's at least three different solutions. Try to explore all possibilities.
+
+leetcode show 195 --solution > 195/sol.py
+leetcode show -gx -o 196/ 196
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 196/ 196
+[196] Delete Duplicate Emails  
+
+https://leetcode.com/problems/delete-duplicate-emails/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (30.01%)
+* Source Code:       196/196.delete-duplicate-emails.0.sql
+* Total Accepted:    60.6K
+* Total Submissions: 201.9K
+* Testcase Example:  '{"headers": {"Person": ["Id", "Email"]}, "rows": {"Person": [[1, "john@example.com"], [2, "bob@example.com"], [3, "john@example.com"]]}}'
+
+Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
+
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+| 3  | john@example.com |
++----+------------------+
+Id is the primary key column for this table.
+
+
+For example, after running your query, the above Person table should have the following rows:
+
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
++----+------------------+
+
+
+Note:
+
+Your output is the whole Person table after executing your sql. Use delete statement.
+
+leetcode show -gx -o 196/original/ 196
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 196/original/ 196
+[196] Delete Duplicate Emails  
+
+https://leetcode.com/problems/delete-duplicate-emails/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (30.01%)
+* Source Code:       196/original/196.delete-duplicate-emails.0.sql
+* Total Accepted:    60.6K
+* Total Submissions: 201.9K
+* Testcase Example:  '{"headers": {"Person": ["Id", "Email"]}, "rows": {"Person": [[1, "john@example.com"], [2, "bob@example.com"], [3, "john@example.com"]]}}'
+
+Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
+
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
+| 3  | john@example.com |
++----+------------------+
+Id is the primary key column for this table.
+
+
+For example, after running your query, the above Person table should have the following rows:
+
+
++----+------------------+
+| Id | Email            |
++----+------------------+
+| 1  | john@example.com |
+| 2  | bob@example.com  |
++----+------------------+
+
+
+Note:
+
+Your output is the whole Person table after executing your sql. Use delete statement.
+
+leetcode show 196 --solution > 196/sol.py
+leetcode show -gx -o 197/ 197
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 197/ 197
+[197] Rising Temperature  
+
+https://leetcode.com/problems/rising-temperature/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (33.28%)
+* Source Code:       197/197.rising-temperature.0.sql
+* Total Accepted:    65.3K
+* Total Submissions: 196.2K
+* Testcase Example:  '{"headers": {"Weather": ["Id", "RecordDate", "Temperature"]}, "rows": {"Weather": [[1, "2015-01-01", 10], [2, "2015-01-02", 25], [3, "2015-01-03", 20], [4, "2015-01-04", 30]]}}'
+
+Given a Weather table, write a SQL query to find all dates' Ids with higher temperature compared to its previous (yesterday's) dates.
+
+
++---------+------------------+------------------+
+| Id(INT) | RecordDate(DATE) | Temperature(INT) |
++---------+------------------+------------------+
+|       1 |       2015-01-01 |               10 |
+|       2 |       2015-01-02 |               25 |
+|       3 |       2015-01-03 |               20 |
+|       4 |       2015-01-04 |               30 |
++---------+------------------+------------------+
+
+
+For example, return the following Ids for the above Weather table:
+
+
++----+
+| Id |
++----+
+|  2 |
+|  4 |
++----+
+
+
+leetcode show -gx -o 197/original/ 197
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 197/original/ 197
+[197] Rising Temperature  
+
+https://leetcode.com/problems/rising-temperature/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (33.28%)
+* Source Code:       197/original/197.rising-temperature.0.sql
+* Total Accepted:    65.3K
+* Total Submissions: 196.2K
+* Testcase Example:  '{"headers": {"Weather": ["Id", "RecordDate", "Temperature"]}, "rows": {"Weather": [[1, "2015-01-01", 10], [2, "2015-01-02", 25], [3, "2015-01-03", 20], [4, "2015-01-04", 30]]}}'
+
+Given a Weather table, write a SQL query to find all dates' Ids with higher temperature compared to its previous (yesterday's) dates.
+
+
++---------+------------------+------------------+
+| Id(INT) | RecordDate(DATE) | Temperature(INT) |
++---------+------------------+------------------+
+|       1 |       2015-01-01 |               10 |
+|       2 |       2015-01-02 |               25 |
+|       3 |       2015-01-03 |               20 |
+|       4 |       2015-01-04 |               30 |
++---------+------------------+------------------+
+
+
+For example, return the following Ids for the above Weather table:
+
+
++----+
+| Id |
++----+
+|  2 |
+|  4 |
++----+
+
+
+leetcode show 197 --solution > 197/sol.py
+leetcode show 248 --solution > 248/sol.py
+leetcode show -gx -o 262/ 262
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 262/ 262
+[262] Trips and Users  
+
+https://leetcode.com/problems/trips-and-users/description/
+
+Tags:   database   uber 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (22.85%)
+* Source Code:       262/262.trips-and-users.0.sql
+* Total Accepted:    27.5K
+* Total Submissions: 120.3K
+* Testcase Example:  '{"headers": {"Trips": ["Id", "Client_Id", "Driver_Id", "City_Id", "Status", "Request_at"], "Users": ["Users_Id", "Banned", "Role"]}, "rows": {"Trips": [["1", "1", "10", "1", "completed", "2013-10-01"], ["2", "2", "11", "1", "cancelled_by_driver", "2013-10-01"], ["3", "3", "12", "6", "completed", "2013-10-01"], ["4", "4", "13", "6", "cancelled_by_client", "2013-10-01"], ["5", "1", "10", "1", "completed", "2013-10-02"], ["6", "2", "11", "6", "completed", "2013-10-02"], ["7", "3", "12", "6", "completed", "2013-10-02"], ["8", "2", "12", "12", "completed", "2013-10-03"], ["9", "3", "10", "12", "completed", "2013-10-03"], ["10", "4", "13", "12", "cancelled_by_driver", "2013-10-03"]], "Users": [["1", "No", "client"], ["2", "Yes", "client"], ["3", "No", "client"], ["4", "No", "client"], ["10", "No", "driver"], ["11", "No", "driver"], ["12", "No", "driver"], ["13", "No", "driver"]]}}'
+
+The Trips table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the Users table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).
+
+
++----+-----------+-----------+---------+--------------------+----------+
+| Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
++----+-----------+-----------+---------+--------------------+----------+
+| 1  |     1     |    10     |    1    |     completed      |2013-10-01|
+| 2  |     2     |    11     |    1    | cancelled_by_driver|2013-10-01|
+| 3  |     3     |    12     |    6    |     completed      |2013-10-01|
+| 4  |     4     |    13     |    6    | cancelled_by_client|2013-10-01|
+| 5  |     1     |    10     |    1    |     completed      |2013-10-02|
+| 6  |     2     |    11     |    6    |     completed      |2013-10-02|
+| 7  |     3     |    12     |    6    |     completed      |2013-10-02|
+| 8  |     2     |    12     |    12   |     completed      |2013-10-03|
+| 9  |     3     |    10     |    12   |     completed      |2013-10-03| 
+| 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
++----+-----------+-----------+---------+--------------------+----------+
+
+
+The Users table holds all users. Each user has an unique Users_Id, and Role is an ENUM type of (‘client’, ‘driver’, ‘partner’).
+
+
++----------+--------+--------+
+| Users_Id | Banned |  Role  |
++----------+--------+--------+
+|    1     |   No   | client |
+|    2     |   Yes  | client |
+|    3     |   No   | client |
+|    4     |   No   | client |
+|    10    |   No   | driver |
+|    11    |   No   | driver |
+|    12    |   No   | driver |
+|    13    |   No   | driver |
++----------+--------+--------+
+
+
+Write a SQL query to find the cancellation rate of requests made by unbanned users between Oct 1, 2013 and Oct 3, 2013. For the above tables, your SQL query should return the following rows with the cancellation rate being rounded to two decimal places.
+
+
++------------+-------------------+
+|     Day    | Cancellation Rate |
++------------+-------------------+
+| 2013-10-01 |       0.33        |
+| 2013-10-02 |       0.00        |
+| 2013-10-03 |       0.50        |
++------------+-------------------+
+
+
+Credits:
+Special thanks to @cak1erlizhou for contributing this question, writing the problem description and adding part of the test cases.
+
+leetcode show -gx -o 262/original/ 262
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 262/original/ 262
+[262] Trips and Users  
+
+https://leetcode.com/problems/trips-and-users/description/
+
+Tags:   database   uber 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (22.85%)
+* Source Code:       262/original/262.trips-and-users.0.sql
+* Total Accepted:    27.5K
+* Total Submissions: 120.3K
+* Testcase Example:  '{"headers": {"Trips": ["Id", "Client_Id", "Driver_Id", "City_Id", "Status", "Request_at"], "Users": ["Users_Id", "Banned", "Role"]}, "rows": {"Trips": [["1", "1", "10", "1", "completed", "2013-10-01"], ["2", "2", "11", "1", "cancelled_by_driver", "2013-10-01"], ["3", "3", "12", "6", "completed", "2013-10-01"], ["4", "4", "13", "6", "cancelled_by_client", "2013-10-01"], ["5", "1", "10", "1", "completed", "2013-10-02"], ["6", "2", "11", "6", "completed", "2013-10-02"], ["7", "3", "12", "6", "completed", "2013-10-02"], ["8", "2", "12", "12", "completed", "2013-10-03"], ["9", "3", "10", "12", "completed", "2013-10-03"], ["10", "4", "13", "12", "cancelled_by_driver", "2013-10-03"]], "Users": [["1", "No", "client"], ["2", "Yes", "client"], ["3", "No", "client"], ["4", "No", "client"], ["10", "No", "driver"], ["11", "No", "driver"], ["12", "No", "driver"], ["13", "No", "driver"]]}}'
+
+The Trips table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the Users table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).
+
+
++----+-----------+-----------+---------+--------------------+----------+
+| Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
++----+-----------+-----------+---------+--------------------+----------+
+| 1  |     1     |    10     |    1    |     completed      |2013-10-01|
+| 2  |     2     |    11     |    1    | cancelled_by_driver|2013-10-01|
+| 3  |     3     |    12     |    6    |     completed      |2013-10-01|
+| 4  |     4     |    13     |    6    | cancelled_by_client|2013-10-01|
+| 5  |     1     |    10     |    1    |     completed      |2013-10-02|
+| 6  |     2     |    11     |    6    |     completed      |2013-10-02|
+| 7  |     3     |    12     |    6    |     completed      |2013-10-02|
+| 8  |     2     |    12     |    12   |     completed      |2013-10-03|
+| 9  |     3     |    10     |    12   |     completed      |2013-10-03| 
+| 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
++----+-----------+-----------+---------+--------------------+----------+
+
+
+The Users table holds all users. Each user has an unique Users_Id, and Role is an ENUM type of (‘client’, ‘driver’, ‘partner’).
+
+
++----------+--------+--------+
+| Users_Id | Banned |  Role  |
++----------+--------+--------+
+|    1     |   No   | client |
+|    2     |   Yes  | client |
+|    3     |   No   | client |
+|    4     |   No   | client |
+|    10    |   No   | driver |
+|    11    |   No   | driver |
+|    12    |   No   | driver |
+|    13    |   No   | driver |
++----------+--------+--------+
+
+
+Write a SQL query to find the cancellation rate of requests made by unbanned users between Oct 1, 2013 and Oct 3, 2013. For the above tables, your SQL query should return the following rows with the cancellation rate being rounded to two decimal places.
+
+
++------------+-------------------+
+|     Day    | Cancellation Rate |
++------------+-------------------+
+| 2013-10-01 |       0.33        |
+| 2013-10-02 |       0.00        |
+| 2013-10-03 |       0.50        |
++------------+-------------------+
+
+
+Credits:
+Special thanks to @cak1erlizhou for contributing this question, writing the problem description and adding part of the test cases.
+
+leetcode show 262 --solution > 262/sol.py
+leetcode show 370 --solution > 370/sol.py
+leetcode show 377 --solution > 377/sol.py
+leetcode show 378 --solution > 378/sol.py
+leetcode show 382 --solution > 382/sol.py
+leetcode show 384 --solution > 384/sol.py
+leetcode show 388 --solution > 388/sol.py
+leetcode show 391 --solution > 391/sol.py
+leetcode show 394 --solution > 394/sol.py
+leetcode show 395 --solution > 395/sol.py
+leetcode show 400 --solution > 400/sol.py
+leetcode show 406 --solution > 406/sol.py
+leetcode show 408 --solution > 408/sol.py
+leetcode show 411 --solution > 411/sol.py
+leetcode show 413 --solution > 413/sol.py
+leetcode show 417 --solution > 417/sol.py
+leetcode show 421 --solution > 421/sol.py
+leetcode show 422 --solution > 422/sol.py
+leetcode show 424 --solution > 424/sol.py
+leetcode show 426 --solution > 426/sol.py
+leetcode show 427 --solution > 427/sol.py
+leetcode show 429 --solution > 429/sol.py
+leetcode show 431 --solution > 431/sol.py
+leetcode show 434 --solution > 434/sol.py
+leetcode show 439 --solution > 439/sol.py
+leetcode show 440 --solution > 440/sol.py
+leetcode show 442 --solution > 442/sol.py
+leetcode show 443 --solution > 443/sol.py
+leetcode show 444 --solution > 444/sol.py
+leetcode show 446 --solution > 446/sol.py
+leetcode show 447 --solution > 447/sol.py
+leetcode show 453 --solution > 453/sol.py
+leetcode show 456 --solution > 456/sol.py
+leetcode show 458 --solution > 458/sol.py
+leetcode show 459 --solution > 459/sol.py
+leetcode show 462 --solution > 462/sol.py
+leetcode show 465 --solution > 465/sol.py
+leetcode show 469 --solution > 469/sol.py
+leetcode show 470 --solution > 470/sol.py
+leetcode show 471 --solution > 471/sol.py
+leetcode show 473 --solution > 473/sol.py
+leetcode show 474 --solution > 474/sol.py
+leetcode show 475 --solution > 475/sol.py
+leetcode show 478 --solution > 478/sol.py
+leetcode show 479 --solution > 479/sol.py
+leetcode show 483 --solution > 483/sol.py
+leetcode show 484 --solution > 484/sol.py
+leetcode show 488 --solution > 488/sol.py
+leetcode show 489 --solution > 489/sol.py
+leetcode show 490 --solution > 490/sol.py
+leetcode show 491 --solution > 491/sol.py
+leetcode show 493 --solution > 493/sol.py
+leetcode show 495 --solution > 495/sol.py
+leetcode show 497 --solution > 497/sol.py
+leetcode show 498 --solution > 498/sol.py
+leetcode show 499 --solution > 499/sol.py
+leetcode show 502 --solution > 502/sol.py
+leetcode show 503 --solution > 503/sol.py
+leetcode show 504 --solution > 504/sol.py
+leetcode show 505 --solution > 505/sol.py
+leetcode show 507 --solution > 507/sol.py
+leetcode show 509 --solution > 509/sol.py
+leetcode show 510 --solution > 510/sol.py
+leetcode show -gx -o 511/ 511
+[ERROR] Problem not found!
+leetcode show -gx -o 511/original/ 511
+[ERROR] Problem not found!
+leetcode show 511 --solution > 511/sol.py
+leetcode show -gx -o 512/ 512
+[ERROR] Problem not found!
+leetcode show -gx -o 512/original/ 512
+[ERROR] Problem not found!
+leetcode show 512 --solution > 512/sol.py
+leetcode show 514 --solution > 514/sol.py
+leetcode show 517 --solution > 517/sol.py
+leetcode show 519 --solution > 519/sol.py
+leetcode show 521 --solution > 521/sol.py
+leetcode show 523 --solution > 523/sol.py
+leetcode show 525 --solution > 525/sol.py
+leetcode show 526 --solution > 526/sol.py
+leetcode show 527 --solution > 527/sol.py
+leetcode show 528 --solution > 528/sol.py
+leetcode show 533 --solution > 533/sol.py
+leetcode show -gx -o 534/ 534
+[ERROR] Problem not found!
+leetcode show -gx -o 534/original/ 534
+[ERROR] Problem not found!
+leetcode show 534 --solution > 534/sol.py
+leetcode show 536 --solution > 536/sol.py
+leetcode show 539 --solution > 539/sol.py
+leetcode show 542 --solution > 542/sol.py
+leetcode show 543 --solution > 543/sol.py
+leetcode show 544 --solution > 544/sol.py
+leetcode show 545 --solution > 545/sol.py
+leetcode show 546 --solution > 546/sol.py
+leetcode show 548 --solution > 548/sol.py
+leetcode show -gx -o 550/ 550
+[ERROR] Problem not found!
+leetcode show -gx -o 550/original/ 550
+[ERROR] Problem not found!
+leetcode show 550 --solution > 550/sol.py
+leetcode show 552 --solution > 552/sol.py
+leetcode show 554 --solution > 554/sol.py
+leetcode show 555 --solution > 555/sol.py
+leetcode show 558 --solution > 558/sol.py
+leetcode show 560 --solution > 560/sol.py
+leetcode show 562 --solution > 562/sol.py
+leetcode show 563 --solution > 563/sol.py
+leetcode show 564 --solution > 564/sol.py
+leetcode show 568 --solution > 568/sol.py
+leetcode show -gx -o 569/ 569
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 569/ 569
+[569] Median Employee Salary  
+
+https://leetcode.com/problems/median-employee-salary/description/
+
+Tags:   database   google 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (45.68%)
+* Source Code:       569/569.median-employee-salary.0.sql
+* Total Accepted:    3.5K
+* Total Submissions: 7.7K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Company", "Salary"]}, "rows": {"Employee": [[1, "A", 2341],[2, "A", 341],[3, "A", 15],[4, "A", 15314],[5, "A", 451],[6, "A", 513],[7, "B", 15],[8, "B", 13],[9, "B", 1154],[10, "B", 1345],[11, "B", 1221],[12, "B", 234],[13, "C", 2345],[14, "C", 2645],[15, "C", 2645],[16, "C", 2652],[17, "C", 65]]}}'
+
+The Employee table holds all employees. The employee table has three columns: Employee Id, Company Name, and Salary.
+
+
++-----+------------+--------+
+|Id   | Company    | Salary |
++-----+------------+--------+
+|1    | A          | 2341   |
+|2    | A          | 341    |
+|3    | A          | 15     |
+|4    | A          | 15314  |
+|5    | A          | 451    |
+|6    | A          | 513    |
+|7    | B          | 15     |
+|8    | B          | 13     |
+|9    | B          | 1154   |
+|10   | B          | 1345   |
+|11   | B          | 1221   |
+|12   | B          | 234    |
+|13   | C          | 2345   |
+|14   | C          | 2645   |
+|15   | C          | 2645   |
+|16   | C          | 2652   |
+|17   | C          | 65     |
++-----+------------+--------+
+
+
+Write a SQL query to find the median salary of each company. Bonus points if you can solve it without using any built-in SQL functions.
+
+
++-----+------------+--------+
+|Id   | Company    | Salary |
++-----+------------+--------+
+|5    | A          | 451    |
+|6    | A          | 513    |
+|12   | B          | 234    |
+|9    | B          | 1154   |
+|14   | C          | 2645   |
++-----+------------+--------+
+
+
+leetcode show -gx -o 569/original/ 569
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 569/original/ 569
+[569] Median Employee Salary  
+
+https://leetcode.com/problems/median-employee-salary/description/
+
+Tags:   database   google 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (45.68%)
+* Source Code:       569/original/569.median-employee-salary.0.sql
+* Total Accepted:    3.5K
+* Total Submissions: 7.7K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Company", "Salary"]}, "rows": {"Employee": [[1, "A", 2341],[2, "A", 341],[3, "A", 15],[4, "A", 15314],[5, "A", 451],[6, "A", 513],[7, "B", 15],[8, "B", 13],[9, "B", 1154],[10, "B", 1345],[11, "B", 1221],[12, "B", 234],[13, "C", 2345],[14, "C", 2645],[15, "C", 2645],[16, "C", 2652],[17, "C", 65]]}}'
+
+The Employee table holds all employees. The employee table has three columns: Employee Id, Company Name, and Salary.
+
+
++-----+------------+--------+
+|Id   | Company    | Salary |
++-----+------------+--------+
+|1    | A          | 2341   |
+|2    | A          | 341    |
+|3    | A          | 15     |
+|4    | A          | 15314  |
+|5    | A          | 451    |
+|6    | A          | 513    |
+|7    | B          | 15     |
+|8    | B          | 13     |
+|9    | B          | 1154   |
+|10   | B          | 1345   |
+|11   | B          | 1221   |
+|12   | B          | 234    |
+|13   | C          | 2345   |
+|14   | C          | 2645   |
+|15   | C          | 2645   |
+|16   | C          | 2652   |
+|17   | C          | 65     |
++-----+------------+--------+
+
+
+Write a SQL query to find the median salary of each company. Bonus points if you can solve it without using any built-in SQL functions.
+
+
++-----+------------+--------+
+|Id   | Company    | Salary |
++-----+------------+--------+
+|5    | A          | 451    |
+|6    | A          | 513    |
+|12   | B          | 234    |
+|9    | B          | 1154   |
+|14   | C          | 2645   |
++-----+------------+--------+
+
+
+leetcode show 569 --solution > 569/sol.py
+leetcode show -gx -o 570/ 570
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 570/ 570
+[570] Managers with at Least 5 Direct Reports  
+
+https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/
+
+Tags:   database   bloomberg 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (61.56%)
+* Source Code:       570/570.managers-with-at-least-5-direct-reports.0.sql
+* Total Accepted:    10.4K
+* Total Submissions: 17K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Department", "ManagerId"]}, "rows": {"Employee": [[101, "John", "A", null],[102, "Dan", "A", 101], [103, "James", "A", 101], [104, "Amy", "A", 101], [105, "Anne", "A", 101], [106, "Ron", "B", 101]]}}'
+
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
+
++------+----------+-----------+----------+
+|Id    |Name 	  |Department |ManagerId |
++------+----------+-----------+----------+
+|101   |John 	  |A 	      |null      |
+|102   |Dan 	  |A 	      |101       |
+|103   |James 	  |A 	      |101       |
+|104   |Amy 	  |A 	      |101       |
+|105   |Anne 	  |A 	      |101       |
+|106   |Ron 	  |B 	      |101       |
++------+----------+-----------+----------+
+
+
+Given the Employee table, write a SQL query that finds out managers with at least 5 direct report. For the above table, your SQL query should return:
+
+
++-------+
+| Name  |
++-------+
+| John  |
++-------+
+
+
+Note:
+No one would report to himself.
+
+leetcode show -gx -o 570/original/ 570
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 570/original/ 570
+[570] Managers with at Least 5 Direct Reports  
+
+https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/
+
+Tags:   database   bloomberg 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (61.56%)
+* Source Code:       570/original/570.managers-with-at-least-5-direct-reports.0.sql
+* Total Accepted:    10.4K
+* Total Submissions: 17K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Name", "Department", "ManagerId"]}, "rows": {"Employee": [[101, "John", "A", null],[102, "Dan", "A", 101], [103, "James", "A", 101], [104, "Amy", "A", 101], [105, "Anne", "A", 101], [106, "Ron", "B", 101]]}}'
+
+The Employee table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.
+
+
++------+----------+-----------+----------+
+|Id    |Name 	  |Department |ManagerId |
++------+----------+-----------+----------+
+|101   |John 	  |A 	      |null      |
+|102   |Dan 	  |A 	      |101       |
+|103   |James 	  |A 	      |101       |
+|104   |Amy 	  |A 	      |101       |
+|105   |Anne 	  |A 	      |101       |
+|106   |Ron 	  |B 	      |101       |
++------+----------+-----------+----------+
+
+
+Given the Employee table, write a SQL query that finds out managers with at least 5 direct report. For the above table, your SQL query should return:
+
+
++-------+
+| Name  |
++-------+
+| John  |
++-------+
+
+
+Note:
+No one would report to himself.
+
+leetcode show 570 --solution > 570/sol.py
+leetcode show -gx -o 571/ 571
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 571/ 571
+[571] Find Median Given Frequency of Numbers  
+
+https://leetcode.com/problems/find-median-given-frequency-of-numbers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (47.56%)
+* Source Code:       571/571.find-median-given-frequency-of-numbers.0.sql
+* Total Accepted:    3.3K
+* Total Submissions: 7K
+* Testcase Example:  '{"headers": {"Numbers": ["Number", "Frequency"]}, "rows": {"Numbers": [[0, 7], [1, 1], [2, 3], [3, 1]]}}'
+
+The Numbers table keeps the value of number and its frequency.
+
+
++----------+-------------+
+|  Number  |  Frequency  |
++----------+-------------|
+|  0       |  7          |
+|  1       |  1          |
+|  2       |  3          |
+|  3       |  1          |
++----------+-------------+
+
+
+In this table, the numbers are 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 3, so the median is (0 + 0) / 2 = 0.
+
+
++--------+
+| median |
++--------|
+| 0.0000 |
++--------+
+
+
+Write a query to find the median of all numbers and name the result as median.
+
+leetcode show -gx -o 571/original/ 571
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 571/original/ 571
+[571] Find Median Given Frequency of Numbers  
+
+https://leetcode.com/problems/find-median-given-frequency-of-numbers/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (47.56%)
+* Source Code:       571/original/571.find-median-given-frequency-of-numbers.0.sql
+* Total Accepted:    3.3K
+* Total Submissions: 7K
+* Testcase Example:  '{"headers": {"Numbers": ["Number", "Frequency"]}, "rows": {"Numbers": [[0, 7], [1, 1], [2, 3], [3, 1]]}}'
+
+The Numbers table keeps the value of number and its frequency.
+
+
++----------+-------------+
+|  Number  |  Frequency  |
++----------+-------------|
+|  0       |  7          |
+|  1       |  1          |
+|  2       |  3          |
+|  3       |  1          |
++----------+-------------+
+
+
+In this table, the numbers are 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 3, so the median is (0 + 0) / 2 = 0.
+
+
++--------+
+| median |
++--------|
+| 0.0000 |
++--------+
+
+
+Write a query to find the median of all numbers and name the result as median.
+
+leetcode show 571 --solution > 571/sol.py
+leetcode show 572 --solution > 572/sol.py
+leetcode show -gx -o 574/ 574
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 574/ 574
+[574] Winning Candidate  
+
+https://leetcode.com/problems/winning-candidate/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (35.94%)
+* Source Code:       574/574.winning-candidate.0.sql
+* Total Accepted:    7.5K
+* Total Submissions: 20.9K
+* Testcase Example:  '{"headers": {"Candidate": ["id", "Name"], "Vote": ["id", "CandidateId"]}, "rows": {"Candidate": [[1, "A"], [2, "B"], [3, "C"], [4, "D"], [5, "E"]], "Vote": [[1, 2],[2, 4],[3, 3],[4, 2],[5, 5]]}}'
+
+Table: Candidate
+
+
++-----+---------+
+| id  | Name    |
++-----+---------+
+| 1   | A       |
+| 2   | B       |
+| 3   | C       |
+| 4   | D       |
+| 5   | E       |
++-----+---------+  
+
+
+Table: Vote
+
+
++-----+--------------+
+| id  | CandidateId  |
++-----+--------------+
+| 1   |     2        |
+| 2   |     4        |
+| 3   |     3        |
+| 4   |     2        |
+| 5   |     5        |
++-----+--------------+
+id is the auto-increment primary key,
+CandidateId is the id appeared in Candidate table.
+
+
+Write a sql to find the name of the winning candidate, the above example will return the winner B.
+
+
++------+
+| Name |
++------+
+| B    |
++------+
+
+
+Notes:
+
+
+	You may assume there is no tie, in other words there will be at most one winning candidate.
+
+
+ 
+
+leetcode show -gx -o 574/original/ 574
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 574/original/ 574
+[574] Winning Candidate  
+
+https://leetcode.com/problems/winning-candidate/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (35.94%)
+* Source Code:       574/original/574.winning-candidate.0.sql
+* Total Accepted:    7.5K
+* Total Submissions: 20.9K
+* Testcase Example:  '{"headers": {"Candidate": ["id", "Name"], "Vote": ["id", "CandidateId"]}, "rows": {"Candidate": [[1, "A"], [2, "B"], [3, "C"], [4, "D"], [5, "E"]], "Vote": [[1, 2],[2, 4],[3, 3],[4, 2],[5, 5]]}}'
+
+Table: Candidate
+
+
++-----+---------+
+| id  | Name    |
++-----+---------+
+| 1   | A       |
+| 2   | B       |
+| 3   | C       |
+| 4   | D       |
+| 5   | E       |
++-----+---------+  
+
+
+Table: Vote
+
+
++-----+--------------+
+| id  | CandidateId  |
++-----+--------------+
+| 1   |     2        |
+| 2   |     4        |
+| 3   |     3        |
+| 4   |     2        |
+| 5   |     5        |
++-----+--------------+
+id is the auto-increment primary key,
+CandidateId is the id appeared in Candidate table.
+
+
+Write a sql to find the name of the winning candidate, the above example will return the winner B.
+
+
++------+
+| Name |
++------+
+| B    |
++------+
+
+
+Notes:
+
+
+	You may assume there is no tie, in other words there will be at most one winning candidate.
+
+
+ 
+
+leetcode show 574 --solution > 574/sol.py
+leetcode show -gx -o 577/ 577
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 577/ 577
+[577] Employee Bonus  
+
+https://leetcode.com/problems/employee-bonus/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (57.61%)
+* Source Code:       577/577.employee-bonus.0.sql
+* Total Accepted:    11K
+* Total Submissions: 19.2K
+* Testcase Example:  '{"headers": {"Employee": ["EmpId", "Name", "Supervisor", "Salary"], "Bonus": ["EmpId", "Bonus"]}, "rows": {"Employee": [[3, "Brad", null, 4000], [1, "John", 3, 1000], [2, "Dan", 3, 2000], [4, "Thomas", 3, 4000]], "Bonus": [[2, 500], [4, 2000]]}}'
+
+Select all employee's name and bonus whose bonus is < 1000.
+
+Table:Employee 
+
+
++-------+--------+-----------+--------+
+| empId |  name  | supervisor| salary |
++-------+--------+-----------+--------+
+|   1   | John   |  3        | 1000   |
+|   2   | Dan    |  3        | 2000   |
+|   3   | Brad   |  null     | 4000   |
+|   4   | Thomas |  3        | 4000   |
++-------+--------+-----------+--------+
+empId is the primary key column for this table.
+
+
+Table: Bonus
+
+
++-------+-------+
+| empId | bonus |
++-------+-------+
+| 2     | 500   |
+| 4     | 2000  |
++-------+-------+
+empId is the primary key column for this table.
+
+
+Example ouput:
+
+
++-------+-------+
+| name  | bonus |
++-------+-------+
+| John  | null  |
+| Dan   | 500   |
+| Brad  | null  |
++-------+-------+
+
+
+leetcode show -gx -o 577/original/ 577
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 577/original/ 577
+[577] Employee Bonus  
+
+https://leetcode.com/problems/employee-bonus/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (57.61%)
+* Source Code:       577/original/577.employee-bonus.0.sql
+* Total Accepted:    11K
+* Total Submissions: 19.2K
+* Testcase Example:  '{"headers": {"Employee": ["EmpId", "Name", "Supervisor", "Salary"], "Bonus": ["EmpId", "Bonus"]}, "rows": {"Employee": [[3, "Brad", null, 4000], [1, "John", 3, 1000], [2, "Dan", 3, 2000], [4, "Thomas", 3, 4000]], "Bonus": [[2, 500], [4, 2000]]}}'
+
+Select all employee's name and bonus whose bonus is < 1000.
+
+Table:Employee 
+
+
++-------+--------+-----------+--------+
+| empId |  name  | supervisor| salary |
++-------+--------+-----------+--------+
+|   1   | John   |  3        | 1000   |
+|   2   | Dan    |  3        | 2000   |
+|   3   | Brad   |  null     | 4000   |
+|   4   | Thomas |  3        | 4000   |
++-------+--------+-----------+--------+
+empId is the primary key column for this table.
+
+
+Table: Bonus
+
+
++-------+-------+
+| empId | bonus |
++-------+-------+
+| 2     | 500   |
+| 4     | 2000  |
++-------+-------+
+empId is the primary key column for this table.
+
+
+Example ouput:
+
+
++-------+-------+
+| name  | bonus |
++-------+-------+
+| John  | null  |
+| Dan   | 500   |
+| Brad  | null  |
++-------+-------+
+
+
+leetcode show 577 --solution > 577/sol.py
+leetcode show -gx -o 578/ 578
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 578/ 578
+[578] Get Highest Answer Rate Question  
+
+https://leetcode.com/problems/get-highest-answer-rate-question/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (35.45%)
+* Source Code:       578/578.get-highest-answer-rate-question.0.sql
+* Total Accepted:    7.5K
+* Total Submissions: 21.3K
+* Testcase Example:  '{"headers": {"survey_log": ["uid", "action", "question_id", "answer_id", "q_num", "timestamp"]},"rows": {"survey_log": [[5, "show", 285, null, 1, 123], [5, "answer", 285, 124124, 1, 124], [5, "show", 369, null, 2, 125], [5, "skip", 369, null, 2, 126]]}}'
+
+Get the highest answer rate question from a table survey_log with these columns: uid, action, question_id, answer_id, q_num, timestamp.
+
+uid means user id; action has these kind of values: "show", "answer", "skip"; answer_id is not null when action column is "answer", while is null for "show" and "skip"; q_num is the numeral order of the question in current session.
+
+Write a sql query to identify the question which has the highest answer rate.
+
+Example:
+
+
+Input:
++------+-----------+--------------+------------+-----------+------------+
+| uid  | action    | question_id  | answer_id  | q_num     | timestamp  |
++------+-----------+--------------+------------+-----------+------------+
+| 5    | show      | 285          | null       | 1         | 123        |
+| 5    | answer    | 285          | 124124     | 1         | 124        |
+| 5    | show      | 369          | null       | 2         | 125        |
+| 5    | skip      | 369          | null       | 2         | 126        |
++------+-----------+--------------+------------+-----------+------------+
+Output:
++-------------+
+| survey_log  |
++-------------+
+|    285      |
++-------------+
+Explanation:
+question 285 has answer rate 1/1, while question 369 has 0/1 answer rate, so output 285.
+
+
+ 
+
+Note: The highest answer rate meaning is: answer number's ratio in show number in the same question.
+
+leetcode show -gx -o 578/original/ 578
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 578/original/ 578
+[578] Get Highest Answer Rate Question  
+
+https://leetcode.com/problems/get-highest-answer-rate-question/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (35.45%)
+* Source Code:       578/original/578.get-highest-answer-rate-question.0.sql
+* Total Accepted:    7.5K
+* Total Submissions: 21.3K
+* Testcase Example:  '{"headers": {"survey_log": ["uid", "action", "question_id", "answer_id", "q_num", "timestamp"]},"rows": {"survey_log": [[5, "show", 285, null, 1, 123], [5, "answer", 285, 124124, 1, 124], [5, "show", 369, null, 2, 125], [5, "skip", 369, null, 2, 126]]}}'
+
+Get the highest answer rate question from a table survey_log with these columns: uid, action, question_id, answer_id, q_num, timestamp.
+
+uid means user id; action has these kind of values: "show", "answer", "skip"; answer_id is not null when action column is "answer", while is null for "show" and "skip"; q_num is the numeral order of the question in current session.
+
+Write a sql query to identify the question which has the highest answer rate.
+
+Example:
+
+
+Input:
++------+-----------+--------------+------------+-----------+------------+
+| uid  | action    | question_id  | answer_id  | q_num     | timestamp  |
++------+-----------+--------------+------------+-----------+------------+
+| 5    | show      | 285          | null       | 1         | 123        |
+| 5    | answer    | 285          | 124124     | 1         | 124        |
+| 5    | show      | 369          | null       | 2         | 125        |
+| 5    | skip      | 369          | null       | 2         | 126        |
++------+-----------+--------------+------------+-----------+------------+
+Output:
++-------------+
+| survey_log  |
++-------------+
+|    285      |
++-------------+
+Explanation:
+question 285 has answer rate 1/1, while question 369 has 0/1 answer rate, so output 285.
+
+
+ 
+
+Note: The highest answer rate meaning is: answer number's ratio in show number in the same question.
+
+leetcode show 578 --solution > 578/sol.py
+leetcode show -gx -o 579/ 579
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 579/ 579
+[579] Find Cumulative Salary of an Employee  
+
+https://leetcode.com/problems/find-cumulative-salary-of-an-employee/description/
+
+Tags:   database   amazon 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (34.06%)
+* Source Code:       579/579.find-cumulative-salary-of-an-employee.0.sql
+* Total Accepted:    3.6K
+* Total Submissions: 10.6K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Month", "Salary"]}, "rows": {"Employee": [[1, 1, 20], [2, 1, 20], [1, 2, 30], [2, 2, 30], [3,2,40],[1,3,40], [3,3,60],[1,4,60],[3,4,70]]}}'
+
+The Employee table holds the salary information in a year.
+
+Write a SQL to get the cumulative sum of an employee's salary over a period of 3 months but exclude the most recent month.
+
+The result should be displayed by 'Id' ascending, and then by 'Month' descending.
+
+Example
+Input
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 1     | 20     |
+| 2  | 1     | 20     |
+| 1  | 2     | 30     |
+| 2  | 2     | 30     |
+| 3  | 2     | 40     |
+| 1  | 3     | 40     |
+| 3  | 3     | 60     |
+| 1  | 4     | 60     |
+| 3  | 4     | 70     |
+
+Output
+
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 3     | 90     |
+| 1  | 2     | 50     |
+| 1  | 1     | 20     |
+| 2  | 1     | 20     |
+| 3  | 3     | 100    |
+| 3  | 2     | 40     |
+
+
+ 
+Explanation
+
+Employee '1' has 3 salary records for the following 3 months except the most recent month '4': salary 40 for month '3', 30 for month '2' and 20 for month '1'
+So the cumulative sum of salary of this employee over 3 months is 90(40+30+20), 50(30+20) and 20 respectively.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 3     | 90     |
+| 1  | 2     | 50     |
+| 1  | 1     | 20     |
+
+Employee '2' only has one salary record (month '1') except its most recent month '2'.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 2  | 1     | 20     |
+
+
+ 
+Employ '3' has two salary records except its most recent pay month '4': month '3' with 60 and month '2' with 40. So the cumulative salary is as following.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 3  | 3     | 100    |
+| 3  | 2     | 40     |
+
+
+ 
+
+leetcode show -gx -o 579/original/ 579
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 579/original/ 579
+[579] Find Cumulative Salary of an Employee  
+
+https://leetcode.com/problems/find-cumulative-salary-of-an-employee/description/
+
+Tags:   database   amazon 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (34.06%)
+* Source Code:       579/original/579.find-cumulative-salary-of-an-employee.0.sql
+* Total Accepted:    3.6K
+* Total Submissions: 10.6K
+* Testcase Example:  '{"headers": {"Employee": ["Id", "Month", "Salary"]}, "rows": {"Employee": [[1, 1, 20], [2, 1, 20], [1, 2, 30], [2, 2, 30], [3,2,40],[1,3,40], [3,3,60],[1,4,60],[3,4,70]]}}'
+
+The Employee table holds the salary information in a year.
+
+Write a SQL to get the cumulative sum of an employee's salary over a period of 3 months but exclude the most recent month.
+
+The result should be displayed by 'Id' ascending, and then by 'Month' descending.
+
+Example
+Input
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 1     | 20     |
+| 2  | 1     | 20     |
+| 1  | 2     | 30     |
+| 2  | 2     | 30     |
+| 3  | 2     | 40     |
+| 1  | 3     | 40     |
+| 3  | 3     | 60     |
+| 1  | 4     | 60     |
+| 3  | 4     | 70     |
+
+Output
+
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 3     | 90     |
+| 1  | 2     | 50     |
+| 1  | 1     | 20     |
+| 2  | 1     | 20     |
+| 3  | 3     | 100    |
+| 3  | 2     | 40     |
+
+
+ 
+Explanation
+
+Employee '1' has 3 salary records for the following 3 months except the most recent month '4': salary 40 for month '3', 30 for month '2' and 20 for month '1'
+So the cumulative sum of salary of this employee over 3 months is 90(40+30+20), 50(30+20) and 20 respectively.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 1  | 3     | 90     |
+| 1  | 2     | 50     |
+| 1  | 1     | 20     |
+
+Employee '2' only has one salary record (month '1') except its most recent month '2'.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 2  | 1     | 20     |
+
+
+ 
+Employ '3' has two salary records except its most recent pay month '4': month '3' with 60 and month '2' with 40. So the cumulative salary is as following.
+
+
+| Id | Month | Salary |
+|----|-------|--------|
+| 3  | 3     | 100    |
+| 3  | 2     | 40     |
+
+
+ 
+
+leetcode show 579 --solution > 579/sol.py
+leetcode show -gx -o 580/ 580
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 580/ 580
+[580] Count Student Number in Departments  
+
+https://leetcode.com/problems/count-student-number-in-departments/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (42.03%)
+* Source Code:       580/580.count-student-number-in-departments.0.sql
+* Total Accepted:    8.8K
+* Total Submissions: 20.9K
+* Testcase Example:  '{"headers":{"student":["student_id","student_name","gender","dept_id"],"department":["dept_id","dept_name"]},"rows":{"student":[[1,"Jack","M",1],[2,"Jane","F",1],[3,"Mark","M",2]],"department":[[1,"Engineering"],[2,"Science"],[3,"Law"]]}}'
+
+A university uses 2 data tables, student and department, to store data about its students and the departments associated with each major.
+
+Write a query to print the respective department name and number of students majoring in each department for all departments in the department table (even ones with no current students).
+
+Sort your results by descending number of students; if two or more departments have the same number of students, then sort those departments alphabetically by department name.
+
+The student is described as follow:
+
+
+| Column Name  | Type      |
+|--------------|-----------|
+| student_id   | Integer   |
+| student_name | String    |
+| gender       | Character |
+| dept_id      | Integer   |
+
+
+where student_id is the student's ID number, student_name is the student's name, gender is their gender, and dept_id is the department ID associated with their declared major.
+
+And the department table is described as below:
+
+
+| Column Name | Type    |
+|-------------|---------|
+| dept_id     | Integer |
+| dept_name   | String  |
+
+
+where dept_id is the department's ID number and dept_name is the department name.
+
+Here is an example input:
+student table:
+
+
+| student_id | student_name | gender | dept_id |
+|------------|--------------|--------|---------|
+| 1          | Jack         | M      | 1       |
+| 2          | Jane         | F      | 1       |
+| 3          | Mark         | M      | 2       |
+
+
+department table:
+
+
+| dept_id | dept_name   |
+|---------|-------------|
+| 1       | Engineering |
+| 2       | Science     |
+| 3       | Law         |
+
+
+The Output should be:
+
+
+| dept_name   | student_number |
+|-------------|----------------|
+| Engineering | 2              |
+| Science     | 1              |
+| Law         | 0              |
+
+
+leetcode show -gx -o 580/original/ 580
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 580/original/ 580
+[580] Count Student Number in Departments  
+
+https://leetcode.com/problems/count-student-number-in-departments/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (42.03%)
+* Source Code:       580/original/580.count-student-number-in-departments.0.sql
+* Total Accepted:    8.8K
+* Total Submissions: 20.9K
+* Testcase Example:  '{"headers":{"student":["student_id","student_name","gender","dept_id"],"department":["dept_id","dept_name"]},"rows":{"student":[[1,"Jack","M",1],[2,"Jane","F",1],[3,"Mark","M",2]],"department":[[1,"Engineering"],[2,"Science"],[3,"Law"]]}}'
+
+A university uses 2 data tables, student and department, to store data about its students and the departments associated with each major.
+
+Write a query to print the respective department name and number of students majoring in each department for all departments in the department table (even ones with no current students).
+
+Sort your results by descending number of students; if two or more departments have the same number of students, then sort those departments alphabetically by department name.
+
+The student is described as follow:
+
+
+| Column Name  | Type      |
+|--------------|-----------|
+| student_id   | Integer   |
+| student_name | String    |
+| gender       | Character |
+| dept_id      | Integer   |
+
+
+where student_id is the student's ID number, student_name is the student's name, gender is their gender, and dept_id is the department ID associated with their declared major.
+
+And the department table is described as below:
+
+
+| Column Name | Type    |
+|-------------|---------|
+| dept_id     | Integer |
+| dept_name   | String  |
+
+
+where dept_id is the department's ID number and dept_name is the department name.
+
+Here is an example input:
+student table:
+
+
+| student_id | student_name | gender | dept_id |
+|------------|--------------|--------|---------|
+| 1          | Jack         | M      | 1       |
+| 2          | Jane         | F      | 1       |
+| 3          | Mark         | M      | 2       |
+
+
+department table:
+
+
+| dept_id | dept_name   |
+|---------|-------------|
+| 1       | Engineering |
+| 2       | Science     |
+| 3       | Law         |
+
+
+The Output should be:
+
+
+| dept_name   | student_number |
+|-------------|----------------|
+| Engineering | 2              |
+| Science     | 1              |
+| Law         | 0              |
+
+
+leetcode show 580 --solution > 580/sol.py
+leetcode show 581 --solution > 581/sol.py
+leetcode show 583 --solution > 583/sol.py
+leetcode show -gx -o 584/ 584
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 584/ 584
+[584] Find Customer Referee  
+
+https://leetcode.com/problems/find-customer-referee/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (66.82%)
+* Source Code:       584/584.find-customer-referee.0.sql
+* Total Accepted:    10.8K
+* Total Submissions: 16.1K
+* Testcase Example:  '{ "headers": { "customer": [ "id", "name", "referee_id"] }, "rows": {"customer": [[1, "Will", null], [2, "Jane", null], [3, "Alex", 2], [4, "Bill", null], [5, "Zack", 1], [6, "Mark", 2]]}}'
+
+Given a table customer holding customers information and the referee.
+
+
++------+------+-----------+
+| id   | name | referee_id|
++------+------+-----------+
+|    1 | Will |      NULL |
+|    2 | Jane |      NULL |
+|    3 | Alex |         2 |
+|    4 | Bill |      NULL |
+|    5 | Zack |         1 |
+|    6 | Mark |         2 |
++------+------+-----------+
+
+
+Write a query to return the list of customers NOT referred by the person with id '2'.
+
+For the sample data above, the result is:
+
+
++------+
+| name |
++------+
+| Will |
+| Jane |
+| Bill |
+| Zack |
++------+
+
+
+leetcode show -gx -o 584/original/ 584
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 584/original/ 584
+[584] Find Customer Referee  
+
+https://leetcode.com/problems/find-customer-referee/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (66.82%)
+* Source Code:       584/original/584.find-customer-referee.0.sql
+* Total Accepted:    10.8K
+* Total Submissions: 16.1K
+* Testcase Example:  '{ "headers": { "customer": [ "id", "name", "referee_id"] }, "rows": {"customer": [[1, "Will", null], [2, "Jane", null], [3, "Alex", 2], [4, "Bill", null], [5, "Zack", 1], [6, "Mark", 2]]}}'
+
+Given a table customer holding customers information and the referee.
+
+
++------+------+-----------+
+| id   | name | referee_id|
++------+------+-----------+
+|    1 | Will |      NULL |
+|    2 | Jane |      NULL |
+|    3 | Alex |         2 |
+|    4 | Bill |      NULL |
+|    5 | Zack |         1 |
+|    6 | Mark |         2 |
++------+------+-----------+
+
+
+Write a query to return the list of customers NOT referred by the person with id '2'.
+
+For the sample data above, the result is:
+
+
++------+
+| name |
++------+
+| Will |
+| Jane |
+| Bill |
+| Zack |
++------+
+
+
+leetcode show 584 --solution > 584/sol.py
+leetcode show -gx -o 585/ 585
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 585/ 585
+[585] Investments in 2016  
+
+https://leetcode.com/problems/investments-in-2016/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (46.68%)
+* Source Code:       585/585.investments-in-2016.0.sql
+* Total Accepted:    6.8K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers":{"insurance":["PID","TIV_2015","TIV_2016","LAT","LON"]},"rows":{"insurance":[[1,10,5,10,10],[2,20,20,20,20],[3,10,30,20,20],[4,10,40,40,40]]}}'
+
+Write a query to print the sum of all total investment values in 2016 (TIV_2016), to a scale of 2 decimal places, for all policy holders who meet the following criteria:
+
+
+	Have the same TIV_2015 value as one or more other policyholders.
+	Are not located in the same city as any other policyholder (i.e.: the (latitude, longitude) attribute pairs must be unique).
+
+
+Input Format:
+The insurance table is described as follows:
+
+
+| Column Name | Type          |
+|-------------|---------------|
+| PID         | INTEGER(11)   |
+| TIV_2015    | NUMERIC(15,2) |
+| TIV_2016    | NUMERIC(15,2) |
+| LAT         | NUMERIC(5,2)  |
+| LON         | NUMERIC(5,2)  |
+
+
+where PID is the policyholder's policy ID, TIV_2015 is the total investment value in 2015, TIV_2016 is the total investment value in 2016, LAT is the latitude of the policy holder's city, and LON is the longitude of the policy holder's city.
+
+Sample Input
+
+
+| PID | TIV_2015 | TIV_2016 | LAT | LON |
+|-----|----------|----------|-----|-----|
+| 1   | 10       | 5        | 10  | 10  |
+| 2   | 20       | 20       | 20  | 20  |
+| 3   | 10       | 30       | 20  | 20  |
+| 4   | 10       | 40       | 40  | 40  |
+
+
+Sample Output
+
+
+| TIV_2016 |
+|----------|
+| 45.00    |
+
+
+Explanation
+
+
+The first record in the table, like the last record, meets both of the two criteria.
+The TIV_2015 value '10' is as the same as the third and forth record, and its location unique.
+
+The second record does not meet any of the two criteria. Its TIV_2015 is not like any other policyholders.
+
+And its location is the same with the third record, which makes the third record fail, too.
+
+So, the result is the sum of TIV_2016 of the first and last record, which is 45.
+
+leetcode show -gx -o 585/original/ 585
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 585/original/ 585
+[585] Investments in 2016  
+
+https://leetcode.com/problems/investments-in-2016/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (46.68%)
+* Source Code:       585/original/585.investments-in-2016.0.sql
+* Total Accepted:    6.8K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers":{"insurance":["PID","TIV_2015","TIV_2016","LAT","LON"]},"rows":{"insurance":[[1,10,5,10,10],[2,20,20,20,20],[3,10,30,20,20],[4,10,40,40,40]]}}'
+
+Write a query to print the sum of all total investment values in 2016 (TIV_2016), to a scale of 2 decimal places, for all policy holders who meet the following criteria:
+
+
+	Have the same TIV_2015 value as one or more other policyholders.
+	Are not located in the same city as any other policyholder (i.e.: the (latitude, longitude) attribute pairs must be unique).
+
+
+Input Format:
+The insurance table is described as follows:
+
+
+| Column Name | Type          |
+|-------------|---------------|
+| PID         | INTEGER(11)   |
+| TIV_2015    | NUMERIC(15,2) |
+| TIV_2016    | NUMERIC(15,2) |
+| LAT         | NUMERIC(5,2)  |
+| LON         | NUMERIC(5,2)  |
+
+
+where PID is the policyholder's policy ID, TIV_2015 is the total investment value in 2015, TIV_2016 is the total investment value in 2016, LAT is the latitude of the policy holder's city, and LON is the longitude of the policy holder's city.
+
+Sample Input
+
+
+| PID | TIV_2015 | TIV_2016 | LAT | LON |
+|-----|----------|----------|-----|-----|
+| 1   | 10       | 5        | 10  | 10  |
+| 2   | 20       | 20       | 20  | 20  |
+| 3   | 10       | 30       | 20  | 20  |
+| 4   | 10       | 40       | 40  | 40  |
+
+
+Sample Output
+
+
+| TIV_2016 |
+|----------|
+| 45.00    |
+
+
+Explanation
+
+
+The first record in the table, like the last record, meets both of the two criteria.
+The TIV_2015 value '10' is as the same as the third and forth record, and its location unique.
+
+The second record does not meet any of the two criteria. Its TIV_2015 is not like any other policyholders.
+
+And its location is the same with the third record, which makes the third record fail, too.
+
+So, the result is the sum of TIV_2016 of the first and last record, which is 45.
+
+leetcode show 585 --solution > 585/sol.py
+leetcode show -gx -o 586/ 586
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 586/ 586
+[586] Customer Placing the Largest Number of Orders  
+
+https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (65.58%)
+* Source Code:       586/586.customer-placing-the-largest-number-of-orders.0.sql
+* Total Accepted:    11.8K
+* Total Submissions: 18K
+* Testcase Example:  '{"headers":{"orders":["order_number","customer_number"]},"rows":{"orders":[[1,1],[2,2],[3,3],[4,3]]}}'
+
+Query the customer_number from the orders table for the customer who has placed the largest number of orders.
+
+It is guaranteed that exactly one customer will have placed more orders than any other customer.
+
+The orders table is defined as follows:
+
+
+| Column            | Type      |
+|-------------------|-----------|
+| order_number (PK) | int       |
+| customer_number   | int       |
+| order_date        | date      |
+| required_date     | date      |
+| shipped_date      | date      |
+| status            | char(15)  |
+| comment           | char(200) |
+
+
+Sample Input
+
+
+| order_number | customer_number | order_date | required_date | shipped_date | status | comment |
+|--------------|-----------------|------------|---------------|--------------|--------|---------|
+| 1            | 1               | 2017-04-09 | 2017-04-13    | 2017-04-12   | Closed |         |
+| 2            | 2               | 2017-04-15 | 2017-04-20    | 2017-04-18   | Closed |         |
+| 3            | 3               | 2017-04-16 | 2017-04-25    | 2017-04-20   | Closed |         |
+| 4            | 3               | 2017-04-18 | 2017-04-28    | 2017-04-25   | Closed |         |
+
+
+Sample Output
+
+
+| customer_number |
+|-----------------|
+| 3               |
+
+
+Explanation
+
+
+The customer with number '3' has two orders, which is greater than either customer '1' or '2' because each of them  only has one order. 
+So the result is customer_number '3'.
+
+
+Follow up: What if more than one customer have the largest number of orders, can you find all the customer_number in this case?
+
+leetcode show -gx -o 586/original/ 586
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 586/original/ 586
+[586] Customer Placing the Largest Number of Orders  
+
+https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (65.58%)
+* Source Code:       586/original/586.customer-placing-the-largest-number-of-orders.0.sql
+* Total Accepted:    11.8K
+* Total Submissions: 18K
+* Testcase Example:  '{"headers":{"orders":["order_number","customer_number"]},"rows":{"orders":[[1,1],[2,2],[3,3],[4,3]]}}'
+
+Query the customer_number from the orders table for the customer who has placed the largest number of orders.
+
+It is guaranteed that exactly one customer will have placed more orders than any other customer.
+
+The orders table is defined as follows:
+
+
+| Column            | Type      |
+|-------------------|-----------|
+| order_number (PK) | int       |
+| customer_number   | int       |
+| order_date        | date      |
+| required_date     | date      |
+| shipped_date      | date      |
+| status            | char(15)  |
+| comment           | char(200) |
+
+
+Sample Input
+
+
+| order_number | customer_number | order_date | required_date | shipped_date | status | comment |
+|--------------|-----------------|------------|---------------|--------------|--------|---------|
+| 1            | 1               | 2017-04-09 | 2017-04-13    | 2017-04-12   | Closed |         |
+| 2            | 2               | 2017-04-15 | 2017-04-20    | 2017-04-18   | Closed |         |
+| 3            | 3               | 2017-04-16 | 2017-04-25    | 2017-04-20   | Closed |         |
+| 4            | 3               | 2017-04-18 | 2017-04-28    | 2017-04-25   | Closed |         |
+
+
+Sample Output
+
+
+| customer_number |
+|-----------------|
+| 3               |
+
+
+Explanation
+
+
+The customer with number '3' has two orders, which is greater than either customer '1' or '2' because each of them  only has one order. 
+So the result is customer_number '3'.
+
+
+Follow up: What if more than one customer have the largest number of orders, can you find all the customer_number in this case?
+
+leetcode show 586 --solution > 586/sol.py
+leetcode show 587 --solution > 587/sol.py
+leetcode show 588 --solution > 588/sol.py
+leetcode show 590 --solution > 590/sol.py
+leetcode show 591 --solution > 591/sol.py
+leetcode show -gx -o 595/ 595
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 595/ 595
+[595] Big Countries  
+
+https://leetcode.com/problems/big-countries/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (72.84%)
+* Source Code:       595/595.big-countries.0.sql
+* Total Accepted:    86.9K
+* Total Submissions: 119.3K
+* Testcase Example:  '{"headers": {"World": ["name", "continent",\t"area",\t"population", "gdp"]}, "rows": {"World": [["Afghanistan", "Asia", 652230, 25500100, 20343000000], ["Albania", "Europe", 28748, 2831741, 12960000000], ["Algeria", "Africa", 2381741, 37100000, 188681000000], ["Andorra", "Europe", 468, 78115,\t3712000000], ["Angola", "Africa", 1246700, 20609294, 100990000000]]}}'
+
+There is a table World 
+
++-----------------+------------+------------+--------------+---------------+
+| name            | continent  | area       | population   | gdp           |
++-----------------+------------+------------+--------------+---------------+
+| Afghanistan     | Asia       | 652230     | 25500100     | 20343000      |
+| Albania         | Europe     | 28748      | 2831741      | 12960000      |
+| Algeria         | Africa     | 2381741    | 37100000     | 188681000     |
+| Andorra         | Europe     | 468        | 78115        | 3712000       |
+| Angola          | Africa     | 1246700    | 20609294     | 100990000     |
++-----------------+------------+------------+--------------+---------------+
+
+
+A country is big if it has an area of bigger than 3 million square km or a population of more than 25 million.
+
+Write a SQL solution to output big countries' name, population and area.
+
+
+For example, according to the above table, we should output:
+
++--------------+-------------+--------------+
+| name         | population  | area         |
++--------------+-------------+--------------+
+| Afghanistan  | 25500100    | 652230       |
+| Algeria      | 37100000    | 2381741      |
++--------------+-------------+--------------+
+
+
+leetcode show -gx -o 595/original/ 595
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 595/original/ 595
+[595] Big Countries  
+
+https://leetcode.com/problems/big-countries/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (72.84%)
+* Source Code:       595/original/595.big-countries.0.sql
+* Total Accepted:    86.9K
+* Total Submissions: 119.3K
+* Testcase Example:  '{"headers": {"World": ["name", "continent",\t"area",\t"population", "gdp"]}, "rows": {"World": [["Afghanistan", "Asia", 652230, 25500100, 20343000000], ["Albania", "Europe", 28748, 2831741, 12960000000], ["Algeria", "Africa", 2381741, 37100000, 188681000000], ["Andorra", "Europe", 468, 78115,\t3712000000], ["Angola", "Africa", 1246700, 20609294, 100990000000]]}}'
+
+There is a table World 
+
++-----------------+------------+------------+--------------+---------------+
+| name            | continent  | area       | population   | gdp           |
++-----------------+------------+------------+--------------+---------------+
+| Afghanistan     | Asia       | 652230     | 25500100     | 20343000      |
+| Albania         | Europe     | 28748      | 2831741      | 12960000      |
+| Algeria         | Africa     | 2381741    | 37100000     | 188681000     |
+| Andorra         | Europe     | 468        | 78115        | 3712000       |
+| Angola          | Africa     | 1246700    | 20609294     | 100990000     |
++-----------------+------------+------------+--------------+---------------+
+
+
+A country is big if it has an area of bigger than 3 million square km or a population of more than 25 million.
+
+Write a SQL solution to output big countries' name, population and area.
+
+
+For example, according to the above table, we should output:
+
++--------------+-------------+--------------+
+| name         | population  | area         |
++--------------+-------------+--------------+
+| Afghanistan  | 25500100    | 652230       |
+| Algeria      | 37100000    | 2381741      |
++--------------+-------------+--------------+
+
+
+leetcode show 595 --solution > 595/sol.py
+leetcode show -gx -o 596/ 596
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 596/ 596
+[596] Classes More Than 5 Students  
+
+https://leetcode.com/problems/classes-more-than-5-students/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (34.42%)
+* Source Code:       596/596.classes-more-than-5-students.0.sql
+* Total Accepted:    34.1K
+* Total Submissions: 99K
+* Testcase Example:  '{"headers": {"courses": ["student", "class"]}, "rows": {"courses": [["A", "Math"], ["B", "English"], ["C", "Math"], ["D", "Biology"], ["E", "Math"], ["F", "Computer"], ["G", "Math"], ["H", "Math"], ["I", "Math"]]}}'
+
+
+There is a table courses with columns: student and class
+
+Please list out all classes which have more than or equal to 5 students.
+
+
+For example, the table:
+
+
++---------+------------+
+| student | class      |
++---------+------------+
+| A       | Math       |
+| B       | English    |
+| C       | Math       |
+| D       | Biology    |
+| E       | Math       |
+| F       | Computer   |
+| G       | Math       |
+| H       | Math       |
+| I       | Math       |
++---------+------------+
+
+
+Should output:
+
++---------+
+| class   |
++---------+
+| Math    |
++---------+
+
+
+
+Note:
+The students should not be counted duplicate in each course.
+
+leetcode show -gx -o 596/original/ 596
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 596/original/ 596
+[596] Classes More Than 5 Students  
+
+https://leetcode.com/problems/classes-more-than-5-students/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (34.42%)
+* Source Code:       596/original/596.classes-more-than-5-students.0.sql
+* Total Accepted:    34.1K
+* Total Submissions: 99K
+* Testcase Example:  '{"headers": {"courses": ["student", "class"]}, "rows": {"courses": [["A", "Math"], ["B", "English"], ["C", "Math"], ["D", "Biology"], ["E", "Math"], ["F", "Computer"], ["G", "Math"], ["H", "Math"], ["I", "Math"]]}}'
+
+
+There is a table courses with columns: student and class
+
+Please list out all classes which have more than or equal to 5 students.
+
+
+For example, the table:
+
+
++---------+------------+
+| student | class      |
++---------+------------+
+| A       | Math       |
+| B       | English    |
+| C       | Math       |
+| D       | Biology    |
+| E       | Math       |
+| F       | Computer   |
+| G       | Math       |
+| H       | Math       |
+| I       | Math       |
++---------+------------+
+
+
+Should output:
+
++---------+
+| class   |
++---------+
+| Math    |
++---------+
+
+
+
+Note:
+The students should not be counted duplicate in each course.
+
+leetcode show 596 --solution > 596/sol.py
+leetcode show -gx -o 597/ 597
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 597/ 597
+[597] Friend Requests I: Overall Acceptance Rate  
+
+https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (39.63%)
+* Source Code:       597/597.friend-requests-i-overall-acceptance-rate.0.sql
+* Total Accepted:    11.4K
+* Total Submissions: 28.8K
+* Testcase Example:  '{"headers":{"friend_request":["sender_id","send_to_id","request_date"],"request_accepted":["requester_id","accepter_id","accept_date"]},"rows":{"friend_request":[[1,2,"2016/06/01"],[1,3,"2016/06/01"],[1,4,"2016/06/01"],[2,3,"2016/06/02"],[3,4,"2016/06/09"]],"request_accepted":[[1,2,"2016/06/03"],[1,3,"2016/06/08"],[2,3,"2016/06/08"],[3,4,"2016/06/09"],[3,4,"2016/06/10"]]}}'
+
+In social network like Facebook or Twitter, people send friend requests and accept others’ requests as well. Now given two tables as below:
+ 
+Table: friend_request
+
+
+| sender_id | send_to_id |request_date|
+|-----------|------------|------------|
+| 1         | 2          | 2016_06-01 |
+| 1         | 3          | 2016_06-01 |
+| 1         | 4          | 2016_06-01 |
+| 2         | 3          | 2016_06-02 |
+| 3         | 4          | 2016-06-09 |
+
+
+ 
+Table: request_accepted
+
+
+| requester_id | accepter_id |accept_date |
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+| 3            | 4           | 2016-06-10 |
+
+
+ 
+Write a query to find the overall acceptance rate of requests rounded to 2 decimals, which is the number of acceptance divide the number of requests.
+
+ 
+For the sample data above, your query should return the following result.
+
+ 
+
+
+|accept_rate|
+|-----------|
+|       0.80|
+
+
+ 
+Note:
+
+
+	The accepted requests are not necessarily from the table friend_request. In this case, you just need to simply count the total accepted requests (no matter whether they are in the original requests), and divide it by the number of requests to get the acceptance rate.
+	It is possible that a sender sends multiple requests to the same receiver, and a request could be accepted more than once. In this case, the ‘duplicated’ requests or acceptances are only counted once.
+	If there is no requests at all, you should return 0.00 as the accept_rate.
+
+
+ 
+Explanation: There are 4 unique accepted requests, and there are 5 requests in total. So the rate is 0.80.
+
+ 
+Follow-up:
+
+
+	Can you write a query to return the accept rate but for every month?
+	How about the cumulative accept rate for every day?
+
+
+leetcode show -gx -o 597/original/ 597
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 597/original/ 597
+[597] Friend Requests I: Overall Acceptance Rate  
+
+https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (39.63%)
+* Source Code:       597/original/597.friend-requests-i-overall-acceptance-rate.0.sql
+* Total Accepted:    11.4K
+* Total Submissions: 28.8K
+* Testcase Example:  '{"headers":{"friend_request":["sender_id","send_to_id","request_date"],"request_accepted":["requester_id","accepter_id","accept_date"]},"rows":{"friend_request":[[1,2,"2016/06/01"],[1,3,"2016/06/01"],[1,4,"2016/06/01"],[2,3,"2016/06/02"],[3,4,"2016/06/09"]],"request_accepted":[[1,2,"2016/06/03"],[1,3,"2016/06/08"],[2,3,"2016/06/08"],[3,4,"2016/06/09"],[3,4,"2016/06/10"]]}}'
+
+In social network like Facebook or Twitter, people send friend requests and accept others’ requests as well. Now given two tables as below:
+ 
+Table: friend_request
+
+
+| sender_id | send_to_id |request_date|
+|-----------|------------|------------|
+| 1         | 2          | 2016_06-01 |
+| 1         | 3          | 2016_06-01 |
+| 1         | 4          | 2016_06-01 |
+| 2         | 3          | 2016_06-02 |
+| 3         | 4          | 2016-06-09 |
+
+
+ 
+Table: request_accepted
+
+
+| requester_id | accepter_id |accept_date |
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+| 3            | 4           | 2016-06-10 |
+
+
+ 
+Write a query to find the overall acceptance rate of requests rounded to 2 decimals, which is the number of acceptance divide the number of requests.
+
+ 
+For the sample data above, your query should return the following result.
+
+ 
+
+
+|accept_rate|
+|-----------|
+|       0.80|
+
+
+ 
+Note:
+
+
+	The accepted requests are not necessarily from the table friend_request. In this case, you just need to simply count the total accepted requests (no matter whether they are in the original requests), and divide it by the number of requests to get the acceptance rate.
+	It is possible that a sender sends multiple requests to the same receiver, and a request could be accepted more than once. In this case, the ‘duplicated’ requests or acceptances are only counted once.
+	If there is no requests at all, you should return 0.00 as the accept_rate.
+
+
+ 
+Explanation: There are 4 unique accepted requests, and there are 5 requests in total. So the rate is 0.80.
+
+ 
+Follow-up:
+
+
+	Can you write a query to return the accept rate but for every month?
+	How about the cumulative accept rate for every day?
+
+
+leetcode show 597 --solution > 597/sol.py
+leetcode show -gx -o 601/ 601
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 601/ 601
+[601] Human Traffic of Stadium  
+
+https://leetcode.com/problems/human-traffic-of-stadium/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Hard (35.13%)
+* Source Code:       601/601.human-traffic-of-stadium.0.sql
+* Total Accepted:    10.9K
+* Total Submissions: 31K
+* Testcase Example:  '{"headers": {"stadium": ["id", "date", "people"]}, "rows": {"stadium": [[1, "2017-01-01", 10], [2, "2017-01-02", 109], [3, "2017-01-03", 150], [4, "2017-01-04", 99], [5, "2017-01-05", 145], [6, "2017-01-06", 1455], [7, "2017-01-07", 199], [8, "2017-01-08", 188]]}}'
+
+X city built a new stadium, each day many people visit it and the stats are saved as these columns: id, date, people
+
+Please write a query to display the records which have 3 or more consecutive rows and the  amount of people more than 100(inclusive).
+
+ 
+For example, the table stadium:
+
++------+------------+-----------+
+| id   | date       | people    |
++------+------------+-----------+
+| 1    | 2017-01-01 | 10        |
+| 2    | 2017-01-02 | 109       |
+| 3    | 2017-01-03 | 150       |
+| 4    | 2017-01-04 | 99        |
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-08 | 188       |
++------+------------+-----------+
+
+
+For the sample data above, the output is:
+
+
++------+------------+-----------+
+| id   | date       | people    |
++------+------------+-----------+
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-08 | 188       |
++------+------------+-----------+
+
+
+Note:
+Each day only have one row record, and the dates are increasing with id increasing.
+ 
+leetcode show -gx -o 601/original/ 601
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 601/original/ 601
+[601] Human Traffic of Stadium  
+
+https://leetcode.com/problems/human-traffic-of-stadium/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Hard (35.13%)
+* Source Code:       601/original/601.human-traffic-of-stadium.0.sql
+* Total Accepted:    10.9K
+* Total Submissions: 31K
+* Testcase Example:  '{"headers": {"stadium": ["id", "date", "people"]}, "rows": {"stadium": [[1, "2017-01-01", 10], [2, "2017-01-02", 109], [3, "2017-01-03", 150], [4, "2017-01-04", 99], [5, "2017-01-05", 145], [6, "2017-01-06", 1455], [7, "2017-01-07", 199], [8, "2017-01-08", 188]]}}'
+
+X city built a new stadium, each day many people visit it and the stats are saved as these columns: id, date, people
+
+Please write a query to display the records which have 3 or more consecutive rows and the  amount of people more than 100(inclusive).
+
+ 
+For example, the table stadium:
+
++------+------------+-----------+
+| id   | date       | people    |
++------+------------+-----------+
+| 1    | 2017-01-01 | 10        |
+| 2    | 2017-01-02 | 109       |
+| 3    | 2017-01-03 | 150       |
+| 4    | 2017-01-04 | 99        |
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-08 | 188       |
++------+------------+-----------+
+
+
+For the sample data above, the output is:
+
+
++------+------------+-----------+
+| id   | date       | people    |
++------+------------+-----------+
+| 5    | 2017-01-05 | 145       |
+| 6    | 2017-01-06 | 1455      |
+| 7    | 2017-01-07 | 199       |
+| 8    | 2017-01-08 | 188       |
++------+------------+-----------+
+
+
+Note:
+Each day only have one row record, and the dates are increasing with id increasing.
+ 
+leetcode show 601 --solution > 601/sol.py
+leetcode show -gx -o 602/ 602
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 602/ 602
+[602] Friend Requests II: Who Has the Most Friends  
+
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (44.10%)
+* Source Code:       602/602.friend-requests-ii-who-has-the-most-friends.0.sql
+* Total Accepted:    9K
+* Total Submissions: 20.5K
+* Testcase Example:  '{"headers":{"request_accepted":["requester_id","accepter_id","accept_date"]},"rows":{"request_accepted":[[1,2,"2016/06/03"],[1,3,"2016/06/08"],[2,3,"2016/06/08"],[3,4,"2016/06/09"]]}}'
+
+In social network like Facebook or Twitter, people send friend requests and accept others' requests as well.
+ 
+Table request_accepted holds the data of friend acceptance, while requester_id and accepter_id both are the id of a person.
+
+ 
+
+
+| requester_id | accepter_id | accept_date|
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+
+Write a query to find the the people who has most friends and the most friends number. For the sample data above, the result is:
+
+
+| id | num |
+|----|-----|
+| 3  | 3   |
+
+Note:
+
+
+	It is guaranteed there is only 1 people having the most friends.
+	The friend request could only been accepted once, which mean there is no multiple records with the same requester_id and accepter_id value.
+	 
+	Explanation:
+	The person with id '3' is a friend of people '1', '2' and '4', so he has 3 friends in total, which is the most number than any others.
+	 
+	Follow-up:
+	In the real world, multiple people could have the same most number of friends, can you find all these people in this case?
+
+
+leetcode show -gx -o 602/original/ 602
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 602/original/ 602
+[602] Friend Requests II: Who Has the Most Friends  
+
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/description/
+
+Tags:   database   facebook 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (44.10%)
+* Source Code:       602/original/602.friend-requests-ii-who-has-the-most-friends.0.sql
+* Total Accepted:    9K
+* Total Submissions: 20.5K
+* Testcase Example:  '{"headers":{"request_accepted":["requester_id","accepter_id","accept_date"]},"rows":{"request_accepted":[[1,2,"2016/06/03"],[1,3,"2016/06/08"],[2,3,"2016/06/08"],[3,4,"2016/06/09"]]}}'
+
+In social network like Facebook or Twitter, people send friend requests and accept others' requests as well.
+ 
+Table request_accepted holds the data of friend acceptance, while requester_id and accepter_id both are the id of a person.
+
+ 
+
+
+| requester_id | accepter_id | accept_date|
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+
+Write a query to find the the people who has most friends and the most friends number. For the sample data above, the result is:
+
+
+| id | num |
+|----|-----|
+| 3  | 3   |
+
+Note:
+
+
+	It is guaranteed there is only 1 people having the most friends.
+	The friend request could only been accepted once, which mean there is no multiple records with the same requester_id and accepter_id value.
+	 
+	Explanation:
+	The person with id '3' is a friend of people '1', '2' and '4', so he has 3 friends in total, which is the most number than any others.
+	 
+	Follow-up:
+	In the real world, multiple people could have the same most number of friends, can you find all these people in this case?
+
+
+leetcode show 602 --solution > 602/sol.py
+leetcode show -gx -o 603/ 603
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 603/ 603
+[603] Consecutive Available Seats  
+
+https://leetcode.com/problems/consecutive-available-seats/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (57.38%)
+* Source Code:       603/603.consecutive-available-seats.0.sql
+* Total Accepted:    8.5K
+* Total Submissions: 14.9K
+* Testcase Example:  '{"headers":{"cinema":["seat_id","free"]},"rows":{"cinema":[[1,1],[2,0],[3,1],[4,1],[5,1]]}}'
+
+Several friends at a cinema ticket office would like to reserve consecutive available seats.
+Can you help to query all the consecutive available seats order by the seat_id using the following cinema table?
+
+| seat_id | free |
+|---------|------|
+| 1       | 1    |
+| 2       | 0    |
+| 3       | 1    |
+| 4       | 1    |
+| 5       | 1    |
+
+
+ 
+Your query should return the following result for the sample case above.
+
+ 
+
+
+| seat_id |
+|---------|
+| 3       |
+| 4       |
+| 5       |
+
+Note:
+
+
+	The seat_id is an auto increment int, and free is bool ('1' means free, and '0' means occupied.).
+	Consecutive available seats are more than 2(inclusive) seats consecutively available.
+
+
+leetcode show -gx -o 603/original/ 603
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 603/original/ 603
+[603] Consecutive Available Seats  
+
+https://leetcode.com/problems/consecutive-available-seats/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (57.38%)
+* Source Code:       603/original/603.consecutive-available-seats.0.sql
+* Total Accepted:    8.5K
+* Total Submissions: 14.9K
+* Testcase Example:  '{"headers":{"cinema":["seat_id","free"]},"rows":{"cinema":[[1,1],[2,0],[3,1],[4,1],[5,1]]}}'
+
+Several friends at a cinema ticket office would like to reserve consecutive available seats.
+Can you help to query all the consecutive available seats order by the seat_id using the following cinema table?
+
+| seat_id | free |
+|---------|------|
+| 1       | 1    |
+| 2       | 0    |
+| 3       | 1    |
+| 4       | 1    |
+| 5       | 1    |
+
+
+ 
+Your query should return the following result for the sample case above.
+
+ 
+
+
+| seat_id |
+|---------|
+| 3       |
+| 4       |
+| 5       |
+
+Note:
+
+
+	The seat_id is an auto increment int, and free is bool ('1' means free, and '0' means occupied.).
+	Consecutive available seats are more than 2(inclusive) seats consecutively available.
+
+
+leetcode show 603 --solution > 603/sol.py
+leetcode show -gx -o 607/ 607
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 607/ 607
+[607] Sales Person  
+
+https://leetcode.com/problems/sales-person/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (55.37%)
+* Source Code:       607/607.sales-person.0.sql
+* Total Accepted:    9.2K
+* Total Submissions: 16.7K
+* Testcase Example:  '{"headers": {"salesperson": ["sales_id", "name", "salary", "commission_rate","hire_date"], "company": ["com_id", "name","city"],"orders":["order_id","order_date","com_id","sales_id","amount"]}, "rows": {"salesperson": [[1, "John", 100000, 6, "4/1/2006"], [2, "Amy", 12000, 5,"5/1/2010"], [3, "Mark", 65000, 12, "12/25/2008"], [4, "Pam", 25000, 25,"1/1/2005"],[5,"Alex",5000,10,"2/3/2007"]], "company": [[1, "RED","Boston"], [2, "ORANGE", "New York"],[3, "YELLOW", "Boston"],[4, "GREEN", "Austin"]],"orders":[[1,"1/1/2014",3,4,10000],[2, "2/1/2014", 4, 5, 5000],[3, "3/1/2014", 1, 1, 50000],[4, "4/1/2014", 1, 4, 25000]]}}'
+
+Description
+
+Given three tables: salesperson, company, orders.
+Output all the names in the table salesperson, who didn’t have sales to company 'RED'.
+
+Example
+Input
+
+Table: salesperson
+
+
++----------+------+--------+-----------------+-----------+
+| sales_id | name | salary | commission_rate | hire_date |
++----------+------+--------+-----------------+-----------+
+|   1      | John | 100000 |     6           | 4/1/2006  |
+|   2      | Amy  | 120000 |     5           | 5/1/2010  |
+|   3      | Mark | 65000  |     12          | 12/25/2008|
+|   4      | Pam  | 25000  |     25          | 1/1/2005  |
+|   5      | Alex | 50000  |     10          | 2/3/2007  |
++----------+------+--------+-----------------+-----------+
+
+The table salesperson holds the salesperson information. Every salesperson has a sales_id and a name.
+
+Table: company
+
+
++---------+--------+------------+
+| com_id  |  name  |    city    |
++---------+--------+------------+
+|   1     |  RED   |   Boston   |
+|   2     | ORANGE |   New York |
+|   3     | YELLOW |   Boston   |
+|   4     | GREEN  |   Austin   |
++---------+--------+------------+
+
+The table company holds the company information. Every company has a com_id and a name.
+
+Table: orders
+
+
++----------+------------+---------+----------+--------+
+| order_id | order_date | com_id  | sales_id | amount |
++----------+------------+---------+----------+--------+
+| 1        |   1/1/2014 |    3    |    4     | 100000 |
+| 2        |   2/1/2014 |    4    |    5     | 5000   |
+| 3        |   3/1/2014 |    1    |    1     | 50000  |
+| 4        |   4/1/2014 |    1    |    4     | 25000  |
++----------+----------+---------+----------+--------+
+
+The table orders holds the sales record information, salesperson and customer company are represented by sales_id and com_id.
+
+output
+
+
++------+
+| name | 
++------+
+| Amy  | 
+| Mark | 
+| Alex |
++------+
+
+
+Explanation
+
+According to order '3' and '4' in table orders, it is easy to tell only salesperson 'John' and 'Alex' have sales to company 'RED',
+so we need to output all the other names in table salesperson.
+
+leetcode show -gx -o 607/original/ 607
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 607/original/ 607
+[607] Sales Person  
+
+https://leetcode.com/problems/sales-person/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (55.37%)
+* Source Code:       607/original/607.sales-person.0.sql
+* Total Accepted:    9.2K
+* Total Submissions: 16.7K
+* Testcase Example:  '{"headers": {"salesperson": ["sales_id", "name", "salary", "commission_rate","hire_date"], "company": ["com_id", "name","city"],"orders":["order_id","order_date","com_id","sales_id","amount"]}, "rows": {"salesperson": [[1, "John", 100000, 6, "4/1/2006"], [2, "Amy", 12000, 5,"5/1/2010"], [3, "Mark", 65000, 12, "12/25/2008"], [4, "Pam", 25000, 25,"1/1/2005"],[5,"Alex",5000,10,"2/3/2007"]], "company": [[1, "RED","Boston"], [2, "ORANGE", "New York"],[3, "YELLOW", "Boston"],[4, "GREEN", "Austin"]],"orders":[[1,"1/1/2014",3,4,10000],[2, "2/1/2014", 4, 5, 5000],[3, "3/1/2014", 1, 1, 50000],[4, "4/1/2014", 1, 4, 25000]]}}'
+
+Description
+
+Given three tables: salesperson, company, orders.
+Output all the names in the table salesperson, who didn’t have sales to company 'RED'.
+
+Example
+Input
+
+Table: salesperson
+
+
++----------+------+--------+-----------------+-----------+
+| sales_id | name | salary | commission_rate | hire_date |
++----------+------+--------+-----------------+-----------+
+|   1      | John | 100000 |     6           | 4/1/2006  |
+|   2      | Amy  | 120000 |     5           | 5/1/2010  |
+|   3      | Mark | 65000  |     12          | 12/25/2008|
+|   4      | Pam  | 25000  |     25          | 1/1/2005  |
+|   5      | Alex | 50000  |     10          | 2/3/2007  |
++----------+------+--------+-----------------+-----------+
+
+The table salesperson holds the salesperson information. Every salesperson has a sales_id and a name.
+
+Table: company
+
+
++---------+--------+------------+
+| com_id  |  name  |    city    |
++---------+--------+------------+
+|   1     |  RED   |   Boston   |
+|   2     | ORANGE |   New York |
+|   3     | YELLOW |   Boston   |
+|   4     | GREEN  |   Austin   |
++---------+--------+------------+
+
+The table company holds the company information. Every company has a com_id and a name.
+
+Table: orders
+
+
++----------+------------+---------+----------+--------+
+| order_id | order_date | com_id  | sales_id | amount |
++----------+------------+---------+----------+--------+
+| 1        |   1/1/2014 |    3    |    4     | 100000 |
+| 2        |   2/1/2014 |    4    |    5     | 5000   |
+| 3        |   3/1/2014 |    1    |    1     | 50000  |
+| 4        |   4/1/2014 |    1    |    4     | 25000  |
++----------+----------+---------+----------+--------+
+
+The table orders holds the sales record information, salesperson and customer company are represented by sales_id and com_id.
+
+output
+
+
++------+
+| name | 
++------+
+| Amy  | 
+| Mark | 
+| Alex |
++------+
+
+
+Explanation
+
+According to order '3' and '4' in table orders, it is easy to tell only salesperson 'John' and 'Alex' have sales to company 'RED',
+so we need to output all the other names in table salesperson.
+
+leetcode show 607 --solution > 607/sol.py
+leetcode show -gx -o 608/ 608
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 608/ 608
+[608] Tree Node  
+
+https://leetcode.com/problems/tree-node/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (57.75%)
+* Source Code:       608/608.tree-node.0.sql
+* Total Accepted:    8.4K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers": {"tree": ["id", "p_id"]}, "rows": {"tree": [[1,null],[2,1],[3,1],[4,2],[5,2]]}}'
+
+Given a table tree, id is identifier of the tree node and p_id is its parent node's id.
+
+
++----+------+
+| id | p_id |
++----+------+
+| 1  | null |
+| 2  | 1    |
+| 3  | 1    |
+| 4  | 2    |
+| 5  | 2    |
++----+------+
+
+Each node in the tree can be one of three types:
+
+
+	Leaf: if the node is a leaf node.
+	Root: if the node is the root of the tree.
+	Inner: If the node is neither a leaf node nor a root node.
+
+
+ 
+Write a query to print the node id and the type of the node. Sort your output by the node id. The result for the above sample is:
+
+ 
+
+
++----+------+
+| id | Type |
++----+------+
+| 1  | Root |
+| 2  | Inner|
+| 3  | Leaf |
+| 4  | Leaf |
+| 5  | Leaf |
++----+------+
+
+
+ 
+
+Explanation
+
+ 
+
+
+	Node '1' is root node, because its parent node is NULL and it has child node '2' and '3'.
+	Node '2' is inner node, because it has parent node '1' and child node '4' and '5'.
+	Node '3', '4' and '5' is Leaf node, because they have parent node and they don't have child node.
+	
+	And here is the image of the sample tree as below:
+	 
+
+	
+			  1
+			/   \
+                      2       3
+                    /   \
+                  4       5
+
+
+	Note
+
+	If there is only one node on the tree, you only need to output its root attributes.
+	
+
+
+leetcode show -gx -o 608/original/ 608
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 608/original/ 608
+[608] Tree Node  
+
+https://leetcode.com/problems/tree-node/description/
+
+Tags:   database   twitter 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (57.75%)
+* Source Code:       608/original/608.tree-node.0.sql
+* Total Accepted:    8.4K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers": {"tree": ["id", "p_id"]}, "rows": {"tree": [[1,null],[2,1],[3,1],[4,2],[5,2]]}}'
+
+Given a table tree, id is identifier of the tree node and p_id is its parent node's id.
+
+
++----+------+
+| id | p_id |
++----+------+
+| 1  | null |
+| 2  | 1    |
+| 3  | 1    |
+| 4  | 2    |
+| 5  | 2    |
++----+------+
+
+Each node in the tree can be one of three types:
+
+
+	Leaf: if the node is a leaf node.
+	Root: if the node is the root of the tree.
+	Inner: If the node is neither a leaf node nor a root node.
+
+
+ 
+Write a query to print the node id and the type of the node. Sort your output by the node id. The result for the above sample is:
+
+ 
+
+
++----+------+
+| id | Type |
++----+------+
+| 1  | Root |
+| 2  | Inner|
+| 3  | Leaf |
+| 4  | Leaf |
+| 5  | Leaf |
++----+------+
+
+
+ 
+
+Explanation
+
+ 
+
+
+	Node '1' is root node, because its parent node is NULL and it has child node '2' and '3'.
+	Node '2' is inner node, because it has parent node '1' and child node '4' and '5'.
+	Node '3', '4' and '5' is Leaf node, because they have parent node and they don't have child node.
+	
+	And here is the image of the sample tree as below:
+	 
+
+	
+			  1
+			/   \
+                      2       3
+                    /   \
+                  4       5
+
+
+	Note
+
+	If there is only one node on the tree, you only need to output its root attributes.
+	
+
+
+leetcode show 608 --solution > 608/sol.py
+leetcode show -gx -o 610/ 610
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 610/ 610
+[610] Triangle Judgement  
+
+https://leetcode.com/problems/triangle-judgement/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (60.97%)
+* Source Code:       610/610.triangle-judgement.0.sql
+* Total Accepted:    8.9K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers":{"triangle":["x","y","z"]},"rows":{"triangle":[[13,15,30],[10,20,15]]}}'
+
+A pupil Tim gets homework to identify whether three line segments could possibly form a triangle.
+ 
+However, this assignment is very heavy because there are hundreds of records to calculate.
+
+ 
+Could you help Tim by writing a query to judge whether these three sides can form a triangle, assuming table triangle holds the length of the three sides x, y and z.
+
+ 
+
+
+| x  | y  | z  |
+|----|----|----|
+| 13 | 15 | 30 |
+| 10 | 20 | 15 |
+
+For the sample data above, your query should return the follow result:
+
+
+| x  | y  | z  | triangle |
+|----|----|----|----------|
+| 13 | 15 | 30 | No       |
+| 10 | 20 | 15 | Yes      |
+
+
+leetcode show -gx -o 610/original/ 610
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 610/original/ 610
+[610] Triangle Judgement  
+
+https://leetcode.com/problems/triangle-judgement/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (60.97%)
+* Source Code:       610/original/610.triangle-judgement.0.sql
+* Total Accepted:    8.9K
+* Total Submissions: 14.6K
+* Testcase Example:  '{"headers":{"triangle":["x","y","z"]},"rows":{"triangle":[[13,15,30],[10,20,15]]}}'
+
+A pupil Tim gets homework to identify whether three line segments could possibly form a triangle.
+ 
+However, this assignment is very heavy because there are hundreds of records to calculate.
+
+ 
+Could you help Tim by writing a query to judge whether these three sides can form a triangle, assuming table triangle holds the length of the three sides x, y and z.
+
+ 
+
+
+| x  | y  | z  |
+|----|----|----|
+| 13 | 15 | 30 |
+| 10 | 20 | 15 |
+
+For the sample data above, your query should return the follow result:
+
+
+| x  | y  | z  | triangle |
+|----|----|----|----------|
+| 13 | 15 | 30 | No       |
+| 10 | 20 | 15 | Yes      |
+
+
+leetcode show 610 --solution > 610/sol.py
+leetcode show -gx -o 612/ 612
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 612/ 612
+[612] Shortest Distance in a Plane  
+
+https://leetcode.com/problems/shortest-distance-in-a-plane/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (53.17%)
+* Source Code:       612/612.shortest-distance-in-a-plane.0.sql
+* Total Accepted:    6.2K
+* Total Submissions: 11.6K
+* Testcase Example:  '{"headers":{"point_2d":["x","y"]},"rows":{"point_2d":[[-1,-1],[0,0],[-1,-2]]}}'
+
+Table point_2d holds the coordinates (x,y) of some unique points (more than two) in a plane.
+ 
+Write a query to find the shortest distance between these points rounded to 2 decimals.
+
+ 
+
+
+| x  | y  |
+|----|----|
+| -1 | -1 |
+| 0  | 0  |
+| -1 | -2 |
+
+
+ 
+The shortest distance is 1.00 from point (-1,-1) to (-1,2). So the output should be:
+
+ 
+
+
+| shortest |
+|----------|
+| 1.00     |
+
+
+ 
+Note: The longest distance among all the points are less than 10000.
+
+ 
+
+leetcode show -gx -o 612/original/ 612
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 612/original/ 612
+[612] Shortest Distance in a Plane  
+
+https://leetcode.com/problems/shortest-distance-in-a-plane/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (53.17%)
+* Source Code:       612/original/612.shortest-distance-in-a-plane.0.sql
+* Total Accepted:    6.2K
+* Total Submissions: 11.6K
+* Testcase Example:  '{"headers":{"point_2d":["x","y"]},"rows":{"point_2d":[[-1,-1],[0,0],[-1,-2]]}}'
+
+Table point_2d holds the coordinates (x,y) of some unique points (more than two) in a plane.
+ 
+Write a query to find the shortest distance between these points rounded to 2 decimals.
+
+ 
+
+
+| x  | y  |
+|----|----|
+| -1 | -1 |
+| 0  | 0  |
+| -1 | -2 |
+
+
+ 
+The shortest distance is 1.00 from point (-1,-1) to (-1,2). So the output should be:
+
+ 
+
+
+| shortest |
+|----------|
+| 1.00     |
+
+
+ 
+Note: The longest distance among all the points are less than 10000.
+
+ 
+
+leetcode show 612 --solution > 612/sol.py
+leetcode show -gx -o 613/ 613
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 613/ 613
+[613] Shortest Distance in a Line  
+
+https://leetcode.com/problems/shortest-distance-in-a-line/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (72.39%)
+* Source Code:       613/613.shortest-distance-in-a-line.0.sql
+* Total Accepted:    11.8K
+* Total Submissions: 16.3K
+* Testcase Example:  '{"headers":{"point":["x"]},"rows":{"point":[[-1],[0],[2]]}}'
+
+Table point holds the x coordinate of some points on x-axis in a plane, which are all integers.
+ 
+Write a query to find the shortest distance between two points in these points.
+
+ 
+
+
+| x   |
+|-----|
+| -1  |
+| 0   |
+| 2   |
+
+
+ 
+The shortest distance is '1' obviously, which is from point '-1' to '0'. So the output is as below:
+
+ 
+
+
+| shortest|
+|---------|
+| 1       |
+
+
+ 
+Note: Every point is unique, which means there is no duplicates in table point.
+
+ 
+Follow-up: What if all these points have an id and are arranged from the left most to the right most of x axis?
+
+ 
+
+leetcode show -gx -o 613/original/ 613
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 613/original/ 613
+[613] Shortest Distance in a Line  
+
+https://leetcode.com/problems/shortest-distance-in-a-line/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (72.39%)
+* Source Code:       613/original/613.shortest-distance-in-a-line.0.sql
+* Total Accepted:    11.8K
+* Total Submissions: 16.3K
+* Testcase Example:  '{"headers":{"point":["x"]},"rows":{"point":[[-1],[0],[2]]}}'
+
+Table point holds the x coordinate of some points on x-axis in a plane, which are all integers.
+ 
+Write a query to find the shortest distance between two points in these points.
+
+ 
+
+
+| x   |
+|-----|
+| -1  |
+| 0   |
+| 2   |
+
+
+ 
+The shortest distance is '1' obviously, which is from point '-1' to '0'. So the output is as below:
+
+ 
+
+
+| shortest|
+|---------|
+| 1       |
+
+
+ 
+Note: Every point is unique, which means there is no duplicates in table point.
+
+ 
+Follow-up: What if all these points have an id and are arranged from the left most to the right most of x axis?
+
+ 
+
+leetcode show 613 --solution > 613/sol.py
+leetcode show -gx -o 614/ 614
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 614/ 614
+[614] Second Degree Follower  
+
+https://leetcode.com/problems/second-degree-follower/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (22.92%)
+* Source Code:       614/614.second-degree-follower.0.sql
+* Total Accepted:    5.6K
+* Total Submissions: 24.4K
+* Testcase Example:  '{"headers":{"follow":["followee", "follower"]},"rows":{"follow":[["A", "B"], ["B", "C"], ["B", "D"], ["D", "E"]]}}'
+
+In facebook, there is a follow table with two columns: followee, follower.
+
+Please write a sql query to get the amount of each follower’s follower if he/she has one.
+
+For example:
+
+
++-------------+------------+
+| followee    | follower   |
++-------------+------------+
+|     A       |     B      |
+|     B       |     C      |
+|     B       |     D      |
+|     D       |     E      |
++-------------+------------+
+
+should output:
+
+
++-------------+------------+
+| follower    | num        |
++-------------+------------+
+|     B       |  2         |
+|     D       |  1         |
++-------------+------------+
+
+Explaination:
+Both B and D exist in the follower list, when as a followee, B's follower is C and D, and D's follower is E. A does not exist in follower list.
+ 
+
+ 
+Note:
+Followee would not follow himself/herself in all cases.
+Please display the result in follower's alphabet order.
+ 
+
+leetcode show -gx -o 614/original/ 614
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 614/original/ 614
+[614] Second Degree Follower  
+
+https://leetcode.com/problems/second-degree-follower/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Medium (22.92%)
+* Source Code:       614/original/614.second-degree-follower.0.sql
+* Total Accepted:    5.6K
+* Total Submissions: 24.4K
+* Testcase Example:  '{"headers":{"follow":["followee", "follower"]},"rows":{"follow":[["A", "B"], ["B", "C"], ["B", "D"], ["D", "E"]]}}'
+
+In facebook, there is a follow table with two columns: followee, follower.
+
+Please write a sql query to get the amount of each follower’s follower if he/she has one.
+
+For example:
+
+
++-------------+------------+
+| followee    | follower   |
++-------------+------------+
+|     A       |     B      |
+|     B       |     C      |
+|     B       |     D      |
+|     D       |     E      |
++-------------+------------+
+
+should output:
+
+
++-------------+------------+
+| follower    | num        |
++-------------+------------+
+|     B       |  2         |
+|     D       |  1         |
++-------------+------------+
+
+Explaination:
+Both B and D exist in the follower list, when as a followee, B's follower is C and D, and D's follower is E. A does not exist in follower list.
+ 
+
+ 
+Note:
+Followee would not follow himself/herself in all cases.
+Please display the result in follower's alphabet order.
+ 
+
+leetcode show 614 --solution > 614/sol.py
+leetcode show -gx -o 615/ 615
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 615/ 615
+[615] Average Salary: Departments VS Company  
+
+https://leetcode.com/problems/average-salary-departments-vs-company/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (35.91%)
+* Source Code:       615/615.average-salary-departments-vs-company.0.sql
+* Total Accepted:    3.3K
+* Total Submissions: 9.2K
+* Testcase Example:  '{"headers":{"salary":["id","employee_id","amount","pay_date"],"employee":["employee_id","department_id"]},"rows":{"salary":[[1,1,9000,"2017/03/31"],[2,2,6000,"2017/03/31"],[3,3,10000,"2017/03/31"],[4,1,7000,"2017/02/28"],[5,2,6000,"2017/02/28"],[6,3,8000,"2017/02/28"]],"employee":[[1,1],[2,2],[3,2]]}}'
+
+Given two tables as below, write a query to display the comparison result (higher/lower/same) of the average salary of employees in a department to the company's average salary.
+ 
+Table: salary
+
+
+| id | employee_id | amount | pay_date   |
+|----|-------------|--------|------------|
+| 1  | 1           | 9000   | 2017-03-31 |
+| 2  | 2           | 6000   | 2017-03-31 |
+| 3  | 3           | 10000  | 2017-03-31 |
+| 4  | 1           | 7000   | 2017-02-28 |
+| 5  | 2           | 6000   | 2017-02-28 |
+| 6  | 3           | 8000   | 2017-02-28 |
+
+
+ 
+The employee_id column refers to the employee_id in the following table employee.
+
+ 
+
+
+| employee_id | department_id |
+|-------------|---------------|
+| 1           | 1             |
+| 2           | 2             |
+| 3           | 2             |
+
+
+ 
+So for the sample data above, the result is:
+
+ 
+
+
+| pay_month | department_id | comparison  |
+|-----------|---------------|-------------|
+| 2017-03   | 1             | higher      |
+| 2017-03   | 2             | lower       |
+| 2017-02   | 1             | same        |
+| 2017-02   | 2             | same        |
+
+
+ 
+Explanation
+
+ 
+In March, the company's average salary is (9000+6000+10000)/3 = 8333.33...
+
+ 
+The average salary for department '1' is 9000, which is the salary of employee_id '1' since there is only one employee in this department. So the comparison result is 'higher' since 9000 > 8333.33 obviously.
+
+ 
+The average salary of department '2' is (6000 + 10000)/2 = 8000, which is the average of employee_id '2' and '3'. So the comparison result is 'lower' since 8000 < 8333.33.
+
+ 
+With he same formula for the average salary comparison in February, the result is 'same' since both the department '1' and '2' have the same average salary with the company, which is 7000.
+
+ 
+
+leetcode show -gx -o 615/original/ 615
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 615/original/ 615
+[615] Average Salary: Departments VS Company  
+
+https://leetcode.com/problems/average-salary-departments-vs-company/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (35.91%)
+* Source Code:       615/original/615.average-salary-departments-vs-company.0.sql
+* Total Accepted:    3.3K
+* Total Submissions: 9.2K
+* Testcase Example:  '{"headers":{"salary":["id","employee_id","amount","pay_date"],"employee":["employee_id","department_id"]},"rows":{"salary":[[1,1,9000,"2017/03/31"],[2,2,6000,"2017/03/31"],[3,3,10000,"2017/03/31"],[4,1,7000,"2017/02/28"],[5,2,6000,"2017/02/28"],[6,3,8000,"2017/02/28"]],"employee":[[1,1],[2,2],[3,2]]}}'
+
+Given two tables as below, write a query to display the comparison result (higher/lower/same) of the average salary of employees in a department to the company's average salary.
+ 
+Table: salary
+
+
+| id | employee_id | amount | pay_date   |
+|----|-------------|--------|------------|
+| 1  | 1           | 9000   | 2017-03-31 |
+| 2  | 2           | 6000   | 2017-03-31 |
+| 3  | 3           | 10000  | 2017-03-31 |
+| 4  | 1           | 7000   | 2017-02-28 |
+| 5  | 2           | 6000   | 2017-02-28 |
+| 6  | 3           | 8000   | 2017-02-28 |
+
+
+ 
+The employee_id column refers to the employee_id in the following table employee.
+
+ 
+
+
+| employee_id | department_id |
+|-------------|---------------|
+| 1           | 1             |
+| 2           | 2             |
+| 3           | 2             |
+
+
+ 
+So for the sample data above, the result is:
+
+ 
+
+
+| pay_month | department_id | comparison  |
+|-----------|---------------|-------------|
+| 2017-03   | 1             | higher      |
+| 2017-03   | 2             | lower       |
+| 2017-02   | 1             | same        |
+| 2017-02   | 2             | same        |
+
+
+ 
+Explanation
+
+ 
+In March, the company's average salary is (9000+6000+10000)/3 = 8333.33...
+
+ 
+The average salary for department '1' is 9000, which is the salary of employee_id '1' since there is only one employee in this department. So the comparison result is 'higher' since 9000 > 8333.33 obviously.
+
+ 
+The average salary of department '2' is (6000 + 10000)/2 = 8000, which is the average of employee_id '2' and '3'. So the comparison result is 'lower' since 8000 < 8333.33.
+
+ 
+With he same formula for the average salary comparison in February, the result is 'same' since both the department '1' and '2' have the same average salary with the company, which is 7000.
+
+ 
+
+leetcode show 615 --solution > 615/sol.py
+leetcode show 616 --solution > 616/sol.py
+leetcode show -gx -o 618/ 618
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 618/ 618
+[618] Students Report By Geography  
+
+https://leetcode.com/problems/students-report-by-geography/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (41.91%)
+* Source Code:       618/618.students-report-by-geography.0.sql
+* Total Accepted:    2.2K
+* Total Submissions: 5.3K
+* Testcase Example:  '{"headers":{"student":["name","continent"]},"rows":{"student":[["Jane","America"],["Pascal","Europe"],["Xi","Asia"],["Jack","America"]]}}'
+
+A U.S graduate school has students from Asia, Europe and America. The students' location information are stored in table student as below.
+ 
+
+
+| name   | continent |
+|--------|-----------|
+| Jack   | America   |
+| Pascal | Europe    |
+| Xi     | Asia      |
+| Jane   | America   |
+
+
+ 
+ Pivot the continent column in this table so that each name is sorted alphabetically and displayed underneath its corresponding continent. The output headers should be America, Asia and Europe respectively. It is guaranteed that the student number from America is no less than either Asia or Europe.
+
+ 
+For the sample input, the output is:
+
+ 
+
+
+| America | Asia | Europe |
+|---------|------|--------|
+| Jack    | Xi   | Pascal |
+| Jane    |      |        |
+
+
+ 
+Follow-up: If it is unknown which continent has the most students, can you write a query to generate the student report?
+
+ 
+
+leetcode show -gx -o 618/original/ 618
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 618/original/ 618
+[618] Students Report By Geography  
+
+https://leetcode.com/problems/students-report-by-geography/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Hard (41.91%)
+* Source Code:       618/original/618.students-report-by-geography.0.sql
+* Total Accepted:    2.2K
+* Total Submissions: 5.3K
+* Testcase Example:  '{"headers":{"student":["name","continent"]},"rows":{"student":[["Jane","America"],["Pascal","Europe"],["Xi","Asia"],["Jack","America"]]}}'
+
+A U.S graduate school has students from Asia, Europe and America. The students' location information are stored in table student as below.
+ 
+
+
+| name   | continent |
+|--------|-----------|
+| Jack   | America   |
+| Pascal | Europe    |
+| Xi     | Asia      |
+| Jane   | America   |
+
+
+ 
+ Pivot the continent column in this table so that each name is sorted alphabetically and displayed underneath its corresponding continent. The output headers should be America, Asia and Europe respectively. It is guaranteed that the student number from America is no less than either Asia or Europe.
+
+ 
+For the sample input, the output is:
+
+ 
+
+
+| America | Asia | Europe |
+|---------|------|--------|
+| Jack    | Xi   | Pascal |
+| Jane    |      |        |
+
+
+ 
+Follow-up: If it is unknown which continent has the most students, can you write a query to generate the student report?
+
+ 
+
+leetcode show 618 --solution > 618/sol.py
+leetcode show -gx -o 619/ 619
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 619/ 619
+[619] Biggest Single Number  
+
+https://leetcode.com/problems/biggest-single-number/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (38.41%)
+* Source Code:       619/619.biggest-single-number.0.sql
+* Total Accepted:    9.5K
+* Total Submissions: 24.6K
+* Testcase Example:  '{"headers": {"my_numbers": ["num"]}, "rows": {"my_numbers": [[8],[8],[3],[3],[1],[4],[5],[6]]}}'
+
+Table my_numbers contains many numbers in column num including duplicated ones.
+Can you write a SQL query to find the biggest number, which only appears once.
+
+
++---+
+|num|
++---+
+| 8 |
+| 8 |
+| 3 |
+| 3 |
+| 1 |
+| 4 |
+| 5 |
+| 6 | 
+
+For the sample data above, your query should return the following result:
+
+
++---+
+|num|
++---+
+| 6 |
+
+Note:
+If there is no such number, just output null.
+
+ 
+
+leetcode show -gx -o 619/original/ 619
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mssql   mysql   oraclesql 
+leetcode show -gx -l mysql -o 619/original/ 619
+[619] Biggest Single Number  
+
+https://leetcode.com/problems/biggest-single-number/description/
+
+Tags:   database 
+
+Langs:  mssql   mysql   oraclesql 
+
+* database
+* Easy (38.41%)
+* Source Code:       619/original/619.biggest-single-number.0.sql
+* Total Accepted:    9.5K
+* Total Submissions: 24.6K
+* Testcase Example:  '{"headers": {"my_numbers": ["num"]}, "rows": {"my_numbers": [[8],[8],[3],[3],[1],[4],[5],[6]]}}'
+
+Table my_numbers contains many numbers in column num including duplicated ones.
+Can you write a SQL query to find the biggest number, which only appears once.
+
+
++---+
+|num|
++---+
+| 8 |
+| 8 |
+| 3 |
+| 3 |
+| 1 |
+| 4 |
+| 5 |
+| 6 | 
+
+For the sample data above, your query should return the following result:
+
+
++---+
+|num|
++---+
+| 6 |
+
+Note:
+If there is no such number, just output null.
+
+ 
+
+leetcode show 619 --solution > 619/sol.py
+leetcode show -gx -o 620/ 620
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 620/ 620
+[620] Not Boring Movies  
+
+https://leetcode.com/problems/not-boring-movies/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (60.92%)
+* Source Code:       620/620.not-boring-movies.0.sql
+* Total Accepted:    48.5K
+* Total Submissions: 79.6K
+* Testcase Example:  '{"headers":{"cinema":["id", "movie", "description", "rating"]},"rows":{"cinema":[[1, "War", "great 3D", 8.9], [2, "Science", "fiction", 8.5], [3, "irish", "boring", 6.2], [4, "Ice song", "Fantacy", 8.6], [5, "House card", "Interesting", 9.1]]}}'
+
+X city opened a new cinema, many people would like to go to this cinema.
+The cinema also gives out a poster indicating the movies’ ratings and descriptions. 
+ 
+Please write a SQL query to output movies with an odd numbered ID and a description that is not 'boring'. Order the result by rating.
+
+
+For example, table cinema:
+
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   1     | War       |   great 3D   |   8.9     |
+|   2     | Science   |   fiction    |   8.5     |
+|   3     | irish     |   boring     |   6.2     |
+|   4     | Ice song  |   Fantacy    |   8.6     |
+|   5     | House card|   Interesting|   9.1     |
++---------+-----------+--------------+-----------+
+
+For the example above, the output should be:
+
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   5     | House card|   Interesting|   9.1     |
+|   1     | War       |   great 3D   |   8.9     |
++---------+-----------+--------------+-----------+
+
+
+leetcode show -gx -o 620/original/ 620
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 620/original/ 620
+[620] Not Boring Movies  
+
+https://leetcode.com/problems/not-boring-movies/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (60.92%)
+* Source Code:       620/original/620.not-boring-movies.0.sql
+* Total Accepted:    48.5K
+* Total Submissions: 79.6K
+* Testcase Example:  '{"headers":{"cinema":["id", "movie", "description", "rating"]},"rows":{"cinema":[[1, "War", "great 3D", 8.9], [2, "Science", "fiction", 8.5], [3, "irish", "boring", 6.2], [4, "Ice song", "Fantacy", 8.6], [5, "House card", "Interesting", 9.1]]}}'
+
+X city opened a new cinema, many people would like to go to this cinema.
+The cinema also gives out a poster indicating the movies’ ratings and descriptions. 
+ 
+Please write a SQL query to output movies with an odd numbered ID and a description that is not 'boring'. Order the result by rating.
+
+
+For example, table cinema:
+
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   1     | War       |   great 3D   |   8.9     |
+|   2     | Science   |   fiction    |   8.5     |
+|   3     | irish     |   boring     |   6.2     |
+|   4     | Ice song  |   Fantacy    |   8.6     |
+|   5     | House card|   Interesting|   9.1     |
++---------+-----------+--------------+-----------+
+
+For the example above, the output should be:
+
++---------+-----------+--------------+-----------+
+|   id    | movie     |  description |  rating   |
++---------+-----------+--------------+-----------+
+|   5     | House card|   Interesting|   9.1     |
+|   1     | War       |   great 3D   |   8.9     |
++---------+-----------+--------------+-----------+
+
+
+leetcode show 620 --solution > 620/sol.py
+leetcode show 622 --solution > 622/sol.py
+leetcode show -gx -o 626/ 626
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 626/ 626
+[626] Exchange Seats  
+
+https://leetcode.com/problems/exchange-seats/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Medium (52.21%)
+* Source Code:       626/626.exchange-seats.0.sql
+* Total Accepted:    17.8K
+* Total Submissions: 34.1K
+* Testcase Example:  '{"headers": {"seat": ["id","student"]}, "rows": {"seat": [[1,"Abbot"],[2,"Doris"],[3,"Emerson"],[4,"Green"],[5,"Jeames"]]}}'
+
+Mary is a teacher in a middle school and she has a table seat storing students' names and their corresponding seat ids.
+The column id is continuous increment.
+Mary wants to change seats for the adjacent students.
+Can you write a SQL query to output the result for Mary?
+
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Abbot   |
+|    2    | Doris   |
+|    3    | Emerson |
+|    4    | Green   |
+|    5    | Jeames  |
++---------+---------+
+
+For the sample input, the output is:
+
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Doris   |
+|    2    | Abbot   |
+|    3    | Green   |
+|    4    | Emerson |
+|    5    | Jeames  |
++---------+---------+
+
+
+Note:
+If the number of students is odd, there is no need to change the last one's seat.
+
+leetcode show -gx -o 626/original/ 626
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 626/original/ 626
+[626] Exchange Seats  
+
+https://leetcode.com/problems/exchange-seats/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Medium (52.21%)
+* Source Code:       626/original/626.exchange-seats.0.sql
+* Total Accepted:    17.8K
+* Total Submissions: 34.1K
+* Testcase Example:  '{"headers": {"seat": ["id","student"]}, "rows": {"seat": [[1,"Abbot"],[2,"Doris"],[3,"Emerson"],[4,"Green"],[5,"Jeames"]]}}'
+
+Mary is a teacher in a middle school and she has a table seat storing students' names and their corresponding seat ids.
+The column id is continuous increment.
+Mary wants to change seats for the adjacent students.
+Can you write a SQL query to output the result for Mary?
+
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Abbot   |
+|    2    | Doris   |
+|    3    | Emerson |
+|    4    | Green   |
+|    5    | Jeames  |
++---------+---------+
+
+For the sample input, the output is:
+
++---------+---------+
+|    id   | student |
++---------+---------+
+|    1    | Doris   |
+|    2    | Abbot   |
+|    3    | Green   |
+|    4    | Emerson |
+|    5    | Jeames  |
++---------+---------+
+
+
+Note:
+If the number of students is odd, there is no need to change the last one's seat.
+
+leetcode show 626 --solution > 626/sol.py
+leetcode show -gx -o 627/ 627
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 627/ 627
+[627] Swap Salary  
+
+https://leetcode.com/problems/swap-salary/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (68.69%)
+* Source Code:       627/627.swap-salary.0.sql
+* Total Accepted:    52.4K
+* Total Submissions: 76.3K
+* Testcase Example:  '{"headers":{"salary":["id","name","sex","salary"]},"rows":{"salary":[[1,"A","m",2500],[2,"B","f",1500],[3,"C","m",5500],[4,"D","f",500]]}}'
+
+Given a table salary, such as the one below, that has m=male and  f=female values. Swap all f and m values (i.e., change all f values to m and vice versa) with a single update query and no intermediate temp table.
+ 
+For example:
+ 
+
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | m   | 2500   |
+| 2  | B    | f   | 1500   |
+| 3  | C    | m   | 5500   |
+| 4  | D    | f   | 500    |
+
+After running your query, the above salary table should have the following rows:
+
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | f   | 2500   |
+| 2  | B    | m   | 1500   |
+| 3  | C    | f   | 5500   |
+| 4  | D    | m   | 500    |
+
+
+leetcode show -gx -o 627/original/ 627
+[ERROR] Not supported language "python3"
+[WARN] Supported languages:  mysql 
+leetcode show -gx -l mysql -o 627/original/ 627
+[627] Swap Salary  
+
+https://leetcode.com/problems/swap-salary/description/
+
+Tags:   database 
+
+Langs:  mysql 
+
+* database
+* Easy (68.69%)
+* Source Code:       627/original/627.swap-salary.0.sql
+* Total Accepted:    52.4K
+* Total Submissions: 76.3K
+* Testcase Example:  '{"headers":{"salary":["id","name","sex","salary"]},"rows":{"salary":[[1,"A","m",2500],[2,"B","f",1500],[3,"C","m",5500],[4,"D","f",500]]}}'
+
+Given a table salary, such as the one below, that has m=male and  f=female values. Swap all f and m values (i.e., change all f values to m and vice versa) with a single update query and no intermediate temp table.
+ 
+For example:
+ 
+
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | m   | 2500   |
+| 2  | B    | f   | 1500   |
+| 3  | C    | m   | 5500   |
+| 4  | D    | f   | 500    |
+
+After running your query, the above salary table should have the following rows:
+
+| id | name | sex | salary |
+|----|------|-----|--------|
+| 1  | A    | f   | 2500   |
+| 2  | B    | m   | 1500   |
+| 3  | C    | f   | 5500   |
+| 4  | D    | m   | 500    |
+
+
+leetcode show 627 --solution > 627/sol.py
+leetcode show 628 --solution > 628/sol.py
+leetcode show 629 --solution > 629/sol.py
+leetcode show 630 --solution > 630/sol.py
+leetcode show 631 --solution > 631/sol.py
+leetcode show 632 --solution > 632/sol.py
+leetcode show 634 --solution > 634/sol.py
+leetcode show 635 --solution > 635/sol.py
+leetcode show 636 --solution > 636/sol.py
+leetcode show 638 --solution > 638/sol.py
+leetcode show 640 --solution > 640/sol.py
+leetcode show 641 --solution > 641/sol.py
+leetcode show 643 --solution > 643/sol.py
+leetcode show 644 --solution > 644/sol.py
+leetcode show 645 --solution > 645/sol.py
+leetcode show 647 --solution > 647/sol.py
+leetcode show 650 --solution > 650/sol.py
+leetcode show 651 --solution > 651/sol.py
+leetcode show 652 --solution > 652/sol.py
+leetcode show 658 --solution > 658/sol.py
+leetcode show 659 --solution > 659/sol.py
+leetcode show 660 --solution > 660/sol.py
+leetcode show 662 --solution > 662/sol.py
+leetcode show 663 --solution > 663/sol.py
+leetcode show 664 --solution > 664/sol.py
+leetcode show 665 --solution > 665/sol.py
+leetcode show 666 --solution > 666/sol.py
+leetcode show 667 --solution > 667/sol.py
+leetcode show 668 --solution > 668/sol.py
+leetcode show 670 --solution > 670/sol.py
+leetcode show 672 --solution > 672/sol.py
+leetcode show 673 --solution > 673/sol.py
+leetcode show 675 --solution > 675/sol.py
+leetcode show 678 --solution > 678/sol.py
+leetcode show 679 --solution > 679/sol.py
+leetcode show 682 --solution > 682/sol.py
+leetcode show 683 --solution > 683/sol.py
+leetcode show 685 --solution > 685/sol.py
+leetcode show 689 --solution > 689/sol.py
+leetcode show 690 --solution > 690/sol.py
+leetcode show 691 --solution > 691/sol.py
+leetcode show 696 --solution > 696/sol.py
+leetcode show 697 --solution > 697/sol.py
+leetcode show 698 --solution > 698/sol.py
+leetcode show 699 --solution > 699/sol.py
+leetcode show 700 --solution > 700/sol.py
+leetcode show 701 --solution > 701/sol.py
+leetcode show 703 --solution > 703/sol.py
+leetcode show 704 --solution > 704/sol.py
+leetcode show 706 --solution > 706/sol.py
+leetcode show 708 --solution > 708/sol.py
+leetcode show 710 --solution > 710/sol.py
+leetcode show 712 --solution > 712/sol.py
+leetcode show 714 --solution > 714/sol.py
+leetcode show 715 --solution > 715/sol.py
+leetcode show 716 --solution > 716/sol.py
+leetcode show 717 --solution > 717/sol.py
+leetcode show 718 --solution > 718/sol.py
+leetcode show 720 --solution > 720/sol.py
+leetcode show 721 --solution > 721/sol.py
+leetcode show 722 --solution > 722/sol.py
+leetcode show 723 --solution > 723/sol.py
+leetcode show 724 --solution > 724/sol.py
+leetcode show 725 --solution > 725/sol.py
+leetcode show 726 --solution > 726/sol.py
+leetcode show 733 --solution > 733/sol.py
+leetcode show 734 --solution > 734/sol.py
+leetcode show 735 --solution > 735/sol.py
+leetcode show 737 --solution > 737/sol.py
+leetcode show 740 --solution > 740/sol.py
+leetcode show 741 --solution > 741/sol.py
+leetcode show 742 --solution > 742/sol.py
+leetcode show 743 --solution > 743/sol.py
+leetcode show 746 --solution > 746/sol.py
+leetcode show 747 --solution > 747/sol.py
+leetcode show 748 --solution > 748/sol.py
+leetcode show 749 --solution > 749/sol.py
+leetcode show 751 --solution > 751/sol.py
+leetcode show 753 --solution > 753/sol.py
+leetcode show 755 --solution > 755/sol.py
+leetcode show 756 --solution > 756/sol.py
+leetcode show 757 --solution > 757/sol.py
+leetcode show 759 --solution > 759/sol.py
+leetcode show 761 --solution > 761/sol.py
+leetcode show 764 --solution > 764/sol.py
+leetcode show 765 --solution > 765/sol.py
+leetcode show 767 --solution > 767/sol.py
+leetcode show 768 --solution > 768/sol.py
+leetcode show 769 --solution > 769/sol.py
+leetcode show 770 --solution > 770/sol.py
+leetcode show 773 --solution > 773/sol.py
+leetcode show 774 --solution > 774/sol.py
+leetcode show 775 --solution > 775/sol.py
+leetcode show 776 --solution > 776/sol.py
+leetcode show 777 --solution > 777/sol.py
+leetcode show 779 --solution > 779/sol.py
+leetcode show 780 --solution > 780/sol.py
+leetcode show 781 --solution > 781/sol.py
+leetcode show 782 --solution > 782/sol.py
+leetcode show 783 --solution > 783/sol.py
+leetcode show 784 --solution > 784/sol.py
+leetcode show 786 --solution > 786/sol.py
+leetcode show 788 --solution > 788/sol.py
+leetcode show 789 --solution > 789/sol.py
+leetcode show 790 --solution > 790/sol.py
+leetcode show 791 --solution > 791/sol.py
+leetcode show 792 --solution > 792/sol.py
+leetcode show 793 --solution > 793/sol.py
+leetcode show 794 --solution > 794/sol.py
+leetcode show 796 --solution > 796/sol.py
+leetcode show 797 --solution > 797/sol.py
+leetcode show 798 --solution > 798/sol.py
+leetcode show 799 --solution > 799/sol.py
+leetcode show 800 --solution > 800/sol.py
+leetcode show 801 --solution > 801/sol.py
+leetcode show 802 --solution > 802/sol.py
+leetcode show 803 --solution > 803/sol.py
+leetcode show 804 --solution > 804/sol.py
+leetcode show 805 --solution > 805/sol.py
+leetcode show 806 --solution > 806/sol.py
+leetcode show 808 --solution > 808/sol.py
+leetcode show 809 --solution > 809/sol.py
+leetcode show 810 --solution > 810/sol.py
+leetcode show 811 --solution > 811/sol.py
+leetcode show 812 --solution > 812/sol.py
+leetcode show 813 --solution > 813/sol.py
+leetcode show 814 --solution > 814/sol.py
+leetcode show 816 --solution > 816/sol.py
+leetcode show 817 --solution > 817/sol.py
+leetcode show 818 --solution > 818/sol.py
+leetcode show 819 --solution > 819/sol.py
+leetcode show 820 --solution > 820/sol.py
+leetcode show 821 --solution > 821/sol.py
+leetcode show 822 --solution > 822/sol.py
+leetcode show 823 --solution > 823/sol.py
+leetcode show 824 --solution > 824/sol.py
+leetcode show 825 --solution > 825/sol.py
+leetcode show 826 --solution > 826/sol.py
+leetcode show 827 --solution > 827/sol.py
+leetcode show 828 --solution > 828/sol.py
+leetcode show 829 --solution > 829/sol.py
+leetcode show 830 --solution > 830/sol.py
+leetcode show 831 --solution > 831/sol.py
+leetcode show 833 --solution > 833/sol.py
+leetcode show 834 --solution > 834/sol.py
+leetcode show 835 --solution > 835/sol.py
+leetcode show 836 --solution > 836/sol.py
+leetcode show 837 --solution > 837/sol.py
+leetcode show 838 --solution > 838/sol.py
+leetcode show 839 --solution > 839/sol.py
+leetcode show 840 --solution > 840/sol.py
+leetcode show 841 --solution > 841/sol.py
+leetcode show 842 --solution > 842/sol.py
+leetcode show 843 --solution > 843/sol.py
+leetcode show 844 --solution > 844/sol.py
+leetcode show 845 --solution > 845/sol.py
+leetcode show 846 --solution > 846/sol.py
+leetcode show 848 --solution > 848/sol.py
+leetcode show 849 --solution > 849/sol.py
+leetcode show 850 --solution > 850/sol.py
+leetcode show 851 --solution > 851/sol.py
+leetcode show 854 --solution > 854/sol.py
+leetcode show 856 --solution > 856/sol.py
+leetcode show 857 --solution > 857/sol.py
+leetcode show 858 --solution > 858/sol.py
+leetcode show 859 --solution > 859/sol.py
+leetcode show 861 --solution > 861/sol.py
+leetcode show 862 --solution > 862/sol.py
+leetcode show 863 --solution > 863/sol.py
+leetcode show 864 --solution > 864/sol.py
+leetcode show 865 --solution > 865/sol.py
+leetcode show 866 --solution > 866/sol.py
+leetcode show 867 --solution > 867/sol.py
+leetcode show 868 --solution > 868/sol.py
+leetcode show 869 --solution > 869/sol.py
+leetcode show 870 --solution > 870/sol.py
+leetcode show 871 --solution > 871/sol.py
+leetcode show 872 --solution > 872/sol.py
+leetcode show 873 --solution > 873/sol.py
+leetcode show 874 --solution > 874/sol.py
+leetcode show 875 --solution > 875/sol.py
+leetcode show 877 --solution > 877/sol.py
+leetcode show 878 --solution > 878/sol.py
+leetcode show 879 --solution > 879/sol.py
+leetcode show 880 --solution > 880/sol.py
+leetcode show 881 --solution > 881/sol.py
+leetcode show 882 --solution > 882/sol.py
+leetcode show 883 --solution > 883/sol.py
+leetcode show 884 --solution > 884/sol.py
+leetcode show 885 --solution > 885/sol.py
+leetcode show 886 --solution > 886/sol.py
+leetcode show 887 --solution > 887/sol.py
+leetcode show 888 --solution > 888/sol.py
+leetcode show 889 --solution > 889/sol.py
+leetcode show 890 --solution > 890/sol.py
+leetcode show 891 --solution > 891/sol.py
+leetcode show 892 --solution > 892/sol.py
+leetcode show 893 --solution > 893/sol.py
+leetcode show 894 --solution > 894/sol.py
+leetcode show 895 --solution > 895/sol.py
+leetcode show 896 --solution > 896/sol.py
+leetcode show 897 --solution > 897/sol.py
+leetcode show 898 --solution > 898/sol.py
+leetcode show 899 --solution > 899/sol.py
+leetcode show 900 --solution > 900/sol.py
+leetcode show 901 --solution > 901/sol.py
+leetcode show 902 --solution > 902/sol.py
+leetcode show 903 --solution > 903/sol.py
+leetcode show 906 --solution > 906/sol.py
+leetcode show 907 --solution > 907/sol.py
+leetcode show 908 --solution > 908/sol.py
+leetcode show 909 --solution > 909/sol.py
+leetcode show 910 --solution > 910/sol.py
+leetcode show 911 --solution > 911/sol.py
+leetcode show -gx -o 912/ 912
+[ERROR] Problem not found!
+leetcode show -gx -o 912/original/ 912
+[ERROR] Problem not found!
+leetcode show 912 --solution > 912/sol.py
+leetcode show 913 --solution > 913/sol.py
+leetcode show 915 --solution > 915/sol.py
+leetcode show 916 --solution > 916/sol.py
+leetcode show 917 --solution > 917/sol.py
+leetcode show 918 --solution > 918/sol.py
+leetcode show 919 --solution > 919/sol.py
+leetcode show 920 --solution > 920/sol.py
+leetcode show 921 --solution > 921/sol.py
+leetcode show 922 --solution > 922/sol.py
+leetcode show 923 --solution > 923/sol.py
+leetcode show 924 --solution > 924/sol.py
+leetcode show 926 --solution > 926/sol.py
+leetcode show 927 --solution > 927/sol.py
+leetcode show 928 --solution > 928/sol.py
+leetcode show 930 --solution > 930/sol.py
+leetcode show 931 --solution > 931/sol.py
+leetcode show 932 --solution > 932/sol.py
+leetcode show 933 --solution > 933/sol.py
+leetcode show 934 --solution > 934/sol.py
+leetcode show 935 --solution > 935/sol.py
+leetcode show 936 --solution > 936/sol.py
+leetcode show 937 --solution > 937/sol.py
+leetcode show 938 --solution > 938/sol.py
+leetcode show 939 --solution > 939/sol.py
+leetcode show 941 --solution > 941/sol.py
+leetcode show 942 --solution > 942/sol.py
+leetcode show 943 --solution > 943/sol.py
+leetcode show 945 --solution > 945/sol.py
+leetcode show 946 --solution > 946/sol.py
+leetcode show 947 --solution > 947/sol.py
+leetcode show 948 --solution > 948/sol.py
+leetcode show 949 --solution > 949/sol.py
+leetcode show 950 --solution > 950/sol.py
+leetcode show 951 --solution > 951/sol.py
+leetcode show 952 --solution > 952/sol.py
+leetcode show 953 --solution > 953/sol.py
+leetcode show 954 --solution > 954/sol.py
+leetcode show 955 --solution > 955/sol.py
+leetcode show 956 --solution > 956/sol.py
+leetcode show 957 --solution > 957/sol.py
+leetcode show 958 --solution > 958/sol.py
+leetcode show 959 --solution > 959/sol.py
+leetcode show 960 --solution > 960/sol.py
+leetcode show 962 --solution > 962/sol.py
+leetcode show 963 --solution > 963/sol.py
+leetcode show 964 --solution > 964/sol.py
+leetcode show 965 --solution > 965/sol.py
+leetcode show 966 --solution > 966/sol.py
+leetcode show 967 --solution > 967/sol.py
+leetcode show 968 --solution > 968/sol.py
+leetcode show 969 --solution > 969/sol.py
+leetcode show 971 --solution > 971/sol.py
+leetcode show 972 --solution > 972/sol.py
+leetcode show 974 --solution > 974/sol.py
+leetcode show 975 --solution > 975/sol.py
+leetcode show 976 --solution > 976/sol.py
+leetcode show 977 --solution > 977/sol.py
+leetcode show 978 --solution > 978/sol.py
+leetcode show 979 --solution > 979/sol.py
+leetcode show 981 --solution > 981/sol.py
+leetcode show 982 --solution > 982/sol.py
+leetcode show 983 --solution > 983/sol.py
+leetcode show 984 --solution > 984/sol.py
+leetcode show 985 --solution > 985/sol.py
+leetcode show 991 --solution > 991/sol.py
+leetcode show 992 --solution > 992/sol.py
+leetcode show 993 --solution > 993/sol.py
+leetcode show 995 --solution > 995/sol.py
+leetcode show 996 --solution > 996/sol.py
+leetcode show 1006 --solution > 1006/sol.py
+leetcode show 1007 --solution > 1007/sol.py
+leetcode show -gx -o 1009/ 1009
+[ERROR] Problem not found!
+leetcode show -gx -o 1009/original/ 1009
+[ERROR] Problem not found!
+leetcode show 1009 --solution > 1009/sol.py
+leetcode show -gx -o 1010/ 1010
+[ERROR] Problem not found!
+leetcode show -gx -o 1010/original/ 1010
+[ERROR] Problem not found!
+leetcode show 1010 --solution > 1010/sol.py
+leetcode show -gx -o 1011/ 1011
+[ERROR] Problem not found!
+leetcode show -gx -o 1011/original/ 1011
+[ERROR] Problem not found!
+leetcode show 1011 --solution > 1011/sol.py
+leetcode show 1012 --solution > 1012/sol.py
+leetcode show 1013 --solution > 1013/sol.py
+leetcode show 1014 --solution > 1014/sol.py
+leetcode show 1015 --solution > 1015/sol.py

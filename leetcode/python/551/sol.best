@@ -1,0 +1,14 @@
+
+Java 1-liner
+
+https://leetcode.com/problems/student-attendance-record-i/discuss/101553
+
+* Lang:    cpp
+* Author:  compton_scatter
+* Votes:   47
+
+```
+public boolean checkRecord(String s) {
+    return !s.matches(".*LLL.*|.*A.*A.*");
+}
+```

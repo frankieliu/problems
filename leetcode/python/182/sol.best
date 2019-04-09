@@ -1,0 +1,13 @@
+
+I have this Simple Approach, anybody has some other way
+
+https://leetcode.com/problems/duplicate-emails/discuss/53528
+
+* Lang:    cpp
+* Author:  dashinghimay
+* Votes:   56
+
+select Email 
+from Person 
+group by Email 
+having count(*) > 1

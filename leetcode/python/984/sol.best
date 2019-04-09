@@ -1,0 +1,19 @@
+
+Java/C++ (and Python) simple greedy
+
+https://leetcode.com/problems/string-without-aaa-or-bbb/discuss/226649
+
+* Lang:    cpp
+* Author:  votrubac
+* Votes:   59
+
+First, I must note that this problem does not feel like \'Easy\'. The implementation is easy, but the intuition is not. In fact, I spent more time on this problem then on other \'Medium\' problems in the contest.
+
+- If the initial number of As is greater than Bs, we swap A and B.
+- For each turn, we add \'a\' to our string.
+- If the number of remaining As is greater than Bs, we add one more \'a\'.
+- Finally, we add \'b\'. 
+<iframe src="https://leetcode.com/playground/VkpuNFz6/shared" frameBorder="0" width="100%" height="210"></iframe>
+
+If you feel rather functional, here is a 3-liner (on par with the Python solution, courtesy of [@zengxinhai](https://leetcode.com/zengxinhai)):
+<iframe src="https://leetcode.com/playground/wkpugsHY/shared" frameBorder="0" width="100%" height="150"></iframe>

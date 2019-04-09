@@ -1,0 +1,30 @@
+
+Java Solution Using HashMap - Leetcode test case missing??
+
+https://leetcode.com/problems/find-anagram-mappings/discuss/113154
+
+* Lang:    cpp
+* Author:  diddit
+* Votes:   31
+
+Other solution does not handle duplicates. 
+Like [12,12] and [12,12]. (This test case missing?) Description says duplicates are possible
+So we should use ArrayList in the HashMap. 
+
+To clarify my confusion again. 
+if A[10,20,10], B[10,10,20], here multiple answer is [1,2,0] or [0,2,1].
+I don't think we should do like [1,2,1] or [0,2,0]. But some people think is okay. But i think of this "B is formed by randomizing the A", which means all indices has to be used?
+
+Let me know what you think? 
+
+    public int[] anagramMappings(int[] A, int[] B) {
+        int[] result = new int [A.length];
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for(int i = 0; i < B.length; i++) {
+            map.computeIfAbsent(B[i], k -> new ArrayList<>()).add(i);
+        }
+        for(int i = 0; i < A.length; i++) {
+            result[i] = map.get(A[i]).remove(map.get(A[i]).size()-1);
+        }
+        return result;
+    }

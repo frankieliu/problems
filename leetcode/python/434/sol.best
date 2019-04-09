@@ -1,0 +1,19 @@
+
+Clean java solution O(n)
+
+https://leetcode.com/problems/number-of-segments-in-a-string/discuss/91607
+
+* Lang:    cpp
+* Author:  asurana28
+* Votes:   59
+
+    public int countSegments(String s) {
+        int res=0;
+        for(int i=0; i<s.length(); i++)
+            if(s.charAt(i)!=' ' && (i==0 || s.charAt(i-1)==' '))
+                res++;        
+        return res;
+    }
+	
+	Time complexity:  O(n)
+	Space complexity: O(1)

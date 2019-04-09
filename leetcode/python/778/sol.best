@@ -1,0 +1,58 @@
+
+Easy and Concise Solution using PriorityQueue [Python/C++]
+
+https://leetcode.com/problems/swim-in-rising-water/discuss/113770
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   33
+
+Python:
+```
+    def swimInWater(self, grid):
+        N, pq, seen, res = len(grid), [(grid[0][0], 0, 0)], set([(0, 0)]), 0
+        while True:
+            T, x, y = heapq.heappop(pq)
+            res = max(res, T)
+            if x == y == N - 1:
+                return res
+            for i, j in [(x + 1, y), (x, y + 1), (x - 1, y), (x, y - 1)]:
+                if 0 <= i < N and 0 <= j < N and (i, j) not in seen:
+                    seen.add((i, j))
+                    heapq.heappush(pq, (grid[i][j], i, j))
+```
+C++
+```
+class Solution {
+public:
+
+    struct T {
+        int t, x, y;
+        T(int a, int b, int c) : t (a), x (b), y (c){}
+        bool operator< (const T &d) const {return t > d.t;}
+    };
+
+    int swimInWater(vector<vector<int>>& grid) {
+        int N = grid.size (), res = 0;
+        priority_queue<T> pq;
+        pq.push(T(grid[0][0], 0, 0));
+        vector<vector<int>> seen(N, vector<int>(N, 0));
+        seen[0][0] = 1;
+        static int dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, { -1, 0}};
+
+        while (true) {
+            auto p = pq.top ();
+            pq.pop ();
+            res = max(res, p.t);
+            if (p.x == N - 1 && p.y == N - 1) return res;
+            for (auto& d : dir) {
+                int i = p.x + d[0], j = p.y + d[1];
+                if (i >= 0 && i < N && j >= 0 && j < N && !seen[i][j]) {
+                    seen[i][j] = 1;
+                    pq.push (T(grid[i][j], i, j));
+                }
+            }
+        }
+    }
+};
+```

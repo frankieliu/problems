@@ -1,0 +1,29 @@
+
+[20ms] C++, Easy understand solution
+
+https://leetcode.com/problems/champagne-tower/discuss/118660
+
+* Lang:    cpp
+* Author:  suilan0602
+* Votes:   31
+
+We use a table to record the result.
+Simple idea:
+If the glass >=1, we should split the diff (glass - 1) into next level.
+
+```
+double champagneTower(int poured, int query_row, int query_glass) {
+        double result[101][101] = {0.0};
+        result[0][0] = poured;
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (result[i][j] >= 1) {
+                    result[i + 1][j] += (result[i][j] - 1) / 2.0;
+                    result[i + 1][j + 1] += (result[i][j] - 1) / 2.0;
+                    result[i][j] = 1;
+                }
+            }
+        }
+        return result[query_row][query_glass];
+    }
+```

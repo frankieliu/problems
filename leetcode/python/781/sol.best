@@ -1,0 +1,82 @@
+
+[C++/Java/Python] Easy and Concise Solution
+
+https://leetcode.com/problems/rabbits-in-forest/discuss/114721
+
+* Lang:    cpp
+* Author:  lee215
+* Votes:   27
+
+## Solution 1
+If ```x+1``` rabbits have same color, then we get ```x+1``` rabbits who all answer ```x```.
+now n rabbits answer x.
+If ```n % (x + 1) == 0```, we need ```n / (x + 1)``` groups of ```x + 1``` rabbits.
+If ```n % (x + 1) != 0```, we need ```n / (x + 1) + 1``` groups of ```x + 1``` rabbits.
+
+the number of groups is ```math.ceil(n / (x + 1))``` and it equals to ```(n + x) / (x + 1)``` , which is more elegant.
+
+**Java**
+```
+    public int numRabbits(int[] answers) {
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int i : answers)
+            m.put(i, m.getOrDefault(i, 0) + 1);
+        int res = 0;
+        for (int i : m.keySet())
+            res += (m.get(i) + i) / (i + 1) * (i + 1);
+        return res;
+    }
+```
+**C++**
+```
+    int numRabbits(vector<int>& answers) {
+        unordered_map<int, int> c;
+        for (int i : answers) c[i]++;
+        int res = 0;
+        for (auto i : c) res += (i.second + i.first) / (i.first + 1) * (i.first + 1);
+        return res;
+    }
+```
+**Python**
+```
+    def numRabbits(self, answers):
+        c = collections.Counter(answers)
+        return sum((c[i] + i) / (i + 1) * (i + 1) for i in c)
+```
+
+## Solution 2
+
+Inspried by @sggkjihua,
+We can count the `res` as we loop on the answers.
+
+**Java**
+```
+    public int numRabbits(int[] answers) {
+        int c[] = new int[1000], res = 0;
+        for (int i : answers)
+            if (c[i]++ % (i + 1) == 0)
+                res += i + 1;
+        return res;
+    }
+```
+**C++**
+```
+    public int numRabbits(int[] answers) {
+        int c[] = new int[1000], res = 0;
+        for (int i : answers)
+            if (c[i]++ % (i + 1) == 0)
+                res += i + 1;
+        return res;
+    }
+```
+**Python**
+```
+    def numRabbits(self, answers):
+        c = collections.Counter()
+        res = 0
+        for i in answers:
+            if c[i] % (i + 1) == 0:
+                res += i + 1
+            c[i] += 1
+        return res
+```

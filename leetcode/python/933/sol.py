@@ -1,1 +1,1 @@
-[ERROR] Solution not found for python3
+[ERROR] Solution not found for python
