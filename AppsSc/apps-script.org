@@ -1,0 +1,41 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* Creating an app
+https://developers.google.com/apps-script/overview
+
+* Creating a button
+http://googleappscripting.com/google-spreadsheet-button/
+1. Insert/Drawing
+2. Tools/Script Editor
+   function foo(){
+
+   }
+   File/Save
+3. Click on the button (drawing)
+4. Select assign script from three dots on NE corner
+5. Write the name of the function
+
+* Getting time
+https://stackoverflow.com/questions/28677898/google-spreadsheets-assign-a-script-to-a-button-with-parameters
+
+function Time(cell){
+  var  d = new Date();
+  var timeAsString = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+  SpreadsheetApp.getActiveSheet().getRange(cell).setValue(timeAsString); 
+};
+
+function TimeB12(){Time('B12')};
+function TimeB13(){Time('B13')};
+
+* Setting activesheet
+https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app
+setActiveSheet(sheet)
+
+* clasp command line editing of apps scripts
+
+* development environment
+https://developers.google.com/apps-script/guides/typescript
+
+* events
+https://developers.google.com/apps-script/reference/script/spreadsheet-trigger-builder

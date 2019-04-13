@@ -72,11 +72,23 @@ from itertools import combinations
 
 
 class Solution:
-    def getFactors(n):
+    def getFactors(self, n):
+        """ algorithm H
+        restricted growth strings in lexicographic order
+        1. initialize a to [0, ..., 0]
+           initialize b to [1, ..., 1]
+        2. if 1 + [a_n = 1] -> 2 blocks if a_n = m, H4
+        3. increase a_n++
+        4. j = n-1, while a_j = b_j, j--
+        5. increase a_j terminate if j = 1
+        6. zero out a_j+1 .. a_n
+           m = b_j + [aj = bj], j++, a_j = 0, b_j = m, j++
+        """
+
 
 
 
 test = True
 if test:
     s = Solution()
-    print(s.getFactors(12257))
+    print(s.getFactors(1))

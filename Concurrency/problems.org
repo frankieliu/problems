@@ -1,0 +1,16 @@
+cigarette-smokers problem
+producers-consumers problem
+readers-writers problem
+readers-writer lock
+sleeping-barber problem
+ABA problem
+banker's algorithm
+catch 22
+circular-reference
+file-locking
+ostrich-algorithm
+priority-inversion
+distributed-deadlock
+edge-chasing
+
+Read Hoare's book
