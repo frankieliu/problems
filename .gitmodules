@@ -1,3 +1,15 @@
 [submodule "Vue/standard-nodejs-quickstart/nodejs-docs-samples"]
 	path = Vue/standard-nodejs-quickstart/nodejs-docs-samples
 	url = https://github.com/GoogleCloudPlatform/nodejs-docs-samples
+[submodule "Hugo/quickstart/themes/ananke"]
+	path = Hugo/quickstart/themes/ananke
+	url = https://github.com/budparr/gohugo-theme-ananke.git
+[submodule "Hugo/quickstart/themes/beautifulhugo"]
+	path = Hugo/quickstart/themes/beautifulhugo
+	url = https://github.com/halogenica/beautifulhugo.git
+[submodule "Hugo/beautifulhugo/themes/beautifulhugo"]
+	path = Hugo/beautifulhugo/themes/beautifulhugo
+	url = https://github.com/halogenica/beautifulhugo.git
+[submodule "Hugo/hugo-theme-docdock/themes/hugo-theme-docdock"]
+	path = Hugo/hugo-theme-docdock/themes/hugo-theme-docdock
+	url = http://github.com/vjeantet/hugo-theme-docdock

@@ -70,49 +70,41 @@
 
 class Solution:
     def verifyPreorder(self, alist):
-        """
 
-        1. push the (root, parent) to stack
-        2. if next element is less that top of stack
-           push to the stack (element, parent if parent < element)
-        3. else
-           keep popping until there is no element smaller than element
-           the last item is the parent of the current element
-           push element to stack (element, parent)
-        4. if next element is smaller than root and smaller than root's parent
-           then error, else push (element, root's parent)
+        # checks if valid preorder from i to j
+        # checks if all the element in are bigger than k
+        def helper(p, i, j, mx=None):
+            # print("({},{}): {}".format(p[i], p[j], mx))
+            # one element
+            if (j-i) <= 0:
+                return True
 
-        Example:
-           testcase = [3, 2, 1, 5, 4, 6]
+            # two elements
+            if (j-i) == 1:
+                if mx:
+                    return p[i] > mx and p[j] > mx
+                else:
+                    return True
 
-        stack: 3
-        stack: 3 2
-        stack: 3 2 1
-        stack: (5,3)
-        stack: (5,3) (4,3)
-        stack: 6
+            # three elements:
+            pivot = p[i]
+            k = i
+            while k <= j:
+                if mx and p[k] < mx:
+                    return False
+                if p[k] > pivot:
+                    break
+                k += 1
+            if k > j:
+                # print("({},{}): {}, break @ {}".format(p[i], p[j], mx, k))
+                return helper(p, i+1, k-1)
+            # print("({},{}): {}, break: {}".format(p[i], p[j], mx, p[k]))
+            return (helper(p, i+1, k-1) and
+                    helper(p, k, j, p[i]))
 
-        """
-        if len(alist)<=2:
+        if len(alist) <= 1:
             return True
-
-        st = []
-        st.append((alist[0], None))
-        for i in range(1, len(alist)):
-            el = alist[i]
-            # print(el, st)
-            if el < st[-1][0]:
-                if st[-1][1]:
-                    if el < st[-1][1]:
-                        return False
-                st.append((el, st[-1][1]))
-            else:
-                # keep popping until top stack is bigger
-                parent = (None, None)
-                while st and el > st[-1][0]:
-                    parent = st.pop()
-                st.append((el, parent[0]))
-        return True
+        return helper(alist, 0, len(alist)-1)
 
 
 test = True
@@ -120,14 +112,11 @@ if test:
     s = Solution()
     case = [0, 0, 0, 1]
     if case[0]:
-        # True
         print(s.verifyPreorder([5, 2, 1, 3, 6]))
     if case[1]:
-        # True
         testcase = [1, 2, 3]
         print(s.verifyPreorder(testcase))
     if case[2]:
-        # False
         testcase = [4, 2, 3, 1]
         print(s.verifyPreorder(testcase))
     if case[3]:

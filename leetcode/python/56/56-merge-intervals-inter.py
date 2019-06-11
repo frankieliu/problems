@@ -37,6 +37,34 @@
 #         self.end = e
 
 class Solution:
+    def intersect(self, intervals):
+        """
+        :type intervals: List[Interval]
+        :rtype: List[Interval]
+        """
+        if len(intervals) <= 1:
+            return intervals
+        a = sorted(intervals)
+        last = [x[1] for x in a]
+        a.append([max(last)+1, max(last)+1])
+
+        left, right = a[0]
+        out = []
+        for i in range(1, len(a)):
+            nl, nr = a[i]
+            # intersection is happening
+            if nl <= right:
+                if nr <= right:
+                    out.append([nl, nr])
+                else:
+                    if nl != right:
+                        out.append([nl, right])
+                    right = nr
+            else:
+                left = nl
+                right = nr
+        return out
+
     def merge(self, intervals):
         """
         :type intervals: List[Interval]
@@ -67,8 +95,14 @@ class Solution:
 test = True
 if test:
     s = Solution()
-    case=[1]
-    Input = [[1,3],[2,6],[8,10],[15,18]]
-    Output = [[1,6],[8,10],[15,18]]
+    case=[0, 1]
     if case[0]:
+        Input = [[1,3],[2,6],[8,10],[15,18]]
+        # Output = [[1,6],[8,10],[15,18]]
         print(s.merge(Input))
+    if case[1]:
+        Input = [[1, 10], [2, 6], [9, 12], [14, 16], [16, 17]]
+        # union [[1, 12], [14, 17]]
+        # intersection: [[2, 6], [9, 10]]
+        print(s.merge(s.intersect(Input)))
+        # note need to merge the output

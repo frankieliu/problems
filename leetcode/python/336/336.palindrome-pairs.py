@@ -14,26 +14,26 @@
 # Given a list of unique words, find all pairs of distinct indices (i, j) in
 # the given list, so that the concatenation of the two words, i.e. words[i] +
 # words[j] is a palindrome.
-# 
+#
 # Example 1:
-# 
-# 
-# 
+#
+#
+#
 # Input: ["abcd","dcba","lls","s","sssll"]
-# Output: [[0,1],[1,0],[3,2],[2,4]] 
+# Output: [[0,1],[1,0],[3,2],[2,4]]
 # Explanation: The palindromes are ["dcbaabcd","abcddcba","slls","llssssll"]
-# 
-# 
-# 
+#
+#
+#
 # Example 2:
-# 
-# 
+#
+#
 # Input: ["bat","tab","cat"]
-# Output: [[0,1],[1,0]] 
+# Output: [[0,1],[1,0]]
 # Explanation: The palindromes are ["battab","tabbat"]
-# 
-# 
-# 
+#
+#
+#
 #
 class Solution:
     def palindromePairs(self, words):
@@ -41,3 +41,31 @@ class Solution:
         :type words: List[str]
         :rtype: List[List[int]]
         """
+        pass
+
+    def z(self, s):
+        z = [0] * len(s)
+        L, R = 0, 0
+        for i in range(1, len(s)):
+            if i > R:  # find the new R
+                L, R = i, i
+                while R < len(s) and s[R-L] == s[R]:
+                    R += 1
+                z[i] = R-L
+                R -= 1
+            else:      # inside LR
+                k = i-L
+                if z[k] < R-i+1:
+                    z[i] = z[k]
+                else:
+                    L = i
+                    while R < len(s) and s[R-L] == s[R]:
+                        R += 1
+                    z[i] = R-L
+                    R -= 1
+        return z
+
+
+test = True
+if test:
+    s = Solution()
