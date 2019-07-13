@@ -1,0 +1,221 @@
+
+
+# Threaded Tree
+"""
+You can do this with a threaded tree. Here's an outline of the method
+(taken from here—see slide 31):
+
+Postorder: a dummy node created that has root as left descendant.
+
+A variable can be used to check type of current action.
+
+If action is left traversal and current node has a left descendant,
+then descendant is traversed. Otherwise action changed to right
+traversal.
+
+If action is right traversal and current node has a left descendant,
+action changed to left traversal. Otherwise action changed to visiting
+a node.
+
+If action is visiting node: current node is visited, afterwards its
+postorder successor has to be found.
+
+If current node’s parent accessible through a thread (i.e. current
+node is parent’s left child) then traversal is set to continue with
+the right descendant of parent.
+
+If current node has no right descendant, this is the end of the
+right-extended chain of nodes.
+
+First: the beginning of the chain is reached through the thread of the
+current node.
+
+Second: right references of nodes in the chain is reversed.
+
+Finally: chain is scanned backward, each node is visited, then right
+references are restored to previous settings.
+
+As the above reference goes on to show, it can also be done without
+threading if you use temporary modifications to the tree structure.
+
+https://stackoverflow.com/questions/10694037/postorder-traversal-of-tree-without-using-recursion-or-stack
+
+----------------------------------------------------------------------
+
+This is too complicated, maybe look at the quora solution
+
+Well this is really interesting question, you may rarely found
+solution of your question over Google bec. of its toughness.
+
+I'll try to explain, how we can achieve post-order traversal using
+Morris method.
+
+Pre-requirement :
+
+Before explaining, post-order traversal, lets revise in-order
+traversal.
+
+In In-order traversal, start from root node
+
+1. if current node has left child then find its in-order predecessor
+   and make root as right child of it and move left of root. [ to find
+   predecessor, find the max element in its left subtree ]
+
+2. if current node don't have left child , then print data and move
+   right.
+
+   Restore Tree: The main thing which should be observe is that while
+   performing step 1, we'll reach a point where predecessor right
+   child is itself current node, this only happen when whole left
+   child turned off and we start printing data from there.  [ when you
+   found no left child of current node]
+
+   So for this case, we need to cut right child off of that node.
+
+Below is sample code:
+
+void MorriesInorder(BTnode root) {
+    if(root == null ) return;
+   BTnode temp;
+    while ( root!=null){
+       //case 2: when left child does not exist
+          if ( root.left == null ) {
+                   print( root.data );
+                   root = root.right;
+        }else {
+                //find predecessor
+                 temp = root.left;
+                 while ( temp.right!=null &&
+                          temp.right!=root) //  to check restore case
+                       temp = temp.right;
+
+                 if ( temp.right == null ) //predecessor found, converting
+                {
+                          temp.right = root;
+                          root = root.left;
+                } else {
+                      print root.data;
+                      temp.right = null; //  cut right child off
+                      root = root.right;
+                 }
+        }
+
+    }
+}
+
+So now back to Original Question, How do we perform Postorder
+traversal.
+
+We'll use above concept with minor changes to achieve postorder
+traversal.
+
+First lets have a dummy node and make whole tree as left child of
+dummy node and make right child empty. [ why? Bec if we assume there
+is no right child of root then prinitng left child and then root
+become postorder traversal, Right ;) ]
+
+Now what next? Are we finished, No...
+
+only performing inorder on new tree does not make any sense, it still
+printing inorder traversal of original tree followed by dummy node.
+
+First remove printing data from case 2 [ discussed in inorder traversal]
+
+Critical Part: Now closely observe inner else block, this the piece of
+code which require attention. Since this temporarily extended tree is
+the subject of traversal as in in-order traversal except that in the
+inner else clause, after finding a temporary parent, nodes between
+p.left (included) and p (excluded) extended to the right in a modified
+tree are processed in the reverse order. To process them in constant
+time, the chain of nodes is scanned down and right references are
+reversed to refer to parents of nodes. Then the same chain is scanned
+upward, each node is visited, and the right references are restored to
+their original setting.
+
+Hope this clear the concept.
+
+I'll paste code soon.....
+
+Kartik Saraswat
+Kartik Saraswat, Student of computer science
+Answered May 9, 2016
+
+Nitin Gupta has already explained the strategy correctly , so read
+that answer before going through this code.
+
+//This is Post Order :children before node( L ,R , N)
+void morrisPostorderTraversal(Node *root){
+
+	// Making our tree left subtree of a dummy Node
+
+	Node *dummyRoot = new Node(0);
+	dummyRoot->left = root;
+
+	// Think of P as the current node
+
+	Node *p = dummyRoot, *pred, *first, *middle, *last;
+
+	while(p!=NULL){
+
+		if(p->left == NULL) {
+			p = p->right;
+		} else{
+			/* p has a left child => it also has a predeccessor
+			   make p as right child predeccessor of p
+			*/
+			pred = p->left;
+			while(pred->right!=NULL && pred->right != p){
+				pred = pred->right;
+			}
+
+			if(pred->right == NULL){
+
+				// predeccessor found for first time
+				// modify the tree
+
+				pred->right = p;
+				p = p->left;
+
+			}else {
+
+			   // predeccessor found second time
+                           // reverse the right references in chain from
+			   // pred to p
+
+				first = p;
+				middle = p->left;
+				while(middle!=p){
+					last = middle->right;
+					middle->right = first;
+					first = middle;
+					middle = last;
+				}
+
+				// visit the nodes from pred to p
+                                // again reverse the right references
+                                // from pred to p
+
+				first = p;
+				middle = pred;
+				while(middle!=p){
+
+					cout << " " << middle->data;
+					last = middle->right;
+					middle->right = first;
+					first = middle;
+					middle = last;
+				}
+
+				// remove the pred to node reference
+				// to restore the tree structure
+
+				pred->right = NULL;
+				p = p-> right;
+			}
+		}
+	}
+}
+
+https://www.quora.com/What-is-a-good-way-to-implement-stackless-recursion-less-post-order-traversal-for-a-non-threaded-binary-tree-using-Morris-method
+
+"""

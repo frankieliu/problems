@@ -1,0 +1,252 @@
+Working with Databases
+======================
+
+Python Database API is specified by `PEP 289 
+<http://www.python.org/dev/peps/pep-0249/>`_. It defines the minimum API 
+required to be provided for each database library.
+
+There are driver libraries for each database engine and usually, each driver 
+provides some functionality in addition to the minimu functionality required by 
+the DB API.
+
+In this chapter, we are going to use a table `people` with there columns `id`, 
+`name` and `email`. The `id` column is an auto incremented integer and the 
+other two are string columns.
+
+Connection and Cursor
+---------------------
+
+Connection objects are the interface to the database. They are created by 
+calling ``create`` function in the driver module.
+
+.. code-block:: python
+
+    # This will be replaced by the driver module name
+    import dbmodule 
+
+    # the parameters to the connect function are driver dependent
+    db = dbmodule.connect(...)
+    
+The cursor objects are used to execute queries and fetch results.
+
+.. code-block:: python
+
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM people")
+    for row in cursor.fetchall():
+        print row
+    cursor.close()
+    db.close()
+
+Database Drivers
+----------------
+
+SQLite - sqlite3
+^^^^^^^^^^^^^^^^
+
+SQLite is a stand-along database, which stores the entite database in a single file. 
+
+The driver module for ``SQLite`` is `sqlite3 <http://docs.python.org/library/sqlite3.html>`_ and it is part of the Python standard library.
+
+To open a connection:
+
+.. code-block:: python
+
+    import sqlite3
+    db = sqlite3.connect(database="test.db")
+    
+SQLite also supports creating database in memory.
+
+.. code-block:: python
+
+    import sqlite3
+    db = sqlite3.connect(database=":memory:")
+
+MySQL - MySQL-python
+^^^^^^^^^^^^^^^^^^^^
+
+The driver of ``MySQL`` is `MySQL-python <http://mysql-python.sourceforge.net/MySQLdb.html>`_. It can be installed using ``pip`` or ``easy_install``.
+
+.. code-block:: text
+
+    $ pip install MySQL-python
+
+To open a connection:
+
+.. code-block:: python
+
+    import MySQLdb
+    db = MySQLdb.connect(host="localhost", db="testdb", user="foo", passwd="foo123")
+
+PostgreSQL - psycopg2
+^^^^^^^^^^^^^^^^^^^^^
+
+The driver for `PostgreSQL` is `psycopg2 <http://www.initd.org/psycopg/docs/>`_. It can be installed using ``pip`` or ``easy_install``.
+
+.. code-block:: text
+
+    $ pip install psycopg2
+
+To open a connection:
+
+.. code-block:: python
+
+    import psycopg2
+    db = psycopg2.connect(host="localhost", db="testdb", user="foo", passwd="foo123")
+
+
+Oracle - cx_Oracle
+^^^^^^^^^^^^^^^^^^
+
+The driver for Oracle is `cx_Oracle <http://cx-oracle.sourceforge.net/html/index.html>`_. It can be installed using ``pip`` or ``easy_install``.
+
+.. code-block:: python
+
+    import cx_Oracle
+    cx_Oracle.connect('foo', 'foo123', 'localhost:1521/XE')
+
+The ``connect`` function takes, username, password and dsn (data source name) as arguments.
+
+It can also be called as:
+
+.. code-block:: python
+
+    cx_Oracle.connect('foo/foo123@localhost:1521/XE')
+
+To use the database in multi-threaded enviroments, pass ``threaded=True`` keyword 
+argument. That will make the driver to wrap the access to the connections with 
+a mutex lock.
+
+.. code-block:: python
+
+    cx_Oracle.connect('foo', 'foo123', 'localhost:1521/XE', threaded=True)
+    
+Working with Cursors
+--------------------
+
+Once we have a connection object, we need to create cursor to execute statements and fetch results.
+
+.. code-block:: python
+
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM people")
+
+After executing a query, results can be fetched using ``fetchone`` or ``fetchall`` methods. 
+
+The ``fetchone`` method returns one row from the result set. If there are no 
+rows in the result, ``None`` is returned. Each row is a tuple containing the 
+values of a row.
+
+.. code-block:: python
+
+    >>> print cursor.fetchone()
+    (1, u'one', u'one@example.com')
+    >>> print cursor.fetchone()
+    (2, u'two', u'two@example.com')
+    >>> print cursor.fetchone()
+    None
+
+The ``fetchall`` method returns all the rows as a list.
+
+.. code-block:: python
+
+    >>> print cursor.fetchall()
+    [(1, u'one', u'one@example.com'), (2, u'two', u'two@example.com')]
+    
+Query Parametrers
+-----------------
+
+Sometimes we need to create queries using some input data.
+
+It is tempting to try string-substitution, but it should *never* be used. 
+
+.. code-block:: python
+
+    def find_user_by_email(db, email):
+        # THIS IS BAD
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM people WHERE email='%s'" % email)
+        return cursor.fetchone()
+        
+The right way to do that is using paramaters. Each driver module suports 
+one of the following of parameter styles. 
+
+* qmark -- ``cursor.execute("SELECT * FROM people WHERE email=?", [email])``
+* numeric -- ``cursor.execute("SELECT * FROM people WHERE email=:1", [email])``
+* named -- ``cursor.execute("SELECT * FROM people WHERE email=:email", {"email": email})``
+* format -- ``cursor.execute("SELECT * FROM people WHERE email=%s", [email])``
+* pyformat -- ``cursor.execute("SELECT * FROM people WHERE email=%s", {"email": email})``
+
+The paramstytle supported by a module can found by using `paramstytle` variable in the module.
+
+.. code-block:: python
+
+    >>> import sqlite3
+    >>> sqlite3.paramstyle
+    'qmark'
+
+The default paramstyles for various drivers are as follows:
+
+* ``sqlite3`` -- ``qmark``
+* ``MySQLdb`` -- ``format``
+* ``psycopg2`` -- ``pyformat``
+* ``cx_Oracle`` -- ``named``
+
+Directly creating queries instead of using parameters can lead to `SQL injection <https://en.wikipedia.org/wiki/SQL_injection>`_ attacks.
+
+Imangine what happens in our bad example when email is "foo'; DROP TABLE people where '1=1".
+
+Database Transactions
+---------------------
+
+Typically, a database transaction is created automatically when a query is executed for the first time. Whenever we execute any statements like INSERT, UPDATE or DELETE, we should commit the transction by calling the ``commit`` method on the connection object. Failing which, the transaction is rolled back when the connection is closed.
+
+This is usually the case for all database drivers, unless auto-commit feature is turned on. 
+
+.. code-block:: python
+
+    db = sqlite3.connect(database="test.db")
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO people (name, email) VALUES (?, ?)", ("one", "one@example.com"))
+    cursor.execute("INSERT INTO people (name, email) VALUES (?, ?)", ("two", "two@example.com"))
+
+    # This is important. Without this, the transacation will be rolled back and 
+    # the inserts will be lost!
+    db.commit()
+    
+It is a good practice to put multiple inserts in a try-except-else block.
+
+.. code-block:: python
+
+    def insert_person(db, data):
+        cursor = db.cursor()
+        try:
+            cursor.execute("INSERT INTO table1 ...")
+            cursor.execute("INSERT INTO table2 ...")
+        except:
+            db.rollback()
+            raise
+        else:
+            db.commit()
+
+Connection Pooling
+------------------
+
+Creating a connection usually invoves allocating some server resources like processes, memory buffers etc. If your applcition requires to open connections frequently, it is a good idea to pool the connections. It allows reusing the connections without having to create a new one every time.
+
+The ``cx_Oracle`` module supports connection polling. 
+
+.. code-block:: python
+
+    pool = cx_Oracle.SessionPool("foo", "foo123", "localhost:1521/XE")
+    db = pool.acquire()
+    
+The ``acquire`` method on ``SessionPool`` object returns a db connection. 
+
+Object Relational Mapping
+-------------------------
+
+Working with connections and cursors is very low-level. Sometimes, we need higher-level abstractions to work with data objects directly instead of worrying about tables and rows. Object relational mapping libraries provide such abstractions.
+
+`SQLAlchemy <http://www.sqlalchemy.org/>`_ is a popular ORM.
+

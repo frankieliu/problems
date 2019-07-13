@@ -1,0 +1,105 @@
+Fun with Sudoku
+===============
+
+Sudoku is a logic puzzle. The objective of the puzzle is to fill a 9x9 grid with digits from 1 to 9 such that each column, row and each 3x3 block contain all the 9 digits. Same digit never appear more than once in each row, column or 3x3 block.
+
+Lets look at a sample puzzle. Empty places are usually denoted by a dot.
+
+.. code-block:: text
+
+    5 3 . | . 7 . | . . . 
+    6 . . | 1 9 5 | . . .
+    . 9 8 | . . . | . 6 .
+    ------+-------+------ 
+    8 . . | . 6 . | . . 3
+    4 . . | 8 . 3 | . . 1 
+    7 . . | . 2 . | . . 6 
+    ------+-------+------ 
+    . 6 . | . . . | 2 8 .
+    . . . | 4 1 9 | . . 5 
+    . . . | . 8 . | . 7 9
+
+Here is the solved puzzle.
+
+.. code-block:: text
+
+    5 3 4 | 6 7 8 | 9 1 2
+    6 7 2 | 1 9 5 | 3 4 8 
+    1 9 8 | 3 4 2 | 5 6 7
+    ------+-------+------ 
+    8 5 9 | 7 6 1 | 4 2 3
+    4 2 6 | 8 5 3 | 7 9 1 
+    7 1 3 | 9 2 4 | 8 5 6 
+    ------+-------+------ 
+    9 6 1 | 5 3 7 | 2 8 4 
+    2 8 7 | 4 1 9 | 6 3 5 
+    3 4 5 | 2 8 6 | 1 7 9
+    
+The simplest way to represent this in Python is a list of lists. We can use 0 or None to represent the empty location.
+
+
+parse_file(filename)
+parse_string(text)
+tostring(p)
+
+swap_rows(p, row1, row2)
+swap_cols(p, col1, col2)
+transpose(p)
+copy(p)
+
+
+
+
+
+.. code-block:: python
+
+    p = [
+        [5, 3, 0, 0, 7, 0, 0, 0, 0], 
+        [6, 0, 0, 1, 9, 5, 0, 0, 0], 
+        [0, 9, 8, 0, 0, 0, 0, 6, 0], 
+        [8, 0, 0, 0, 6, 0, 0, 0, 3], 
+        [4, 0, 0, 8, 0, 3, 0, 0, 1], 
+        [7, 0, 0, 0, 2, 0, 0, 0, 6], 
+        [0, 6, 0, 0, 0, 0, 2, 8, 0], 
+        [0, 0, 0, 4, 1, 9, 0, 0, 5], 
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    ]
+
+.. problem:: write a function `print_sudoku` to print given sudoku puzzle in the nice format shown above.
+
+.. problem:: Sudoku has some wonderful properties. If we swap any two rows or two columns in the same 3x3 block, it will still be a valid sudoku puzzle. Write two functions `swap_row(row1, row2)` and `swap_col(col1, col2)` two swap any two rows or columns.
+
+.. problem:: Write a function `transpose` to transpose a sudoku puzzle.
+
+.. problem:: Write a function `copy` to copy one sudoku puzzle into another.
+    
+.. problem:: Write function to parse the sudoku files. The function takes the filename as argument and returns the sudoku puzzle as a 2-d array.
+
+    >>> s = parse_sudoku("sudoku.txt")
+    >>> s[0]
+    [5, 3, 0, 0, 7, 0, 0, 0, 0]
+
+.. problem:: Some times the sudoku puzzle is written without any spaces and the block separators.
+
+.. code-block:: text
+
+    53..7....
+    6..195...
+    .98....6.
+    8...6...3
+    4..8.3..1
+    7...2...6
+    .6....28.
+    ...419..5
+    ....8..79
+
+Or in one single line.
+
+.. code-block:: text
+
+    53..7....6..195....98....6.8...6...34..8.3..17...2...6.6....28....419..5....8..79
+    
+Change the above program to handle these two cases as well along with the first one.
+
+.. program:: Now that we have the sudoku reader, lets write a program to print the 
+

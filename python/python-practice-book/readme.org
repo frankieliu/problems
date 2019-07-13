@@ -1,0 +1,51 @@
+https://anandology.com/python-practice-book/modules.html
+../
+1-getting-started.txt                              31-Mar-2012 02:02               14162
+best_practices.txt                                 09-Apr-2012 13:00                1758
+classes.txt                                        02-Apr-2012 17:16                 106
+datastructures.txt                                 29-Apr-2012 01:53               25941
+dbapi.txt                                          09-Apr-2012 17:59                7962
+functional-programming.txt                         06-Jan-2016 17:43               12920
+functional_programming.txt                         12-Oct-2012 07:24               11901
+getting-started.txt                                06-Jan-2016 17:43               16870
+index.txt                                          06-Jan-2016 17:43                 999
+iterators.txt                                      06-Jan-2016 17:43               12001
+modules.txt                                        06-Jan-2016 17:43               11984
+object_oriented_programming.txt                    06-Jan-2016 17:43               11407
+references.txt                                     29-Apr-2012 01:50                1691
+standard_library.txt                               28-Mar-2012 13:16                  35
+sudoku.txt                                         30-Mar-2012 05:36                2954
+threads.txt                                        10-Apr-2012 02:58                6287
+varargs.txt                                        28-Mar-2012 13:16                1412
+working-with-data.txt                              06-Jan-2016 17:43  27523
+
+#+begin_src python :results output
+  sites = '''1-getting-started.txt
+  best_practices.txt
+  classes.txt
+  datastructures.txt
+  dbapi.txt
+  functional-programming.txt
+  functional_programming.txt
+  getting-started.txt
+  index.txt
+  iterators.txt
+  modules.txt
+  object_oriented_programming.txt
+  references.txt
+  standard_library.txt
+  sudoku.txt
+  threads.txt
+  varargs.txt
+  working-with-data.txt
+  '''
+  import subprocess
+  outdir = './book/'
+  base = 'https://anandology.com/python-practice-book/_sources'
+  for x in sites.splitlines():
+      subprocess.run(
+          "wget {}/{} -P {}".format(base, x, outdir),
+          shell=True)
+#+end_src
+
+#+RESULTS:

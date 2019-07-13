@@ -1,0 +1,8 @@
+Classes and Objects
+===================
+
+* class is a datastructure
+* class is a behavior
+* duck typing
+
+
