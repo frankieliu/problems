@@ -1,57 +1,77 @@
-[1020] Partition Array Into Three Parts With Equal Sum  
+In leetcode init
+[TRACE] inited plugin: cookie.chrome
+[TRACE] skipped plugin: lintcode
+[TRACE] skipped plugin: leetcode.cn
+[TRACE] inited plugin: retry
+[TRACE] inited plugin: cache
+[TRACE] inited plugin: company
+[TRACE] inited plugin: solution.discuss
+[DEBUG] cache hit: problems.json
+[DEBUG] cache hit: 1107.new-users-daily-count.database.json
+[1107] New Users Daily Count  
 
-https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/description/
+https://leetcode.com/problems/new-users-daily-count/description/
 
-Tags:   algorithms 
+Tags:   database 
 
-Langs:  c   cpp   csharp   golang   java   javascript   kotlin   php   python   python3   ruby   rust   scala   swift 
+Langs:  mssql   mysql   oraclesql 
 
-* algorithms
-* Easy (53.03%)
-* Source Code:       1020/original/1020.partition-array-into-three-parts-with-equal-sum.0.cpp
-* Total Accepted:    6.5K
-* Total Submissions: 12.2K
-* Testcase Example:  '[0,2,1,-6,6,-7,9,1,2,0,1]'
+* database
+* Medium (58.00%)
+* Source Code:       1107/original/1107.new-users-daily-count.sql
+* Total Accepted:    29
+* Total Submissions: 50
+* Testcase Example:  '{"headers":{"Traffic":["user_id","activity","activity_date"]},"rows":{"Traffic":[[1,"login","2019-05-01"],[1,"homepage","2019-05-01"],[1,"logout","2019-05-01"],[2,"login","2019-06-21"],[2,"logout","2019-06-21"],[3,"login","2019-01-01"],[3,"jobs","2019-01-01"],[3,"logout","2019-01-01"],[4,"login","2019-06-21"],[4,"groups","2019-06-21"],[4,"logout","2019-06-21"],[5,"login","2019-03-01"],[5,"logout","2019-03-01"],[5,"login","2019-06-21"],[5,"logout","2019-06-21"]]}}'
 
-Given an array A of integers, return true if and only if we can partition the array into three non-empty parts with equal sums.
-
-Formally, we can partition the array if we can find indexes i+1 < j with (A[0] + A[1] + ... + A[i] == A[i+1] + A[i+2] + ... + A[j-1] == A[j] + A[j-1] + ... + A[A.length - 1])
-
- 
-
-Example 1:
-
-
-Input: [0,2,1,-6,6,-7,9,1,2,0,1]
-Output: true
-Explanation: 0 + 2 + 1 = -6 + 6 - 7 + 9 + 1 = 2 + 0 + 1
-
+Table: Traffic
 
 
-Example 2:
-
-
-Input: [0,2,1,-6,6,7,9,-1,2,0,1]
-Output: false
-
-
-
-Example 3:
-
-
-Input: [3,3,6,5,-2,2,5,1,-9,4]
-Output: true
-Explanation: 3 + 3 = 6 = 5 - 2 + 2 + 5 + 1 - 9 + 4
-
-
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| user_id       | int     |
+| activity      | enum    |
+| activity_date | date    |
++---------------+---------+
+There is no primary key for this table, it may have duplicate rows.
+The activity column is an ENUM type of ('login', 'logout', 'jobs', 'groups', 'homepage').
 
 
  
 
-Note:
+Write an SQL query that reports for every date within at most 90 days from today, the number of users that logged in for the first time on that date. Assume today is 2019-06-30.
+
+The query result format is in the following example:
 
 
-	3 <= A.length <= 50000
-	-10000 <= A[i] <= 10000
+Traffic table:
++---------+----------+---------------+
+| user_id | activity | activity_date |
++---------+----------+---------------+
+| 1       | login    | 2019-05-01    |
+| 1       | homepage | 2019-05-01    |
+| 1       | logout   | 2019-05-01    |
+| 2       | login    | 2019-06-21    |
+| 2       | logout   | 2019-06-21    |
+| 3       | login    | 2019-01-01    |
+| 3       | jobs     | 2019-01-01    |
+| 3       | logout   | 2019-01-01    |
+| 4       | login    | 2019-06-21    |
+| 4       | groups   | 2019-06-21    |
+| 4       | logout   | 2019-06-21    |
+| 5       | login    | 2019-03-01    |
+| 5       | logout   | 2019-03-01    |
+| 5       | login    | 2019-06-21    |
+| 5       | logout   | 2019-06-21    |
++---------+----------+---------------+
 
+Result table:
++------------+-------------+
+| login_date | user_count  |
++------------+-------------+
+| 2019-05-01 | 1           |
+| 2019-06-21 | 2           |
++------------+-------------+
+Note that we only care about dates with non zero user count.
+The user with id 5 first logged in on 2019-03-01 so he's not counted on 2019-06-21.
 

@@ -1,0 +1,116 @@
+from collections import defaultdict
+
+
+class Solution:
+
+    def near(self, i, j, w):
+        ret = sum([x[0] == x[1] for x in zip(w[i], w[j])])
+        return ret
+
+    def nearw(self, wi, wj):
+        ret = sum([x[0] == x[1] for x in zip(wi, wj)])
+        return ret
+
+    def guess(self, select, secret):
+        return self.nearw(select, secret)
+
+    def findSecretWord(self, w, master):
+        """
+        create a "near" list
+        """
+
+        h = [None] * len(w)  # keeps the set
+        n = [None] * len(w)  # keeps the near matrix
+        for i in range(len(h)):
+            h[i] = defaultdict(set)
+            n[i] = [0] * len(w)
+
+        for i in range(0, len(w) - 1):
+            for j in range(i + 1, len(w)):
+                nr = self.near(i, j, w)
+                n[i][j], n[j][i] = nr, nr
+                h[i][nr].add(j)
+                h[j][nr].add(i)
+
+        def remaining_choices(select, nr, choices):
+            return len(h[select][nr] & choices)
+
+        choices = set(range(len(w)))
+        while True:
+            max_cost = {}
+            if len(choices) > 1:
+                for select in choices:
+                    cost = {}
+                    visited = set()
+                    for secret in choices:
+                        if select != secret:
+                            nr = n[select][secret]
+                            if nr not in visited:
+                                cost[secret] = remaining_choices(
+                                    select, nr, choices)
+                                visited.add(nr)
+                    # find the max cost among all the secrets
+                    max_cost[select] = max(cost.items(), key=lambda x: x[1])
+                mcost = {k: v[1] for k, v in max_cost.items()}
+                minmax = min(mcost.items(), key=lambda x: x[1])
+                selection = minmax[0]
+            else:
+                selection = list(choices)[0]
+
+            offline = False
+            if offline:
+                my_secret = w[1]
+                my_secret = "hbaczn"
+                matches = self.guess(w[selection], my_secret)
+                my_secret_index = w.index(my_secret)
+                print(
+                    ("Secret: {}, Index: {}, " +
+                     "Matches: {}, N: {}, |N|: {}").format(
+                         my_secret, my_secret_index,
+                         n[selection][my_secret_index],
+                         h[selection][matches],
+                         len(h[selection][matches])))
+            else:
+                matches = master.guess(w[selection])
+
+            if matches == 6:
+                print("found")
+                break
+            choices = h[selection][matches] & choices
+
+        return w[selection]
+
+
+test = True
+if test:
+    s = Solution()
+    case = [False] * 1 + [True] + [False] * 1
+    master = None
+    if case[0]:
+        # Example 1:
+        secret = "acckzz"
+        wordlist = ["acckzz", "ccbazz", "eiowzz", "abcczz"]
+        print(s.findSecretWord(wordlist, master))
+    if case[1]:
+        secret = "hbaczn"
+        wordlist = [
+            "gaxckt", "trlccr", "jxwhkz", "ycbfps", "peayuf", "yiejjw",
+            "ldzccp", "nqsjoa", "qrjasy", "pcldos", "acrtag", "buyeia",
+            "ubmtpj", "drtclz", "zqderp", "snywek", "caoztp", "ibpghw",
+            "evtkhl", "bhpfla", "ymqhxk", "qkvipb", "tvmued", "rvbass",
+            "axeasm", "qolsjg", "roswcb", "vdjgxx", "bugbyv", "zipjpc",
+            "tamszl", "osdifo", "dvxlxm", "iwmyfb", "wmnwhe", "hslnop",
+            "nkrfwn", "puvgve", "rqsqpq", "jwoswl", "tittgf", "evqsqe",
+            "aishiv", "pmwovj", "sorbte", "hbaczn", "coifed", "hrctvp",
+            "vkytbw", "dizcxz", "arabol", "uywurk", "ppywdo", "resfls",
+            "tmoliy", "etriev", "oanvlx", "wcsnzy", "loufkw", "onnwcy",
+            "novblw", "mtxgwe", "rgrdbt", "ckolob", "kxnflb", "phonmg",
+            "egcdab", "cykndr", "lkzobv", "ifwmwp", "jqmbib", "mypnvf",
+            "lnrgnj", "clijwa", "kiioqr", "syzebr", "rqsmhg", "sczjmz",
+            "hsdjfp", "mjcgvm", "ajotcx", "olgnfv", "mjyjxj", "wzgbmg",
+            "lpcnbj", "yjjlwn", "blrogv", "bdplzs", "oxblph", "twejel",
+            "rupapy", "euwrrz", "apiqzu", "ydcroj", "ldvzgq", "zailgu",
+            "xgqpsr", "wxdyho", "alrplq", "brklfk"
+        ]
+        print(s.findSecretWord(wordlist, master))
+

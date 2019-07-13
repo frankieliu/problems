@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k}{def} \PYG{n+nf}{boring}\PYG{p}{(}\PYG{n}{args} \PYG{o}{=} \PYG{n+nb+bp}{None}\PYG{p}{):}
+    \PYG{k}{pass}
+\end{Verbatim}

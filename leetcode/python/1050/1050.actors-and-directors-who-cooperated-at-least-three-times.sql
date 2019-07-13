@@ -1,0 +1,60 @@
+--
+-- @lc app=leetcode id=1050 lang=mysql
+--
+-- [1050] Actors and Directors Who Cooperated At Least Three Times
+--
+-- https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/description/
+--
+-- database
+-- Easy (75.37%)
+-- Total Accepted:    1.9K
+-- Total Submissions: 2.6K
+-- Testcase Example:  '{"headers":{"ActorDirector":["actor_id","director_id","timestamp"]},"rows":{"ActorDirector":[[1,1,0],[1,1,1],[1,1,2],[1,2,3],[1,2,4],[2,1,5],[2,1,6]]}}'
+--
+-- Table: ActorDirector
+-- 
+-- 
+-- +-------------+---------+
+-- | Column Name | Type    |
+-- +-------------+---------+
+-- | actor_id    | int     |
+-- | director_id | int     |
+-- | timestamp   | int     |
+-- +-------------+---------+
+-- timestamp is the primary key column for this table.
+-- 
+-- 
+-- 
+-- 
+-- Write a SQL query for a report that provides the pairs (actor_id,
+-- director_id) where the actor have cooperated with the director at least 3
+-- times.
+-- 
+-- Example:
+-- 
+-- 
+-- ActorDirector table:
+-- +-------------+-------------+-------------+
+-- | actor_id    | director_id | timestamp   |
+-- +-------------+-------------+-------------+
+-- | 1           | 1           | 0           |
+-- | 1           | 1           | 1           |
+-- | 1           | 1           | 2           |
+-- | 1           | 2           | 3           |
+-- | 1           | 2           | 4           |
+-- | 2           | 1           | 5           |
+-- | 2           | 1           | 6           |
+-- +-------------+-------------+-------------+
+-- 
+-- Result table:
+-- +-------------+-------------+
+-- | actor_id    | director_id |
+-- +-------------+-------------+
+-- | 1           | 1           |
+-- +-------------+-------------+
+-- The only pair is (1, 1) where they cooperated exactly 3 times.
+-- 
+-- 
+--
+# Write your MySQL query statement below
+

@@ -88,7 +88,9 @@ function my_sol() {
     fi
 }
 
-usage() { echo "Usage: $0 [-b <begin>] [-e <end>] [-p <number>] [-n (dryrun)] [-s (skip solution)]" 1>&2; exit 1; }
+usage() {
+    echo "Clear leetcode cache first: leetcode cache -d"
+    echo "Usage: $0 [-b <begin>] [-e <end>] [-p <number>] [-n (dryrun)] [-s (skip solution)]" 1>&2; exit 1; }
 solution=1
 while getopts ":b:e:snp:" o; do
     case "${o}" in

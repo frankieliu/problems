@@ -36,29 +36,30 @@
 #
 #
 class Solution:
-    def findMin(self, nums):
+    def findMin(self, n):
         """
         :type nums: List[int]
         :rtype: int
         """
-        return self.help(nums, 0, len(nums))
-
-    def help(self, nums, i, j):
-        print(nums[i:j])
-        if (j-i) == 0:
+        if len(n) == 0:
             return None
-        if (j-i) == 1:
-            return nums[i]
-        if (j-i) == 2:
-            return min(nums[i], nums[i+1])
-        mid = (j+i) // 2
-        if nums[mid] >= nums[j-1]:
-            return self.help(nums, mid+1, j)
-        else:
-            return self.help(nums, i, mid+1)
+        if len(n) == 1:
+            return n[0]
+        l, r = 0, len(n)-1
+        while l < r:
+            print(l,r)
+            m = (l+r)//2
+            if n[m] > n[r]:
+                print("go right")
+                l = m+1
+            else:
+                print("go left")
+                r = m
+        return n[l]
 
 
-test = False
+test = True
 if test:
     s = Solution()
+    print(s.findMin([4,5,1,2,3,4]))
     print(s.findMin([4,5,1,2,3,4]))

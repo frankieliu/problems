@@ -1,0 +1,117 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{defaultdict}
+
+
+\PYG{k}{class} \PYG{n+nc}{Solution}\PYG{p}{:}
+
+    \PYG{k}{def} \PYG{n+nf}{near}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{,} \PYG{n}{w}\PYG{p}{):}
+        \PYG{n}{ret} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{([}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{w}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{w}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])])}
+        \PYG{k}{return} \PYG{n}{ret}
+
+    \PYG{k}{def} \PYG{n+nf}{nearw}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{wi}\PYG{p}{,} \PYG{n}{wj}\PYG{p}{):}
+        \PYG{n}{ret} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{([}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{wi}\PYG{p}{,} \PYG{n}{wj}\PYG{p}{)])}
+        \PYG{k}{return} \PYG{n}{ret}
+
+    \PYG{k}{def} \PYG{n+nf}{guess}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{select}\PYG{p}{,} \PYG{n}{secret}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{nearw}\PYG{p}{(}\PYG{n}{select}\PYG{p}{,} \PYG{n}{secret}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{findSecretWord}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{w}\PYG{p}{,} \PYG{n}{master}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{        create a \PYGZdq{}near\PYGZdq{} list}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+        \PYG{n}{h} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb+bp}{None}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} keeps the set}
+        \PYG{n}{n} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb+bp}{None}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} keeps the near matrix}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{h}\PYG{p}{)):}
+            \PYG{n}{h}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{defaultdict}\PYG{p}{(}\PYG{n+nb}{set}\PYG{p}{)}
+            \PYG{n}{n}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)}
+
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{):}
+            \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)):}
+                \PYG{n}{nr} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{near}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{,} \PYG{n}{w}\PYG{p}{)}
+                \PYG{n}{n}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{],} \PYG{n}{n}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{nr}\PYG{p}{,} \PYG{n}{nr}
+                \PYG{n}{h}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{nr}\PYG{p}{]}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{j}\PYG{p}{)}
+                \PYG{n}{h}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{nr}\PYG{p}{]}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}
+
+        \PYG{k}{def} \PYG{n+nf}{remaining\PYGZus{}choices}\PYG{p}{(}\PYG{n}{select}\PYG{p}{,} \PYG{n}{nr}\PYG{p}{,} \PYG{n}{choices}\PYG{p}{):}
+            \PYG{k}{return} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{h}\PYG{p}{[}\PYG{n}{select}\PYG{p}{][}\PYG{n}{nr}\PYG{p}{]} \PYG{o}{\PYGZam{}} \PYG{n}{choices}\PYG{p}{)}
+
+        \PYG{n}{choices} \PYG{o}{=} \PYG{n+nb}{set}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{w}\PYG{p}{)))}
+        \PYG{k}{while} \PYG{n+nb+bp}{True}\PYG{p}{:}
+            \PYG{n}{max\PYGZus{}cost} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+            \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{choices}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{:}
+                \PYG{k}{for} \PYG{n}{select} \PYG{o+ow}{in} \PYG{n}{choices}\PYG{p}{:}
+                    \PYG{n}{cost} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+                    \PYG{n}{visited} \PYG{o}{=} \PYG{n+nb}{set}\PYG{p}{()}
+                    \PYG{k}{for} \PYG{n}{secret} \PYG{o+ow}{in} \PYG{n}{choices}\PYG{p}{:}
+                        \PYG{k}{if} \PYG{n}{select} \PYG{o}{!=} \PYG{n}{secret}\PYG{p}{:}
+                            \PYG{n}{nr} \PYG{o}{=} \PYG{n}{n}\PYG{p}{[}\PYG{n}{select}\PYG{p}{][}\PYG{n}{secret}\PYG{p}{]}
+                            \PYG{k}{if} \PYG{n}{nr} \PYG{o+ow}{not} \PYG{o+ow}{in} \PYG{n}{visited}\PYG{p}{:}
+                                \PYG{n}{cost}\PYG{p}{[}\PYG{n}{secret}\PYG{p}{]} \PYG{o}{=} \PYG{n}{remaining\PYGZus{}choices}\PYG{p}{(}
+                                    \PYG{n}{select}\PYG{p}{,} \PYG{n}{nr}\PYG{p}{,} \PYG{n}{choices}\PYG{p}{)}
+                                \PYG{n}{visited}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{nr}\PYG{p}{)}
+                    \PYG{c+c1}{\PYGZsh{} find the max cost among all the secrets}
+                    \PYG{n}{max\PYGZus{}cost}\PYG{p}{[}\PYG{n}{select}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{cost}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(),} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])}
+                \PYG{n}{mcost} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{k}\PYG{p}{:} \PYG{n}{v}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{k}\PYG{p}{,} \PYG{n}{v} \PYG{o+ow}{in} \PYG{n}{max\PYGZus{}cost}\PYG{o}{.}\PYG{n}{items}\PYG{p}{()\PYGZcb{}}
+                \PYG{n}{minmax} \PYG{o}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{n}{mcost}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(),} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])}
+                \PYG{n}{selection} \PYG{o}{=} \PYG{n}{minmax}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n}{selection} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{choices}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+            \PYG{n}{offline} \PYG{o}{=} \PYG{n+nb+bp}{False}
+            \PYG{k}{if} \PYG{n}{offline}\PYG{p}{:}
+                \PYG{n}{my\PYGZus{}secret} \PYG{o}{=} \PYG{n}{w}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+                \PYG{n}{my\PYGZus{}secret} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}hbaczn\PYGZdq{}}
+                \PYG{n}{matches} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{guess}\PYG{p}{(}\PYG{n}{w}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{],} \PYG{n}{my\PYGZus{}secret}\PYG{p}{)}
+                \PYG{n}{my\PYGZus{}secret\PYGZus{}index} \PYG{o}{=} \PYG{n}{w}\PYG{o}{.}\PYG{n}{index}\PYG{p}{(}\PYG{n}{my\PYGZus{}secret}\PYG{p}{)}
+                \PYG{k}{print}\PYG{p}{(}
+                    \PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Secret: \PYGZob{}\PYGZcb{}, Index: \PYGZob{}\PYGZcb{}, \PYGZdq{}} \PYG{o}{+}
+                     \PYG{l+s+s2}{\PYGZdq{}Matches: \PYGZob{}\PYGZcb{}, N: \PYGZob{}\PYGZcb{}, |N|: \PYGZob{}\PYGZcb{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}
+                         \PYG{n}{my\PYGZus{}secret}\PYG{p}{,} \PYG{n}{my\PYGZus{}secret\PYGZus{}index}\PYG{p}{,}
+                         \PYG{n}{n}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{][}\PYG{n}{my\PYGZus{}secret\PYGZus{}index}\PYG{p}{],}
+                         \PYG{n}{h}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{][}\PYG{n}{matches}\PYG{p}{],}
+                         \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{h}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{][}\PYG{n}{matches}\PYG{p}{])))}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n}{matches} \PYG{o}{=} \PYG{n}{master}\PYG{o}{.}\PYG{n}{guess}\PYG{p}{(}\PYG{n}{w}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{])}
+
+            \PYG{k}{if} \PYG{n}{matches} \PYG{o}{==} \PYG{l+m+mi}{6}\PYG{p}{:}
+                \PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}found\PYGZdq{}}\PYG{p}{)}
+                \PYG{k}{break}
+            \PYG{n}{choices} \PYG{o}{=} \PYG{n}{h}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{][}\PYG{n}{matches}\PYG{p}{]} \PYG{o}{\PYGZam{}} \PYG{n}{choices}
+
+        \PYG{k}{return} \PYG{n}{w}\PYG{p}{[}\PYG{n}{selection}\PYG{p}{]}
+
+
+\PYG{n}{test} \PYG{o}{=} \PYG{n+nb+bp}{True}
+\PYG{k}{if} \PYG{n}{test}\PYG{p}{:}
+    \PYG{n}{s} \PYG{o}{=} \PYG{n}{Solution}\PYG{p}{()}
+    \PYG{n}{case} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb+bp}{False}\PYG{p}{]} \PYG{o}{*} \PYG{l+m+mi}{1} \PYG{o}{+} \PYG{p}{[}\PYG{n+nb+bp}{True}\PYG{p}{]} \PYG{o}{+} \PYG{p}{[}\PYG{n+nb+bp}{False}\PYG{p}{]} \PYG{o}{*} \PYG{l+m+mi}{1}
+    \PYG{n}{master} \PYG{o}{=} \PYG{n+nb+bp}{None}
+    \PYG{k}{if} \PYG{n}{case}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]:}
+        \PYG{c+c1}{\PYGZsh{} Example 1:}
+        \PYG{n}{secret} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}acckzz\PYGZdq{}}
+        \PYG{n}{wordlist} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}acckzz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ccbazz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}eiowzz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}abcczz\PYGZdq{}}\PYG{p}{]}
+        \PYG{k}{print}\PYG{p}{(}\PYG{n}{s}\PYG{o}{.}\PYG{n}{findSecretWord}\PYG{p}{(}\PYG{n}{wordlist}\PYG{p}{,} \PYG{n}{master}\PYG{p}{))}
+    \PYG{k}{if} \PYG{n}{case}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]:}
+        \PYG{n}{secret} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}hbaczn\PYGZdq{}}
+        \PYG{n}{wordlist} \PYG{o}{=} \PYG{p}{[}
+            \PYG{l+s+s2}{\PYGZdq{}gaxckt\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}trlccr\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}jxwhkz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ycbfps\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}peayuf\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}yiejjw\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}ldzccp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}nqsjoa\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}qrjasy\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}pcldos\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}acrtag\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}buyeia\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}ubmtpj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}drtclz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}zqderp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}snywek\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}caoztp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ibpghw\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}evtkhl\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}bhpfla\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ymqhxk\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}qkvipb\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}tvmued\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}rvbass\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}axeasm\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}qolsjg\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}roswcb\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}vdjgxx\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}bugbyv\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}zipjpc\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}tamszl\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}osdifo\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}dvxlxm\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}iwmyfb\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}wmnwhe\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}hslnop\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}nkrfwn\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}puvgve\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}rqsqpq\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}jwoswl\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}tittgf\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}evqsqe\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}aishiv\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}pmwovj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sorbte\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}hbaczn\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}coifed\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}hrctvp\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}vkytbw\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}dizcxz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}arabol\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}uywurk\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ppywdo\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}resfls\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}tmoliy\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}etriev\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}oanvlx\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}wcsnzy\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}loufkw\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}onnwcy\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}novblw\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}mtxgwe\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}rgrdbt\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ckolob\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}kxnflb\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}phonmg\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}egcdab\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}cykndr\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}lkzobv\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ifwmwp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}jqmbib\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}mypnvf\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}lnrgnj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}clijwa\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}kiioqr\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}syzebr\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}rqsmhg\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sczjmz\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}hsdjfp\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}mjcgvm\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ajotcx\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}olgnfv\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}mjyjxj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}wzgbmg\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}lpcnbj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}yjjlwn\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}blrogv\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}bdplzs\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}oxblph\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}twejel\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}rupapy\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}euwrrz\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}apiqzu\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ydcroj\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ldvzgq\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}zailgu\PYGZdq{}}\PYG{p}{,}
+            \PYG{l+s+s2}{\PYGZdq{}xgqpsr\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}wxdyho\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}alrplq\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}brklfk\PYGZdq{}}
+        \PYG{p}{]}
+        \PYG{k}{print}\PYG{p}{(}\PYG{n}{s}\PYG{o}{.}\PYG{n}{findSecretWord}\PYG{p}{(}\PYG{n}{wordlist}\PYG{p}{,} \PYG{n}{master}\PYG{p}{))}
+\end{Verbatim}
