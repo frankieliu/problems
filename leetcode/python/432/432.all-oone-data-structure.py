@@ -12,9 +12,9 @@
 # Testcase Example:  '["AllOne","getMaxKey","getMinKey"]\n[[],[],[]]'
 #
 # Implement a data structure supporting the following operations:
-# 
-# 
-# 
+#
+#
+#
 # Inc(Key) - Inserts a new key  with value 1. Or increments an existing key by
 # 1. Key is guaranteed to be a non-empty string.
 # Dec(Key) - If Key's value is 1, remove it from the data structure. Otherwise
@@ -24,20 +24,48 @@
 # exists, return an empty string "".
 # GetMinKey() - Returns one of the keys with minimal value. If no element
 # exists, return an empty string "".
-# 
-# 
-# 
-# 
+#
+#
+#
+#
 # Challenge: Perform all these in O(1) time complexity.
-# 
+#
 #
 class AllOne:
+    """
+    double linked list and hash map
+
+    Node:
+      prev
+      next
+      val
+      Set<>
+
+    AllOnes:
+      map<string, node>
+      Node head = new Node(0)
+      Node tail = new Node(Int.MaxValue)
+      head.next = tail
+      tail.prev = head
+
+    min:
+      getminkey
+      head.next.set.iterator.next()  : get any key
+
+    inc:
+      if map.hasKey():
+        curr = key
+        if curr.val + 1 in map
+
+    insert(first, second, what)
+    remove(node)
+    """
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        
+
 
     def inc(self, key):
         """
@@ -45,7 +73,7 @@ class AllOne:
         :type key: str
         :rtype: void
         """
-        
+
 
     def dec(self, key):
         """
@@ -53,21 +81,21 @@ class AllOne:
         :type key: str
         :rtype: void
         """
-        
+
 
     def getMaxKey(self):
         """
         Returns one of the keys with maximal value.
         :rtype: str
         """
-        
+
 
     def getMinKey(self):
         """
         Returns one of the keys with Minimal value.
         :rtype: str
         """
-        
+
 
 
 # Your AllOne object will be instantiated and called as such:

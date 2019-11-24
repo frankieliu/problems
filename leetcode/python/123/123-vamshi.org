@@ -1,0 +1,31 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+
+* stock problem
+[3 3 5   0 0 3 1 4]
+       |
+Break into two parts, find the max on the left and max on the right.
+
+* f and g
+f(i) = 0 to i
+g(i) = i to n-1
+
+* max profit
+max_profit = max|_{i=0}^{n-2} max ((f(i) + g(i+1)), f(n-1))
+
+* for loop
+for i = 0 .. n-1
+minimum so far
+
+f(i) = max maxp a[i]-minsofar
+
+3 3 5 6 0 3 1 4
+3 3 3 3 0 0 0 0 <- min so far
+0 0 2 3 3 3 3 4 <- max profit so far
+
+g(i) = max maxp maxsofar-a[i]
+
+3 3 5 6 0 3 1 4
+6 6 6 6 4 4 4 4 <- max so far
+4 4 4 4 4 3 3 0 <- max profit so far

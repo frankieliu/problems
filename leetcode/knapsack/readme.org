@@ -1,0 +1,7 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+* geek for geeks
+printing-items-01-knapsack: how to print the solution to knapsack
+0-1-knapsack-problem-dp-10: basic tutorial on knapsack problem
+double-knapsack-dynamic-programming: putting into two knapsacks
+

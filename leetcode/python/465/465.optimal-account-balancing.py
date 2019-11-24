@@ -17,54 +17,108 @@
 # means person x gave person y $z. Assuming Alice, Bill, and Chris are person
 # 0, 1, and 2 respectively (0, 1, 2 are the person's ID), the transactions can
 # be represented as [[0, 1, 10], [2, 0, 5]].
-# 
+#
 # Given a list of transactions between a group of people, return the minimum
 # number of transactions required to settle the debt.
-# 
+#
 # Note:
-# 
+#
 # A transaction will be given as a tuple (x, y, z). Note that x ≠ y and z > 0.
 # Person's IDs may not be linear, e.g. we could have the persons 0, 1, 2 or we
 # could also have the persons 0, 2, 6.
-# 
-# 
-# 
+#
+#
+#
 # Example 1:
-# 
+#
 # Input:
 # [[0,1,10], [2,0,5]]
-# 
+#
 # Output:
 # 2
-# 
+#
 # Explanation:
 # Person #0 gave person #1 $10.
 # Person #2 gave person #0 $5.
-# 
+#
 # Two transactions are needed. One way to settle the debt is person #1 pays
 # person #0 and #2 $5 each.
-# 
-# 
-# 
+#
+#
+#
 # Example 2:
-# 
+#
 # Input:
 # [[0,1,10], [1,0,1], [1,2,5], [2,0,5]]
-# 
+#
 # Output:
 # 1
-# 
+#
 # Explanation:
 # Person #0 gave person #1 $10.
 # Person #1 gave person #0 $1.
 # Person #1 gave person #2 $5.
 # Person #2 gave person #0 $5.
-# 
+#
 # Therefore, person #1 only need to give person #0 $4, and all debt is
 # settled.
-# 
-# 
 #
+#
+#
+from typing import List
+from collections import defaultdict
+
+
 class Solution:
-    def minTransfers(self, transactions: List[List[int]]) -> int:
-        
+    def minTransfers(self, trans: List[List[int]]) -> int:
+        def dfs(s):
+            """ min number of transactions
+                to settle starting from debt[s]
+            """
+            # advance to next non zero debt
+            while s < len(debt) and debt[s] == 0:
+                s += 1
+            # print("Working on debt {}".format(s))
+
+            res = 1 << 31
+            prev = 0
+            # look at all the other possible options to
+            # print("All possible candidates: {}".format(
+            #    list(range(s+1, len(debt)))))
+            for i in range(s + 1, len(debt)):
+                # print("At dfs {}, value {}".format(s, i))
+                if debt[i] != prev and debt[s] * debt[i] < 0:
+                    debt[i] += debt[s]
+                    res = min(res, 1 + dfs(s + 1))
+                    debt[i] -= debt[s]  # backtrack
+                    prev = debt[i]      # pointless to look at the same one
+            return res if res < 1 << 31 else 0
+
+        b = defaultdict(lambda: 0)
+        for t in trans:
+            b[t[0]] -= t[2]  # Alice paid Bob $10, she is $10 less than before
+            b[t[1]] += t[2]  # Bob is therefore $10 more than before
+
+        debt = []
+        for ab in b:
+            if b[ab]:  # different than 0
+                debt.append(b[ab])
+
+        # print(debt)
+        return dfs(0)
+
+
+test = True
+if test:
+    sol = Solution()
+    case = [False] * 0 + [True] + [False] * 2
+    if case[0]:
+        # Example 1:
+        Input = [[0, 1, 10], [2, 0, 5]]
+        # Output: 2
+        print(sol.minTransfers(Input))
+    if case[1]:
+        # Example 2:
+        Input = [[0, 1, 10], [1, 0, 1], [1, 2, 5], [2, 0, 5]]
+        # Output: 1
+        print(sol.minTransfers(Input))

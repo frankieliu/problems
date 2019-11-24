@@ -53,15 +53,43 @@ class Solution:
         # all possible pairs of boundaries
         dp = [[0]*nn for x in range(nn)]
 
-        # the initial conditions we can know the best coins
-        # 1-1-1
+        # The main idea is to think backwards, i.e. what is the
+        # last ballon to burst, and how much that will yield
+        #
+        # The last ballon will burts in the following way
+        # 1--Last Ballon--1
+        #
+        # where 1 is the just fences around the ballons,
+        # 1 works well becaues 1*N*1 = N
+        #
+        # since this is the last ballon, then that allows us
+        # to create a new fence at
+        # 1 -- next ballon -- last ballon -- next ballon -- 1
+        #
+        # basically there are two subproblems now
+
+        # DP means the maximum score having boundaries at i and i+2
+        # where we don't count the boundaries as ballons, either
+        # 1. they have already popped in the future or
+        # 2. they are boundary ballons
+
+        # Note below the two boundaries do not need to be popped,
+        # the two boundaries will be popped in the future, so
+        # dp[i][i+2] will only pop the i+1 th baloon
         for i in range(0, nn-2):
             dp[i][i+2] = n[i] * n[i+1] * n[i+2]
         print(dp)
 
+        # Similarly when we consider dp[i][i+3] we will
+        # consider both scenarios popping i+1/i+2, or
+        # i+2/i+1, both of them dependent on
+        # dp[i][i+2] if you pop i+2 first and
+        # dp[i+1][i+3] if you pop i+1 first
+
         # now we increase the separation
         # we already did sep 2 then we need to find up to n-1 separation
         # for the final solution, we build bottom up
+
         for sep in range(3, nn):
             for i in range(0, nn-sep):
                 j = i + sep

@@ -7,71 +7,63 @@ In leetcode init
 [TRACE] inited plugin: company
 [TRACE] inited plugin: solution.discuss
 [DEBUG] cache hit: problems.json
-[DEBUG] cache hit: 1107.new-users-daily-count.database.json
-[1107] New Users Daily Count  
+[DEBUG] cache hit: 1179.reformat-department-table.database.json
+[1179] Reformat Department Table  
 
-https://leetcode.com/problems/new-users-daily-count/description/
+https://leetcode.com/problems/reformat-department-table/description/
 
 Tags:   database 
 
 Langs:  mssql   mysql   oraclesql 
 
 * database
-* Medium (58.00%)
-* Source Code:       1107/original/1107.new-users-daily-count.sql
-* Total Accepted:    29
-* Total Submissions: 50
-* Testcase Example:  '{"headers":{"Traffic":["user_id","activity","activity_date"]},"rows":{"Traffic":[[1,"login","2019-05-01"],[1,"homepage","2019-05-01"],[1,"logout","2019-05-01"],[2,"login","2019-06-21"],[2,"logout","2019-06-21"],[3,"login","2019-01-01"],[3,"jobs","2019-01-01"],[3,"logout","2019-01-01"],[4,"login","2019-06-21"],[4,"groups","2019-06-21"],[4,"logout","2019-06-21"],[5,"login","2019-03-01"],[5,"logout","2019-03-01"],[5,"login","2019-06-21"],[5,"logout","2019-06-21"]]}}'
+* Easy (66.99%)
+* Source Code:       1179/original/1179.reformat-department-table.sql
+* Total Accepted:    137
+* Total Submissions: 205
+* Testcase Example:  '{"headers":{"Department":["id","revenue","month"]},"rows":{"Department":[[1,8000,"Jan"],[2,9000,"Jan"],[3,10000,"Feb"],[1,7000,"Feb"],[1,6000,"Mar"]]}}'
 
-Table: Traffic
+Table: Department
 
 
 +---------------+---------+
 | Column Name   | Type    |
 +---------------+---------+
-| user_id       | int     |
-| activity      | enum    |
-| activity_date | date    |
+| id            | int     |
+| revenue       | int     |
+| month         | varchar |
 +---------------+---------+
-There is no primary key for this table, it may have duplicate rows.
-The activity column is an ENUM type of ('login', 'logout', 'jobs', 'groups', 'homepage').
+(id, month) is the primary key of this table.
+The table has information about the revenue of each department per month.
+The month has values in ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].
 
 
  
 
-Write an SQL query that reports for every date within at most 90 days from today, the number of users that logged in for the first time on that date. Assume today is 2019-06-30.
+Write an SQL query to reformat the table such that there is a department id column and a revenue column for each month.
 
 The query result format is in the following example:
 
 
-Traffic table:
-+---------+----------+---------------+
-| user_id | activity | activity_date |
-+---------+----------+---------------+
-| 1       | login    | 2019-05-01    |
-| 1       | homepage | 2019-05-01    |
-| 1       | logout   | 2019-05-01    |
-| 2       | login    | 2019-06-21    |
-| 2       | logout   | 2019-06-21    |
-| 3       | login    | 2019-01-01    |
-| 3       | jobs     | 2019-01-01    |
-| 3       | logout   | 2019-01-01    |
-| 4       | login    | 2019-06-21    |
-| 4       | groups   | 2019-06-21    |
-| 4       | logout   | 2019-06-21    |
-| 5       | login    | 2019-03-01    |
-| 5       | logout   | 2019-03-01    |
-| 5       | login    | 2019-06-21    |
-| 5       | logout   | 2019-06-21    |
-+---------+----------+---------------+
+Department table:
++------+---------+-------+
+| id   | revenue | month |
++------+---------+-------+
+| 1    | 8000    | Jan   |
+| 2    | 9000    | Jan   |
+| 3    | 10000   | Feb   |
+| 1    | 7000    | Feb   |
+| 1    | 6000    | Mar   |
++------+---------+-------+
 
 Result table:
-+------------+-------------+
-| login_date | user_count  |
-+------------+-------------+
-| 2019-05-01 | 1           |
-| 2019-06-21 | 2           |
-+------------+-------------+
-Note that we only care about dates with non zero user count.
-The user with id 5 first logged in on 2019-03-01 so he's not counted on 2019-06-21.
++------+-------------+-------------+-------------+-----+-------------+
+| id   | Jan_Revenue | Feb_Revenue | Mar_Revenue | ... | Dec_Revenue |
++------+-------------+-------------+-------------+-----+-------------+
+| 1    | 8000        | 7000        | 6000        | ... | null        |
+| 2    | 9000        | null        | null        | ... | null        |
+| 3    | null        | 10000       | null        | ... | null        |
++------+-------------+-------------+-------------+-----+-------------+
+
+Note that the result table has 13 columns (1 for the department id + 12 for the months).
 

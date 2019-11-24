@@ -30,9 +30,31 @@
 # 
 #
 class Solution(object):
-    def circularArrayLoop(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        
+    def circularArrayLoop(self, nums: List[int]) -> bool:
+        def jump(i,nums):
+            res = (nums[i] + i) % len(nums)
+            if res < 0:
+                res += len(nums)
+            return res
+        for i in range(0,len(nums)):
+            if nums[i] == 0:
+                continue
+            j = i
+            k = jump(i,nums)
+            while nums[i]*nums[k] > 0 and nums[i]*nums[jump(k,nums)] > 0:
+                # print(j,k)
+                if j == k:
+                    if j == jump(j, nums):
+                        break
+                    return True
+                j = jump(j,nums)
+                k = jump(jump(k,nums),nums)
+            # print("exited")
+            j = i
+            ni = nums[i]
+            while ni*nums[j] > 0:
+                k = jump(j,nums)
+                nums[j] = 0
+                j = k
+            print(nums)
+        return False

@@ -62,115 +62,67 @@ class Solution:
     smallest label.
 
     """
+
     def numIslands(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
-
-        if len(grid) == 0:
+        if len(grid) == 0 or len(grid[0]) == 0:
             return 0
-        if len(grid) == 1 and len(grid[0]) == 1:
-            if grid[0][0] == '1':
-                return 1
+        p = {}
+
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(x, y):
+            px = find(x)
+            py = find(y)
+            if px < py:
+                p[py] = px
             else:
-                return 0
+                p[px] = py
 
-        # we use 1 to start off because
-        # would like to label with count+1 = 2
-        # since the grid already uses '1'
-        count = 1
-        h = {}   # hash of labels
-
-        # top row:
-        i = 0
-        for j in range(len(grid[i])):
-            if j == 0:
-                if grid[i][j] == '1':
-                    count += 1
-                    grid[i][j] = count
-                    h[count] = True
-            else:
-                if grid[i][j] == '1':
-                    if grid[i][j-1] != '0':
-                        grid[i][j] = grid[i][j-1]
-                    else:
-                        count += 1
-                        grid[i][j] = count
-                        h[count] = True
-
-        # print(grid[i])
-
-        # second row onward
-
-        for i in range(1, len(grid)):
-            # print("working on", i)
-            j = 0
-            # copy from above
-            if grid[i][j] == '1':
-                if grid[i-1][j] != '0':
-                    grid[i][j] = grid[i-1][j]
-                else:
-                    count += 1
-                    grid[i][j] = count
-                    h[count] = True
-
-            # merge right
-            for j in range(1, len(grid[0])):
-                if grid[i][j] == '1':
-                    # left neighbor island
-                    if grid[i][j-1] != '0':
-                        grid[i][j] = grid[i][j-1]
-                        if grid[i-1][j] != '0' and grid[i-1][j] != grid[i][j]:
-                            # merge islands
-                            # choose the smaller of the labels
-                            if grid[i-1][j] < grid[i][j]:
-                                del h[grid[i][j]]
-                                # relabel
-                                for k in range(j, -1, -1):
-                                    if grid[i][k] == '0':
-                                        break
-                                    grid[i][k] = grid[i-1][j]
-                            else:
-                                if grid[i-1][j] in h:
-                                    del h[grid[i-1][j]]
-                    # loner
-                    else:
-                        # merge with above
-                        if grid[i-1][j] != '0':
-                            grid[i][j] = grid[i-1][j]
-                        else:
-                            count += 1
-                            grid[i][j] = count
-                            h[count] = True
-
-            # print(grid[i], count)
-        return len(h)
+        nr = len(grid)
+        nc = len(grid[0])
+        print(nr, nc)
+        for row in range(nr):
+            for col in range(nc):
+                if grid[row][col] == "1":
+                    id = row * nc + col
+                    p[row * nc + col] = row * nc + col
+                    if col != 0:
+                        if grid[row][col - 1] == "1":
+                            union(id - 1, id)
+                    if row != 0:
+                        if grid[row - 1][col] == "1":
+                            union(id - nc, id)
+        for i in p:
+            find(i)
+        return len(set(p.values()))
 
 
 test = True
 if test:
     s = Solution()
-    a = ["11110",
-         "11010",
-         "11000",
-         "00000"]
-
-    a = ["11000",
-         "11000",
-         "00100",
-         "00011"]
-
-
-    # print(s.numIslands([list(x) for x in a]))
-
-    a = [["1","0","1","1","0","1","1"]]
-
-    a = [["1","1","1","1","1","1","1"],
-         ["0","0","0","0","0","0","1"],
-         ["1","1","1","1","1","0","1"],
-         ["1","0","0","0","1","0","1"],
-         ["1","0","1","0","1","0","1"],
-         ["1","0","1","1","1","0","1"],
-         ["1","1","1","1","1","1","1"]]
-    print(s.numIslands(a))
+    case = [False] * 4 + [True] * 1 + [False] * 10
+    if case[0]:
+        a = ["11110", "11010", "11000", "00000"]
+        print(s.numIslands(a))
+    if case[1]:
+        a = ["11000", "11000", "00100", "00011"]
+        print(s.numIslands(a))
+    if case[2]:
+        a = [["1", "0", "1", "1", "0", "1", "1"]]
+        print(s.numIslands(a))
+    if case[3]:
+        a = [["1", "1", "1", "1", "1", "1",
+              "1"], ["0", "0", "0", "0", "0", "0",
+                     "1"], ["1", "1", "1", "1", "1", "0",
+                            "1"], ["1", "0", "0", "0", "1", "0",
+                                   "1"], ["1", "0", "1", "0", "1", "0", "1"],
+             ["1", "0", "1", "1", "1", "0",
+              "1"], ["1", "1", "1", "1", "1", "1", "1"]]
+        print(s.numIslands(a))
+    if case[4]:
+        a = [["1", "0", "1", "1", "1"], ["1", "0", "1", "0", "1"],
+             ["1", "1", "1", "0", "1"]]
+        print(s.numIslands(a))

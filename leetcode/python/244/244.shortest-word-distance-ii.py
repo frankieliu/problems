@@ -28,25 +28,25 @@ from collections import defaultdict
 
 class WordDistance:
     def __init__(self, w):
-        self.h = defaultdict(list)
-        for i, el in enumerate(w):
-            self.h[el].append(i)
-        self.max = len(w)
+        self.w = w
+        self.d = defaultdict(list)
+        for i, aw in enumerate(w):
+            self.d[aw].append(i)
+        print(self.d)
+        self.dm = defaultdict(lambda: -1)
 
     def shortest(self, w1, w2):
-        l1 = self.h[w1]
-        l2 = self.h[w2]
-        i, j = 0, 0
-        out = self.max
-        while i < len(l1) and j < len(l2):
-            out = min(out, abs(l1[i] - l2[j]))
-            if out == 0:
-                break
-            if l1[i] > l2[j]:
-                j += 1
-            else:
-                i += 1
-        return out
+        if (w1 == w2):
+            return 0
+        if (w2 < w1):
+            w1, w2 = w2, w1
+        if self.dm[(w1, w2)] == -1:
+            amin = len(self.w)+1
+            for a in self.d[w1]:
+                for b in self.d[w2]:
+                    amin = min(amin, abs(a-b))
+            self.dm[(w1, w2)] = amin
+        return self.dm[(w1, w2)]
 
 
 test = True

@@ -46,30 +46,44 @@ from collections import deque
 
 class Solution:
     def maxSlidingWindow(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        out = []
-        q = deque()
-        for i in range(len(nums)):
-            el = nums[i]
-            # top to queue is smaller
-            # get rid of things that are older and smaller
-            while q and nums[q[-1]] < el:
-                q.pop()
-            q.append(i)
-            # bottom of queue has largest numbers
-            if q[0] == i - k:
-                q.popleft()
-            out.append(nums[q[0]])
-        # we need to begin with kth element
-        return out[k - 1:]
+        # break up into windows of size k
+        # create two cum sum
+        if len(nums) == 0:
+            return []
+        if len(nums) <= k:
+            return [max(nums)]
+        ln = len(nums)
+        infn = -(1<<31)
+        nums += [infn] * (k - (ln % k))
+        maxl, maxr, leftcs, rightcs = infn, infn, [infn]*len(nums), [infn]*len(nums)
+        for i in range(0, len(nums)):
+            if i % k == 0:
+                maxl = infn
+                maxr = infn
+            j = len(nums) - i - 1
+            maxl = max(maxl, nums[i])
+            maxr = max(maxr, nums[j])
+            leftcs[i] = maxl
+            rightcs[j] = maxr
+        # print(leftcs, rightcs)
+        # [1, 3, 3]   [-3, 5, 5]  [6, 7, 7]
+        # [3, 3, -1]  [5, 5, 3]   [7, 7, -2147483648]
+        return [max(rightcs[i],leftcs[i+k-1]) for i in range(0,ln-k+1)]
 
 
 test = True
 if test:
     s = Solution()
-    Example = [1, 3, -1, -3, 5, 3, 6, 7]
-    print(s.maxSlidingWindow(Example, 3))
+    case = [False]*1 + [True] + [False]*1
+    if case[0]:
+        # Example:
+        nums = [1,3,-1,-3,5,3,6,7]
+        k = 3
+        # Output: [3,3,5,5,6,7]
+        print(s.maxSlidingWindow(nums, k))
+    if case[1]:
+        # Example:
+        nums = []
+        k = 3
+        # Output: [3,3,5,5,6,7]
+        print(s.maxSlidingWindow(nums, k))

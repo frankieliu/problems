@@ -58,52 +58,48 @@
 #
 #
 # Definition for binary tree with next pointer.
-# class TreeLinkNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-#         self.next = None
+class TreeLinkNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+        self.next = None
+    def __repr__(self):
+        return ("(" +
+                ",".join([
+                    str(self.val),str(self.left),str(self.right),str(self.next and self.next.val)])+
+                ")")
+
 class Solution:
-    # @param root, a tree link node
-    # @return nothing
     def connect(self, root):
         if root is None:
-            return
+            return root
 
-        p0 = root
-        conn, first = None, None
+        def children(r):
+            while r is not None:
+                for x in [r.left, r.right]:
+                    if x:
+                        yield x
+                r = r.next
+            yield None
 
-        # main parent level loop
-        while p0:
-            if conn:
-                if p0.left:
-                    conn.next = p0.left
-                    conn = conn.next
-                if p0.right:
-                    conn.next = p0.right
-                    conn = conn.next
-            else:
-                if p0.left:
-                    conn = p0.left
-                    first = conn
-                if p0.right:
-                    if conn:
-                        conn.next = p0.right
-                        conn = conn.next
-                    else:
-                        conn = p0.right
-                        first = conn
-            p0 = p0.next
+        next_root = root
+        while next_root:
+            nc = children(next_root)
+            curr = next_root = next(nc)
+            while curr:
+                curr.next = next(nc)
+                curr = curr.next
+        return root
 
-        if first:
-            self.connect(first)
 
-test = False
+test = True
 if test:
-    from TreeNode.TreeNode import arrayToTreeNode, TreeNode
-    tn = arrayToTreeNode([1, 2, 3, 4, None, None, 7])
-    tmp = TreeNode(0)
+    tn = {x: TreeLinkNode(x) for x in [1, 2, 3, 4, 5, 7]}
+    tn[1].left = tn[2]
+    tn[1].right = tn[3]
+    tn[2].left = tn[4]
+    tn[2].right = tn[5]
+    tn[3].right = tn[7]
     s = Solution()
-    print(s.connect(tn))
-    print(tn)
+    print(s.connect(tn[1]))

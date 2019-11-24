@@ -1,0 +1,3 @@
+@lnic
+O(m*n*3^L)
+O(m*n*4^L) (only 3 available)

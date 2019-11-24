@@ -41,35 +41,47 @@
 # Could you solve it in linear time?
 #
 #
-from collections import deque
-
+from typing import *
 
 class Solution:
-    def maxSlidingWindow(self, nums, k):
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
+        This is the 84ms solution
+
+           [.. k ..]
+        1. Find the max of the first k-window
+        2. If the next value is larger than the max_value,
+           obviously it is the next maxValue
+        3. Otherwise, if nums[i] == max_value, then you
+           need to recompute a new max
         """
-        out = []
-        q = deque()
-        for i in range(len(nums)):
-            el = nums[i]
-            # top to queue is smaller
-            # get rid of things that are older and smaller
-            while q and nums[q[-1]] < el:
-                q.pop()
-            q.append(i)
-            # bottom of queue has largest numbers
-            if q[0] == i - k:
-                q.popleft()
-            out.append(nums[q[0]])
-        # we need to begin with kth element
-        return out[k - 1:]
+
+        if len(nums) == 0:
+            return []
+        max_value = max(nums[:k])
+        res = [max_value]
+        for i in range(len(nums)-k):
+            if nums[i+k] > max_value:
+                max_value = nums[i+k]
+            elif nums[i] == max_value:
+                max_value = max(nums[i+1:i+k+1])
+            res.append(max_value)
+        return res
 
 
 test = True
 if test:
     s = Solution()
-    Example = [1, 3, -1, -3, 5, 3, 6, 7]
-    print(s.maxSlidingWindow(Example, 3))
+    case = [False]*0 + [True] + [False]*1
+    if case[0]:
+        # Example:
+        nums = [1, 3, -1, -3, 5, 3, 6, 7]
+        k = 3
+        # Output: [3,3,5,5,6,7]
+        print(s.maxSlidingWindow(nums, k))
+    if case[1]:
+        # Example:
+        nums = []
+        k = 3
+        # Output: [3,3,5,5,6,7]
+        print(s.maxSlidingWindow(nums, k))

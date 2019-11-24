@@ -1,0 +1,30 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* conc
+cat cats catsdogcats dog dogcatsdog hippopotamuses rat ratcatdogcat
+cats
+you can repeat the words
+
+* return
+list of words that is composed of multiple words
+
+* dp
+if you can break into words
+rockstar
+
+if rock is in dict
+star
+dp[rockstar] = for all possible breaks
+dp[n+1]
+
+* solution to word break (word, dictionary)
+dp[i] = boolean if s[0:i]
+    for j in 0:i
+     if dp[j] and in dictionary s[j:i]
+
+* rockstar
+can only be made of smaller words
+sort by the length
+previous words that we have seen so far
+it is n^2 for break word

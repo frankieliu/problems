@@ -58,8 +58,20 @@ from collections import defaultdict
 class Solution:
     def uniqueLetterString(self, s):
         """
-        :type S: str
-        :rtype: int
+        The key idea is to separate U in U_c i.e. calculate the # of unique
+        substrings containing 'c'
+
+        U(x) = sum_{c \in A} U_c(x) where A is your alphabet
+
+        1. create a map of character to the index of that character
+           for example LETTER
+           m['E'] = [1,4]
+
+        2. add sentinels
+           [-1,1,4,6]
+
+        3. multiply
+           [-1 -> 1] * [2 -> 4]
         """
         # create a mat
         m = defaultdict(list)

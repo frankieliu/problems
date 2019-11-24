@@ -1,0 +1,139 @@
+#
+# @lc app=leetcode id=886 lang=python3
+#
+# [886] Possible Bipartition
+#
+# https://leetcode.com/problems/possible-bipartition/description/
+#
+# algorithms
+# Medium (40.01%)
+# Total Accepted:    10.4K
+# Total Submissions: 26K
+# Testcase Example:  '4\n[[1,2],[1,3],[2,4]]'
+#
+# Given a set of N people (numbered 1, 2, ..., N), we would like to split
+# everyone into two groups of any size.
+#
+# Each person may dislike some other people, and they should not go into the
+# same group. 
+#
+# Formally, if dislikes[i] = [a, b], it means it is not allowed to put the
+# people numbered a and b into the same group.
+#
+# Return true if and only if it is possible to split everyone into two groups
+# in this way.
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# Example 1:
+#
+#
+# Input: N = 4, dislikes = [[1,2],[1,3],[2,4]]
+# Output: true
+# Explanation: group1 [1,4], group2 [2,3]
+#
+#
+#
+# Example 2:
+#
+#
+# Input: N = 3, dislikes = [[1,2],[1,3],[2,3]]
+# Output: false
+#
+#
+#
+# Example 3:
+#
+#
+# Input: N = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]]
+# Output: false
+#
+#
+#
+#
+# Note:
+#
+#
+# 1 <= N <= 2000
+# 0 <= dislikes.length <= 10000
+# 1 <= dislikes[i][j] <= N
+# dislikes[i][0] < dislikes[i][1]
+# There does not exist i != j for which dislikes[i] == dislikes[j].
+#
+#
+#
+#
+#
+#
+from collections import defaultdict
+
+class Solution:
+    def possibleBipartition(self, N, gr):
+        v = set()
+        r = set()
+        c = defaultdict(lambda:0)
+
+        g = defaultdict(list)
+        for x in gr:
+            g[x[0]].append(x[1])
+            g[x[1]].append(x[0])
+
+        def dfs(n):
+            for nei in g[n]:
+                if nei in v:
+                    if c[nei] == c[n]:
+                        return False
+                    else:
+                        continue
+                v.add(nei)
+                c[nei] = -c[n]
+                res = dfs(nei)
+                if res is False:
+                    return False
+            return True
+        res = True
+        for i in range(1, N+1):
+            if i != 1 and i in v:
+                continue
+            v.add(i)
+            c[i] = 1
+            res = dfs(i)
+            if res is False:
+                return False
+        return res
+
+
+test = True
+if test:
+    sol = Solution()
+    case = [False]*3 + [True] + [False]*3
+    if case[0]:
+        # Example 1:
+        N = 4
+        dislikes = [[1,2],[1,3],[2,4]]
+        # Output: true
+        print(sol.possibleBipartition(N, dislikes))
+    if case[1]:
+        # Example 2:
+        N = 3
+        dislikes = [[1,2],[1,3],[2,3]]
+        # Output: false
+        print(sol.possibleBipartition(N, dislikes))
+    if case[2]:
+        # Example 3:
+        N = 5
+        dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]]
+        # Output: false
+        print(sol.possibleBipartition(N, dislikes))
+    if case[3]:
+        Input = [[1,2],[3,4],[4,5],[3,5]]
+        # Output: false
+        print(sol.possibleBipartition(5, Input))

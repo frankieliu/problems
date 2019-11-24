@@ -1,0 +1,45 @@
+# -*- mode: org -*-
+#+STARTUP: indent hidestars showall
+
+* problem
+1 3 2 3 1
+  *     *
+      * *
+
+s.t.  i < j and a[i] > 2 a[j]
+
+(3, 1), (3, 1)
+
+* brute
+O(n^2) brute force linear scan
+
+* BST
+for some j
+assume that left of j is kept in a BST
+1. create a BST at each step
+2. iterate and searh an binary search in previously sorted
+3. augmented BST
+
+* merge sort
+132 | 31
+
+3 4 7  |  1 3
+i         j
+
+move enough indices
+3 > 2(1)
+
+move j to the right, it doesn't satisfy
+3 4 7 | 1 3
+i         j   count += 1
+
+merge allows you to solve this problem
+
+* another solution
+3 4 7 | 1 2 3
+i       j
+
+find the i that meets the criteria then count number on left
+then move j then move i until it meets the criteria, etc
+
+This works as well

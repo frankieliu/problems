@@ -13,79 +13,220 @@
 #
 # Given an input string (s) and a pattern (p), implement wildcard pattern
 # matching with support for '?' and '*'.
-# 
-# 
+#
+#
 # '?' Matches any single character.
 # '*' Matches any sequence of characters (including the empty sequence).
-# 
-# 
+#
+#
 # The matching should cover the entire input string (not partial).
-# 
+#
 # Note:
-# 
-# 
+#
+#
 # s could be empty and contains only lowercase letters a-z.
 # p could be empty and contains only lowercase letters a-z, and characters like
 # ? or *.
-# 
-# 
+#
+#
 # Example 1:
-# 
-# 
+#
+#
 # Input:
 # s = "aa"
 # p = "a"
 # Output: false
 # Explanation: "a" does not match the entire string "aa".
-# 
-# 
+#
+#
 # Example 2:
-# 
-# 
+#
+#
 # Input:
 # s = "aa"
 # p = "*"
 # Output: true
 # Explanation: '*' matches any sequence.
-# 
-# 
+#
+#
 # Example 3:
-# 
-# 
+#
+#
 # Input:
 # s = "cb"
 # p = "?a"
 # Output: false
 # Explanation: '?' matches 'c', but the second letter is 'a', which does not
 # match 'b'.
-# 
-# 
+#
+#
 # Example 4:
-# 
-# 
+#
+#
 # Input:
 # s = "adceb"
 # p = "*a*b"
 # Output: true
 # Explanation: The first '*' matches the empty sequence, while the second '*'
 # matches the substring "dce".
-# 
-# 
+#
+#
 # Example 5:
-# 
-# 
+#
+#
 # Input:
 # s = "acdcb"
 # p = "a*c?b"
 # Output: false
-# 
-# 
 #
+#
+#
+
+
 class Solution:
     def isMatch(self, s, p):
         """
-        :type s: str
-        :type p: str
-        :rtype: bool
+        1. dedup:
+           - get rid of multiple *'s (e.g. ***) in a row
+
+        2. trim:
+           - get rid of fixed matches at beginning and end
+
+             foo-------bar   ->    -------
+             foo*--*bar            *--*
+
+        3. greedy:
+           - remaining pattern and string *pat1*pat2*, ---pat1---pat2---
+           - greedily search for first occurrence of pat1 in the remaining s
+           - if pat1, is found, then search for pat2, etc
+           - return false if any of these patterns not appear
         """
-        
+
+        # Dedup
+        pnew = []
+        for i, ch in enumerate(p):
+            if i == 0:
+                pnew.append(ch)
+                continue
+            if ch == '*' and p[i - 1] == '*':
+                pass
+            else:
+                pnew.append(ch)
+        p = "".join(pnew)
+
+        # Trim
+        def match(s, p, i, j, dec):
+            while 0 <= i < len(s) and 0 <= j < len(p) and p[j] in {s[i], '?'}:
+                j, i = j + dec, i + dec
+            return i, j
+
+        i, j = match(s, p, 0, 0, +1)
+        if i == len(s) and j == len(p):   # complete match
+            return True
+        if j == len(p) or p[j] != '*':    # unmatched is not a '*'
+            return False
+        s, p = s[i:], p[j:]
+
+        i, j = match(s, p, len(s) - 1, len(p) - 1, -1)
+        if j == -1 or p[j] != '*':        # unmatched is not a '*'
+            return False
+        s, p = s[:i + 1], p[:j + 1]
+
+        # Greedy
+        def match1(s, i, j, jmax):
+            while j < jmax and s[i] in {'?', s[j]}:
+                j, i = j + 1, i + 1
+            return j
+
+        def zz(s, pat):
+            cat = pat + '$' + s
+            z = [None] * len(cat)
+
+            L = R = 0
+            for i in range(1, len(cat)):
+                if i > R:
+                    L = R = i
+                    R = match1(cat, R - L, R, len(cat))
+                    z[i] = R - L
+                    R -= 1
+                else:
+                    k = i - L
+                    if z[k] < R - i + 1:
+                        z[i] = z[k]
+                    else:
+                        L = i
+                        R = match1(cat, R - L, R, len(cat))
+                        z[i] = R - L
+                        R -= 1
+                if i > len(pat) and z[i] == len(pat):
+                    return i - len(pat) - 1  # -1 for '$'
+            return -1
+
+        while len(p) > 1:
+            pat = p[1:p.index('*', 1)]
+            j = zz(s, pat)
+            if j == -1:
+                return False
+            p = p[1 + len(pat):]
+            s = s[j + len(pat):]
+        return True
+
+
+test = True
+if test:
+    sol = Solution()
+    case = [False] * 8 + [True] + [False] * 5
+    if case[0]:
+        # Example 1:
+        s = "axxxbcxxxdexxxxa"
+        p = "*bc*de*"
+        # Output: true
+        print(sol.isMatch(s, p))
+    if case[1]:
+        # Example 2:
+        s = "aa"
+        p = "*"
+        # Output: true
+        print(sol.isMatch(s, p))
+    if case[2]:
+        # Example 3:
+        s = "cb"
+        p = "?a"
+        # Output: false
+        print(sol.isMatch(s, p))
+    if case[3]:
+        # Example 4:
+        s = "adceb"
+        p = "*a*b"
+        # Output: true
+        print(sol.isMatch(s, p))
+    if case[4]:
+        # Example 5:
+        s = "acdcb"
+        p = "a*c?b"
+        # Output: false
+        print(sol.isMatch(s, p))
+    if case[5]:
+        # Example 6:
+        s = "aa"
+        p = "a"
+        # Output: false
+        print(sol.isMatch(s, p))
+    if case[6]:
+        # Example 7:
+        s = "b"
+        p = "?*?"
+        # Output: false
+        print(sol.isMatch(s, p))
+    if case[7]:
+        # Example 8:
+        s = "c"
+        p = "*?*"
+        # Output: true
+        print(sol.isMatch(s, p))
+    if case[8]:
+        # Example 9:
+        s = "zacabz"
+        p = "*a?b*"
+        # Output: false
+        print(sol.isMatch(s, p))

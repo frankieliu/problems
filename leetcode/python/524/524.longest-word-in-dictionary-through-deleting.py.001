@@ -1,0 +1,113 @@
+#
+# @lc app=leetcode id=524 lang=python3
+#
+# [524] Longest Word in Dictionary through Deleting
+#
+# https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/description/
+#
+# algorithms
+# Medium (44.79%)
+# Total Accepted:    36.7K
+# Total Submissions: 81.9K
+# Testcase Example:  '"abpcplea"\n["ale","apple","monkey","plea"]'
+#
+#
+# Given a string and a string dictionary, find the longest string in the
+# dictionary that can be formed by deleting some characters of the given
+# string. If there are more than one possible results, return the longest word
+# with the smallest lexicographical order. If there is no possible result,
+# return the empty string.
+#
+# Example 1:
+#
+# Input:
+# s = "abpcplea", d = ["ale","apple","monkey","plea"]
+#
+# Output:
+# "apple"
+#
+#
+#
+#
+# Example 2:
+#
+# Input:
+# s = "abpcplea", d = ["a","b","c"]
+#
+# Output:
+# "a"
+#
+#
+#
+# Note:
+#
+# All the strings in the input will only contain lower-case letters.
+# The size of the dictionary won't exceed 1,000.
+# The length of all the strings in the input won't exceed 1,000.
+#
+#
+#
+from typing import List
+
+from collections import defaultdict
+class Solution:
+    def findLongestWord(self, s: str, d: List[str]) -> str:
+       g = defaultdict(set)
+       do_graph_memo = {'': {'$': None}}
+
+       def do_graph(astr):
+           """
+           abpcplea
+           tree for abpcplea
+           tree for bpcplea
+           tree for cplea
+           tree for lea
+            l -> e -> a -> $
+            l -> e -> $
+            l -> $
+            $
+           tree for ea
+            e -> a -> $
+            e -> $
+            a -> $
+            $
+           tree for a
+            a -> $
+            -> $
+           tree for ""
+            -> $
+           """
+           print("working on '{}'".format(astr))
+           g = {}
+           if astr in do_graph_memo:
+               print("Found")
+               print(do_graph_memo[astr])
+               return do_graph_memo[astr]
+           suffix = do_graph(astr[1:])
+           print("In {} suffix {}".format(astr,suffix))
+           g[astr[0]] = suffix
+           g.update(suffix)
+           print("In {} g {}".format(astr,suffix))
+           do_graph_memo[astr] = g
+           return g
+       g = do_graph(s)
+       print(g)
+
+test = True
+if test:
+    sol = Solution()
+    case = [False]*0 + [True] + [False]*2
+    if case[0]:
+        # Example 1:
+        s = "abpcplea"
+        s = "abc"
+        d = ["ale","apple","monkey","plea"]
+        # Output:
+        print(sol.findLongestWord(s,d))
+    if case[1]:
+        # Example 2:
+        s = "abpcplea"
+        d = ["a","b","c"]
+        # Output:
+        print(sol.findLongestWord(s,d))
+
